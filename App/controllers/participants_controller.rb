@@ -1,6 +1,7 @@
 class ParticipantsController < ApplicationController
 
   def index
+
   end
 
   def receive_form
