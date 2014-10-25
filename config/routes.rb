@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   match '/receive_form' => 'participants#receive_form', via: :post
   match '/receive_form' => 'participants#receive_form', via: :get
   match '/receive_form' => 'participants#receive_form', via: :options
+  match '/' => 'participants#index', via: :get
 
 
   # The priority is based upon order of creation: first created -> highest priority.
