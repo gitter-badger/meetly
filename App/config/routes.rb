@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+  get 'participant/index'
+
+  get 'participant/receive_form'
+
   resources :participants
   root to: 'participants#index'
 
   match '/receive_form' => 'participants#receive_form', via: :post
   match '/receive_form' => 'participants#receive_form', via: :get
+  match '/receive_form' => 'participants#receive_form', via: :options
 
 
   # The priority is based upon order of creation: first created -> highest priority.

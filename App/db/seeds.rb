@@ -15,11 +15,8 @@ d1 = Day.create!(number: 1)
 d2 = Day.create!(number: 2)
 d3 = Day.create!(number: 3)
 
-	
-
-
 pt = PriceTable.create!(
-	name: "Podstawowa",
+	name: 'Podstawowa',
 	days: 100,
 	day1: 30,
 	day2: 30,
@@ -31,30 +28,30 @@ pt = PriceTable.create!(
 
 
 ru = Role.create!(
-	name: "Uczestnik",
+	name: 'Uczestnik',
 	price_table: pt
 	)
 
 ro = Role.create!(
-	name: "Organizator",
+	name: 'Organizator',
 	price_table: pt
 	)
 
 Participant.create!([
 		{
-			name: "Bartek",
-			surname: "Szczepanski",
+			name: 'Bartek',
+			surname: 'Szczepanski',
 			role: ro,
-			city: "Wroclaw",
+			city: 'Wroclaw',
 			nights: 0,
 			dinners: 2,
 			days: [d1, d2, d3]
 		},
 		{
-			name: "Pawel",
-			surname: "Zachanowicz",
+			name: 'Pawel',
+			surname: 'Zachanowicz',
 			role: ru,
-			city: "Wroclaw",
+			city: 'Wroclaw',
 			nights: 0,
 			dinners: 0,
 			days: [d1, d2, d3]
