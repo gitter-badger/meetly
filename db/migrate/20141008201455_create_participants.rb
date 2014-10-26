@@ -10,6 +10,8 @@ class CreateParticipants < ActiveRecord::Migration
       t.string :phone
       t.integer :cost
       t.float :paid
+
+      t.timestamps
     end
   end
 
