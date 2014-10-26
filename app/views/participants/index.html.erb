@@ -1,2 +1,28 @@
-<h1>Participant#index</h1>
-<p>Find me in app/views/participant/index.html.erb</p>
+<h1>Lista uczestników</h1>
+<table>
+  <tr>
+    <th>Imie</th>
+    <th>Nazwisko</th>
+    <th>Wiek</th>
+    <th>Miasto</th>
+    <th>E-mail</th>
+    <th>Telefon</th>
+    <th>Utworzony</th>
+  </tr>
+
+<% @participants.each do |participant| %>
+<tr>
+  <td><%= participant.name%></td>
+  <td><%=participant.surname%></td>
+  <td><%=participant.age%></td>
+  <td><%=participant.city%></td>
+  <td><%=participant.email%></td>
+  <td><%=participant.phone%></td>
+  <td><%= participant.created_at%></td>
+</tr>
+
+
+
+
+<%end%>
+</table>

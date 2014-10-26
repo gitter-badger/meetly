@@ -4,7 +4,7 @@ class ParticipantsController < ApplicationController
   protect_from_forgery with: :exception
 
   def index
-
+    @participants = Participant.include('days').all
   end
 
   def receive_form
