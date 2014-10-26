@@ -227,7 +227,7 @@ $('form').on('submit', function (event){
 	};
 	console.log('DATA: ' + data.name + ' ' + data.surname);
 	console.log(data);
-	$.ajax('http://localhost:3000/receive_form', {
+	$.ajax('http://api.blu-soft.pl/receive_form', {
 	type: 'POST',
 	contentType: 'application/json',
 	dataType: 'json',
