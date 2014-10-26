@@ -227,10 +227,10 @@ $('form').on('submit', function (event){
 	};
 	console.log('DATA: ' + data.name + ' ' + data.surname);
 	console.log(data);
-	$.ajax('http://api.blu-soft.pl/receive_form', {
+	$.ajax('https://shrouded-caverns-4963.herokuapp.com/receive_form', {
 	type: 'POST',
 	contentType: 'application/json',
-	dataType: 'json',
+	dataType: 'jsonp',
 	data: data,
 	success: function(result){
 		var msg = $('<p></p>');
