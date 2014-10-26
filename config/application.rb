@@ -19,5 +19,15 @@ module PWebApp
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    config.middleware.insert 0, Rack::Cors do
+      allow do
+        origins 'blu-soft.pl'
+        resource %r{/test},
+                 :headers => ['Origin', 'Accept', 'Content-Type'],
+                 :methods => [:put, :delete, :post]
+      end
+    end
+
   end
 end
