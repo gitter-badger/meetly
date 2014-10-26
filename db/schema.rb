@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141025192056) do
+ActiveRecord::Schema.define(version: 20141026234311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,18 +33,20 @@ ActiveRecord::Schema.define(version: 20141025192056) do
   add_index "participant_days", ["participant_id"], name: "index_participant_days_on_participant_id", using: :btree
 
   create_table "participants", force: true do |t|
-    t.string  "name"
-    t.string  "surname"
-    t.integer "age"
-    t.string  "city"
-    t.string  "email"
-    t.string  "phone"
-    t.integer "cost"
-    t.float   "paid"
-    t.integer "role_id"
-    t.integer "nights"
-    t.integer "dinners"
-    t.boolean "gender"
+    t.string   "name"
+    t.string   "surname"
+    t.integer  "age"
+    t.string   "city"
+    t.string   "email"
+    t.string   "phone"
+    t.integer  "cost"
+    t.float    "paid"
+    t.integer  "role_id"
+    t.integer  "nights"
+    t.integer  "dinners"
+    t.boolean  "gender"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "participants", ["role_id"], name: "index_participants_on_role_id", using: :btree
