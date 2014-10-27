@@ -17,14 +17,23 @@ d3 = Day.create!(number: 3)
 
 pt = PriceTable.create!(
 	name: 'Podstawowa',
-	days: 100,
-	day1: 30,
-	day2: 30,
-	day3: 50,
-	night: 15,
+	days: 99,
+	day1: 20,
+	day2: 40,
+	day3: 60,
+	night: 10,
 	dinner: 15
 	)
 
+pt2 = PriceTable.create!(
+    name: 'PodstawowaPo5',
+    days: 120,
+    day1: 20,
+    day2: 40,
+    day3: 60,
+    night: 10,
+    dinner: 15
+)
 
 
 ru = Role.create!(

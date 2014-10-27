@@ -3,7 +3,7 @@ require 'mandrill'
 class MandrillMailer
 
   def initialize
-    @mailer = Mandrill::API.new ENV["MAILCHIMP_API_KEY"]
+    @mailer = Mandrill::API.new
   end
 
   attr_accessor :mailer
