@@ -12,12 +12,12 @@ class ParticipantsController < ApplicationController
 
     respond_to do |format|
       if @participant.save
-        format.json {render :json => @participant.to_json}
+        format.json {render :json => @participant.to_json, :callback => params['callback']}
         format.html {render }
       end
     end
   end
-#, :callback => params['callback']
+  
   protected
 
   def create_participant
