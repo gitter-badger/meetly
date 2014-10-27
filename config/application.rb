@@ -23,7 +23,7 @@ module PWebApp
     config.middleware.insert 0, Rack::Cors do
       allow do
         origins 'blu-soft.pl'
-        resource %r{/test},
+        resource %r{/receive_form},
                  :headers => ['Origin', 'Accept', 'Content-Type'],
                  :methods => [:put, :delete, :post]
       end
