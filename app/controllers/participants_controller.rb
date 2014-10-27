@@ -11,10 +11,11 @@ class ParticipantsController < ApplicationController
   def receive_form
     @participant = create_participant
     @mandrill = MandrillMailer.new
+    @mandrill.send_confirmation(@participant)
 
     respond_to do |format|
       if @participant.save
-        @mandrill.send_confirmation(@participant)
+
         format.json {render :json => @participant.to_json, :callback => params['callback']}
         format.html {render }
       end
