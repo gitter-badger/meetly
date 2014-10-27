@@ -3,7 +3,7 @@ require 'mandrill'
 class MandrillMailer
 
   def initialize
-    @mailer = Mandrill::API.new
+    @mailer = Mandrill::API.new 'lv_wbMgDlIX5unkCAMXg4Q'
   end
 
   attr_accessor :mailer
