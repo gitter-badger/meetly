@@ -7,11 +7,5 @@ class ActiveSupport::TestCase
   fixtures :all
 
 
-  def assert_presence(model, field)
-    model.valid?
-    assert_match /can't be blank/, model.errors[field].join,
-                 "Presence error for #{field} not found in #{model.class}"
-  end
-
   # Add more helper methods to be used by all tests here...
 end

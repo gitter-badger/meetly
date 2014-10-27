@@ -2,6 +2,13 @@ require 'test_helper'
 
 class ParticipantTest < ActiveSupport::TestCase
 
+
+  should validate_presence_of(:name)
+  should validate_presence_of(:surname)
+  should validate_presence_of(:email)
+  should validate_presence_of(:age)
+
+
   # Called before every test method runs. Can be used
   # to set up fixture information.
   def setup
@@ -25,13 +32,6 @@ class ParticipantTest < ActiveSupport::TestCase
 
   test "receive_form calculates good price for nights and dinners" do
 
-  end
-
-  test "participant invalid without a name and email" do
-    @todd.name = nil
-    @todd.email = nil
-    assert_presence(@todd, :name)
-    assert_presence(@todd, :email)
   end
 
   test "participant should respond to role" do

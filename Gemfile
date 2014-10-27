@@ -24,8 +24,15 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
+gem 'mandrill-api'
+
 group :production do
   gem 'puma'
+end
+
+group :development, :test do
+  gem 'factory_girl_rails'
+  gem 'shoulda'
 end
 
 # Use ActiveModel has_secure_password

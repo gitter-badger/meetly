@@ -1,5 +1,6 @@
-class ParticipantsController < ApplicationController
+require 'mandrill_mailer'
 
+class ParticipantsController < ApplicationController
   before_filter :set_headers
   protect_from_forgery with: :exception
 
@@ -9,20 +10,23 @@ class ParticipantsController < ApplicationController
 
   def receive_form
     @participant = create_participant
+    @mandrill = MandrillMailer.new
 
     respond_to do |format|
       if @participant.save
+        @mandrill.send_confirmation(@participant)
         format.json {render :json => @participant.to_json, :callback => params['callback']}
         format.html {render }
       end
     end
   end
-  
+
   protected
 
   def create_participant
     parameters = params.permit(:name, :surname, :age, :city, :email, :phone, :nights, :dinners, :gender)
     participant = Participant.new(parameters)
+    participant.role = Role.find_by(name: 'Uczestnik')
     days = []
     days.push(Day.find_by_number(1)) if params[:day1]
     days.push(Day.find_by_number(2)) if params[:day2]
@@ -33,6 +37,20 @@ class ParticipantsController < ApplicationController
 
 
   private
+
+  def calculate_price
+    price_table = @participant.role.price_table
+
+    price_table.days if @participant.days.length > 2
+
+    sum = 0
+    sum = sum + price_table.day1 if @participant.days.include?(Day.find_by_number(1))
+    sum = sum + price_table.day2 if @participant.days.include?(Day.find_by_number(2))
+    sum = sum + price_table.day3 if @participant.days.include?(Day.find_by_number(3))
+    sum
+  end
+
+
 
   def set_headers
     headers['Access-Control-Allow-Origin'] = 'blu-soft.pl'
