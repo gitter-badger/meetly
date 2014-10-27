@@ -28,7 +28,7 @@
 *.app
 
 # Ruby Mine Project
-.idea
+.idea/
 
 # Form for testing
-Test-Form
+Test-Form/
