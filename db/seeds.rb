@@ -50,6 +50,9 @@ Participant.create!([
 		{
 			name: 'Bartek',
 			surname: 'Szczepanski',
+      age: 24,
+      email: 'szczepan97@gmail.com',
+      phone: '664752055',
 			role: ro,
 			city: 'Wroclaw',
 			nights: 0,
@@ -59,6 +62,9 @@ Participant.create!([
 		{
 			name: 'Pawel',
 			surname: 'Zachanowicz',
+      age: 49,
+      email: 'pz@zachan.com',
+      phone: 'TOP SECRET',
 			role: ru,
 			city: 'Wroclaw',
 			nights: 0,
