@@ -29,7 +29,11 @@ class MandrillMailer
             {
                 :email=> "#{participant.email}",
                 :name=> "#{participant.name}"
-            }
+            },
+            :global_merge_vars=>[{
+                :name => "USER:COMPANY",
+                :content => "Poczatek"
+                                 }]
         ]
     }
   end
