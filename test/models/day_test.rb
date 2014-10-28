@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class DayTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+   should validate_presence_of(:number)
+   should validate_uniqueness_of(:number)
+
 end
