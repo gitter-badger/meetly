@@ -14,7 +14,7 @@ class MandrillMailer
         'confirmation2',
         [{
             :name => 'name',
-            :content => "#{participant.name}"
+            :content => ""
         }],
         message = @message
     )
@@ -23,7 +23,7 @@ class MandrillMailer
   def prepare_message(participant)
     @message = {
         :from_name=> "Początek",
-        :from_email=>"info@poczatek.org",
+        :from_email=>"szczepan97@gmail.com",
         :subject=>"Potwierdzenie rejestracji",
         :to=>[
             {
