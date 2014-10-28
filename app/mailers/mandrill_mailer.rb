@@ -31,8 +31,8 @@ class MandrillMailer
                 :name=> "#{participant.name}"
             },
             :global_merge_vars=>[{
-                :name => "USER:COMPANY",
-                :content => "Poczatek"
+                :name => "fname",
+                :content => "#{participant.name}"
                                  }]
         ]
     }

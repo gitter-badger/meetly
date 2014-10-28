@@ -5,7 +5,7 @@ class ParticipantsController < ApplicationController
   protect_from_forgery with: :exception
 
   def index
-    @participants = Participant.includes(:days).all
+    @participants = Participant.includes(:days).includes(:role).all
   end
 
   def receive_form
@@ -26,28 +26,29 @@ class ParticipantsController < ApplicationController
   def create_participant
     parameters = params.permit(:name, :surname, :age, :city, :email, :phone, :nights, :dinners, :gender)
     participant = Participant.new(parameters)
+    puts "#{participant.name}"
     participant.role = Role.find_by(name: 'Uczestnik')
-    participant.cost = calculate_price
     days = []
     days.push(Day.find_by_number(1)) if params[:day1]
     days.push(Day.find_by_number(2)) if params[:day2]
     days.push(Day.find_by_number(3)) if params[:day3]
     participant.days = days
+    participant.cost = calculate_price(participant)
     participant
   end
 
 
   private
 
-  def calculate_price
-    price_table = @participant.role.price_table
+  def calculate_price(participant)
+    price_table = participant.role.price_table
 
-    price_table.days if @participant.days.length > 2
+    price_table.days if participant.days.length > 2
 
     sum = 0
-    sum = sum + price_table.day1 if @participant.days.include?(Day.find_by_number(1))
-    sum = sum + price_table.day2 if @participant.days.include?(Day.find_by_number(2))
-    sum = sum + price_table.day3 if @participant.days.include?(Day.find_by_number(3))
+    sum = sum + price_table.day1 if participant.days.include?(Day.find_by_number(1))
+    sum = sum + price_table.day2 if participant.days.include?(Day.find_by_number(2))
+    sum = sum + price_table.day3 if participant.days.include?(Day.find_by_number(3))
     sum
   end
 
