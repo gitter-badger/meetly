@@ -13,8 +13,8 @@ class MandrillMailer
     @mailer.messages.send_template(
         'confirmation2',
         [{
-            :name => 'main',
-            :content => "empty"
+            :name => 'name',
+            :content => "#{participant.name}"
         }],
         message = @message
     )
@@ -30,10 +30,11 @@ class MandrillMailer
                 :email=> "#{participant.email}",
                 :name=> "#{participant.name}"
             },
-            :global_merge_vars=>[{
-                :name => "PNAME",
-                :content => "#{participant.name}"
-                                 }]
+            ],
+        :global_merge_vars=>[{
+                                 :name => "PNAME",
+                                 :content => "#{participant.name}"
+                             }
         ]
     }
   end
