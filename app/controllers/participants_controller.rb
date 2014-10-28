@@ -11,11 +11,10 @@ class ParticipantsController < ApplicationController
   def receive_form
     @participant = create_participant
     @mandrill = MandrillMailer.new
-    @mandrill.send_confirmation(@participant)
 
     respond_to do |format|
       if @participant.save
-
+        @mandrill.send_confirmation(@participant)
         format.json {render :json => @participant.to_json, :callback => params['callback']}
         format.html {render }
       end
@@ -28,6 +27,7 @@ class ParticipantsController < ApplicationController
     parameters = params.permit(:name, :surname, :age, :city, :email, :phone, :nights, :dinners, :gender)
     participant = Participant.new(parameters)
     participant.role = Role.find_by(name: 'Uczestnik')
+    participant.cost = calculate_price
     days = []
     days.push(Day.find_by_number(1)) if params[:day1]
     days.push(Day.find_by_number(2)) if params[:day2]
