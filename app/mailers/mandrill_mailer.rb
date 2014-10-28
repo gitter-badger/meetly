@@ -11,7 +11,7 @@ class MandrillMailer
   def send_confirmation(participant)
     prepare_message(participant)
     @mailer.messages.send_template(
-        'Confirmation_new',
+        'Confirmation',
         [{
             :name => 'main',
             :content => "empty"
