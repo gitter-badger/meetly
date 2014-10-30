@@ -9,6 +9,10 @@
     <th>Telefon</th>
     <th>Rola</th>
     <th>Koszt</th>
+    <th>Zapłacono</th>
+    <th>Ilosc dni</th>
+    <th>Ilosc noclegow</th>
+    <th>Ilosc obiadow</th>
     <th>Utworzony</th>
   </tr>
 
@@ -22,6 +26,10 @@
   <td><%=participant.phone%></td>
   <td><%=participant.role.name%></td>
   <td><%=participant.cost%></td>
+  <td><%=participant.paid%></td>
+  <td><%=participant.days.length%></td>
+  <td><%=participant.nights%></td>
+  <td><%=participant.dinners%></td>
   <td><%= participant.created_at%></td>
 </tr>
 

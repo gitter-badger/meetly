@@ -50,7 +50,7 @@ class Participant < ActiveRecord::Base
     end
 
     sum = sum + self.nights * price_table.night
-    sum = sum + self.nights * price_table.dinner
+    sum = sum + self.dinners * price_table.dinner
     sum
   end
 end
