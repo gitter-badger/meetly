@@ -49,8 +49,8 @@ class Participant < ActiveRecord::Base
       sum = sum + price_table.day3 if self.days.include?(Day.find_by_number(3))
     end
 
-    sum = sum + nights * price_table.nights
-    sum = sum + nights * price_table.dinners
+    sum = sum + self.nights * price_table.night
+    sum = sum + self.nights * price_table.dinner
     sum
   end
 end
