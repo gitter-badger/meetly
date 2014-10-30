@@ -9,7 +9,6 @@ class ParticipantTest < ActiveSupport::TestCase
   should validate_presence_of(:age)
   should validate_presence_of(:role)
   should validate_numericality_of(:age)
-  should ensure_length_of(:days).is_at_least(1).is_at_most(3)
   should belong_to(:role)
   should have_many(:days)
 
@@ -17,7 +16,7 @@ class ParticipantTest < ActiveSupport::TestCase
   # Called before every test method runs. Can be used
   # to set up fixture information.
   def setup
-    @todd = FactoryGirl.create(:participant)
+    super
   end
 
   # Called after every test method runs. Can be used to tear
@@ -28,7 +27,18 @@ class ParticipantTest < ActiveSupport::TestCase
   end
 
   test "participant should have proper cost calculation" do
-    #TODO
+    p = Participant.last
+
+    assert_equal p.cost, p.role.price_table.days
+    assert_equal p.paid, 0
   end
+
+  test "participant cant be created with more than 3 days" do
+    p = Participant.first
+    p.days.push(FactoryGirl.build(:day))
+
+    assert !p.valid?
+  end
+
 
 end
