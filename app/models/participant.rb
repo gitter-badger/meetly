@@ -40,12 +40,17 @@ class Participant < ActiveRecord::Base
   def calculate_price
     price_table = self.role.price_table
 
-    return price_table.days if self.days.length > 2
 
-    sum = 0
-    sum = sum + price_table.day1 if self.days.include?(Day.find_by_number(1))
-    sum = sum + price_table.day2 if self.days.include?(Day.find_by_number(2))
-    sum = sum + price_table.day3 if self.days.include?(Day.find_by_number(3))
+    if self.days.length > 2
+      sum = price_table.days
+    else
+      sum = sum + price_table.day1 if self.days.include?(Day.find_by_number(1))
+      sum = sum + price_table.day2 if self.days.include?(Day.find_by_number(2))
+      sum = sum + price_table.day3 if self.days.include?(Day.find_by_number(3))
+    end
+
+    sum = sum + nights * price_table.nights
+    sum = sum + nights * price_table.dinners
     sum
   end
 end
