@@ -13,9 +13,9 @@ class ParticipantsController < ApplicationController
     respond_to do |format|
       if @participant.save
         @participant.send_confirmation
-        format.json {render :json => @participant.to_json, :callback => params['callback']}
+        format.json {render :json => @participant.to_json, :status => 201, :callback => params['callback']}
       else
-        format.json {render :json => @participant.errors, :callback => params['callback']}
+        format.json {render :json => @participant.errors, :status => 422, :callback => params['callback']}
       end
     end
   end
