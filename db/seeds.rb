@@ -57,7 +57,8 @@ Participant.create!([
 			city: 'Wroclaw',
 			nights: 0,
 			dinners: 2,
-			days: [d1, d2, d3]
+			days: [d1, d2, d3],
+      gender: true
 		},
 		{
 			name: 'Pawel',
@@ -69,7 +70,8 @@ Participant.create!([
 			city: 'Wroclaw',
 			nights: 0,
 			dinners: 0,
-			days: [d1, d2, d3]
+			days: [d1, d2, d3],
+      gender: true
 		}
 
 	])

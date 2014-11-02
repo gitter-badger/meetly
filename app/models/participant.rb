@@ -3,11 +3,12 @@ class Participant < ActiveRecord::Base
 	has_many :participant_days
 	has_many :days, through: :participant_days
 
-  validates_presence_of :name, :surname, :email, :age, :city, :phone, :role
+  validates_presence_of :name, :surname, :email, :age, :city, :phone, :role, :gender
   validates_numericality_of :age
 
-  validate :days_are_limited, on: [:create, :update]
+  validates :email, :uniqueness => {:scope => [:name, :surname]}
 
+  validate :days_are_limited, on: [:create, :update]
 
   before_save :fill_attributes
 

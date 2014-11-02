@@ -8,5 +8,6 @@ FactoryGirl.define do
     phone "664752055"
     days {[FactoryGirl.build(:day), FactoryGirl.build(:day), FactoryGirl.build(:day)]}
     association :role, factory: :role
+    gender true
     end
 end
