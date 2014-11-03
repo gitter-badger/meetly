@@ -28,15 +28,22 @@ class ParticipantsController < ApplicationController
   protected
 
   def create_participant
-    parameters = params.permit(:name, :surname, :age, :city, :email, :phone, :nights, :dinners, :gender)
+    parameters = params.permit(:name, :surname, :age, :city, :email, :phone, :nights, :dinners)
     participant = Participant.new(parameters)
+    if(params[:gender]==false)
+      participant.gender = 'M'
+    else
+      participant.gender = 'K'
+    end
     puts "#{participant.name}"
+    puts "#{participant.gender} w środku!"
     participant.role = Role.find_by(name: 'Uczestnik')
     days = []
     days.push(Day.find_by_number(1)) if params[:day1]
     days.push(Day.find_by_number(2)) if params[:day2]
     days.push(Day.find_by_number(3)) if params[:day3]
     participant.days = days
+    puts "DNIII : #{participant.days.length}"
     participant
   end
 

@@ -58,7 +58,7 @@ Participant.create!([
 			nights: 0,
 			dinners: 2,
 			days: [d1, d2, d3],
-      gender: true
+      gender: 'M'
 		},
 		{
 			name: 'Pawel',
@@ -71,7 +71,7 @@ Participant.create!([
 			nights: 0,
 			dinners: 0,
 			days: [d1, d2, d3],
-      gender: true
+      gender: 'M'
 		}
 
 	])
