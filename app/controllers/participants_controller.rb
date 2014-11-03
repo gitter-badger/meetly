@@ -44,7 +44,7 @@ class ParticipantsController < ApplicationController
     parameters = params.permit(:name, :surname, :age, :city, :email, :phone)
     participant = Participant.new(parameters)
 
-    !params[:gender] ? participant.gender = 'M' : participant.gender = 'K'
+    params[:gender]=='false' ? participant.gender = 'M' : participant.gender = 'K'
 
     puts "#{participant.name}"
     puts "#{participant.gender} w środku!"

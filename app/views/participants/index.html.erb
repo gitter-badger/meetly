@@ -10,9 +10,14 @@
     <th>Rola</th>
     <th>Koszt</th>
     <th>Zapłacono</th>
-    <th>Ilosc dni</th>
-    <th>Ilosc noclegow</th>
-    <th>Ilosc obiadow</th>
+    <th>Dzien 1</th>
+    <th>Dzien 2</th>
+    <th>Dzien 3</th>
+    <th>Nocleg 1</th>
+    <th>Nocleg 2</th>
+    <th>Obiad 1</th>
+    <th>Obiad 2</th>
+    <th>Plec</th>
     <th>Utworzony</th>
   </tr>
 
@@ -27,9 +32,14 @@
   <td><%=participant.role.name%></td>
   <td><%=participant.cost%></td>
   <td><%=participant.paid%></td>
-  <td><%=participant.days.length%></td>
-  <td><%=participant.nights.length%></td>
-  <td><%=participant.dinners.length%></td>
+  <td><%=!participant.days[0].nil?%></td>
+  <td><%=!participant.days[1].nil?%></td>
+  <td><%=!participant.days[2].nil?%></td>
+  <td><%=!participant.nights[0].nil?%></td>
+  <td><%=!participant.nights[1].nil?%></td>
+  <td><%=!participant.dinners[0].nil?%></td>
+  <td><%=!participant.dinners[1].nil?%></td>
+  <td><%=participant.gender %></td>
   <td><%= participant.created_at%></td>
 </tr>
 
