@@ -12,7 +12,8 @@ class ParticipantsController < ApplicationController
   def receive_form
     @participant = create_participant
     puts "created!!!"
-
+    puts "#{@participant.gender}"
+    puts "#{@participant.valid?} ::: VALID?"
       if @participant.save!
         puts "saved!!"
         @participant.send_confirmation
