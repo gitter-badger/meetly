@@ -32,13 +32,13 @@
   <td><%=participant.role.name%></td>
   <td><%=participant.cost%></td>
   <td><%=participant.paid%></td>
-  <td><%=!participant.days[0].nil?%></td>
-  <td><%=!participant.days[1].nil?%></td>
-  <td><%=!participant.days[2].nil?%></td>
-  <td><%=!participant.nights[0].nil?%></td>
-  <td><%=!participant.nights[1].nil?%></td>
-  <td><%=!participant.dinners[0].nil?%></td>
-  <td><%=!participant.dinners[1].nil?%></td>
+  <td><%=participant.days.include?(Day.find_by_number(1))%></td>
+  <td><%=participant.days.include?(Day.find_by_number(2))%></td>
+  <td><%=participant.days.include?(Day.find_by_number(3))%></td>
+  <td><%=participant.nights.include?(Night.find_by_number(1))%></td>
+  <td><%=participant.nights.include?(Night.find_by_number(2))%></td>
+  <td><%=participant.dinners.include?(Dinner.find_by_number(1))%></td>
+  <td><%=participant.dinners.include?(Dinner.find_by_number(2))%></td>
   <td><%=participant.gender %></td>
   <td><%= participant.created_at%></td>
 </tr>
