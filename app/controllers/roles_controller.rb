@@ -7,7 +7,7 @@ class RolesController < ApplicationController
     if @role
       price_table = @role.price_table
       respond_to do |format|
-        format.json{render :json => price_table.to_json, :status => 200}
+        format.json{render :json => price_table.to_json, :status => 200, :callback => params['callback']}
       end
     else
       respond_to do |format|

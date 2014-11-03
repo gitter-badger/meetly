@@ -29,9 +29,9 @@ class MandrillMailer
     date = get_date
 
     @message = {
-        :from_name=> "Początek - rejestracja",
+        :from_name=> "Rejestracja Początek 14/15",
         :from_email=>"rejestracja@poczatek.org",
-        :subject=>"Potwierdzenie rejestracji",
+        :subject=>"Potwierdzenie rejestracji uczestnika",
         :to=>[
             {
                 :email=> "#{participant.email}",
@@ -96,8 +96,8 @@ class MandrillMailer
       end
     end
 
-    options = options + " Nocleg x #{participant.nights}"
-    options = options + " Obiad x #{participant.dinners}"
+    options = options + " + Nocleg x #{participant.nights}" if participant.nights != 0
+    options = options + " + Obiad x #{participant.dinners}" if participant.dinners != 0
     puts options
     options
   end
