@@ -30,7 +30,7 @@ class ParticipantTest < ActiveSupport::TestCase
   test "participant should have proper cost calculation" do
     p = Participant.last
 
-    assert_equal p.cost, p.role.price_table.days
+    assert_equal p.cost, p.role.price_table.days + p.role.price_table.night
     assert_equal p.paid, 0
   end
 

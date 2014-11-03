@@ -10,10 +10,18 @@ Role.destroy_all
 Participant.destroy_all
 PriceTable.destroy_all
 Day.destroy_all
+Night.destroy_all
+Dinner.destroy_all
 
 d1 = Day.create!(number: 1)
 d2 = Day.create!(number: 2)
 d3 = Day.create!(number: 3)
+
+n1 = Night.create!(number: 1)
+n2 = Night.create!(number: 2)
+
+dn1=Dinner.create!(number:1)
+dn2 = Dinner.create!(number:2)
 
 pt = PriceTable.create!(
 	name: 'Podstawowa',
@@ -55,8 +63,8 @@ Participant.create!([
       phone: '664752055',
 			role: ro,
 			city: 'Wroclaw',
-			nights: 0,
-			dinners: 2,
+			nights: [n1, n2],
+			dinners: [dn1, dn2],
 			days: [d1, d2, d3],
       gender: 'M'
 		},
@@ -68,8 +76,8 @@ Participant.create!([
       phone: 'TOP SECRET',
 			role: ru,
 			city: 'Wroclaw',
-			nights: 0,
-			dinners: 0,
+			nights: [n1],
+			dinners: [],
 			days: [d1, d2, d3],
       gender: 'M'
 		}

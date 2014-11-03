@@ -11,12 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103185444) do
+ActiveRecord::Schema.define(version: 20141103191651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "days", force: true do |t|
+    t.integer  "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "dinners", force: true do |t|
+    t.integer  "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "nights", force: true do |t|
     t.integer  "number"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -32,6 +44,26 @@ ActiveRecord::Schema.define(version: 20141103185444) do
   add_index "participant_days", ["day_id"], name: "index_participant_days_on_day_id", using: :btree
   add_index "participant_days", ["participant_id"], name: "index_participant_days_on_participant_id", using: :btree
 
+  create_table "participant_dinners", force: true do |t|
+    t.integer  "participant_id"
+    t.integer  "dinner_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "participant_dinners", ["dinner_id"], name: "index_participant_dinners_on_dinner_id", using: :btree
+  add_index "participant_dinners", ["participant_id"], name: "index_participant_dinners_on_participant_id", using: :btree
+
+  create_table "participant_nights", force: true do |t|
+    t.integer  "participant_id"
+    t.integer  "night_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "participant_nights", ["night_id"], name: "index_participant_nights_on_night_id", using: :btree
+  add_index "participant_nights", ["participant_id"], name: "index_participant_nights_on_participant_id", using: :btree
+
   create_table "participants", force: true do |t|
     t.string   "name"
     t.string   "surname"
@@ -44,8 +76,6 @@ ActiveRecord::Schema.define(version: 20141103185444) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "role_id"
-    t.integer  "nights"
-    t.integer  "dinners"
     t.string   "gender"
   end
 

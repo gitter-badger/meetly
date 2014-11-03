@@ -3,6 +3,12 @@ class Participant < ActiveRecord::Base
 	has_many :participant_days
 	has_many :days, through: :participant_days
 
+  has_many :participant_nights
+  has_many :nights, through: :participant_nights
+
+  has_many :participant_dinners
+  has_many :dinners, through: :participant_dinners
+
   validates_presence_of :name, :surname, :email, :age, :city, :phone, :role, :gender
   validates_numericality_of :age
 
@@ -50,8 +56,10 @@ class Participant < ActiveRecord::Base
       sum = sum + price_table.day3 if self.days.include?(Day.find_by_number(3))
     end
 
-    sum = sum + self.nights * price_table.night
-    sum = sum + self.dinners * price_table.dinner
+
+
+    sum = sum + self.nights.length * price_table.night
+    sum = sum + self.dinners.length * price_table.dinner
     sum
   end
 end
