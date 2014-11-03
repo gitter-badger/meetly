@@ -39,12 +39,11 @@ class ParticipantsController < ApplicationController
     dinners = []
     dinners.push(Dinner.find_by_number(1)) if params[:dinner1] == 'true'
     dinners.push(Dinner.find_by_number(2)) if params[:dinner2] == 'true'
-    dinners.push(Dinner.find_by_number(2)) if params[:dinner2] == 'true'
 
     parameters = params.permit(:name, :surname, :age, :city, :email, :phone)
     participant = Participant.new(parameters)
 
-    params[:gender]=='false' ? participant.gender = 'M' : participant.gender = 'K'
+    params[:gender]=='false' ? participant.gender = 'K' : participant.gender = 'M'
 
     puts "#{participant.name}"
     puts "#{participant.gender} w środku!"
