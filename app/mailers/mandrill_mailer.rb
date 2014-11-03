@@ -96,8 +96,8 @@ class MandrillMailer
       end
     end
 
-    options = options + " + Nocleg x #{participant.nights}" if participant.nights != 0
-    options = options + " + Obiad x #{participant.dinners}" if participant.dinners != 0
+    options = options + " + Nocleg x #{participant.nights.length}" if participant.nights.length != 0
+    options = options + " + Obiad x #{participant.dinners.length}" if participant.dinners.length != 0
     puts options
     options
   end
