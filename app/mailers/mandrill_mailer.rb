@@ -1,10 +1,11 @@
 require 'mandrill'
 require 'active_support'
+require 'day.rb'
 
 class MandrillMailer
 
   def initialize
-    @mailer = Mandrill::API.new
+    @mailer = Mandrill::API.new 'lv_wbMgDlIX5unkCAMXg4Q'
   end
 
   attr_accessor :mailer
@@ -29,7 +30,7 @@ class MandrillMailer
 
     @message = {
         :from_name=> "Początek - rejestracja",
-        :from_email=>"bartosz.szczepanski@blu-soft.pl",
+        :from_email=>"rejestracja@poczatek.org",
         :subject=>"Potwierdzenie rejestracji",
         :to=>[
             {
@@ -71,38 +72,44 @@ class MandrillMailer
 
   def get_options(participant)
     days = participant.days
-    db_days = Days.all
+    puts "before days!"
+    db_days = [Day.new(number: 1), Day.new(number: 2), Day.new(number: 3)]
     options = ""
+    puts "start!!"
     if days.length > 0
       if days.length == 3
         options = "Cała konferencja"
+        puts options
       elsif days.length == 1
         options = "Dzień"
-        options = options + " 1" if days.include?(db_days.find_by(number: 1))
-        options = options + " 2" if days.include?(db_days.find_by(number: 2))
-        options = options + " 3" if days.include?(db_days.find_by(number: 3))
+        options = options + " 1" if days.include?(db_days[0])
+        options = options + " 2" if days.include?(db_days[1])
+        options = options + " 3" if days.include?(db_days[2])
+        puts options
       else
         options = "Dzień"
-        options = options + " 1 i" if days.include?(db_days.find_by(number: 1))
-        options = options + " 2" if days.include?(db_days.find_by(number: 2)) && days.include?(db_days.find_by(number: 1))
-        options = options + " 2 i" if days.include?(db_days.find_by(number: 2)) && !days.include?(db_days.find_by(number: 1))
-        options = options + " 3" if days.include?(db_days.find_by(number: 3))
+        options = options + " 1 i" if days.include?(db_days[0])
+        options = options + " 2" if days.include?(db_days[1]) && days.include?(db_days[0])
+        options = options + " 2 i" if days.include?(db_days[1]) && !days.include?(db_days[0])
+        options = options + " 3" if days.include?(db_days[2])
+        puts options
       end
     end
 
     options = options + " Nocleg x #{participant.nights}"
     options = options + " Obiad x #{participant.dinners}"
+    puts options
     options
   end
 
 
   def get_date
-    date = Date.now
+    date = Date.today
     date = date + 7.days
-    if date < Date.new(2014, 24, 12)
+    if date < Date.new(2014, 12, 24)
       return date = date.strftime("%d.%m.%Y")
     else
-      return date = Date.new(2014, 24, 12).strftime("%d.%m.%Y")
+      return date = Date.new(2014, 12, 24).strftime("%d.%m.%Y")
     end
   end
 end
