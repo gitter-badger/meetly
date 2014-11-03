@@ -63,23 +63,9 @@ Participant.create!([
       phone: '664752055',
 			role: ro,
 			city: 'Wroclaw',
-			nights: [n1, n2],
+			nights: [],
 			dinners: [dn1, dn2],
 			days: [d1, d2, d3],
       gender: 'M'
-		},
-		{
-			name: 'Pawel',
-			surname: 'Zachanowicz',
-      age: 49,
-      email: 'pz@zachan.com',
-      phone: 'TOP SECRET',
-			role: ru,
-			city: 'Wroclaw',
-			nights: [n1],
-			dinners: [],
-			days: [d1, d2, d3],
-      gender: 'M'
 		}
-
 	])
