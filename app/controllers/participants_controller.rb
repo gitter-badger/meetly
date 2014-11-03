@@ -28,6 +28,18 @@ class ParticipantsController < ApplicationController
   protected
 
   def create_participant
+
+    days = []
+    days.push(Day.find_by_number(1)) if params[:day1]==true
+    days.push(Day.find_by_number(2)) if params[:day2]==true
+    days.push(Day.find_by_number(3)) if params[:day3]==true
+    nights = []
+    nights.push(Night.find_by_number(1)) if params[:night1]==true
+    nights.push(Night.find_by_number(2)) if params[:night2]==true
+    dinners = []
+    dinners.push(Dinner.find_by_number(1)) if params[:dinner1]==true
+    dinners.push(Dinner.find_by_number(2)) if params[:dinner2]==true
+
     parameters = params.permit(:name, :surname, :age, :city, :email, :phone)
     participant = Participant.new(parameters)
 
@@ -39,27 +51,19 @@ class ParticipantsController < ApplicationController
 
     participant.role = Role.find_by(name: 'Uczestnik')
 
-    days = [] 
-    days.push(Day.find_by_number(1)) if params[:day1]==true
-    days.push(Day.find_by_number(2)) if params[:day2]==true
-    days.push(Day.find_by_number(3)) if params[:day3]==true
+
     participant.days = days
 
     puts "noc 1 : #{params[:night1]}"
     puts "noc 2 : #{params[:night2]}"
 
-    nights = []
-    nights.push(Night.find_by_number(1)) if params[:night1]==true
-    nights.push(Night.find_by_number(2)) if params[:night2]==true
+
     participant.nights = nights
 
 
     puts "obiad 1 : #{params[:dinner1]}"
     puts "obiad 2 : #{params[:dinner2]}"
 
-    dinners = []
-    dinners.push(Dinner.find_by_number(1)) if params[:dinner1]==true
-    dinners.push(Dinner.find_by_number(2)) if params[:dinner2]==true
     participant.dinners = dinners
 
 
