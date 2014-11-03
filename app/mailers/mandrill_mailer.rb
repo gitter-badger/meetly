@@ -10,8 +10,8 @@ class MandrillMailer
 
   attr_accessor :mailer
 
-  def send_confirmation(participant)
-    prepare_message(participant)
+  def send_confirmation(participant, days)
+    prepare_message(participant, days)
     @mailer.messages.send_template(
         'Confirmation_new',
         [{
@@ -22,10 +22,10 @@ class MandrillMailer
     )
   end
 
-  def prepare_message(participant)
+  def prepare_message(participant, days)
 
     ending = get_ending(participant)
-    options = get_options(participant)
+    options = get_options(participant, days)
     date = get_date
 
     @message = {
@@ -70,28 +70,27 @@ class MandrillMailer
     "eś"
   end
 
-  def get_options(participant)
-    days = participant.days
+  def get_options(participant, db_days)
+    pdays = participant.days
     puts "before days!"
-    db_days = [Day.new(number: 1), Day.new(number: 2), Day.new(number: 3)]
     options = ""
     puts "start!!"
-    if days.length > 0
-      if days.length == 3
+    if pdays.length > 0
+      if pdays.length == 3
         options = "Cała konferencja"
         puts options
-      elsif days.length == 1
+      elsif pdays.length == 1
         options = "Dzień"
-        options = options + " 1" if days.include?(db_days[0])
-        options = options + " 2" if days.include?(db_days[1])
-        options = options + " 3" if days.include?(db_days[2])
+        options = options + " 1" if pdays.include?(db_days[0])
+        options = options + " 2" if pdays.include?(db_days[1])
+        options = options + " 3" if pdays.include?(db_days[2])
         puts options
       else
         options = "Dzień"
-        options = options + " 1 i" if days.include?(db_days[0])
-        options = options + " 2" if days.include?(db_days[1]) && days.include?(db_days[0])
-        options = options + " 2 i" if days.include?(db_days[1]) && !days.include?(db_days[0])
-        options = options + " 3" if days.include?(db_days[2])
+        options = options + " 1 i" if pdays.include?(db_days[0])
+        options = options + " 2" if pdays.include?(db_days[1]) && pdays.include?(db_days[0])
+        options = options + " 2 i" if pdays.include?(db_days[1]) && !pdays.include?(db_days[0])
+        options = options + " 3" if pdays.include?(db_days[2])
         puts options
       end
     end

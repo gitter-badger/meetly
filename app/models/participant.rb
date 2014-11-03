@@ -20,7 +20,7 @@ class Participant < ActiveRecord::Base
 
   def send_confirmation
     @mandrill = MandrillMailer.new
-    @mandrill.send_confirmation(self)
+    @mandrill.send_confirmation(self, Day.all)
   end
 
   attr_accessor :mandrill
