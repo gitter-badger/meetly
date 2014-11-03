@@ -39,18 +39,18 @@ class ParticipantsController < ApplicationController
 
     participant.role = Role.find_by(name: 'Uczestnik')
 
-    days = []
-    days.push(Day.find_by_number(1)) if params[:day1]
-    days.push(Day.find_by_number(2)) if params[:day2]
-    days.push(Day.find_by_number(3)) if params[:day3]
+    days = [] 
+    days.push(Day.find_by_number(1)) if params[:day1]==true
+    days.push(Day.find_by_number(2)) if params[:day2]==true
+    days.push(Day.find_by_number(3)) if params[:day3]==true
     participant.days = days
 
     puts "noc 1 : #{params[:night1]}"
     puts "noc 2 : #{params[:night2]}"
 
     nights = []
-    nights.push(Night.find_by_number(1)) if params[:night1]
-    nights.push(Night.find_by_number(2)) if params[:night2]
+    nights.push(Night.find_by_number(1)) if params[:night1]==true
+    nights.push(Night.find_by_number(2)) if params[:night2]==true
     participant.nights = nights
 
 
@@ -58,8 +58,8 @@ class ParticipantsController < ApplicationController
     puts "obiad 2 : #{params[:dinner2]}"
 
     dinners = []
-    dinners.push(Dinner.find_by_number(1)) if params[:dinner1]
-    dinners.push(Dinner.find_by_number(2)) if params[:dinner2]
+    dinners.push(Dinner.find_by_number(1)) if params[:dinner1]==true
+    dinners.push(Dinner.find_by_number(2)) if params[:dinner2]==true
     participant.dinners = dinners
 
 
