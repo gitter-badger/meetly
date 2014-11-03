@@ -3,6 +3,7 @@ require 'mandrill_mailer'
 class ParticipantsController < ApplicationController
   before_filter :set_headers
   protect_from_forgery with: :exception
+  respond_to :json, :js
 
   def index
     @participants = Participant.includes(:days).includes(:role).all
@@ -11,16 +12,16 @@ class ParticipantsController < ApplicationController
   def receive_form
     @participant = create_participant
     puts "created!!!"
-    respond_to do |format|
+
       if @participant.save!
         puts "saved!!"
         @participant.send_confirmation
-        format.json {render :json => @participant.to_json, :status => 201, :callback => params['callback']}
+        respond_with :json => @participant.to_json, :status => 201, :callback => params['callback']
       else
         puts @participant.errors.full_messages
-        format.json {render :json => @participant.errors, :status => 422, :callback => params['callback']}
+        respond_with :json => @participant.errors, :status => 422, :callback => params['callback']
       end
-    end
+
   end
 
   protected
@@ -37,6 +38,11 @@ class ParticipantsController < ApplicationController
     participant.days = days
     participant
   end
+
+
+
+
+
 
 
   private
