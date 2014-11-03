@@ -16,10 +16,10 @@ class ParticipantsController < ApplicationController
       if @participant.save!
         puts "saved!!"
         @participant.send_confirmation
-        respond_with @participant.to_json, :status => 201, :callback => params['callback']
+        respond_with @participant.to_json, :status => 201, :callback => params['callback'], content_type: "application/javascript"
       else
         puts @participant.errors.full_messages
-        respond_with @participant.errors.to_json, :status => 422, :callback => params['callback']
+        respond_with @participant.errors.to_json, :status => 422, :callback => params['callback'], content_type: "application/javascript"
       end
 
   end
