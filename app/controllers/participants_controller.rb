@@ -36,7 +36,7 @@ class ParticipantsController < ApplicationController
     puts "#{participant.name}"
     puts "#{participant.gender} w środku!"
 
-    
+
     participant.role = Role.find_by(name: 'Uczestnik')
 
     days = []
@@ -45,10 +45,17 @@ class ParticipantsController < ApplicationController
     days.push(Day.find_by_number(3)) if params[:day3]
     participant.days = days
 
+    puts "noc 1 : #{params[:night1]}"
+    puts "noc 2 : #{params[:night2]}"
+
     nights = []
     nights.push(Night.find_by_number(1)) if params[:night1]
     nights.push(Night.find_by_number(2)) if params[:night2]
     participant.nights = nights
+
+
+    puts "obiad 1 : #{params[:dinner1]}"
+    puts "obiad 2 : #{params[:dinner2]}"
 
     dinners = []
     dinners.push(Dinner.find_by_number(1)) if params[:dinner1]
