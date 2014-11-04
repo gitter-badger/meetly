@@ -42,9 +42,22 @@
   <td><%=participant.gender %></td>
   <td><%= participant.created_at%></td>
 </tr>
-
-
-
-
 <%end%>
+
+  <p>
+    Ilość zarejestrowanych: <%= @participants.length %>
+  </p>
+
+  <p>
+    Ilość noclegów chopaki noc 1: <%= @participants.night1.men%>
+  </p>
+  <p>
+    Ilość noclegów chopaki noc 2: <%= @participants.night2.men%>
+  </p>
+  <p>
+    Ilość noclegów dziewuchy noc 1: <%= @participants.night1.women%>
+  </p>
+  <p>
+    Ilość noclegów dziewuchy noc 2: <%= @participants.night2.women%>
+  </p>
 </table>

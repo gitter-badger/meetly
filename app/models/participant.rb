@@ -1,5 +1,7 @@
 class Participant < ActiveRecord::Base
+
 	belongs_to :role
+
 	has_many :participant_days
 	has_many :days, through: :participant_days
 
@@ -11,12 +13,18 @@ class Participant < ActiveRecord::Base
 
   validates_presence_of :name, :surname, :email, :age, :city, :phone, :role, :gender
   validates_numericality_of :age
-
   validates :email, :uniqueness => {:scope => [:name, :surname]}
-
   validate :days_are_limited, on: [:create, :update]
 
   before_save :fill_attributes
+
+  scope :night1_sleeper, -> {where(night1: true)}
+  scope :night2_sleeper, -> {where(night2: true)}
+  scope :dinner1_eater, -> {where(dinner1: true)}
+  scope :dinner2_eater, -> {where(dinner2: true)}
+  scope :men, -> {where(gender: 'M')}
+  scope :women, -> {where(gender: 'K')}
+
 
   def send_confirmation
     @mandrill = MandrillMailer.new
@@ -24,6 +32,7 @@ class Participant < ActiveRecord::Base
   end
 
   attr_accessor :mandrill
+
 
 
   private
