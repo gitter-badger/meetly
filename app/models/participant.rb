@@ -18,10 +18,10 @@ class Participant < ActiveRecord::Base
 
   before_save :fill_attributes
 
-  scope :night1_sleeper, -> {where(night1: true)}
-  scope :night2_sleeper, -> {where(night2: true)}
-  scope :dinner1_eater, -> {where(dinner1: true)}
-  scope :dinner2_eater, -> {where(dinner2: true)}
+  scope :night1_sleeper, -> {where(nights.includes?(Night.find_by_number(1)))}
+  scope :night2_sleeper, -> {where(nights.includes?(Night.find_by_number(2)))}
+  scope :dinner1_eater, -> {where(dinners.includes?(Dinner.find_by_number(1)))}
+  scope :dinner2_eater, -> {where(dinners.includes?(Dinner.find_by_number(2)))}
   scope :men, -> {where(gender: 'M')}
   scope :women, -> {where(gender: 'K')}
 
