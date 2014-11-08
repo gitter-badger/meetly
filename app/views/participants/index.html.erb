@@ -19,6 +19,8 @@
     <th>Obiad 2</th>
     <th>Plec</th>
     <th>Utworzony</th>
+    <th>Termin płatności</th>
+    <th>Przeterminowana płatność?</th>
   </tr>
 
 <% @participants.each do |participant| %>
@@ -41,6 +43,14 @@
   <td><%=participant.dinners.include?(Dinner.find_by_number(2))%></td>
   <td><%=participant.gender %></td>
   <td><%= participant.created_at%></td>
+  <td><%=participant.payment_deadline%></td>
+  <td> 
+    <% if participant.payment_deadline > Date.today %>
+    <p style="background-color:green; color:white; text-align:center">nie :D</p>
+    <% else %>
+    <p style="background-color:red; color:white; text-align:center"> tak :[ </p>
+    <% end %>
+  </td>
 </tr>
 <%end%>
 

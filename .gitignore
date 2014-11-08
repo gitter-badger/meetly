@@ -35,3 +35,4 @@ Test-Form/
 
 Gemfile.lock
 .env
+tmp/
