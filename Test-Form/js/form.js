@@ -28,8 +28,11 @@ $(document).ready(function () {
 //Funkcja liczy koszty po zaznaczonych polach.
   function kosztUdzial() { 
 
-      var calakonferencjaKoszt = calakonferencja.val();
-      var pierwszydzienKoszt = pierwszydzien.val();
+
+
+
+      var calakonferencjaKoszt = 99;
+      var pierwszydzienKoszt = 20;
       var drugidzienKoszt = drugidzien.val();
       var trzecidzienKoszt = trzecidzien.val();
 
@@ -204,48 +207,48 @@ kosztKonferencji();
  		kosztKonferencji();
  	});
 
-//Update and check with subdomain
-$('form').on('submit', function (event){
-    console.log('im inside!');
-    console.log($('.pierwszy-dzien:checked').val()=='on');
-    event.preventDefault();
-	var form = $(this);
-	var data = 
-	{
-		"name" : $("#name").val(),
-		"surname" : $("#surname").val(),
-		"age" : $('#age').val(),
-        "nights" : $('.nocleg:checked').length,
-        "dinners" : $('.obiad:checked').length,
-        "day1" : $('.pierwszy-dzien:checked').val()=='on',
-        "day2" : $('.drugi-dzien:checked').val()=='on',
-        "day3" : $('.trzeci-dzien:checked').val()=='on',
-        "gender" : true,
-        "phone" : $('.tel').val(),
-        "email" : $('.email').val(),
-        "city" : $('.city').val()
-	};
-	console.log('DATA: ' + data.name + ' ' + data.surname);
-	console.log(data);
-	$.ajax('https://shrouded-caverns-4963.herokuapp.com/receive_form', {
-	type: 'POST',
-	contentType: 'application/json',
-	dataType: 'jsonp',
-	data: data,
-	success: function(result){
-		var msg = $('<p></p>');
-		msg.append('SUCCESS: ');
-		msg.append('result: ');
-		msg.append(result.name);
-		form.after(msg);
-		console.log(msg)
-	},
-	error: function(response, errorType, errorMessage)
-	{
-		console.log(errorType + ': ' + errorMessage);
-	}
+    $("#reg").on('submit', function (event){
+        console.log('im inside!');
+        console.log($('.pierwszy-dzien:checked').val()=='on');
+        event.preventDefault();
+        var form = $(this);
+        var data =
+        {
+            "name" : form.find(".imie").val(),
+            "surname" : form.find(".nazwisko").val(),
+            "age" : form.find('.wiek').val(),
+            "nights" : form.find('.nocleg:checked').length,
+            "dinners" : form.find('.obiad:checked').length,
+            "day1" : form.find('.pierwszy-dzien:checked').val()=='on',
+            "day2" : form.find('.drugi-dzien:checked').val()=='on',
+            "day3" : form.find('.trzeci-dzien:checked').val()=='on',
+            "gender" : form.find(".plec").val()==1,
+            "phone" : form.find('.tel').val(),
+            "email" : form.find('.email').val(),
+            "city" : form.find('.miasto').val()
+        };
+        console.log('DATA: ' + data.name + ' ' + data.surname + ' ' + data.city);
+        console.log(data);
+        $.ajax('http://localhost:3000/receive_form', {
+            type: 'POST',
+            contentType: 'application/json',
+            dataType: 'jsonp',
+            data: data,
+            crossDomain: true,
+            success: function(result){
+                var msg = $('<p></p>');
+                msg.append('SUCCESS: ');
+                msg.append('result: ');
+                msg.append(result.name);
+                form.after(msg);
+                console.log(msg)
+            },
+            error: function(response, errorType, errorMessage)
+            {
+                console.log(errorType + ': ' + errorMessage);
+            }
 
+        });
+    });
 });
-});
-
-});
+//https://afternoon-hamlet-2397.herokuapp.com
