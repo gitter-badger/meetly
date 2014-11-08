@@ -51,6 +51,8 @@ class Participant < ActiveRecord::Base
     self.paid = 0
     self.cost = calculate_price
     self.role = Role.find_by(name: 'Uczestnik') if self.role==nil
+    self.payment_deadline = Date.today + 7.days
+    puts "#{self.payment_deadline.to_s}"
   end
 
   def calculate_price
