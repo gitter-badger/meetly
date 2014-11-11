@@ -45,7 +45,7 @@
   <td><%= participant.created_at%></td>
   <td><%=participant.payment_deadline%></td>
   <td> 
-    <% if participant.payment_deadline > Time.current %>
+    <% if participant.payment_deadline > Time.current.end_of_day %>
     <p style="background-color:green; color:white; text-align:center">nie :D</p>
     <% else %>
     <p style="background-color:red; color:white; text-align:center"> tak :[ </p>
