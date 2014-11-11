@@ -7,7 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<h2 class='User_Header'> 
 
+<% if @current_user %>
+	<%=@current_user.name%> 
+	Profile 
+	<%else%>
+	Not logged in
+	<%end%>
+<h2>
 <%= yield %>
 
 </body>

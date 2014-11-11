@@ -12,6 +12,7 @@ PriceTable.destroy_all
 Day.destroy_all
 Night.destroy_all
 Dinner.destroy_all
+User.destroy_all
 
 d1 = Day.create!(number: 1)
 d2 = Day.create!(number: 2)

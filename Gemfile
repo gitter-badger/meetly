@@ -26,6 +26,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'mandrill-api'
 
+gem 'bcrypt', :require => 'bcrypt'
+
 group :production do
   gem 'puma'
 end

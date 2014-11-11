@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'participant/index'
-
-  get 'participant/receive_form'
 
   resources :participants
   root to: 'participants#index'
@@ -10,8 +7,13 @@ Rails.application.routes.draw do
   match '/receive_form' => 'participants#receive_form', via: :get, defaults: {format: 'json'}
   match '/get_role_price_table' => 'roles#get_role_price_table', via: :get, defaults: {format: 'json'}
 
+  match "/login" => "sessions#login", via: :get
+  match "/logout" => "sessions#logout", via: :get
+    match '/login_attempt' => 'sessions#login_attempt', via: :get
 
-
+  match "/login" => "sessions#login", via: :post
+  match "/logout" => "sessions#logout", via: :post
+  match '/login_attempt' => 'sessions#login_attempt', via: :post
 
 
   # The priority is based upon order of creation: first created -> highest priority.
