@@ -12,7 +12,6 @@ PriceTable.destroy_all
 Day.destroy_all
 Night.destroy_all
 Dinner.destroy_all
-User.destroy_all
 
 d1 = Day.create!(number: 1)
 d2 = Day.create!(number: 2)
@@ -58,6 +57,38 @@ ro = Role.create!(
 Participant.create!([
 		{
 			name: 'Bartek',
+			surname: 'Szczepanski',
+      age: 24,
+      email: 'szczepan97@gmail.com',
+      phone: '664752055',
+			role: ro,
+			city: 'Wroclaw',
+			nights: [],
+			dinners: [dn1, dn2],
+			days: [d1, d2, d3],
+      gender: 'M'
+		}
+	])
+
+Participant.create!([
+		{
+			name: 'Bartek1',
+			surname: 'Szczepanski',
+      age: 24,
+      email: 'szczepan97@gmail.com',
+      phone: '664752055',
+			role: ro,
+			city: 'Wroclaw',
+			nights: [],
+			dinners: [dn1, dn2],
+			days: [d1, d2, d3],
+      gender: 'M'
+		}
+	])
+
+Participant.create!([
+		{
+			name: 'Bartek2',
 			surname: 'Szczepanski',
       age: 24,
       email: 'szczepan97@gmail.com',

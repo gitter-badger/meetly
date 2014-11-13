@@ -31,6 +31,35 @@ class Participant < ActiveRecord::Base
     @mandrill.send_confirmation(self, Day.all)
   end
 
+  def get_status
+
+    if payment_deadline > Time.current.beginning_of_day
+      color = 'green'
+    else
+      if paid > 0
+        color = 'orange'
+      else
+        color = 'red'
+      end
+    end
+
+    if paid == 0
+      status = 'ZAREJESTROWANY'
+    elsif paid == cost
+      status = 'OPŁACONY'
+      color = 'green'
+    else
+      status = 'NIEDOPŁACONY'
+    end
+
+    format_status(color, status)
+  end
+
+def format_status(color, status)
+  status = '<p style="background-color:' + color + '; color:white; text-align:center">' + status + '</p>'
+  status.html_safe
+end
+
   attr_accessor :mandrill
 
 
@@ -48,10 +77,10 @@ class Participant < ActiveRecord::Base
   end
 
   def fill_attributes
-    self.paid = 0
+    self.paid = 0 if paid == nil
     self.cost = calculate_price
     self.role = Role.find_by(name: 'Uczestnik') if self.role==nil
-    self.payment_deadline = Date.today + 7.days
+    self.payment_deadline = Date.today + 7.days if payment_deadline==nil
   end
 
   def calculate_price

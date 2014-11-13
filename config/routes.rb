@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :participants
+  resources :participants do
+    patch :edit_payment, on: :member
+  end
   root to: 'participants#index'
 
   match '/receive_form' => 'participants#receive_form', via: :post, defaults: {format: 'json'}
@@ -9,11 +11,12 @@ Rails.application.routes.draw do
 
   match "/login" => "sessions#login", via: :get
   match "/logout" => "sessions#logout", via: :get
-    match '/login_attempt' => 'sessions#login_attempt', via: :get
+  match '/login_attempt' => 'sessions#login_attempt', via: :get
 
   match "/login" => "sessions#login", via: :post
   match "/logout" => "sessions#logout", via: :post
   match '/login_attempt' => 'sessions#login_attempt', via: :post
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,59 +1,5 @@
 <h1>Lista uczestników</h1>
-<table>
-  <tr>
-    <th>Imie</th>
-    <th>Nazwisko</th>
-    <th>Wiek</th>
-    <th>Miasto</th>
-    <th>E-mail</th>
-    <th>Telefon</th>
-    <th>Rola</th>
-    <th>Koszt</th>
-    <th>Zapłacono</th>
-    <th>Dzien 1</th>
-    <th>Dzien 2</th>
-    <th>Dzien 3</th>
-    <th>Nocleg 1</th>
-    <th>Nocleg 2</th>
-    <th>Obiad 1</th>
-    <th>Obiad 2</th>
-    <th>Plec</th>
-    <th>Utworzony</th>
-    <th>Termin płatności</th>
-    <th>Przeterminowana płatność?</th>
-  </tr>
-
-<% @participants.each do |participant| %>
-<tr>
-  <td><%= participant.name%></td>
-  <td><%=participant.surname%></td>
-  <td><%=participant.age%></td>
-  <td><%=participant.city%></td>
-  <td><%=participant.email%></td>
-  <td><%=participant.phone%></td>
-  <td><%=participant.role.name%></td>
-  <td><%=participant.cost%></td>
-  <td><%=participant.paid%></td>
-  <td><%=participant.days.include?(Day.find_by_number(1))%></td>
-  <td><%=participant.days.include?(Day.find_by_number(2))%></td>
-  <td><%=participant.days.include?(Day.find_by_number(3))%></td>
-  <td><%=participant.nights.include?(Night.find_by_number(1))%></td>
-  <td><%=participant.nights.include?(Night.find_by_number(2))%></td>
-  <td><%=participant.dinners.include?(Dinner.find_by_number(1))%></td>
-  <td><%=participant.dinners.include?(Dinner.find_by_number(2))%></td>
-  <td><%=participant.gender %></td>
-  <td><%= participant.created_at%></td>
-  <td><%=participant.payment_deadline%></td>
-  <td> 
-    <% if participant.payment_deadline > Time.current.beginning_of_day %>
-    <p style="background-color:green; color:white; text-align:center">nie :D</p>
-    <% else %>
-    <p style="background-color:red; color:white; text-align:center"> tak :[ </p>
-    <% end %>
-  </td>
-</tr>
-<%end%>
-
+<header>
   <p>
     Ilość zarejestrowanych: <%= @participants.length %>
   </p>
@@ -67,7 +13,34 @@
   <p>
     Ilość noclegów dziewuchy noc 1: <%= @participants.night1_sleeper.women.length%>
   </p>
-  <p>
+  <p class="noclegi">
     Ilość noclegów dziewuchy noc 2: <%= @participants.night2_sleeper.women.length%>
   </p>
+</header>
+<table>
+  <tr>
+    <th>Imie</th>
+    <th>Nazwisko</th>
+    <th>Wiek</th>
+    <th>Miasto</th>
+    <th>E-mail</th>
+    <th>Telefon</th>
+    <th>Rola</th>
+    <th>Koszt</th>
+    <th>Zapłacono</th>
+    <th>Do zapłaty </th>
+    <th>Dzien 1</th>
+    <th>Dzien 2</th>
+    <th>Dzien 3</th>
+    <th>Nocleg 1</th>
+    <th>Nocleg 2</th>
+    <th>Obiad 1</th>
+    <th>Obiad 2</th>
+    <th>Plec</th>
+    <th>Utworzony</th>
+    <th>Termin płatności</th>
+    <th>Status</th>
+  </tr>
+
+<%= render @participants %>
 </table>

@@ -10,6 +10,25 @@ class ParticipantsController < ApplicationController
     @participants = Participant.includes(:days).includes(:role).all
   end
 
+  def destroy
+    @participant = Participant.find(params[:id])
+    @participant.destroy
+    respond_to do |format|
+     # format.html {redirect_to participants_url}
+     # format.json {head :ok}
+      format.js {render "destroy", :locals => {:id => params[:id]}}
+    end
+  end
+
+  def edit_payment
+    @participant = Participant.find(params[:id])
+    @participant.paid = params[:participant][:paid]
+    @participant.save
+
+    redirect_to root_url
+  end
+
+
   def receive_form
     @participant = create_participant
     puts "created!!!"
