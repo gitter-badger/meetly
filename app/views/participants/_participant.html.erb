@@ -22,7 +22,11 @@
     <td><%=participant.payment_deadline%></td>
     <td><%= participant.get_status %></td>
     <td>
+    <%if participant.archived == false %>
       <%= link_to 'Usuń', participant, method: :delete, remote: true %>
+      <%else%>
+      Tu będzie przywracanie :)
+      <%end%>
     </td>
     <td>
       <%= form_for participant, url: edit_payment_participant_path(participant) do |f| %>

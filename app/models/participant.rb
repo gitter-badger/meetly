@@ -1,5 +1,7 @@
 class Participant < ActiveRecord::Base
 
+  default_scope { where(archived: false)}
+
 	belongs_to :role
 
 	has_many :participant_days
@@ -22,6 +24,7 @@ class Participant < ActiveRecord::Base
   scope :night2_sleeper, -> {where(nights: {number: 2}).includes(:nights)}
   scope :dinner1_eater, -> {where(dinners: {number: 1}).includes(:dinners)}
   scope :dinner2_eater, -> {where(dinners: {number: 2}).includes(:dinners)}
+
   scope :men, -> {where(gender: 'M')}
   scope :women, -> {where(gender: 'K')}
 
@@ -60,7 +63,8 @@ def format_status(color, status)
   status.html_safe
 end
 
-  attr_accessor :mandrill
+
+attr_accessor :mandrill
 
 
 

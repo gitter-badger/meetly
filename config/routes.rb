@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   match "/logout" => "sessions#logout", via: :post
   match '/login_attempt' => 'sessions#login_attempt', via: :post
 
-
+  get '/archived' => 'participants#show_archived'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

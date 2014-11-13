@@ -12,12 +12,17 @@ class ParticipantsController < ApplicationController
 
   def destroy
     @participant = Participant.find(params[:id])
-    @participant.destroy
+    @participant.archived = true
+    @participant.save!
     respond_to do |format|
      # format.html {redirect_to participants_url}
      # format.json {head :ok}
       format.js {render "destroy", :locals => {:id => params[:id]}}
     end
+  end
+
+  def show_archived
+    @participants = Participant.unscoped.where(archived: true)
   end
 
   def edit_payment
@@ -44,6 +49,8 @@ class ParticipantsController < ApplicationController
       end
 
   end
+
+
 
   protected
 
