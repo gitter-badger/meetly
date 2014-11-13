@@ -23,7 +23,7 @@
     <td><%= participant.get_status %></td>
     <td>
     <%if participant.archived == false %>
-      <%= link_to 'Usuń', participant, method: :delete, remote: true %>
+      <%= link_to 'Usuń', participant, :method => :delete, :data => {:confirm => 'Na pewno usunąć?'} , :remote => true %>
       <%else%>
       Tu będzie przywracanie :)
       <%end%>
