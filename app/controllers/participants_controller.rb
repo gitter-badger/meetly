@@ -7,7 +7,7 @@ class ParticipantsController < ApplicationController
   respond_to :json, :js
 
   def index
-    @participants = Participant.includes(:days).includes(:role).all
+    @participants = Participant.includes(:days).includes(:role).all.order("participants.created_at ASC")
   end
 
   def destroy
