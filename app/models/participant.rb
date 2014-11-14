@@ -59,7 +59,7 @@ class Participant < ActiveRecord::Base
       end
     end
 
-    if paid == 0
+    if paid == 0 && cost != 0
       status = 'ZAREJESTROWANY'
     elsif paid == cost
       status = 'OPŁACONY'
