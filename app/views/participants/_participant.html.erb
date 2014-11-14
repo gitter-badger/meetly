@@ -1,4 +1,4 @@
-<tr class="<%= dom_id(participant) %>">
+<tr class="<%= dom_id(participant) %>" style="outline: thin solid">
  
     <td><%= participant.name%></td>
     <td><%=participant.surname%></td>
@@ -22,6 +22,9 @@
     <td><%=participant.payment_deadline%></td>
     <td><%= participant.get_status %></td>
     <td>
+    <p>
+    <%= link_to 'Wyślij potwierdzenie', payment_confirm_participant_path(participant), :method => :post, :data => {:confirm => 'Na pewno wysłać?'}, :remote => true %>
+    </p>
     <%if participant.archived == false %>
       <%= link_to 'Usuń', participant, :method => :delete, :data => {:confirm => 'Na pewno usunąć?'} , :remote => true %>
       <%else%>
@@ -34,8 +37,5 @@
         <%= f.number_field :paid %>
         <%= f.submit "Zapłać" %>
       <% end %>
-    </td>
-      
-   
-  
+    </td>   
 </tr>

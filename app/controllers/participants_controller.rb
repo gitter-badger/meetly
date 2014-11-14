@@ -14,6 +14,7 @@ class ParticipantsController < ApplicationController
     @participant = Participant.find(params[:id])
     @participant.archived = true
     @participant.save!
+    @participant.send_delete_info
     respond_to do |format|
      # format.html {redirect_to participants_url}
      # format.json {head :ok}
@@ -29,18 +30,18 @@ class ParticipantsController < ApplicationController
     @participant = Participant.find(params[:id])
     @participant.paid = params[:participant][:paid]
     @participant.save
-
     redirect_to root_url
+  end
+
+  def payment_confirm
+    @participant = Participant.find(params[:id])
+    @participant.send_confirm_payment
   end
 
 
   def receive_form
     @participant = create_participant
-    puts "created!!!"
-    puts "#{@participant.gender}"
-    puts "#{@participant.valid?} ::: VALID?"
       if @participant.save!
-        puts "saved!!"
         @participant.send_confirmation
         respond_with @participant.to_json, :status => 201, :callback => params['callback'], content_type: "application/javascript"
       else

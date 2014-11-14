@@ -10,23 +10,78 @@ class MandrillMailer
 
   attr_accessor :mailer
 
-  def send_confirmation(participant, days)
-    prepare_message(participant, days)
+  def send_message(template)
     @mailer.messages.send_template(
-        'Confirmation_new',
-        [{
-            :name => 'name',
-            :content => ""
-        }],
-        message = @message
-    )
+        template,
+        [],
+        message = @message 
+        )
   end
 
-  def prepare_message(participant, days)
+  def prepare_confirm_payment_message(participant, days)
+    ending = get_ending(participant)
+    options = get_options(participant, days)
+    to_pay_text = get_to_pay_text(participant)
+   
+
+    @message = {
+        :from_name=> "Rejestracja Początek 14/15",
+        :from_email=>"rejestracja@poczatek.org",
+        :subject=>"Potwierdzenie wpłaty",
+        :to=>[
+            {
+                :email=> "#{participant.email}",
+                :name=> "#{participant.name} #{participant.surname}"
+            },
+            ],
+        :global_merge_vars=>[{
+                                 :name => "IMIE",
+                                 :content => "#{participant.name}"
+                             },
+                             {
+                                 :name => "KONCOWKA",
+                                 :content => "#{ending}"
+                             },
+                             {
+                                 :name => "OPCJE",
+                                 :content => "#{options}"
+                             },
+                             {
+                                 :name => "ZAPLACONO",
+                                 :content => "#{participant.paid}"
+                             },
+                             {
+                                 :name => "DOZAPLATY",
+                                 :content => "#{to_pay_text}"
+                             }]
+    }
+  end
+
+
+
+  def prepare_delete_info_message(participant)
+    @message = {
+        :from_name=> "Rejestracja Początek 14/15",
+        :from_email=>"rejestracja@poczatek.org",
+        :subject=>"Usunięcie z listy uczestników",
+        :to=>[
+            {
+                :email=> "#{participant.email}",
+                :name=> "#{participant.name} #{participant.surname}"
+            },
+            ],
+        :global_merge_vars=>[{
+                                 :name => "IMIE",
+                                 :content => "#{participant.name}"
+                             }]
+    }
+  end
+
+  def prepare_confirmation_message(participant, days)
 
     ending = get_ending(participant)
     options = get_options(participant, days)
-    date = get_date
+    date = get_payment_deadline
 
     @message = {
         :from_name=> "Rejestracja Początek 14/15",
@@ -65,8 +120,11 @@ class MandrillMailer
     }
   end
 
+
+private
+
   def get_ending(participant)
-    return "aś" unless participant.gender
+    return "aś" if participant.gender == 'K'
     "eś"
   end
 
@@ -102,13 +160,37 @@ class MandrillMailer
   end
 
 
-  def get_date
+  def get_payment_deadline
     date = Date.today
     date = date + 7.days
     if date < Date.new(2014, 12, 24)
       return date = date.strftime("%d.%m.%Y")
     else
       return date = Date.new(2014, 12, 24).strftime("%d.%m.%Y")
+    end
+  end
+
+  def get_to_pay_text(participant)
+    participation_cost = participant.cost - participant.nights.length * participant.role.price_table.night - participant.dinners.length * participant.role.price_table.dinner
+    q = participant.paid - participant.cost
+    qm = participant.cost - participant.paid
+
+    q = q.to_s
+    qm = qm.to_s
+
+
+    if participant.paid == participant.cost
+        return 'Całkowity koszt Twojego udziału został opłacony. <br />'
+    elsif participant.paid > participant.cost
+        return 'Otrzymaliśmy o <strong>' + q + ' zł</strong> więcej niż wymagana kwota. <br /> 
+        Przy rejestracji w dniu przyjazdu na konferencję pieniądze zostaną Ci zwrócone. <br />'
+    elsif participant.paid > participation_cost && participant.paid < participant.cost
+        'Do opłacenia pełnego udziału brakuje <strong>' + qm + ' zł.</strong><br />
+        Za obiady i noclegi można zapłacić również na miejscu.<br />
+        W razie rezygnacji z obiadów lub noclegów, prosimy o kontakt pod adresem rejestracja@poczatek.org. <br />'
+    else
+        'Do opłacenia podstawowego kosztu udziału brakuje <strong>' + qm + ' zł.</strong><br />
+        Prosimy o dopłatę do wymaganej kwoty w ciągu <strong>2 dni roboczych</strong>.'
     end
   end
 end

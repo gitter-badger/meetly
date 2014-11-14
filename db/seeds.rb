@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Role.destroy_all
-Participant.destroy_all
+Participant.unscoped.destroy_all
 PriceTable.destroy_all
 Day.destroy_all
 Night.destroy_all

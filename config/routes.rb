@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :participants do
     patch :edit_payment, on: :member
+    post :payment_confirm, on: :member
   end
   root to: 'participants#index'
 

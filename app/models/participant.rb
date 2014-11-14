@@ -31,7 +31,20 @@ class Participant < ActiveRecord::Base
 
   def send_confirmation
     @mandrill = MandrillMailer.new
-    @mandrill.send_confirmation(self, Day.all)
+    @mandrill.prepare_confirmation_message(self, Day.all)
+    @mandrill.send_message('Confirmation_new')
+  end
+
+  def send_delete_info
+    @mandrill = MandrillMailer.new
+    @mandrill.prepare_delete_info_message(self)
+    @mandrill.send_message('delete_participant')
+  end
+
+  def send_confirm_payment
+    @mandrill = MandrillMailer.new
+    @mandrill.prepare_confirm_payment_message(self, Day.all)
+    @mandrill.send_message('confirm_payment')
   end
 
   def get_status
@@ -63,12 +76,11 @@ def format_status(color, status)
   status.html_safe
 end
 
-
 attr_accessor :mandrill
 
 
 
-  private
+private
 
   def days_are_limited
     if self.days.length > 3
