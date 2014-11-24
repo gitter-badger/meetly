@@ -1,4 +1,4 @@
-<tr class="<%= dom_id(participant) %>" style="outline: thin solid">
+<tr class="<%= dom_id(participant) %>" style="outline: thin solid"  >
  
     <td><%= participant.name%></td>
     <td><%=participant.surname%></td>
@@ -25,17 +25,21 @@
     <p>
     <%= link_to 'Wyślij potwierdzenie', payment_confirm_participant_path(participant), :method => :post, :data => {:confirm => 'Na pewno wysłać?'}, :remote => true %>
     </p>
+    
     <%if participant.archived == false %>
-      <%= link_to 'Usuń', participant, :method => :delete, :data => {:confirm => 'Na pewno usunąć?'} , :remote => true %>
-      <%else%>
-      Tu będzie przywracanie :)
-      <%end%>
+      <p><%= link_to 'Archiwizuj', participant, :method => :delete, :data => {:confirm => 'Na pewno usunąć? Uczestnik otrzyma maila z potwierdzeniem!'} , :remote => true %></p>
+        <p><%= link_to 'Usuń na zawsze', wipe_participant_path(participant), :method => :delete, :data => {:confirm => 'Usunąć NA ZAWSZE?'}, :remote => true %></p>
+    <%else%>
+     <%= link_to 'Przywróć', unarchive_participant_path(participant), :method => :patch, :data => {:confirm => 'Na pewno przywrócić?'}, :remote => true %>
+    <%end%>
+      
     </td>
     <td>
       <%= form_for participant, url: edit_payment_participant_path(participant) do |f| %>
         <strong>Zapłać:</strong>
         <%= f.number_field :paid %>
-        <%= f.submit "Zapłać" %>
+        <%= f.collection_select :role_id, Role.all, :id, :name %>        
+        <%= f.submit "Zapiszz" %>
       <% end %>
     </td>   
 </tr>

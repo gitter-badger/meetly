@@ -22,14 +22,34 @@ class ParticipantsController < ApplicationController
     end
   end
 
+  def wipe
+    @participant = Participant.find(params[:id])
+    @participant.destroy
+    respond_to do |format|
+      format.js {render "destroy", :locals => {:id => params[:id]}}
+    end
+  end
+
+  def unarchive
+    @participant = Participant.unscoped.find(params[:id])
+    @participant.archived = false
+    @participant.save!
+    respond_to do |format|
+      format.js {render "destroy", :locals => {:id => params[:id]}}
+    end
+  end
+
   def show_archived
     @participants = Participant.unscoped.where(archived: true)
   end
 
   def edit_payment
-    @participant = Participant.find(params[:id])
+    @participant = Participant.find(params[:id])    
     @participant.paid = params[:participant][:paid]
-    @participant.save
+    if params[:participant][:role_id]
+      @participant.role = Role.find(params[:participant][:role_id])
+    end
+    @participant.save!
     redirect_to root_url
   end
 
