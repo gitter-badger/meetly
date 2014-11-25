@@ -10,6 +10,7 @@ pt = PriceTable.create!(
 
 org = Role.find_by(name: 'Organizator')
 org.price_table = pt
+org.save!
 
 pt2 = PriceTable.create!(
     name: 'Wolntariusze',
