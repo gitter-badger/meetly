@@ -27,7 +27,7 @@
     </p>
     
     <%if participant.archived == false %>
-      <p><%= link_to 'Archiwizuj', participant, :method => :delete, :data => {:confirm => 'Na pewno usunąć? Uczestnik otrzyma maila z potwierdzeniem!'} , :remote => true %></p>
+      <p><%= link_to 'Archiwizuj (mail)', participant, :method => :delete, :data => {:confirm => 'Na pewno usunąć? Uczestnik otrzyma maila z potwierdzeniem!'} , :remote => true %></p>
         <p><%= link_to 'Usuń na zawsze', wipe_participant_path(participant), :method => :delete, :data => {:confirm => 'Usunąć NA ZAWSZE?'}, :remote => true %></p>
     <%else%>
      <%= link_to 'Przywróć', unarchive_participant_path(participant), :method => :patch, :data => {:confirm => 'Na pewno przywrócić?'}, :remote => true %>
@@ -39,7 +39,7 @@
         <strong>Zapłać:</strong>
         <%= f.number_field :paid %>
         <%= f.collection_select :role_id, Role.all, :id, :name %>        
-        <%= f.submit "Zapiszz" %>
+        <%= f.submit "Zapisz" %>
       <% end %>
     </td>   
 </tr>
