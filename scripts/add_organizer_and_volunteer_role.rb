@@ -8,10 +8,8 @@ pt = PriceTable.create!(
 	dinner: 0
 	)
 
-org = Role.create!(
-	name: 'Organizator',
-	price_table: pt
-	)
+org = Role.find_by(name: 'Organizator')
+org.price_table = pt
 
 pt2 = PriceTable.create!(
     name: 'Wolntariusze',
