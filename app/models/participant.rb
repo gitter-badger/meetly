@@ -64,8 +64,11 @@ class Participant < ActiveRecord::Base
     elsif paid == cost
       status = 'OPŁACONY'
       color = 'green'
+    elsif paid < cost
+      status = 'NIEDOPAŁCONY'
     else
-      status = 'NIEDOPŁACONY'
+      status = 'NADPŁACONY'
+      color = 'blue'
     end
 
     format_status(color, status)
