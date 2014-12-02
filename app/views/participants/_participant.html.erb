@@ -35,7 +35,7 @@
       
     </td>
     <td>
-      <%= form_for participant, url: edit_payment_participant_path(participant) do |f| %>
+      <%= form_for participant, url: edit_payment_participant_path(participant), remote: true do |f| %>
         <strong>Zapłać:</strong>
         <%= f.number_field :paid %>
         <%= f.collection_select :role_id, Role.all, :id, :name %>        

@@ -50,7 +50,9 @@ class ParticipantsController < ApplicationController
       @participant.role = Role.find(params[:participant][:role_id])
     end
     @participant.save!
-    redirect_to root_url
+    respond_to do |format|
+      format.js
+    end
   end
 
   def payment_confirm

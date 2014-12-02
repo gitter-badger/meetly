@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :participants do
-    patch :edit_payment, on: :member
+    patch :edit_payment, on: :member, defaults: {format: 'js'}
     post :payment_confirm, on: :member
     delete :wipe, on: :member
     patch :unarchive, on: :member
