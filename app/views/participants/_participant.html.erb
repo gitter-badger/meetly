@@ -25,17 +25,9 @@
     <p>
     <%= link_to 'Potwierdzenie zapłaty', payment_confirm_participant_path(participant), :method => :post, :data => {:confirm => 'Na pewno wysłać?'}, :remote => true %>
     </p>
-    <p style="color:gray;">
+    <p style="color:grey;">
      <%= link_to 'Ponowne potwierdzenie rejestracji', resend_confirmation_participant_path(participant), :method => :get, :data => {:confirm => 'Na pewno wysłać PONOWNIE?'}, :remote => true %>
     </p>
-    
-    <%if participant.archived == false %>
-      <p><%= link_to 'Archiwizuj (mail)', participant, :method => :delete, :data => {:confirm => 'Na pewno usunąć? Uczestnik otrzyma maila z potwierdzeniem!'} , :remote => true %></p>
-        <p><%= link_to 'Usuń na zawsze', wipe_participant_path(participant), :method => :delete, :data => {:confirm => 'Usunąć NA ZAWSZE?'}, :remote => true %></p>
-    <%else%>
-     <%= link_to 'Przywróć', unarchive_participant_path(participant), :method => :patch, :data => {:confirm => 'Na pewno przywrócić?'}, :remote => true %>
-    <%end%>
-      
     </td>
     <td>
       <%= form_for participant, url: edit_payment_participant_path(participant), remote: true do |f| %>
@@ -45,4 +37,12 @@
         <%= f.submit "Zapisz" %>
       <% end %>
     </td>   
+    <td>
+        <%if participant.archived == false %>
+      <p><%= link_to 'Archiwizuj (mail)', participant, :method => :delete, :data => {:confirm => 'Na pewno usunąć? Uczestnik otrzyma maila z potwierdzeniem!'} , :remote => true %></p>
+    <%else%>
+     <%= link_to 'Przywróć', unarchive_participant_path(participant), :method => :patch, :data => {:confirm => 'Na pewno przywrócić?'}, :remote => true %>
+    <%end%>
+    <p><%= link_to 'Usuń na zawsze', wipe_participant_path(participant), :method => :delete, :data => {:confirm => 'Usunąć NA ZAWSZE?'}, :remote => true %></p>
+    </td>
 </tr>
