@@ -103,9 +103,7 @@ class ParticipantsController < ApplicationController
     puts "#{participant.name}"
     puts "#{participant.gender} w środku!"
 
-
-    participant.role = Role.find_by(name: 'Uczestnik')
-    # participant.role = Role.find_by(name: 'UczestnikPo1012')
+    participant.role = Role.find_by(name: 'UczestnikPo1012')
 
     participant.days = days
 
