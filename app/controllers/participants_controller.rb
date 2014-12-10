@@ -73,6 +73,11 @@ class ParticipantsController < ApplicationController
 
   end
 
+  def resend_confirmation
+    @participant = Participant.find(params[:id])
+    @participant.send_confirmation
+  end
+
 
 
   protected

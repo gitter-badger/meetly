@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     post :payment_confirm, on: :member
     delete :wipe, on: :member
     patch :unarchive, on: :member
+    get :resend_confirmation, on: :member
   end
   root to: 'participants#index'
 

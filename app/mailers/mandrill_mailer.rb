@@ -81,7 +81,7 @@ class MandrillMailer
 
     ending = get_ending(participant)
     options = get_options(participant, days)
-    date = get_payment_deadline
+    date = get_payment_deadline(participant)
 
     @message = {
         :from_name=> "Rejestracja Początek 14/15",
@@ -160,14 +160,14 @@ private
   end
 
 
-  def get_payment_deadline
-    date = Date.today
-    date = date + 7.days
-    if date < Date.new(2014, 12, 24)
-      return date = date.strftime("%d.%m.%Y")
-    else
-      return date = Date.new(2014, 12, 24).strftime("%d.%m.%Y")
-    end
+  def get_payment_deadline(participant)
+    date = participant.payment_deadline
+    return date = date.strftime("%d.%m.%Y")
+    #if date < Date.new(2014, 12, 24)
+      #return date = date.strftime("%d.%m.%Y")
+    #else
+      #return date = Date.new(2014, 12, 24).strftime("%d.%m.%Y")
+    #end
   end
 
   def get_to_pay_text(participant)

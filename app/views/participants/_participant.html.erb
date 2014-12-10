@@ -23,7 +23,10 @@
     <td><%= participant.get_status %></td>
     <td>
     <p>
-    <%= link_to 'Wyślij potwierdzenie', payment_confirm_participant_path(participant), :method => :post, :data => {:confirm => 'Na pewno wysłać?'}, :remote => true %>
+    <%= link_to 'Potwierdzenie zapłaty', payment_confirm_participant_path(participant), :method => :post, :data => {:confirm => 'Na pewno wysłać?'}, :remote => true %>
+    </p>
+    <p style="color:gray;">
+     <%= link_to 'Ponowne potwierdzenie rejestracji', resend_confirmation_participant_path(participant), :method => :post, :data => {:confirm => 'Na pewno wysłać PONOWNIE?'}, :remote => true %>
     </p>
     
     <%if participant.archived == false %>
