@@ -12,3 +12,5 @@ r = Role.create!(
 	name: 'UczestnikPo1012',
 	price_table: p
 	)
+
+puts "Role: #{r.name} with price table: #{r.price_table.name} created!"

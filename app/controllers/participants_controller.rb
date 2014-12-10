@@ -105,7 +105,7 @@ class ParticipantsController < ApplicationController
 
 
     participant.role = Role.find_by(name: 'Uczestnik')
-
+    # participant.role = Role.find_by(name: 'UczestnikPo1012')
 
     participant.days = days
 
