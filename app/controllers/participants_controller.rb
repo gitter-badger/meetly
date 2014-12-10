@@ -76,6 +76,7 @@ class ParticipantsController < ApplicationController
   def resend_confirmation
     @participant = Participant.find(params[:id])
     @participant.send_confirmation
+    respond_with @participant.to_json, :status => 200
   end
 
 
