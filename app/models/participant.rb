@@ -100,6 +100,9 @@ private
     self.cost = calculate_price
     self.role = Role.find_by(name: 'Uczestnik') if self.role==nil
     self.payment_deadline = Date.today + 7.days if payment_deadline==nil
+    if payment_deadline > Date.new(2014,12,24)
+      payment_deadline = Date.new(2014,12,24)
+    end
   end
 
   def calculate_price
