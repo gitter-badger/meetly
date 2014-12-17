@@ -96,13 +96,25 @@ private
   end
 
   def fill_attributes
+
+    #set basic attributes
     self.paid = 0 if paid == nil
     self.cost = calculate_price
-    self.role = Role.find_by(name: 'Uczestnik') if self.role==nil
+    self.role = Role.find_by(name: 'UczestnikPo1012') if self.role==nil
+
+    #set deadline
     self.payment_deadline = Date.today + 7.days if payment_deadline==nil
-    if payment_deadline > Date.new(2014,12,24)
-      payment_deadline = Date.new(2014,12,24)
+
+    #prepare dates 
+    eve =  Date.new(2014,12,24)
+    today - Date.today
+
+    if payment_deadline > eve && today <= eve
+      payment_deadline = eve
+    elsif today > eve && today
+      payment_deadline = today
     end
+
   end
 
   def calculate_price
@@ -116,8 +128,6 @@ private
       sum = sum + price_table.day2 if self.days.include?(Day.find_by_number(2))
       sum = sum + price_table.day3 if self.days.include?(Day.find_by_number(3))
     end
-
-
 
     sum = sum + self.nights.length * price_table.night
     sum = sum + self.dinners.length * price_table.dinner
