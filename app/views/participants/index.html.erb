@@ -1,4 +1,4 @@
-<h1>Lista uczestników</h1>
+<!-- <h1>Lista uczestników</h1>
 <header>
   <p>
     Ilość zarejestrowanych: <%= @participants.length %>
@@ -18,7 +18,7 @@
   </p>
 
   <p>
-  Ilość obiadów dzień 1: <%= @participants.dinner1_eater.length%>
+  Ilość obiadów dzień 1: <%= @participants.dinner1_eater.length%>"Hello, this is dog")
   </p>
   <p>
   Ilość obiadów dzień 2: <%= @participants.dinner2_eater.length%>
@@ -44,8 +44,164 @@
     <th>Utworzony</th>
     <th>Termin płatności</th>
     <th>Status</th>
-  </tr>
+  </tr> -->
 
-<%= render @participants %>
+
+<div class="log-box">
+  <div class="log-txt"></div>
+</div>
+
+<div class="add-new-cont">
+  <form class="new-form" action="#" method="post">
+    <div id="new-form-close" class="icon icon_close"></div>
+    <h2>Dodaj uczestnika</h2>
+    <div class="form-row">
+      <input type="text" name="first_name" placeholder="Imię" required />
+      <input type="text" name="last_name" placeholder="Nazwisko" required />
+      <div class="clearfix"></div>
+    </div>
+    <div class="form-row">
+      <input type="text" name="first_name" placeholder="Wiek" required />
+      <input type="text" name="last_name" placeholder="Miasto" required />
+      <div class="clearfix"></div>
+    </div>
+    <div class="form-row">
+      <input type="text" name="last_name" placeholder="Rola (np. uczestnik)" required />
+      <div class="clearfix"></div>
+    </div>
+    <div class="form-row">
+      <input type="text" name="first_name" placeholder="E-mail" required />
+      <input type="text" name="last_name" placeholder="Telefon" required />
+      <div class="clearfix"></div>
+    </div>
+    <div class="form-row form-row-checkbox">
+      <label>Dni:</label>
+      <div class="clearfix"></div>
+      <div class="checkbox-part">
+        <label for="day-1">1</label>
+        <input id="day-1" type="checkbox" name="day[1]" value="1" checked />
+      </div>
+      <div class="checkbox-part">
+        <label for="day-2">2</label>
+        <input id="day-2" type="checkbox" name="day[2]" value="1" checked />
+      </div>
+      <div class="checkbox-part">
+        <label for="day-3">3</label>
+        <input id="day-3" type="checkbox" name="day[3]" value="1" checked />
+      </div>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="form-row form-row-checkbox">
+      <label>Obiady:</label>
+      <div class="clearfix"></div>
+      <div class="checkbox-part">
+        <label for="dinner-1">1</label>
+        <input id="dinner-1" type="checkbox" name="dinner[1]" value="1" checked />
+      </div>
+      <div class="checkbox-part">
+        <label for="dinner-2">2</label>
+        <input id="dinner-2" type="checkbox" name="dinner[2]" value="1" checked />
+      </div>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="form-row form-row-checkbox">
+      <label>Noclegi:</label>
+      <div class="clearfix"></div>
+      <div class="checkbox-part">
+        <label for="night-1">1</label>
+        <input id="night-1" type="checkbox" name="night[1]" value="1" checked />
+      </div>
+      <div class="checkbox-part">
+        <label for="night-2">2</label>
+        <input id="night-2" type="checkbox" name="night[2]" value="1" checked />
+      </div>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="form-row">
+      <input type="text" name="first_name" pattern="[0-9]+" placeholder="Suma" required />
+      <input type="text" name="last_name" pattern="[0-9]+" placeholder="Zapłacono" required />
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="form-row">
+      <div class="ColVis"><button class="ColVis_Button ColVis_MasterButton" type="submit"><span>Zapisz</span></button></div>
+
+    </div>
+    <div class="clearfix"></div>
+  </form>
+</div>
+
+<div class="wrapper">
+  <header class="container">
+    <a href="#" class="logo"></a>
+    <ul class="page-tabs reset-ul">
+      <li><a class="active" href="#"><span class="icon_id"></span>Lista uczestników</a></li>
+      <li><a href="#"><span class="icon_datareport"></span>Podsumowanie</a></li>
+      <li><a href="#"><span class="icon_mail_alt"></span>Wiadomości</a></li>
+    </ul>
+    <div class="logout"><a href="#"><i class="icon_lock-open_alt"></i>Wyloguj</a></div>
+    <div class="clearfix"></div>
+  </header>
+
+  <section class="container content">
+    <h1 class="main-header">Lista uczestników</h1>
+
+<table id="data" class="display" cellspacing="0" width="100%">
+<thead>
+    <tr>
+        <th>Imię i nazwisko</th>
+        <th>Wiek</th>
+        <th>Miasto</th>
+        <th>E-mail</th>
+        <th>Telefon</th>
+        <th>Rola</th>
+        <th>Suma</th>
+        <th>Zapłacono</th>
+        <th>Do zapłaty</th>
+        <th class="th-group-1">Dzien 1</th>
+        <th class="th-group-1">Dzien 2</th>
+        <th class="th-group-1">Dzien 3</th>
+        <th class="th-group-2">Obiad 1</th>
+        <th class="th-group-2">Obiad 2</th>
+        <th class="th-group-3">Nocleg 1</th>
+        <th class="th-group-3">Nocleg 2</th>
+        <th>Zarejestrowany</th>
+        <th>Termin płatności</th>
+        <th>Status</th>
+        <th>Panel szybkiej obsługi</th>
+    </tr>
+</thead>
+
+<tfoot>
+    <tr>
+        <th>Imię i nazwisko</th>
+        <th>Wiek</th>
+        <th>Miasto</th>
+        <th>E-mail</th>
+        <th>Telefon</th>
+        <th>Rola</th>
+        <th>Suma</th>
+        <th>Zapłacono</th>
+        <th>Do zapłaty</th>
+        <th class="th-group-1">Dzien 1</th>
+        <th class="th-group-1">Dzien 2</th>
+        <th class="th-group-1">Dzien 3</th>
+        <th class="th-group-2">Obiad 1</th>
+        <th class="th-group-2">Obiad 2</th>
+        <th class="th-group-3">Nocleg 1</th>
+        <th class="th-group-3">Nocleg 2</th>
+        <th>Zarejestrowany</th>
+        <th>Termin płatności</th>
+        <th>Status</th>
+        <th>Panel szybkiej obsługi</th>
+    </tr>
+</tfoot>
+
+<tbody>
+  <%= render @participants %>
+</tbody>
 
 </table>
