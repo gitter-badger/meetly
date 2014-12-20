@@ -109,9 +109,9 @@ private
     eve =  Date.new(2014,12,24)
     today = Date.today
 
-    if payment_deadline > eve
+    if payment_deadline > eve && today <= eve
       payment_deadline = eve
-    elsif today > eve
+    elsif today > eve && today
       payment_deadline = today
     end
 
