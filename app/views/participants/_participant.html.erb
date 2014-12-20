@@ -1,13 +1,13 @@
-<tr data-id="<%= dom_id(participant) %>" class="<%= dom_id(participant) %>" >
+<tr data-id="1" class="<%= dom_id(participant) %>" >
  
-    <td class="editable" data-action="first_name"><%= participant.name%> <%=participant.surname%></td>
-    <td class="editable" data-action="age"><%=participant.age%></td>
-    <td class="editable" data-action="town"><%=participant.city%></td>
-    <td class="editable" data-action="email"><%=participant.email%></td>
-    <td class="editable" data-action="phone"><%=participant.phone%></td>
+    <td data-action="first_name"><%= participant.name%> <%=participant.surname%></td>
+    <td data-action="age"><%=participant.age%></td>
+    <td data-action="town"><%=participant.city%></td>
+    <td data-action="email"><%=participant.email%></td>
+    <td data-action="phone"><%=participant.phone%></td>
     <td data-action="role"><%=participant.role.name[0]%></td>
-    <td class="editable td-total" data-action="total"><%=participant.cost%></td>
-    <td class="editable td-paid" data-action="paid"><%=participant.paid%></td>
+    <td class="td-total" data-action="total"><%=participant.cost%></td>
+    <td class="td-paid" data-action="paid"><%=participant.paid%></td>
     <td class="to-pay"><%=participant.cost - participant.paid %> </td>
     <td><%=participant.days.include?(Day.find_by_number(1))%></td>
     <td><%=participant.days.include?(Day.find_by_number(2))%></td>

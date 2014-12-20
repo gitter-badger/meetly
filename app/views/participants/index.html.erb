@@ -45,7 +45,8 @@
     <th>Termin płatności</th>
     <th>Status</th>
   </tr> -->
-<script>
+<% content_for :head do %>
+  <script>
   $(document).ready(function() {
     var table = $('#data').on( 'init.dt', function () {
       $("select").selectbox();
@@ -81,11 +82,12 @@
     
   });
 </script>
+<% end %>
 
+<div id="data_wrapper"> </div>
 <div class="log-box">
   <div class="log-txt"></div>
 </div>
-
 <div class="add-new-cont">
   <form class="new-form" action="#" method="post">
     <div id="new-form-close" class="icon icon_close"></div>
@@ -206,7 +208,7 @@
         <th>Zarejestrowany</th>
         <th>Termin płatności</th>
         <th>Status</th>
-        <th>Panel szybkiej obsługi</th>
+        <th></th>
     </tr>
 </thead>
 
@@ -231,7 +233,7 @@
         <th>Zarejestrowany</th>
         <th>Termin płatności</th>
         <th>Status</th>
-        <th>Panel szybkiej obsługi</th>
+        <th></th>
     </tr>
 </tfoot>
 
