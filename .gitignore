@@ -38,4 +38,4 @@ Gemfile.lock
 tmp/
 
 #Log
-log/
+*.log
