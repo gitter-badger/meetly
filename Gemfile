@@ -28,6 +28,8 @@ gem 'mandrill-api'
 
 gem 'bcrypt', :require => 'bcrypt'
 
+gem 'jquery-datatables-rails', '~> 3.1.1'
+
 group :production do
   gem 'puma'
 end
