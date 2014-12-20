@@ -5249,3 +5249,874 @@ Started GET "/assets/applogo.png" for 127.0.0.1 at 2014-12-20 17:14:30 +0100
 
 
 Started GET "/assets/favicon.png" for 127.0.0.1 at 2014-12-20 17:14:30 +0100
+
+
+Started GET "/" for 127.0.0.1 at 2014-12-20 17:35:25 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ParticipantsController#index as HTML
+  [1m[35mUser Load (1.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = $1 LIMIT 1  [["id", 3]]
+  [1m[36mParticipant Load (1.0ms)[0m  [1mSELECT "participants".* FROM "participants"  WHERE "participants"."archived" = 'f'  ORDER BY participants.created_at ASC[0m
+  [1m[35mParticipantDay Load (1.0ms)[0m  SELECT "participant_days".* FROM "participant_days"  WHERE "participant_days"."participant_id" IN (51, 54)
+  [1m[36mDay Load (0.0ms)[0m  [1mSELECT "days".* FROM "days"  WHERE "days"."id" IN (52, 53, 54)[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT "roles".* FROM "roles"  WHERE "roles"."id" IN (36, 39)
+  [1m[36mSQL (2.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 1 AND "participants"."gender" = 'M'  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (2.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 2 AND "participants"."gender" = 'M'  ORDER BY participants.created_at ASC
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 1 AND "participants"."gender" = 'K'  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (2.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 2 AND "participants"."gender" = 'K'  ORDER BY participants.created_at ASC
+  [1m[36mSQL (2.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "dinners"."id" AS t3_r0, "dinners"."number" AS t3_r1, "dinners"."created_at" AS t3_r2, "dinners"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_dinners" ON "participant_dinners"."participant_id" = "participants"."id" LEFT OUTER JOIN "dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participants"."archived" = 'f' AND "dinners"."number" = 1  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (2.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "dinners"."id" AS t3_r0, "dinners"."number" AS t3_r1, "dinners"."created_at" AS t3_r2, "dinners"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_dinners" ON "participant_dinners"."participant_id" = "participants"."id" LEFT OUTER JOIN "dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participants"."archived" = 'f' AND "dinners"."number" = 2  ORDER BY participants.created_at ASC
+  [1m[36mDay Load (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 1 LIMIT 1[0m
+  [1m[35mDay Load (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 2 LIMIT 1
+  [1m[36mDay Load (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 3 LIMIT 1[0m
+  [1m[35mDinner Load (0.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 1 LIMIT 1
+  [1m[36mDinner Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 35 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mDinner Load (0.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 2 LIMIT 1
+  [1m[36mDinner Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 36 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mNight Load (1.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 1 LIMIT 1
+  [1m[36mNight Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 35 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mNight Load (1.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 2 LIMIT 1
+  [1m[36mNight Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 36 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mRole Load (0.0ms)[0m  SELECT "roles".* FROM "roles"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 1 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 2 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 3 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 1 LIMIT 1
+  [1m[36mDinner Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 35 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 2 LIMIT 1
+  [1m[36mDinner Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 36 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 1 LIMIT 1
+  [1m[36mNight Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 35 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 2 LIMIT 1
+  [1m[36mNight Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 36 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "roles".* FROM "roles"
+  Rendered participants/_participant.html.erb (96.0ms)
+  Rendered participants/index.html.erb within layouts/application (437.0ms)
+Completed 200 OK in 1065ms (Views: 980.1ms | ActiveRecord: 34.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-12-20 17:35:27 +0100
+Processing by ParticipantsController#index as HTML
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  [1m[35mParticipant Load (0.0ms)[0m  SELECT "participants".* FROM "participants"  WHERE "participants"."archived" = 'f'  ORDER BY participants.created_at ASC
+  [1m[36mParticipantDay Load (0.0ms)[0m  [1mSELECT "participant_days".* FROM "participant_days"  WHERE "participant_days"."participant_id" IN (51, 54)[0m
+  [1m[35mDay Load (0.0ms)[0m  SELECT "days".* FROM "days"  WHERE "days"."id" IN (52, 53, 54)
+  [1m[36mRole Load (0.0ms)[0m  [1mSELECT "roles".* FROM "roles"  WHERE "roles"."id" IN (36, 39)[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 1 AND "participants"."gender" = 'M'  ORDER BY participants.created_at ASC
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 2 AND "participants"."gender" = 'M'  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (2.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 1 AND "participants"."gender" = 'K'  ORDER BY participants.created_at ASC
+  [1m[36mSQL (2.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 2 AND "participants"."gender" = 'K'  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "dinners"."id" AS t3_r0, "dinners"."number" AS t3_r1, "dinners"."created_at" AS t3_r2, "dinners"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_dinners" ON "participant_dinners"."participant_id" = "participants"."id" LEFT OUTER JOIN "dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participants"."archived" = 'f' AND "dinners"."number" = 1  ORDER BY participants.created_at ASC
+  [1m[36mSQL (2.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "dinners"."id" AS t3_r0, "dinners"."number" AS t3_r1, "dinners"."created_at" AS t3_r2, "dinners"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_dinners" ON "participant_dinners"."participant_id" = "participants"."id" LEFT OUTER JOIN "dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participants"."archived" = 'f' AND "dinners"."number" = 2  ORDER BY participants.created_at ASC[0m
+  [1m[35mDay Load (1.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 1 LIMIT 1
+  [1m[36mDay Load (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 2 LIMIT 1[0m
+  [1m[35mDay Load (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 3 LIMIT 1
+  [1m[36mDinner Load (0.0ms)[0m  [1mSELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 1 LIMIT 1[0m
+  [1m[35mDinner Exists (0.0ms)[0m  SELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 35 LIMIT 1  [["participant_id", 51]]
+  [1m[36mDinner Load (1.0ms)[0m  [1mSELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 2 LIMIT 1[0m
+  [1m[35mDinner Exists (1.0ms)[0m  SELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 36 LIMIT 1  [["participant_id", 51]]
+  [1m[36mNight Load (0.0ms)[0m  [1mSELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 1 LIMIT 1[0m
+  [1m[35mNight Exists (0.0ms)[0m  SELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 35 LIMIT 1  [["participant_id", 51]]
+  [1m[36mNight Load (0.0ms)[0m  [1mSELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 2 LIMIT 1[0m
+  [1m[35mNight Exists (0.0ms)[0m  SELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 36 LIMIT 1  [["participant_id", 51]]
+  [1m[36mRole Load (0.0ms)[0m  [1mSELECT "roles".* FROM "roles"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 1 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 3 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 1 LIMIT 1[0m
+  [1m[35mDinner Exists (0.0ms)[0m  SELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 35 LIMIT 1  [["participant_id", 54]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 2 LIMIT 1[0m
+  [1m[35mDinner Exists (0.0ms)[0m  SELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 36 LIMIT 1  [["participant_id", 54]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 1 LIMIT 1[0m
+  [1m[35mNight Exists (0.0ms)[0m  SELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 35 LIMIT 1  [["participant_id", 54]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 2 LIMIT 1[0m
+  [1m[35mNight Exists (0.0ms)[0m  SELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 36 LIMIT 1  [["participant_id", 54]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "roles".* FROM "roles"[0m
+  Rendered participants/_participant.html.erb (66.0ms)
+  Rendered participants/index.html.erb within layouts/application (239.0ms)
+Completed 200 OK in 579ms (Views: 565.0ms | ActiveRecord: 12.0ms)
+
+
+Started GET "/assets/fonts/fonts.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/grid_12-825-55-15.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/specimen_stylesheet.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/dataTables.colVis.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/fonts/prnov/stylesheet.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/jquery.dataTables.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/jquery.selectbox.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/participant.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/grid_12-825-55-15.css" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/fonts/fonts.css" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/dataTables.colVis.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/jquery.dataTables.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/jquery.page-ui.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/jquery.selectbox-0.2.min.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/participant.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/fonts/ElegantIcons.woff" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/applogo.png" for 127.0.0.1 at 2014-12-20 17:35:28 +0100
+
+
+Started GET "/assets/fonts/fonts.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/assets/dataTables.colVis.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/assets/fonts/prnov/stylesheet.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/grid_12-825-55-15.css" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/specimen_stylesheet.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/grid_12-825-55-15.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/assets/jquery.dataTables.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/assets/jquery.selectbox.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/assets/participant.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/assets/fonts/fonts.css" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:37 +0100
+
+
+Started GET "/" for 127.0.0.1 at 2014-12-20 17:35:40 +0100
+Processing by ParticipantsController#index as HTML
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = $1 LIMIT 1  [["id", 3]]
+  [1m[36mParticipant Load (1.0ms)[0m  [1mSELECT "participants".* FROM "participants"  WHERE "participants"."archived" = 'f'  ORDER BY participants.created_at ASC[0m
+  [1m[35mParticipantDay Load (1.0ms)[0m  SELECT "participant_days".* FROM "participant_days"  WHERE "participant_days"."participant_id" IN (51, 54)
+  [1m[36mDay Load (1.0ms)[0m  [1mSELECT "days".* FROM "days"  WHERE "days"."id" IN (52, 53, 54)[0m
+  [1m[35mRole Load (0.0ms)[0m  SELECT "roles".* FROM "roles"  WHERE "roles"."id" IN (36, 39)
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 1 AND "participants"."gender" = 'M'  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 2 AND "participants"."gender" = 'M'  ORDER BY participants.created_at ASC
+  [1m[36mSQL (2.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 1 AND "participants"."gender" = 'K'  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 2 AND "participants"."gender" = 'K'  ORDER BY participants.created_at ASC
+  [1m[36mSQL (2.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "dinners"."id" AS t3_r0, "dinners"."number" AS t3_r1, "dinners"."created_at" AS t3_r2, "dinners"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_dinners" ON "participant_dinners"."participant_id" = "participants"."id" LEFT OUTER JOIN "dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participants"."archived" = 'f' AND "dinners"."number" = 1  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "dinners"."id" AS t3_r0, "dinners"."number" AS t3_r1, "dinners"."created_at" AS t3_r2, "dinners"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_dinners" ON "participant_dinners"."participant_id" = "participants"."id" LEFT OUTER JOIN "dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participants"."archived" = 'f' AND "dinners"."number" = 2  ORDER BY participants.created_at ASC
+  [1m[36mDay Load (1.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 1 LIMIT 1[0m
+  [1m[35mDay Load (1.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 2 LIMIT 1
+  [1m[36mDay Load (1.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 3 LIMIT 1[0m
+  [1m[35mDinner Load (0.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 1 LIMIT 1
+  [1m[36mDinner Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 35 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mDinner Load (1.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 2 LIMIT 1
+  [1m[36mDinner Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 36 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mNight Load (0.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 1 LIMIT 1
+  [1m[36mNight Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 35 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mNight Load (1.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 2 LIMIT 1
+  [1m[36mNight Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 36 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mRole Load (0.0ms)[0m  SELECT "roles".* FROM "roles"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 1 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 2 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 3 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 1 LIMIT 1
+  [1m[36mDinner Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 35 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (1.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 2 LIMIT 1
+  [1m[36mDinner Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 36 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 1 LIMIT 1
+  [1m[36mNight Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 35 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 2 LIMIT 1
+  [1m[36mNight Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 36 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "roles".* FROM "roles"
+  Rendered participants/_participant.html.erb (42.0ms)
+  Rendered participants/index.html.erb within layouts/application (217.0ms)
+Completed 200 OK in 600ms (Views: 579.0ms | ActiveRecord: 19.0ms)
+
+
+Started GET "/assets/jquery.dataTables.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/fonts/prnov/stylesheet.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/specimen_stylesheet.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/grid_12-825-55-15.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/fonts/fonts.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/dataTables.colVis.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/jquery.selectbox.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/participant.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/grid_12-825-55-15.css" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/fonts/fonts.css" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/dataTables.colVis.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/jquery.dataTables.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/jquery.page-ui.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/jquery.selectbox-0.2.min.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/participant.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/assets/applogo.png" for 127.0.0.1 at 2014-12-20 17:35:41 +0100
+
+
+Started GET "/" for 127.0.0.1 at 2014-12-20 17:41:50 +0100
+Processing by ParticipantsController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  [1m[35mParticipant Load (1.0ms)[0m  SELECT "participants".* FROM "participants"  WHERE "participants"."archived" = 'f'  ORDER BY participants.created_at ASC
+  [1m[36mParticipantDay Load (1.0ms)[0m  [1mSELECT "participant_days".* FROM "participant_days"  WHERE "participant_days"."participant_id" IN (51, 54)[0m
+  [1m[35mDay Load (0.0ms)[0m  SELECT "days".* FROM "days"  WHERE "days"."id" IN (52, 53, 54)
+  [1m[36mRole Load (0.0ms)[0m  [1mSELECT "roles".* FROM "roles"  WHERE "roles"."id" IN (36, 39)[0m
+  [1m[35mSQL (2.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 1 AND "participants"."gender" = 'M'  ORDER BY participants.created_at ASC
+  [1m[36mSQL (2.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 2 AND "participants"."gender" = 'M'  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 1 AND "participants"."gender" = 'K'  ORDER BY participants.created_at ASC
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 2 AND "participants"."gender" = 'K'  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "dinners"."id" AS t3_r0, "dinners"."number" AS t3_r1, "dinners"."created_at" AS t3_r2, "dinners"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_dinners" ON "participant_dinners"."participant_id" = "participants"."id" LEFT OUTER JOIN "dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participants"."archived" = 'f' AND "dinners"."number" = 1  ORDER BY participants.created_at ASC
+  [1m[36mSQL (2.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "dinners"."id" AS t3_r0, "dinners"."number" AS t3_r1, "dinners"."created_at" AS t3_r2, "dinners"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_dinners" ON "participant_dinners"."participant_id" = "participants"."id" LEFT OUTER JOIN "dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participants"."archived" = 'f' AND "dinners"."number" = 2  ORDER BY participants.created_at ASC[0m
+  [1m[35mDay Load (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 1 LIMIT 1
+  [1m[36mDay Load (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 2 LIMIT 1[0m
+  [1m[35mDay Load (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 3 LIMIT 1
+  [1m[36mDinner Load (0.0ms)[0m  [1mSELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 1 LIMIT 1[0m
+  [1m[35mDinner Exists (0.0ms)[0m  SELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 35 LIMIT 1  [["participant_id", 51]]
+  [1m[36mDinner Load (0.0ms)[0m  [1mSELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 2 LIMIT 1[0m
+  [1m[35mDinner Exists (0.0ms)[0m  SELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 36 LIMIT 1  [["participant_id", 51]]
+  [1m[36mNight Load (1.0ms)[0m  [1mSELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 1 LIMIT 1[0m
+  [1m[35mNight Exists (0.0ms)[0m  SELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 35 LIMIT 1  [["participant_id", 51]]
+  [1m[36mNight Load (0.0ms)[0m  [1mSELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 2 LIMIT 1[0m
+  [1m[35mNight Exists (0.0ms)[0m  SELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 36 LIMIT 1  [["participant_id", 51]]
+  [1m[36mRole Load (0.0ms)[0m  [1mSELECT "roles".* FROM "roles"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 1 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 3 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 1 LIMIT 1[0m
+  [1m[35mDinner Exists (1.0ms)[0m  SELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 35 LIMIT 1  [["participant_id", 54]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 2 LIMIT 1[0m
+  [1m[35mDinner Exists (0.0ms)[0m  SELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 36 LIMIT 1  [["participant_id", 54]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 1 LIMIT 1[0m
+  [1m[35mNight Exists (0.0ms)[0m  SELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 35 LIMIT 1  [["participant_id", 54]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 2 LIMIT 1[0m
+  [1m[35mNight Exists (0.0ms)[0m  SELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 36 LIMIT 1  [["participant_id", 54]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "roles".* FROM "roles"[0m
+  Rendered participants/_participant.html.erb (45.0ms)
+  Rendered participants/index.html.erb within layouts/application (243.0ms)
+Completed 200 OK in 635ms (Views: 617.0ms | ActiveRecord: 14.0ms)
+
+
+Started GET "/assets/dataTables.colVis.css?body=1" for 127.0.0.1 at 2014-12-20 17:41:50 +0100
+
+
+Started GET "/assets/fonts/fonts.css?body=1" for 127.0.0.1 at 2014-12-20 17:41:50 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/grid_12-825-55-15.css?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/specimen_stylesheet.css?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/fonts/prnov/stylesheet.css?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/jquery.dataTables.css?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/jquery.selectbox.css?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/participant.css?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.css?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/grid_12-825-55-15.css" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/fonts/fonts.css" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.js?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/dataTables.colVis.js?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/jquery.dataTables.js?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/jquery.page-ui.js?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/jquery.selectbox-0.2.min.js?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/participant.js?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/applogo.png" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/assets/favicon.png" for 127.0.0.1 at 2014-12-20 17:41:51 +0100
+
+
+Started GET "/" for 127.0.0.1 at 2014-12-20 17:48:01 +0100
+Processing by ParticipantsController#index as HTML
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = $1 LIMIT 1  [["id", 3]]
+  [1m[36mParticipant Load (1.0ms)[0m  [1mSELECT "participants".* FROM "participants"  WHERE "participants"."archived" = 'f'  ORDER BY participants.created_at ASC[0m
+  [1m[35mParticipantDay Load (1.0ms)[0m  SELECT "participant_days".* FROM "participant_days"  WHERE "participant_days"."participant_id" IN (51, 54)
+  [1m[36mDay Load (1.0ms)[0m  [1mSELECT "days".* FROM "days"  WHERE "days"."id" IN (52, 53, 54)[0m
+  [1m[35mRole Load (0.0ms)[0m  SELECT "roles".* FROM "roles"  WHERE "roles"."id" IN (36, 39)
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 1 AND "participants"."gender" = 'M'  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 2 AND "participants"."gender" = 'M'  ORDER BY participants.created_at ASC
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 1 AND "participants"."gender" = 'K'  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 2 AND "participants"."gender" = 'K'  ORDER BY participants.created_at ASC
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "dinners"."id" AS t3_r0, "dinners"."number" AS t3_r1, "dinners"."created_at" AS t3_r2, "dinners"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_dinners" ON "participant_dinners"."participant_id" = "participants"."id" LEFT OUTER JOIN "dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participants"."archived" = 'f' AND "dinners"."number" = 1  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "dinners"."id" AS t3_r0, "dinners"."number" AS t3_r1, "dinners"."created_at" AS t3_r2, "dinners"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_dinners" ON "participant_dinners"."participant_id" = "participants"."id" LEFT OUTER JOIN "dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participants"."archived" = 'f' AND "dinners"."number" = 2  ORDER BY participants.created_at ASC
+  [1m[36mDay Load (1.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 1 LIMIT 1[0m
+  [1m[35mDay Load (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 2 LIMIT 1
+  [1m[36mDay Load (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 3 LIMIT 1[0m
+  [1m[35mDinner Load (1.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 1 LIMIT 1
+  [1m[36mDinner Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 35 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mDinner Load (1.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 2 LIMIT 1
+  [1m[36mDinner Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 36 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mNight Load (1.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 1 LIMIT 1
+  [1m[36mNight Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 35 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mNight Load (0.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 2 LIMIT 1
+  [1m[36mNight Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 36 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mRole Load (1.0ms)[0m  SELECT "roles".* FROM "roles"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 1 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 2 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 3 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 1 LIMIT 1
+  [1m[36mDinner Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 35 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 2 LIMIT 1
+  [1m[36mDinner Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 36 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 1 LIMIT 1
+  [1m[36mNight Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 35 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 2 LIMIT 1
+  [1m[36mNight Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 36 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "roles".* FROM "roles"
+  Rendered participants/_participant.html.erb (49.0ms)
+  Rendered participants/index.html.erb within layouts/application (240.0ms)
+Completed 200 OK in 634ms (Views: 615.0ms | ActiveRecord: 16.0ms)
+
+
+Started GET "/assets/fonts/fonts.css?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/dataTables.colVis.css?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/grid_12-825-55-15.css?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/specimen_stylesheet.css?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/fonts/prnov/stylesheet.css?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/jquery.dataTables.css?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/jquery.selectbox.css?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/participant.css?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.css?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/grid_12-825-55-15.css" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/fonts/fonts.css" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/jquery.page-ui.js?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.js?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/dataTables.colVis.js?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/jquery.selectbox-0.2.min.js?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/jquery.dataTables.js?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/participant.js?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/assets/applogo.png" for 127.0.0.1 at 2014-12-20 17:48:02 +0100
+
+
+Started GET "/" for 127.0.0.1 at 2014-12-20 17:51:34 +0100
+Processing by ParticipantsController#index as HTML
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  [1m[35mParticipant Load (1.0ms)[0m  SELECT "participants".* FROM "participants"  WHERE "participants"."archived" = 'f'  ORDER BY participants.created_at ASC
+  [1m[36mParticipantDay Load (1.0ms)[0m  [1mSELECT "participant_days".* FROM "participant_days"  WHERE "participant_days"."participant_id" IN (51, 54)[0m
+  [1m[35mDay Load (0.0ms)[0m  SELECT "days".* FROM "days"  WHERE "days"."id" IN (52, 53, 54)
+  [1m[36mRole Load (0.0ms)[0m  [1mSELECT "roles".* FROM "roles"  WHERE "roles"."id" IN (36, 39)[0m
+  [1m[35mSQL (2.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 1 AND "participants"."gender" = 'M'  ORDER BY participants.created_at ASC
+  [1m[36mSQL (2.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 2 AND "participants"."gender" = 'M'  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 1 AND "participants"."gender" = 'K'  ORDER BY participants.created_at ASC
+  [1m[36mSQL (2.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 2 AND "participants"."gender" = 'K'  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (2.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "dinners"."id" AS t3_r0, "dinners"."number" AS t3_r1, "dinners"."created_at" AS t3_r2, "dinners"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_dinners" ON "participant_dinners"."participant_id" = "participants"."id" LEFT OUTER JOIN "dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participants"."archived" = 'f' AND "dinners"."number" = 1  ORDER BY participants.created_at ASC
+  [1m[36mSQL (2.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "dinners"."id" AS t3_r0, "dinners"."number" AS t3_r1, "dinners"."created_at" AS t3_r2, "dinners"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_dinners" ON "participant_dinners"."participant_id" = "participants"."id" LEFT OUTER JOIN "dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participants"."archived" = 'f' AND "dinners"."number" = 2  ORDER BY participants.created_at ASC[0m
+  [1m[35mDay Load (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 1 LIMIT 1
+  [1m[36mDay Load (1.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 2 LIMIT 1[0m
+  [1m[35mDay Load (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 3 LIMIT 1
+  [1m[36mDinner Load (1.0ms)[0m  [1mSELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 1 LIMIT 1[0m
+  [1m[35mDinner Exists (0.0ms)[0m  SELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 35 LIMIT 1  [["participant_id", 51]]
+  [1m[36mDinner Load (0.0ms)[0m  [1mSELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 2 LIMIT 1[0m
+  [1m[35mDinner Exists (0.0ms)[0m  SELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 36 LIMIT 1  [["participant_id", 51]]
+  [1m[36mNight Load (1.0ms)[0m  [1mSELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 1 LIMIT 1[0m
+  [1m[35mNight Exists (1.0ms)[0m  SELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 35 LIMIT 1  [["participant_id", 51]]
+  [1m[36mNight Load (0.0ms)[0m  [1mSELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 2 LIMIT 1[0m
+  [1m[35mNight Exists (0.0ms)[0m  SELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 36 LIMIT 1  [["participant_id", 51]]
+  [1m[36mRole Load (0.0ms)[0m  [1mSELECT "roles".* FROM "roles"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 1 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 3 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 1 LIMIT 1[0m
+  [1m[35mDinner Exists (0.0ms)[0m  SELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 35 LIMIT 1  [["participant_id", 54]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 2 LIMIT 1[0m
+  [1m[35mDinner Exists (0.0ms)[0m  SELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 36 LIMIT 1  [["participant_id", 54]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 1 LIMIT 1[0m
+  [1m[35mNight Exists (0.0ms)[0m  SELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 35 LIMIT 1  [["participant_id", 54]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 2 LIMIT 1[0m
+  [1m[35mNight Exists (0.0ms)[0m  SELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 36 LIMIT 1  [["participant_id", 54]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "roles".* FROM "roles"[0m
+  Rendered participants/_participant.html.erb (44.0ms)
+  Rendered participants/index.html.erb within layouts/application (229.0ms)
+Completed 200 OK in 627ms (Views: 605.0ms | ActiveRecord: 17.0ms)
+
+
+Started GET "/assets/fonts/fonts.css?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/dataTables.colVis.css?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/grid_12-825-55-15.css?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/specimen_stylesheet.css?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/fonts/prnov/stylesheet.css?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/jquery.dataTables.css?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/jquery.selectbox.css?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/participant.css?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.css?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/grid_12-825-55-15.css" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/fonts/fonts.css" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.js?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/dataTables.colVis.js?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/jquery.dataTables.js?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/jquery.page-ui.js?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/jquery.selectbox-0.2.min.js?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/participant.js?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-12-20 17:51:35 +0100
+
+
+Started GET "/assets/applogo.png" for 127.0.0.1 at 2014-12-20 17:51:36 +0100
+
+
+Started GET "/" for 127.0.0.1 at 2014-12-20 17:52:06 +0100
+Processing by ParticipantsController#index as HTML
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = $1 LIMIT 1  [["id", 3]]
+  [1m[36mParticipant Load (1.0ms)[0m  [1mSELECT "participants".* FROM "participants"  WHERE "participants"."archived" = 'f'  ORDER BY participants.created_at ASC[0m
+  [1m[35mParticipantDay Load (0.0ms)[0m  SELECT "participant_days".* FROM "participant_days"  WHERE "participant_days"."participant_id" IN (51, 54)
+  [1m[36mDay Load (0.0ms)[0m  [1mSELECT "days".* FROM "days"  WHERE "days"."id" IN (52, 53, 54)[0m
+  [1m[35mRole Load (0.0ms)[0m  SELECT "roles".* FROM "roles"  WHERE "roles"."id" IN (36, 39)
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 1 AND "participants"."gender" = 'M'  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 2 AND "participants"."gender" = 'M'  ORDER BY participants.created_at ASC
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 1 AND "participants"."gender" = 'K'  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "nights"."id" AS t3_r0, "nights"."number" AS t3_r1, "nights"."created_at" AS t3_r2, "nights"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_nights" ON "participant_nights"."participant_id" = "participants"."id" LEFT OUTER JOIN "nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participants"."archived" = 'f' AND "nights"."number" = 2 AND "participants"."gender" = 'K'  ORDER BY participants.created_at ASC
+  [1m[36mSQL (2.0ms)[0m  [1mSELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "dinners"."id" AS t3_r0, "dinners"."number" AS t3_r1, "dinners"."created_at" AS t3_r2, "dinners"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_dinners" ON "participant_dinners"."participant_id" = "participants"."id" LEFT OUTER JOIN "dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participants"."archived" = 'f' AND "dinners"."number" = 1  ORDER BY participants.created_at ASC[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT "participants"."id" AS t0_r0, "participants"."name" AS t0_r1, "participants"."surname" AS t0_r2, "participants"."age" AS t0_r3, "participants"."city" AS t0_r4, "participants"."email" AS t0_r5, "participants"."phone" AS t0_r6, "participants"."cost" AS t0_r7, "participants"."paid" AS t0_r8, "participants"."created_at" AS t0_r9, "participants"."updated_at" AS t0_r10, "participants"."role_id" AS t0_r11, "participants"."gender" AS t0_r12, "participants"."payment_deadline" AS t0_r13, "participants"."archived" AS t0_r14, "days"."id" AS t1_r0, "days"."number" AS t1_r1, "days"."created_at" AS t1_r2, "days"."updated_at" AS t1_r3, "roles"."id" AS t2_r0, "roles"."name" AS t2_r1, "roles"."price_table_id" AS t2_r2, "dinners"."id" AS t3_r0, "dinners"."number" AS t3_r1, "dinners"."created_at" AS t3_r2, "dinners"."updated_at" AS t3_r3 FROM "participants" LEFT OUTER JOIN "participant_days" ON "participant_days"."participant_id" = "participants"."id" LEFT OUTER JOIN "days" ON "days"."id" = "participant_days"."day_id" LEFT OUTER JOIN "roles" ON "roles"."id" = "participants"."role_id" LEFT OUTER JOIN "participant_dinners" ON "participant_dinners"."participant_id" = "participants"."id" LEFT OUTER JOIN "dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participants"."archived" = 'f' AND "dinners"."number" = 2  ORDER BY participants.created_at ASC
+  [1m[36mDay Load (1.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 1 LIMIT 1[0m
+  [1m[35mDay Load (1.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 2 LIMIT 1
+  [1m[36mDay Load (1.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 3 LIMIT 1[0m
+  [1m[35mDinner Load (0.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 1 LIMIT 1
+  [1m[36mDinner Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 35 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mDinner Load (0.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 2 LIMIT 1
+  [1m[36mDinner Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 36 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mNight Load (1.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 1 LIMIT 1
+  [1m[36mNight Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 35 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mNight Load (1.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 2 LIMIT 1
+  [1m[36mNight Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 36 LIMIT 1[0m  [["participant_id", 51]]
+  [1m[35mRole Load (0.0ms)[0m  SELECT "roles".* FROM "roles"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 1 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "days".* FROM "days"  WHERE "days"."number" = 2 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "days".* FROM "days"  WHERE "days"."number" = 3 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 1 LIMIT 1
+  [1m[36mDinner Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 35 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "dinners".* FROM "dinners"  WHERE "dinners"."number" = 2 LIMIT 1
+  [1m[36mDinner Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "dinners" INNER JOIN "participant_dinners" ON "dinners"."id" = "participant_dinners"."dinner_id" WHERE "participant_dinners"."participant_id" = $1 AND "dinners"."id" = 36 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 1 LIMIT 1
+  [1m[36mNight Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 35 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "nights".* FROM "nights"  WHERE "nights"."number" = 2 LIMIT 1
+  [1m[36mNight Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "nights" INNER JOIN "participant_nights" ON "nights"."id" = "participant_nights"."night_id" WHERE "participant_nights"."participant_id" = $1 AND "nights"."id" = 36 LIMIT 1[0m  [["participant_id", 54]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "roles".* FROM "roles"
+  Rendered participants/_participant.html.erb (43.0ms)
+  Rendered participants/index.html.erb within layouts/application (240.0ms)
+Completed 200 OK in 595ms (Views: 575.0ms | ActiveRecord: 17.0ms)
+
+
+Started GET "/assets/dataTables.colVis.css?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/fonts/fonts.css?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/grid_12-825-55-15.css?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/specimen_stylesheet.css?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/fonts/prnov/stylesheet.css?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/jquery.dataTables.css?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/jquery.selectbox.css?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/participant.css?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.css?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/fonts/prnov/specimen_files/grid_12-825-55-15.css" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/fonts/fonts.css" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.js?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/dataTables.colVis.js?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/jquery.dataTables.js?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/jquery.page-ui.js?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/jquery.selectbox-0.2.min.js?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/participant.js?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
+
+
+Started GET "/assets/applogo.png" for 127.0.0.1 at 2014-12-20 17:52:07 +0100
