@@ -14,6 +14,8 @@ Rails.application.config.assets.precompile += %w( dataTables.colVis.css )
 Rails.application.config.assets.precompile += %w( style.css.scss )
 Rails.application.config.assets.precompile += %w( fonts/fonts.css )
 Rails.application.config.assets.precompile += %w( style.css )
+Rails.application.config.assets.precompile += %w( fonts/prnov/specimen_stylesheet.css )
+Rails.application.config.assets.precompile += %w( fonts/prnov/grid_12-825-55-15.css )
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
