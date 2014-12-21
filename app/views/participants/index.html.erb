@@ -46,41 +46,43 @@
     <th>Status</th>
   </tr> -->
 <% content_for :head do %>
-  <script>
-    $(document).ready(function() {
-      var table = $('#data').on( 'init.dt', function () {
-        $("select").selectbox();
-      }).dataTable({
-        "language": {
-          "sProcessing":   "Przetwarzanie...",
-          "sLengthMenu":   "Pokaż _MENU_ pozycji",
-          "sZeroRecords":  "Nie znaleziono pasujących pozycji",
-          "sInfoThousands":  " ",
-          "sInfo":         "Pozycje od _START_ do _END_ z _TOTAL_ łącznie",
-          "sInfoEmpty":    "Pozycji 0 z 0 dostępnych",
-          "sInfoFiltered": "(filtrowanie spośród _MAX_ dostępnych pozycji)",
-          "sInfoPostFix":  "",
-          "sSearch":       "Szukaj:",
-          "sUrl":          "",
-          "oPaginate": {
-            "sFirst":    "Pierwsza",
-            "sPrevious": "Poprzednia",
-            "sNext":     "Następna",
-            "sLast":     "Ostatnia"
+ <script>
+      $(document).ready(function() {
+        var table = $('#data').on( 'init.dt', function () {
+          $("select").selectbox();
+        }).dataTable({
+          "language": {
+            "sProcessing":   "Przetwarzanie...",
+            "sLengthMenu":   "Pokaż _MENU_ pozycji",
+            "sZeroRecords":  "Nie znaleziono pasujących pozycji",
+            "sInfoThousands":  " ",
+            "sInfo":         "Pozycje od _START_ do _END_ z _TOTAL_ łącznie",
+            "sInfoEmpty":    "Pozycji 0 z 0 dostępnych",
+            "sInfoFiltered": "(filtrowanie spośród _MAX_ dostępnych pozycji)",
+            "sInfoPostFix":  "",
+            "sSearch":       "Szukaj:",
+            "sUrl":          "",
+            "oPaginate": {
+              "sFirst":    "Pierwsza",
+              "sPrevious": "Poprzednia",
+              "sNext":     "Następna",
+              "sLast":     "Ostatnia"
+            },
+            "sEmptyTable":     "Brak danych",
+            "sLoadingRecords": "Wczytywanie...",
+            "oAria": {
+              "sSortAscending":  ": aktywuj by posortować kolumnę rosnąco",
+              "sSortDescending": ": aktywuj by posortować kolumnę malejąco"
+            }
           },
-          "sEmptyTable":     "Brak danych",
-          "sLoadingRecords": "Wczytywanie...",
-          "oAria": {
-            "sSortAscending":  ": aktywuj by posortować kolumnę rosnąco",
-            "sSortDescending": ": aktywuj by posortować kolumnę malejąco"
+          "dom": 'C<"clear">lfrtip',
+          initComplete: function () {
+            $('#data_wrapper').prepend('<div id="add-new" class="ColVis"><button class="ColVis_Button ColVis_MasterButton dodaj"><span class="button_text">Dodaj uczestnika</span></button></div>');
           }
-        },
-        "dom": 'C<"clear">lfrtip',
-        initComplete: function () {
-            $('#data_wrapper').prepend('<div id="add-new" class="ColVis"><button class="ColVis_Button ColVis_MasterButton dodaj"><span    class="button_text">Douczestnika</span></button></div>');
-        }       
-    });
-  </script>
+        });
+
+      });
+    </script>
 <% end %>
 
 <div id="data_wrapper"> </div>
