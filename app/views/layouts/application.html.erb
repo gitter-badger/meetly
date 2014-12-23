@@ -33,15 +33,16 @@
 <%=favicon_link_tag 'favicon.png'%>
 </head>
 <body>
-<h2 class='User_Header'> 
-
-<% if @current_user %>
-	<%=@current_user.name%> 
-	Profile 
-	<%else%>
-	Not logged in
-	<%end%>
-</h2>
 <%= yield %>
 </body>
+
+<footer class="container">
+	<% if @current_user %>
+		Zalogowany jako <%=@current_user.name%> 
+	<%else%>
+	 	Niezalogowany
+	<%end%>
+	<div class="copyright">Copyright <a href="http://poczatek.org" target="_blank">Poczatek.org</a> 2014</div>
+</footer>
+
 </html>
