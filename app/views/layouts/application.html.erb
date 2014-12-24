@@ -37,11 +37,13 @@
 </body>
 
 <footer class="container">
+	<div class="userInfo">
 	<% if @current_user %>
 		Zalogowany jako <%=@current_user.name%> 
 	<%else%>
 	 	Niezalogowany
 	<%end%>
+	</div>
 	<div class="copyright">Copyright <a href="http://poczatek.org" target="_blank">Poczatek.org</a> 2014</div>
 </footer>
 
