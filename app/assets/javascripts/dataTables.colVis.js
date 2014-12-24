@@ -921,7 +921,7 @@ ColVis.defaults = {
 	 *  @type     boolean
 	 *  @default  false
 	 */
-	bRestore: false,
+	bRestore: true,
 
 	/**
 	 * Restore button text
@@ -929,7 +929,7 @@ ColVis.defaults = {
 	 *  @type     string
 	 *  @default  Restore original
 	 */
-	sRestore: 'Restore original',
+	sRestore: 'Przywróć widok',
 
 	/**
 	 * Show Show-All button

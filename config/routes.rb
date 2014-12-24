@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   root to: 'participants#index'
 
+  match '/summary' => 'participants#summary', via: :get
   match '/receive_form' => 'participants#receive_form', via: :post, defaults: {format: 'json'}
   match '/receive_form' => 'participants#receive_form', via: :get, defaults: {format: 'json'}
   match '/get_role_price_table' => 'roles#get_role_price_table', via: :get, defaults: {format: 'json'}

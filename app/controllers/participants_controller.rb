@@ -6,6 +6,10 @@ class ParticipantsController < ApplicationController
   protect_from_forgery with: :exception
   respond_to :json, :js
 
+  def summary
+    @participants = Participant.includes(:days).includes(:role).all
+  end
+
   def index
     @participants = Participant.includes(:days).includes(:role).all.order("participants.created_at ASC")
   end

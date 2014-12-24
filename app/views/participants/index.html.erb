@@ -4,6 +4,28 @@
         var table = $('#data').on( 'init.dt', function () {
           $("select").selectbox();
         }).dataTable({
+          columnDefs:
+          [{
+            visible: false, targets: [1, 2]
+          }],
+          colVis:{
+            exclude: [9, 10, 11, 12, 13, 14, 15, 19, 20, 21],
+            groups: [
+            {
+                    title: "Dni",
+                    columns: [ 9, 10, 11 ]
+                },
+                {
+                    title: "Noce",
+                    columns: [ 12, 13 ]
+                },
+                {
+                    title: "Obiady",
+                    columns: [ 14, 15 ]
+            }    
+            ]
+          },
+          
           "language": {
             "sProcessing":   "Przetwarzanie...",
             "sLengthMenu":   "Pokaż _MENU_ pozycji",
@@ -125,16 +147,10 @@
 </div>
 
 <div class="wrapper">
-  <header class="container">
-    <a href="#" class="logo"></a>
-    <ul class="page-tabs reset-ul">
-      <li><a class="active" href="#"><span class="icon_id"></span>Lista uczestników</a></li>
-      <li><a href="#"><span class="icon_datareport"></span>Podsumowanie</a></li>
-      <li><a href="#"><span class="icon_mail_alt"></span>Wiadomości</a></li>
-    </ul>
-    <div class="logout"><a href="/logout"><i class="icon_lock-open_alt"></i>Wyloguj</a></div>
-    <div class="clearfix"></div>
-  </header>
+
+
+<%= render 'shared/menu' %>
+
 
   <section class="container content">
     <h1 class="main-header">Lista uczestników</h1>

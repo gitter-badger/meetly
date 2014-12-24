@@ -1,0 +1,17 @@
+   <div class="wrapper">
+    
+<%= render 'shared/menu' %>
+
+      <section class="container content">
+    <h1 class="main-header">Podsumowanie</h1>
+  <div style="font-size: 16px;">
+    Ilość zarejestrowanych: <%= @participants.length %> <br /><br />
+    Ilość noclegów chopaki noc 1: <%= @participants.night1_sleeper.men.length%><br /><br />
+    Ilość noclegów chopaki noc 2: <%= @participants.night2_sleeper.men.length%><br /><br />
+    Ilość noclegów dziewuchy noc 1: <%= @participants.night1_sleeper.women.length%><br /><br />
+    Ilość noclegów dziewuchy noc 2: <%= @participants.night2_sleeper.women.length%><br /><br />
+    Ilość obiadów dzień 1: <%= @participants.dinner1_eater.length%><br /><br />
+    Ilość obiadów dzień 2: <%= @participants.dinner2_eater.length%><br /><br />
+  </div>
+</section>
+</div>
