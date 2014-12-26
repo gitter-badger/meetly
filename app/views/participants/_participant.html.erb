@@ -9,13 +9,29 @@
     <td class="td-total" data-action="total"><%=participant.cost%></td>
     <td class="td-paid" data-action="paid"><%=participant.paid%></td>
     <td class="to-pay"><%=participant.cost - participant.paid %> </td>
-    <td><%=participant.days.include?(Day.find_by_number(1))%></td>
-    <td><%=participant.days.include?(Day.find_by_number(2))%></td>
-    <td><%=participant.days.include?(Day.find_by_number(3))%></td>
-    <td><%=participant.dinners.include?(Dinner.find_by_number(1))%></td>
-    <td><%=participant.dinners.include?(Dinner.find_by_number(2))%></td>
-    <td><%=participant.nights.include?(Night.find_by_number(1))%></td>
-    <td><%=participant.nights.include?(Night.find_by_number(2))%></td>
+    <td>
+        <%if participant.days.include?(Day.find_by_number(1)) %>
+            <div class="icon icon_check_alt"></div>
+        <%else%>
+            <div class="icon icon_close_alt"></div>            
+        <%end%>
+    </td>
+    <td>
+        <%if participant.days.include?(Day.find_by_number(2)) %>
+            <div class="icon icon_check_alt"></div>
+        <%else%>
+            <div class="icon icon_close_alt"></div>            
+        <%end%>
+    </td>
+    <td>
+        <%if participant.days.include?(Day.find_by_number(3)) %>
+            <div class="icon icon_check_alt"></div>
+        <%else%>
+            <div class="icon icon_close_alt"></div>            
+        <%end%>
+    </td>
+    <td><%=participant.dinners.length%></td>
+    <td><%=participant.nights.length%></td>
     <td><%= participant.created_at%></td>
     <td><%=participant.payment_deadline%></td>
     <td><%= participant.get_status %></td>

@@ -6,24 +6,17 @@
         }).dataTable({
           columnDefs:
           [{
-            visible: false, targets: [1, 2]
+            visible: false, 
+            targets: [3, 4, 14, 15]
           }],
           colVis:{
-            exclude: [9, 10, 11, 12, 13, 14, 15, 19, 20, 21],
+            exclude: [9, 10, 11, 17, 18, 19],
             groups: [
-            {
+                {
                     title: "Dni",
                     columns: [ 9, 10, 11 ]
-                },
-                {
-                    title: "Noce",
-                    columns: [ 12, 13 ]
-                },
-                {
-                    title: "Obiady",
-                    columns: [ 14, 15 ]
-            }    
-            ]
+                }
+                ]
           },
           
           "language": {
@@ -53,9 +46,13 @@
           "dom": 'C<"clear">lfrtip',
           initComplete: function () {
             $('#data_wrapper').prepend('<div id="add-new" class="ColVis"><button class="ColVis_Button ColVis_MasterButton dodaj"><span class="button_text">Dodaj uczestnika</span></button></div>');
+             
           }
         });
-
+        // $.each(table.fnSettings().aoColumns, function(i){
+        //   console.log("title: " + table.fnSettings().aoColumns[i].sTitle);
+        //   console.log("visiblility " + table.fnSettings().aoColumns[i].bVisible);
+        // });
       });
     </script>
 <% end %>
@@ -167,14 +164,12 @@
         <th>Suma</th>
         <th>Zapłacono</th>
         <th>Do zapłaty</th>
-        <th class="th-group-1">Dzien 1</th>
-        <th class="th-group-1">Dzien 2</th>
-        <th class="th-group-1">Dzien 3</th>
-        <th class="th-group-2">Obiad 1</th>
-        <th class="th-group-2">Obiad 2</th>
-        <th class="th-group-3">Nocleg 1</th>
-        <th class="th-group-3">Nocleg 2</th>
-        <th>Zarejestrowany</th>
+        <th class="th-group-1">Dzień 1</th>
+        <th class="th-group-1">Dzień 2</th>
+        <th class="th-group-1">Dzień 3</th>
+        <th class="th-group-2">Obiady</th>
+        <th class="th-group-3">Noclegi</th>
+        <th>Data rejestracji</th>
         <th>Termin płatności</th>
         <th>Status</th>
         <th></th>
@@ -194,14 +189,12 @@
         <th>Suma</th>
         <th>Zapłacono</th>
         <th>Do zapłaty</th>
-        <th class="th-group-1">Dzien 1</th>
-        <th class="th-group-1">Dzien 2</th>
-        <th class="th-group-1">Dzien 3</th>
-        <th class="th-group-2">Obiad 1</th>
-        <th class="th-group-2">Obiad 2</th>
-        <th class="th-group-3">Nocleg 1</th>
-        <th class="th-group-3">Nocleg 2</th>
-        <th>Zarejestrowany</th>
+        <th class="th-group-1">Dzień 1</th>
+        <th class="th-group-1">Dzień 2</th>
+        <th class="th-group-1">Dzień 3</th>
+        <th class="th-group-2">Obiady</th>
+        <th class="th-group-3">Noclegi</th>
+        <th>Data rejestracji</th>
         <th>Termin płatności</th>
         <th>Status</th>
         <th></th>
