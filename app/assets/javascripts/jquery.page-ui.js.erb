@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+	le_width = $('#data').width() + 70;
+	$('header').width(le_width+20);
+	$('footer').width(le_width);
+	$('.content').width(le_width);
+
 	//Kliknięcie w plusik
 	$(document).on('click', ".td-check .icon_check_alt", function(){
 		var action = $(this).attr('data-action');
