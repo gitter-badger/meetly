@@ -1,5 +1,10 @@
 <tr data-id="<%= dom_id(participant) %>" class="<%= dom_id(participant) %>" >
- 
+    <td>
+
+        <%= link_to participant, :method => :delete, :data => {:confirm => "Na pewno chcesz usunąć uczesntika #{participant.name}"}, :remote => true do %>
+        <span class="icon icon_trash_alt" title="Usuń uczestnika"></span>
+        <% end %>
+    </td>
     <td data-action="first_name"><%= participant.name%> <%=participant.surname%></td>
     <td data-action="age"><%=participant.age%></td>
     <td data-action="town"><%=participant.city%></td>
@@ -36,29 +41,11 @@
     <td><%=participant.payment_deadline%></td>
     <td><%= participant.get_status %></td>
     <td>
-    <%= link_to 'UPDATE', edit_form_participant_path(participant), :method => :put, :remote => :true %>
-    <div class="update-button" data-id="<%= participant.id %>">TRY ME!</div>
-    <p>
-    <%= link_to 'Potwierdzenie zapłaty', payment_confirm_participant_path(participant), :method => :post, :data => {:confirm => 'Na pewno wysłać?'}, :remote => true %>
-    </p>
-    <p style="color:grey;">
-     <%= link_to 'Ponowne potwierdzenie rejestracji', resend_confirmation_participant_path(participant), :method => :get, :data => {:confirm => 'Na pewno wysłać PONOWNIE?'}, :remote => true %>
-    </p>
+
+    <%= link_to edit_form_participant_path(participant), :method => :put, :remote => :true do %>
+    <span title="Edytuj uczestnika" class="icon icon_pencil-edit_alt"></span>
+    <% end %>
+
     </td>
-    <td>
-      <%= form_for participant, url: edit_payment_participant_path(participant), remote: true do |f| %>
-        <strong>Zapłać:</strong>
-        <%= f.number_field :paid %>
-        <%= f.collection_select :role_id, Role.all, :id, :name %>        
-        <%= f.submit "Zapisz" %>
-      <% end %>
-    </td>   
-    <td>
-        <%if participant.archived == false %>
-      <p><%= link_to 'Archiwizuj (mail)', participant, :method => :delete, :data => {:confirm => 'Na pewno usunąć? Uczestnik otrzyma maila z potwierdzeniem!'} , :remote => true %></p>
-    <%else%>
-     <%= link_to 'Przywróć', unarchive_participant_path(participant), :method => :patch, :data => {:confirm => 'Na pewno przywrócić?'}, :remote => true %>
-    <%end%>
-    <p><%= link_to 'Usuń na zawsze', wipe_participant_path(participant), :method => :delete, :data => {:confirm => 'Usunąć NA ZAWSZE?'}, :remote => true %></p>
-    </td>
+   
 </tr>

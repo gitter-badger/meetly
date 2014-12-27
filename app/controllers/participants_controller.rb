@@ -62,7 +62,7 @@ class ParticipantsController < ApplicationController
     @participant = Participant.find(params[:id])
     @participant.archived = true
     @participant.save!
-    @participant.send_delete_info
+    # @participant.send_delete_info
     respond_to do |format|
      # format.html {redirect_to participants_url}
      # format.json {head :ok}
