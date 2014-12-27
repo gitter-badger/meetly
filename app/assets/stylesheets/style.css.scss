@@ -493,6 +493,15 @@ table .editable input {
 	color: #3ab13c;
 }
 
+.update-participant {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	z-index: 1010;
+	display: none;
+}
+
 .add-new-cont {
 	position: fixed;
 	width: 100%;
@@ -559,6 +568,19 @@ table .editable input {
 	transition: all 200ms ease-in-out;
 }
 
+#update-close {
+	position: absolute;
+	right: -10px;top:-40px;
+	font-size: 40px;
+	color: #fff;
+	cursor: pointer;
+	-moz-transition: all 200ms ease-in-out;  /* FF3.7+ */
+	-o-transition: all 200ms ease-in-out;  /* Opera 10.5 */
+	-webkit-transition: all 200ms ease-in-out;  /* Saf3.2+, Chrome */
+	transition: all 200ms ease-in-out;
+}
+
+
 #new-form-close:hover {
 	color: #86BC31 ;
 }
@@ -566,4 +588,8 @@ table .editable input {
 .log-txt .ColVis {
 	margin-top: 5px;
 	margin-bottom: 0;
+}
+
+td {
+	text-align: center;
 }

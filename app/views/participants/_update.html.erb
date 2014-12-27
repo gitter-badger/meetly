@@ -1,0 +1,35 @@
+<%= form_for @participant, url: edit_participant_path(@participant), html: {class: "new-form"} do |f| %>
+<div id="update-close" class="icon icon_close"></div>
+<h2>Edytuj uczestnika</h2>
+<div class="form-row">
+	<%= f.text_field :name %>
+	<%= f.text_field :surname%>
+	<div class="clearfix"></div>
+</div>
+<div class="form-row">
+	<%= f.text_field :age%>
+	<%= f.text_field :city%>
+    <div class="clearfix"></div>
+</div>
+<div class="form-row">
+      <%= f.collection_select :role_id, Role.all, :id, :name, {}, {:class => "change-select sbHolder"} %>
+      <div class="clearfix"></div>
+</div>
+<div class="form-row">
+	<%= f.text_field :email%>
+	<%= f.text_field :phone%>
+	<div class="clearfix"></div>
+</div>
+<div class="form-row">
+      <%= f.select :day_ids, Day.all.map{|x| ["Dzień " + x.number.to_s, x.id]} , {}, {multiple: true}%>
+      <%= f.select :night_ids, Night.all.map{|x| ["Nocleg " + x.number.to_s, x.id]} , {}, {multiple: true}%>
+      <%= f.select :dinner_ids, Dinner.all.map{|x| ["Obiad " + x.number.to_s, x.id]} , {}, {multiple: true}%>
+      <div class="clearfix"></div>
+</div>
+
+<div class="form-row">
+	<%= f.date_select :payment_deadline%>
+	<div class="clearfix"></div>
+</div>
+    <%= f.submit 'Zapisz', :class =>  "ColVis_Button ColVis_MasterButton Edit_Participant"%>
+<% end %>

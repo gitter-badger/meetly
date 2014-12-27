@@ -380,8 +380,24 @@ $(document).ready(function() {
 	$(document).on('click', "#add-new", function(){
 		$('.add-new-cont').fadeIn('fast');
 	});
+
 	$('#new-form-close').click(function() {
 		$('.add-new-cont').fadeOut('fast');
+	});
+
+	$('.update-button').click(function(){
+		$(".update-participant").fadeIn('fast');
+	});
+	$(document).on('click', '#update-close', function() {
+		console.log('DZIEJE SIE');
+		$(".update-participant").fadeOut('fast');
+		$(".update-participant").empty();
+	});
+
+	$(document).on('click', '.Edit_Participant', function() {
+		console.log('DZIEJE SIE');
+		$(".update-participant").fadeOut('fast');
+		$(".update-participant").empty();
 	});
 
 });

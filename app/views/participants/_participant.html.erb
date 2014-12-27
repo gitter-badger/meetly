@@ -36,6 +36,8 @@
     <td><%=participant.payment_deadline%></td>
     <td><%= participant.get_status %></td>
     <td>
+    <%= link_to 'UPDATE', edit_form_participant_path(participant), :method => :put, :remote => :true %>
+    <div class="update-button" data-id="<%= participant.id %>">TRY ME!</div>
     <p>
     <%= link_to 'Potwierdzenie zapłaty', payment_confirm_participant_path(participant), :method => :post, :data => {:confirm => 'Na pewno wysłać?'}, :remote => true %>
     </p>

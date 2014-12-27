@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     delete :wipe, on: :member
     patch :unarchive, on: :member
     get :resend_confirmation, on: :member
+    put :edit_form, on: :member
+    patch :edit, on: :member
   end
+
+
   root to: 'participants#index'
 
   match '/summary' => 'participants#summary', via: :get
