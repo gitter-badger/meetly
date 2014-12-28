@@ -35,20 +35,32 @@
             $('.add-new').fadeIn('fast');
           });
 
+          $(document).on('page:fetch', function() {
+            $('#loading').show();
+          });
+
+          $(document).on('page:change', function() {
+            $('#loading').hide();
+          });
+
         var table = $('#data').on( 'init.dt', function () {
           $("select").selectbox();
         }).dataTable({
           columnDefs:
           [{
             visible: false, 
-            targets: [4, 5, 15, 16]
+            targets: [4, 5, 16, 17]
           }],
           colVis:{
-            exclude: [10, 11, 12, 17, 18, 19, 20],
+            exclude: [10, 11, 12, 13, 14, 18, 19, 20, 21],
             groups: [
                 {
                     title: "Dni",
-                    columns: [ 9, 10, 11 ]
+                    columns: [ 10, 11, 12 ]
+                },
+                {
+                  title: "Obiady",
+                  columnsL [ 13, 14]
                 }
                 ]
           },
@@ -101,6 +113,12 @@
 <%= render 'new' %>
 </div>
 
+<div id="loading">
+  <form class="new-form">
+    <h3>WCZYTYWANIE...</h3>
+  </form>
+</div>
+
 <div class="wrapper">
 
 
@@ -126,7 +144,8 @@
         <th class="th-group-1">Dzień 1</th>
         <th class="th-group-1">Dzień 2</th>
         <th class="th-group-1">Dzień 3</th>
-        <th class="th-group-2">Obiady</th>
+        <th class="th-group-2">Obiad 1</th>
+        <th class="th-group-2">Obiad 2</th>
         <th class="th-group-3">Noclegi</th>
         <th>Data rejestracji</th>
         <th>Termin płatności</th>
@@ -151,7 +170,8 @@
         <th class="th-group-1">Dzień 1</th>
         <th class="th-group-1">Dzień 2</th>
         <th class="th-group-1">Dzień 3</th>
-        <th class="th-group-2">Obiady</th>
+        <th class="th-group-2">Obiad 1</th>
+        <th class="th-group-2">Obiad 2</th>
         <th class="th-group-3">Noclegi</th>
         <th>Data rejestracji</th>
         <th>Termin płatności</th>
