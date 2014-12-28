@@ -12,10 +12,6 @@
     <div class="clearfix"></div>
 </div>
 <div class="form-row">
-      <%= f.collection_select :role_id, Role.all, :id, :name, {}, {:class => "change-select sbHolder"} %>
-      <div class="clearfix"></div>
-</div>
-<div class="form-row">
   <%= f.email_field :email, placeholder: 'EMAIL'%>
   <%= f.telephone_field :phone, placeholder: 'TELEFON'%>
   <div class="clearfix"></div>
@@ -28,14 +24,20 @@
 </div>
 <div class="form-row">
   <%= f.select :gender, [['KOBIETA', 'K'], ['MĘŻCZYZNA','M']] , {}, {multiple: false}%>
+  
+  <div style="float:right">
+		  <%= f.collection_select :role_id, Role.all, :id, :name, {}, {:class => "change-select sbHolder"} %>
+		  <div class="clearfix"></div>
+	</div>
 </div>
 <div class="form-row">
   <%= f.number_field :paid, placeholder: 'ZAPŁACONO'%>
+  <div style="float:right">
+   <%= f.date_select :payment_deadline%>
+   </div>
   <div class="clearfix"></div>
 </div>
-<div class="form-row">
-  <%= f.date_select :payment_deadline%>
-  <div class="clearfix"></div>
-</div>
+
     <%= f.submit 'Zapisz', :class =>  "Edit_Participant"%>
+	<div class="clearfix"></div>
 <% end %>

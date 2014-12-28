@@ -253,7 +253,6 @@ height: 100%;
 	padding-bottom: 20px;
 	padding-left: 20px;
 	background: #ececec;
-    overflow: auto;
 }
 
 table thead th {
@@ -369,7 +368,7 @@ button.ColVis_Button {
 	padding-top: 100px;
 }
 
-input[type='text'],input[type='password'] {
+input[type='text'],input[type='password'],input[type='number'],input[type='email'],input[type='tel'],input[type='phone'] {
 	background-color: rgba(white, 0.0);
 	border: solid 1px #acacac;
 	-webkit-border-radius: 3px;
@@ -391,7 +390,7 @@ input[type='text'],input[type='password'] {
 }
 
 
-input[type='text']:focus, input[type='password']:focus {
+input[type='text']:focus, input[type='password']:focus,input[type='number']:focus,input[type='email']:focus,input[type='tel']:focus,input[type='phone']:focus {
 	background-color: #f8f8f8;
 	border-color:#999999;
 }
@@ -549,12 +548,21 @@ table .editable input {
 	margin-bottom: 10px;
 }
 
-.new-form input[type='text'] {
+.new-form input {
 	float: left;
 	width: 41%;
 }
 
-.new-form input[type='text']:nth-child(2n) {
+.new-form .sbHolder {
+	width: 41%;
+	margin-bottom: 15px;
+}
+
+.new-form select {
+	margin-bottom: 15px;
+}
+
+.new-form input:nth-child(2n) {
 	float: right;
 }
 
