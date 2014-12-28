@@ -98,7 +98,7 @@ class ParticipantsController < ApplicationController
   end
 
   def index
-    @participants = Participant.includes(:days).includes(:role).all.order("participants.created_at ASC")
+    @participants = Participant.includes(:days).includes(:role).all
   end
 
   def destroy
