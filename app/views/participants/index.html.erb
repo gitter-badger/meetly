@@ -40,7 +40,6 @@
             $('.add-new').empty();
             $('.add-new').html("<%= escape_javascript(render 'new')%>")
             $('.add-new').fadeIn('fast');
-            $('#loading').show();
           });
 
           $(document).on('page:fetch', function() {
