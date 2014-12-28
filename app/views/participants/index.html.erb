@@ -1,16 +1,50 @@
 <% content_for :head do %>
  <script>
       $(document).ready(function() {
+
+          $(document).on('click', '#new-form-close', function() {
+            console.log('DZIEJE SIE');
+            $('.add-new').fadeOut('fast');
+            $('.add-new').empty();
+          });
+        
+          $('.update-button').click(function(){
+            $(".update-participant").fadeIn('fast');
+          });
+          $(document).on('click', '#update-close', function() {
+            console.log('DZIEJE SIE');
+            $(".update-participant").fadeOut('fast');
+            $(".update-participant").empty();
+          });
+        
+          $(document).on('click', '.Edit_Participant', function() {
+            console.log('DZIEJE SIE');
+            $(".update-participant").fadeOut('fast');
+            $(".update-participant").empty();
+          });
+        
+          $(document).on('click', '#mail-close', function() {
+            console.log('DZIEJE SIE');
+            $(".mail-list").fadeOut('fast');
+            $(".mail-list").empty();
+          });
+
+          $(document).on('click', "#add-new", function(){
+            $('.add-new').empty();
+            $('.add-new').html("<%= escape_javascript(render 'new')%>")
+            $('.add-new').fadeIn('fast');
+          });
+
         var table = $('#data').on( 'init.dt', function () {
           $("select").selectbox();
         }).dataTable({
           columnDefs:
           [{
             visible: false, 
-            targets: [3, 4, 14, 15]
+            targets: [4, 5, 15, 16]
           }],
           colVis:{
-            exclude: [9, 10, 11, 17, 18, 19],
+            exclude: [10, 11, 12, 17, 18, 19, 20],
             groups: [
                 {
                     title: "Dni",
@@ -60,94 +94,11 @@
 <div class="log-box">
   <div class="log-txt"></div>
 </div>
-<div class="update-participant">
-  
+<div class="update-participant"></div>
+<div class="mail-list"></div>
 
-
-</div>
-
-
-<div class="add-new-cont">
-  <form class="new-form" action="#" method="post">
-    <div id="new-form-close" class="icon icon_close"></div>
-    <h2>Dodaj uczestnika</h2>
-    <div class="form-row">
-      <input type="text" name="first_name" placeholder="Imię" required />
-      <input type="text" name="last_name" placeholder="Nazwisko" required />
-      <div class="clearfix"></div>
-    </div>
-    <div class="form-row">
-      <input type="text" name="first_name" placeholder="Wiek" required />
-      <input type="text" name="last_name" placeholder="Miasto" required />
-      <div class="clearfix"></div>
-    </div>
-    <div class="form-row">
-      <input type="text" name="last_name" placeholder="Rola (np. uczestnik)" required />
-      <div class="clearfix"></div>
-    </div>
-    <div class="form-row">
-      <input type="text" name="first_name" placeholder="E-mail" required />
-      <input type="text" name="last_name" placeholder="Telefon" required />
-      <div class="clearfix"></div>
-    </div>
-    <div class="form-row form-row-checkbox">
-      <label>Dni:</label>
-      <div class="clearfix"></div>
-      <div class="checkbox-part">
-        <label for="day-1">1</label>
-        <input id="day-1" type="checkbox" name="day[1]" value="1" checked />
-      </div>
-      <div class="checkbox-part">
-        <label for="day-2">2</label>
-        <input id="day-2" type="checkbox" name="day[2]" value="1" checked />
-      </div>
-      <div class="checkbox-part">
-        <label for="day-3">3</label>
-        <input id="day-3" type="checkbox" name="day[3]" value="1" checked />
-      </div>
-      <div class="clearfix"></div>
-    </div>
-
-    <div class="form-row form-row-checkbox">
-      <label>Obiady:</label>
-      <div class="clearfix"></div>
-      <div class="checkbox-part">
-        <label for="dinner-1">1</label>
-        <input id="dinner-1" type="checkbox" name="dinner[1]" value="1" checked />
-      </div>
-      <div class="checkbox-part">
-        <label for="dinner-2">2</label>
-        <input id="dinner-2" type="checkbox" name="dinner[2]" value="1" checked />
-      </div>
-      <div class="clearfix"></div>
-    </div>
-
-    <div class="form-row form-row-checkbox">
-      <label>Noclegi:</label>
-      <div class="clearfix"></div>
-      <div class="checkbox-part">
-        <label for="night-1">1</label>
-        <input id="night-1" type="checkbox" name="night[1]" value="1" checked />
-      </div>
-      <div class="checkbox-part">
-        <label for="night-2">2</label>
-        <input id="night-2" type="checkbox" name="night[2]" value="1" checked />
-      </div>
-      <div class="clearfix"></div>
-    </div>
-
-    <div class="form-row">
-      <input type="text" name="first_name" pattern="[0-9]+" placeholder="Suma" required />
-      <input type="text" name="last_name" pattern="[0-9]+" placeholder="Zapłacono" required />
-      <div class="clearfix"></div>
-    </div>
-
-    <div class="form-row">
-      <div class="ColVis"><button class="ColVis_Button ColVis_MasterButton" type="submit"><span>Zapisz</span></button></div>
-
-    </div>
-    <div class="clearfix"></div>
-  </form>
+<div class="add-new">
+<%= render 'new' %>
 </div>
 
 <div class="wrapper">
@@ -181,6 +132,8 @@
         <th>Termin płatności</th>
         <th>Status</th>
         <th></th>
+        <th></th>
+        <th></th>
     </tr>
 </thead>
 
@@ -203,6 +156,8 @@
         <th>Data rejestracji</th>
         <th>Termin płatności</th>
         <th>Status</th>
+        <th></th>
+        <th></th>
         <th></th>
     </tr>
 </tfoot>
