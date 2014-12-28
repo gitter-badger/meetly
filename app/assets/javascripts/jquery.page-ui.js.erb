@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+	$('.container').find('.page-tabs').find('li').first().click(function() {
+            $('#loading').show();
+          });
+
 	le_width = $('#data').width() + 70;
 	// $('header').width(le_width+20);
 	// $('footer').width(le_width);
@@ -380,33 +384,5 @@ $(document).ready(function() {
 	// 		top: '-200px'
 	// 	});
 	// });
-	
-	//Modal dodawania uzytkownika
-
-
-	$('#new-form-close').click(function() {
-		$('.add-new').fadeOut('fast');
-	});
-
-	$('.update-button').click(function(){
-		$(".update-participant").fadeIn('fast');
-	});
-	$(document).on('click', '#update-close', function() {
-		console.log('DZIEJE SIE');
-		$(".update-participant").fadeOut('fast');
-		$(".update-participant").empty();
-	});
-
-	$(document).on('click', '.Edit_Participant', function() {
-		console.log('DZIEJE SIE');
-		$(".update-participant").fadeOut('fast');
-		$(".update-participant").empty();
-	});
-
-	$(document).on('click', '#mail-close', function() {
-		console.log('DZIEJE SIE');
-		$(".mail-list").fadeOut('fast');
-		$(".mail-list").empty();
-	});
 
 });
