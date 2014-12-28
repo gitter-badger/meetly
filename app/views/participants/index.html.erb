@@ -2,6 +2,10 @@
  <script>
       $(document).ready(function() {
 
+          $(window).load(function() {
+            $('#loading').hide();
+          });
+
           $(document).on('click', '#new-form-close', function() {
             console.log('DZIEJE SIE');
             $('.add-new').fadeOut('fast');
@@ -60,7 +64,7 @@
                 },
                 {
                   title: "Obiady",
-                  columnsL [ 13, 14]
+                  columns: [ 13, 14]
                 }
                 ]
           },
@@ -113,10 +117,8 @@
 <%= render 'new' %>
 </div>
 
-<div id="loading">
-  <form class="new-form">
-    <h3>WCZYTYWANIE...</h3>
-  </form>
+<div id="loading" style="text-align:center;">
+    <h3 style="color:white;">WCZYTYWANIE...</h3>
 </div>
 
 <div class="wrapper">
