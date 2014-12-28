@@ -1,6 +1,5 @@
 <tr data-id="<%= dom_id(participant) %>" class="<%= dom_id(participant) %>" >
     <td>
-
         <%= link_to participant, :method => :delete, :data => {:confirm => "Na pewno chcesz usunąć uczesntika #{participant.name}"}, :remote => true do %>
         <span class="icon icon_trash_alt" title="Usuń uczestnika"></span>
         <% end %>
@@ -39,13 +38,21 @@
     <td><%=participant.nights.length%></td>
     <td><%= participant.created_at%></td>
     <td><%=participant.payment_deadline%></td>
-    <td><%= participant.get_status %></td>
+    <td class="status"><%= participant.get_status %></td>
     <td>
-
+    <%= link_to set_arrived_participant_path(participant), :method => :patch, :remote => :true do %>
+    <span title="Przyjechał" class="icon icon_check"> </span>
+    <% end %>
+    </td>
+    <td>
     <%= link_to edit_form_participant_path(participant), :method => :put, :remote => :true do %>
     <span title="Edytuj uczestnika" class="icon icon_pencil-edit_alt"></span>
     <% end %>
-
+    </td>
+    <td>
+        <%= link_to list_mail_participant_path(participant), :method => :get, :remote => :true do %>
+            <span title="Wyślij e-mail" class="icon icon_mail_alt"></span>
+        <% end %>
     </td>
    
 </tr>

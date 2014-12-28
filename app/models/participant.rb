@@ -49,6 +49,10 @@ class Participant < ActiveRecord::Base
 
   def get_status
 
+    if arrived==true
+      return arrived_status
+    end 
+
     if payment_deadline > Time.current.beginning_of_day
       color = 'green'
     else
@@ -76,6 +80,11 @@ class Participant < ActiveRecord::Base
 
 def format_status(color, status)
   status = '<p style="background-color:' + color + '; color:white; text-align:center">' + status + '</p>'
+  status.html_safe
+end
+
+def arrived_status
+  status = '<p style="background-color: transparent; color: green; text-align: center; font-weight: 900;">PRZYJECHAŁ</p>'
   status.html_safe
 end
 

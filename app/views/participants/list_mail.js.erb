@@ -1,0 +1,5 @@
+var id = "<%= @participant.id %>";
+console.log(id);
+$(".mail-list").empty();
+$(".mail-list").html(" <%= j render 'mlist', :locals => {:participant => @participant}%>");
+$(".mail-list").fadeIn("fast");

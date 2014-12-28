@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141113214256) do
+ActiveRecord::Schema.define(version: 20141227233149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20141113214256) do
     t.string   "gender"
     t.datetime "payment_deadline"
     t.boolean  "archived",         default: false
+    t.boolean  "arrived",          default: false
   end
 
   add_index "participants", ["role_id"], name: "index_participants_on_role_id", using: :btree

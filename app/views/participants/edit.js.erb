@@ -1,4 +1,0 @@
-var id = '<%= dom_id(@participant) %>';
-var clase = '.' + id;
-$(clase).empty();
-$(clase).html("<%= escape_javascript(render @participant)%>");

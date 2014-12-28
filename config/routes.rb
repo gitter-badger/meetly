@@ -7,7 +7,10 @@ Rails.application.routes.draw do
     patch :unarchive, on: :member
     get :resend_confirmation, on: :member
     put :edit_form, on: :member
+    get :list_mail, on: :member
     patch :edit, on: :member
+    delete :destroy_and_mail, on: :member
+    patch :set_arrived, on: :member, defaults: {format: 'js'}
   end
 
 
