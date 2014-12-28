@@ -6,6 +6,8 @@
     <h2>Ludzie</h2>
   <div style="font-size: 16px;">
     Ilość zarejestrowanych: <%= @participants.length %> <br /><br />
+    Przyjechało: <%= @participants.where(arrived: true).length %> <br /><br />
+    <br /><br/>
     Ilość noclegów chopaki noc 1: <%= @participants.night1_sleeper.men.length%><br /><br />
     Ilość noclegów chopaki noc 2: <%= @participants.night2_sleeper.men.length%><br /><br />
     Ilość noclegów dziewuchy noc 1: <%= @participants.night1_sleeper.women.length%><br /><br />
