@@ -1,6 +1,6 @@
 <form class="new-form">
 <div id="mail-close" class="icon icon_close"></div>
-<h2>Wyślij e-mail do <%= @participant.name @participant.surname%></h2>
+<h3>Wyślij e-mail do <%= @participant.name%> <%= @participant.surname %></h3>
 <br />
 <div class="form-row">
 	<%= link_to payment_confirm_participant_path(@participant), :method => :post, :data => {:confirm =>	'Na pewno wysłać potwierdzenie zapłaty?'}, :remote => true  do %>
