@@ -1,9 +1,9 @@
    <div class="wrapper">
     
 <%= render 'shared/menu' %>
-
-      <section class="container content">
+<section class="container content">
     <h1 class="main-header">Podsumowanie</h1>
+    <h2>Ludzie</h2>
   <div style="font-size: 16px;">
     Ilość zarejestrowanych: <%= @participants.length %> <br /><br />
     Ilość noclegów chopaki noc 1: <%= @participants.night1_sleeper.men.length%><br /><br />
@@ -13,5 +13,13 @@
     Ilość obiadów dzień 1: <%= @participants.dinner1_eater.length%><br /><br />
     Ilość obiadów dzień 2: <%= @participants.dinner2_eater.length%><br /><br />
   </div>
+</section>
+<section class="container content">
+<h2>Finanse</h2>
+<div style="font-size: 16px;">
+Całkowita kwota do zapłaty: <%= Participant.all.inject(0){|sum, e| sum += e.cost}%> <br /> <br />
+Całkowita wpłacona kwota: <%= Participant.all.inject(0){|sum, e| sum += e.paid}%> <br /> <br />
+Brakująca kwota: <%= Participant.all.inject(0){|sum, e| sum += (e.cost - e.paid)}%> <br /> <br />
+</div>
 </section>
 </div>
