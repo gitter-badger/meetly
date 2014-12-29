@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     put :edit_form, on: :member
     get :list_mail, on: :member
     patch :edit, on: :member
+    post :edit, on: :member
     delete :destroy_and_mail, on: :member
     patch :set_arrived, on: :member, defaults: {format: 'js'}
   end
