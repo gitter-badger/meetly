@@ -108,12 +108,12 @@
   <div class="log-txt"></div>
 </div>
 <div class="update-participant">
-<%= render 'new', :locals =>{:participant => Participant.new  %>
+<%= render 'new', :locals =>{:participant => @p1 %>
 </div>
 <div class="mail-list"></div>
 
 <div class="add-new">
-<%= render 'new', :locals =>{:participant => Participant.new %>
+<%= render 'new', :locals =>{:participant => @p1 %>
 </div>
 
 <div id="loading" style="text-align:center;">

@@ -99,6 +99,7 @@ class ParticipantsController < ApplicationController
 
   def index
     @participants = Participant.includes(:days).includes(:role).all
+    @p1 = Participant.new
   end
 
   def destroy
