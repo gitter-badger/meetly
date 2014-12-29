@@ -82,7 +82,8 @@ class ParticipantsController < ApplicationController
   def edit_form
     @participant = Participant.find(params[:id])
     respond_to do |format|
-      format.js {render "edit_form", :locals => {:participant => @participant}}
+      format.html {render "edit_form", :locals => {:participant => @participant}}
+      #format.js {render "edit_form", :locals => {:participant => @participant}}
     end
   end
 
