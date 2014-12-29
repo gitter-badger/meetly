@@ -2,12 +2,10 @@
     <td>
     <% if participant.archived==false %>
         <%= link_to participant, :method => :delete, :data => {:confirm => "Na pewno chcesz usunąć uczesntika #{participant.name}"}, :remote => true do %>
-        PRZYWRÓĆ
+        <span class="icon icon_trash_alt" title="Usuń uczestnika"></span>
         <% end %>
     <% else %>
-        <%= link_to unarchive_participant_path(participant), :method => :patch, :data => {:confirm => 'Na pewno przywrócić?'}, :remote => true do %>
-            <span class="icon .icon_plus-box" title="Przywróć uczestnika"></span>
-            <% end %>     
+        <%= link_to 'PRZYWRÓĆ', unarchive_participant_path(participant), :method => :patch, :data => {:confirm => 'Na pewno przywrócić?'}, :remote => true %>  
     <% end %>
     </td>
     <td data-action="first_name"><%= participant.name%> <%=participant.surname%></td>
