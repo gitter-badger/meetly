@@ -15,7 +15,7 @@ class Participant < ActiveRecord::Base
 
   validates_presence_of :name, :surname, :email, :age, :city, :phone, :role, :gender
   validates_numericality_of :age
-  validates :email, :uniqueness => {:scope => [:name, :surname, :archived]}
+  #validates :email, :uniqueness => {:scope => [:name, :surname, :archived]}
   validate :days_are_limited, on: [:create, :update]
 
   before_save :fill_attributes
