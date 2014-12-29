@@ -113,7 +113,9 @@
 <div class="log-box">
   <div class="log-txt"></div>
 </div>
-<div class="update-participant"></div>
+<div class="update-participant">
+  <%=render 'update', :locals =>{:participant => Participant.first}%>
+</div>
 <div class="mail-list"></div>
 
 <div class="add-new">
