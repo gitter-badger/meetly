@@ -74,7 +74,9 @@
     </td>   
     <% else %>
     <td>
-            
+       <%= link_to unarchive_participant_path(participant), :method => :patch, :data => {:confirm => 'Na pewno przywrócić?'}, :remote => true do %>
+            <span class="icon .icon_plus-box" title="Przywróć uczestnika"></span>
+            <% end %>     
     </td>
     <% end %>
 </tr>
