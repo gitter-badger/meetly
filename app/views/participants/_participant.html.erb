@@ -1,8 +1,12 @@
 <tr data-id="<%= dom_id(participant) %>" class="<%= dom_id(participant) %>" >
     <td>
+    <% if participant.archived == false %>
         <%= link_to participant, :method => :delete, :data => {:confirm => "Na pewno chcesz usunąć uczesntika #{participant.name}"}, :remote => true do %>
         <span class="icon icon_trash_alt" title="Usuń uczestnika"></span>
         <% end %>
+    <% else %>
+        <%= link_to 'Usuń na zawsze', wipe_participant_path(@participant), :method => :delete, :data => {:confirm => 'Usunąć NA ZAWSZE?'}, :remote => true %>
+    <% end %>
     </td>
     <td data-action="first_name"><%= participant.name%> <%=participant.surname%></td>
     <td data-action="age"><%=participant.age%></td>
@@ -52,6 +56,7 @@
     <td><%= participant.created_at%></td>
     <td><%=participant.payment_deadline%></td>
     <td class="status"><%= participant.get_status %></td>
+    <% if participant.archived == false %>
     <td>
     <%= link_to set_arrived_participant_path(participant), :method => :patch, :remote => :true do %>
     <span title="Przyjechał" class="icon icon_check"> </span>
@@ -67,4 +72,9 @@
             <span title="Wyślij e-mail" class="icon icon_mail_alt"></span>
         <% end %>
     </td>   
+    <% else %><td>
+            <%= link_to unarchive_participant_path(@participant), :method => :patch, :data => {:confirm => 'Na pewno przywrócić?'}, :remote => true do %>
+            <span class="icon .icon_plus-box" title="Przywróć uczestnika"></span>
+            <% end %></td>
+            <% end %>
 </tr>
