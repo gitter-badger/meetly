@@ -7,7 +7,7 @@ class ParticipantsController < ApplicationController
   respond_to :json, :js
 
   def create
-    parameters = params.require(:participant).permit(:gender, :paid, :name, :surname, :age, :city, :email, :phone)
+    parameters = params.require(:participant).permit(:arrived, :gender, :paid, :name, :surname, :age, :city, :email, :phone)
     
     @participant=Participant.new(parameters)
 
@@ -45,7 +45,7 @@ class ParticipantsController < ApplicationController
 
   def edit
     @participant = Participant.find(params[:id])
-    parameters = params.require(:participant).permit(:paid, :name, :surname, :age, :city, :email, :phone)
+    parameters = params.require(:participant).permit(:arrived, :paid, :name, :surname, :age, :city, :email, :phone)
     @participant.update(parameters)
     role_id = params[:participant][:role_id]
     @participant.role = Role.find(role_id)
