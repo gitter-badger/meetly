@@ -25,6 +25,10 @@ class Participant < ActiveRecord::Base
   scope :dinner1_eater, -> {where(dinners: {number: 1}).includes(:dinners)}
   scope :dinner2_eater, -> {where(dinners: {number: 2}).includes(:dinners)}
 
+  scope :dayer1, -> {where(days: {number: 1}).includes(:days)}
+  scope :dayer2, -> {where(days: {number: 2}).includes(:days)}
+  scope :dayer3, -> {where(days: {number: 3}).includes(:days)}
+
   scope :men, -> {where(gender: 'M')}
   scope :women, -> {where(gender: 'K')}
 
