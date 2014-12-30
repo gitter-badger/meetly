@@ -26,8 +26,8 @@
   <div style="font-size: 16px;">    
     Ilość obiadów dzień 1: <%= @participants.dinner1_eater.length%><br /><br />
     Ilość obiadów dzień 2: <%= @participants.dinner2_eater.length%><br /><br /><br /> <br />
-    Zapłacone obiady dzień 1: <%= @participants.dinner1_eater.where("paid > 0").length %><br /> <br />
-    Zapłacone obiady dzień 2: <%= @participants.dinner2_eater.where("paid > 0").length %><br /> <br />
+    Zapłacone obiady dzień 1: <%= @participants.dinner1_eater.where("(paid > 0) or (cost=0)").length %><br /> <br />
+    Zapłacone obiady dzień 2: <%= @participants.dinner2_eater.where("(paid > 0) or (cost=0)").length %><br /> <br />
   </div>
 </section>
 <section class="container content">
