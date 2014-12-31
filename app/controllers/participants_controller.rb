@@ -98,6 +98,8 @@ class ParticipantsController < ApplicationController
     @vol = Participant.all.inject(0) do |sum, e| 
                 if (e.cost - e.paid) < 0 
                   sum = sum - (e.cost - e.paid)
+                else
+                  sum
                 end
               end
   end
