@@ -97,8 +97,8 @@ class ParticipantsController < ApplicationController
     @participants = Participant.includes(:days).includes(:role).all
     @vol = Participant.all.inject(0){|sum, e| if ((e.cost - e.paid)<0)
                 sum -= (e.cost - e.paid)
-              end
-            end
+                  end
+              }
   end
 
   def index
