@@ -39,12 +39,7 @@ Brakująca kwota (z uwzględnieniem zwrotów dla wolontariuszy): <%= Participant
 Zwroty dla wolontariuszy: 
 
 
-<%= Participant.all.inject(0) do |sum, e| 
-  if ((e.cost - e.paid)<0)
-    sum += -(e.cost - e.paid)
-  end
-end
-%>
+<%= @vol %>
 </div>
 </section>
 </div>
