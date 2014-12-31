@@ -95,7 +95,15 @@ class ParticipantsController < ApplicationController
 
   def summary
     @participants = Participant.includes(:days).includes(:role).all
-    @vol = Participant.all.inject(0) do |sum, e| 
+    @vol = Participant.all.where(role_id: 31).inject(0) do |sum, e| 
+                if (e.cost - e.paid) < 0 
+                  sum = sum - (e.cost - e.paid)
+                else
+                  sum
+                end
+              end
+
+    @par = Participant.all.where.not(role_id: 31).inject(0) do |sum, e| 
                 if (e.cost - e.paid) < 0 
                   sum = sum - (e.cost - e.paid)
                 else

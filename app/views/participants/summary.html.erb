@@ -36,7 +36,8 @@
 Całkowita kwota do zapłaty: <%= Participant.all.inject(0){|sum, e| sum += e.cost}%> <br /> <br />
 Całkowita wpłacona kwota: <%= Participant.all.inject(0){|sum, e| sum += e.paid}%> <br /> <br />
 Brakująca kwota (z uwzględnieniem zwrotów dla wolontariuszy): <%= Participant.all.inject(0){|sum, e| sum += (e.cost - e.paid)}%> <br /> <br />
-Zwroty dla wolontariuszy lub uczestników: <%= @vol %>
+Zwroty dla wolontariuszy: <%= @vol %> <br />
+Zwroty dla reszty: <%- @par %> <br/>
 </div>
 </section>
 </div>
