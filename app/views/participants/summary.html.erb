@@ -10,6 +10,8 @@
     Ilość zarejestrowanych na dzień 2 : <%= @participants.dayer2.length %> <br />
     Ilość zarejestrowanych na dzień 3 : <%= @participants.dayer3.length %> <br /> <br/>
     Przyjechało: <%= @participants.where(arrived: true).length %> <br /><br />
+    Przyjechało chłopaków: <%= @participants.where(arrived: true).where(gender: 'M').length %> <br/>
+Przyjechało dziewczyn: <%= @participants.where(arrived: true).where(gender: 'K').length %> <br/> <br/>
     </div>
     </section>
     <section class="container content">
