@@ -2,14 +2,14 @@ require 'mandrill_mailer'
 
 class ParticipantsController < ApplicationController
   before_filter :set_headers
-  before_filter :authenticate_user, :except => [:receive_form, :create_participant]
+  before_filter :authenticate_user, except: [:receive_form, :create_participant]
   protect_from_forgery with: :exception
   respond_to :json, :js
 
   def create
     parameters = params.require(:participant).permit(:arrived, :gender, :paid, :name, :surname, :age, :city, :email, :phone)
-    
-    @participant=Participant.new(parameters)
+
+    @participant = Participant.new(parameters)
 
     role_id = params[:participant][:role_id]
     @participant.role = Role.find(role_id)
@@ -18,14 +18,14 @@ class ParticipantsController < ApplicationController
     dinner_ids = params[:participant][:dinner_ids]
     night_ids = params[:participant][:night_ids]
 
-    day_ids.reject! {|d| d.empty?}
-    dinner_ids.reject! {|d| d.empty?}
-    night_ids.reject! {|d| d.empty?}
+    day_ids.reject!(&:empty?)
+    dinner_ids.reject!(&:empty?)
+    night_ids.reject!(&:empty?)
 
     @participant.days = Day.none
     @participant.dinners = Dinner.none
     @participant.nights = Night.none
-    
+
     day_ids.each do |d|
       @participant.days.push(Day.find(d.to_i))
     end
@@ -37,7 +37,7 @@ class ParticipantsController < ApplicationController
     end
 
     @participant.payment_deadline = DateTime.new(params[:participant]["payment_deadline(1i)"].to_i, params[:participant]["payment_deadline(2i)"].to_i, params[:participant]["payment_deadline(3i)"].to_i)
-    
+
     @participant.save!
 
     redirect_to root_url
@@ -54,14 +54,14 @@ class ParticipantsController < ApplicationController
     dinner_ids = params[:participant][:dinner_ids]
     night_ids = params[:participant][:night_ids]
 
-    day_ids.reject! {|d| d.empty?}
-    dinner_ids.reject! {|d| d.empty?}
-    night_ids.reject! {|d| d.empty?}
+    day_ids.reject!(&:empty?)
+    dinner_ids.reject!(&:empty?)
+    night_ids.reject!(&:empty?)
 
     @participant.days = Day.none
     @participant.dinners = Dinner.none
     @participant.nights = Night.none
-    
+
     day_ids.each do |d|
       @participant.days.push(Day.find(d.to_i))
     end
@@ -73,7 +73,7 @@ class ParticipantsController < ApplicationController
     end
 
     @participant.payment_deadline = DateTime.new(params[:participant]["payment_deadline(1i)"].to_i, params[:participant]["payment_deadline(2i)"].to_i, params[:participant]["payment_deadline(3i)"].to_i)
-    
+
     @participant.save!
 
     redirect_to root_url
@@ -82,34 +82,34 @@ class ParticipantsController < ApplicationController
   def edit_form
     @participant = Participant.find(params[:id])
     respond_to do |format|
-      format.js {render "edit_form", :locals => {:participant => @participant}}
+      format.js { render "edit_form", locals: { participant: @participant } }
     end
   end
 
   def list_mail
     @participant = Participant.find(params[:id])
     respond_to do |format|
-      format.js {render "list_mail", :locals => {:participant => @participant}}
+      format.js { render "list_mail", locals: { participant: @participant } }
     end
   end
 
   def summary
     @participants = Participant.includes(:days).includes(:role).all
-    @vol = Participant.all.where(role_id: 31).inject(0) do |sum, e| 
-                if (e.cost - e.paid) < 0 
-                  sum = sum - (e.cost - e.paid)
-                else
-                  sum
-                end
-              end
+    @vol = Participant.all.where(role_id: 31).inject(0) do |sum, e|
+      if (e.cost - e.paid) < 0
+        sum -= (e.cost - e.paid)
+      else
+        sum
+      end
+    end
 
-    @par = Participant.all.where.not(role_id: 31).inject(0) do |sum, e| 
-                if (e.cost - e.paid) < 0 
-                  sum = sum - (e.cost - e.paid)
-                else
-                  sum
-                end
-              end
+    @par = Participant.all.where.not(role_id: 31).inject(0) do |sum, e|
+      if (e.cost - e.paid) < 0
+        sum -= (e.cost - e.paid)
+      else
+        sum
+      end
+    end
   end
 
   def index
@@ -121,18 +121,18 @@ class ParticipantsController < ApplicationController
     @participant.archived = true
     @participant.save!
     respond_to do |format|
-     # format.html {redirect_to participants_url}
-     # format.json {head :ok}
-      format.js {render "destroy", :locals => {:id => params[:id]}}
+      # format.html {redirect_to participants_url}
+      # format.json {head :ok}
+      format.js { render "destroy", locals: { id: params[:id] } }
     end
   end
 
   def set_arrived
     @participant = Participant.find(params[:id])
-    @participant.arrived =  !@participant.arrived 
+    @participant.arrived = !@participant.arrived
     @participant.save!
     respond_to do |format|
-      format.js {render "refresh", :locals => {:id => params[:id]}}
+      format.js { render "refresh", locals: { id: params[:id] } }
     end
   end
 
@@ -142,18 +142,17 @@ class ParticipantsController < ApplicationController
     @participant.save!
     @participant.send_delete_info
     respond_to do |format|
-     # format.html {redirect_to participants_url}
-     # format.json {head :ok}
-      format.js {render "destroy", :locals => {:id => params[:id]}}
+      # format.html {redirect_to participants_url}
+      # format.json {head :ok}
+      format.js { render "destroy", locals: { id: params[:id] } }
     end
   end
-
 
   def wipe
     @participant = Participant.find(params[:id])
     @participant.destroy
     respond_to do |format|
-      format.js {render "destroy", :locals => {:id => params[:id]}}
+      format.js { render "destroy", locals: { id: params[:id] } }
     end
   end
 
@@ -162,7 +161,7 @@ class ParticipantsController < ApplicationController
     @participant.archived = false
     @participant.save!
     respond_to do |format|
-      format.js {render "destroy", :locals => {:id => params[:id]}}
+      format.js { render "destroy", locals: { id: params[:id] } }
     end
   end
 
@@ -171,7 +170,7 @@ class ParticipantsController < ApplicationController
   end
 
   def edit_payment
-    @participant = Participant.find(params[:id])    
+    @participant = Participant.find(params[:id])
     @participant.paid = params[:participant][:paid]
     if params[:participant][:role_id]
       @participant.role = Role.find(params[:participant][:role_id])
@@ -187,17 +186,15 @@ class ParticipantsController < ApplicationController
     @participant.send_confirm_payment
   end
 
-
   def receive_form
     @participant = create_participant
-      if @participant.save!
-        @participant.send_confirmation
-        respond_with @participant.to_json, :status => 201, :callback => params['callback'], content_type: "application/javascript"
-      else
-        puts @participant.errors.full_messages
-        respond_with @participant.errors.to_json, :status => 422, :callback => params['callback'], content_type: "application/javascript"
-      end
-
+    if @participant.save!
+      @participant.send_confirmation
+      respond_with @participant.to_json, status: 201, callback: params['callback'], content_type: "application/javascript"
+    else
+      puts @participant.errors.full_messages
+      respond_with @participant.errors.to_json, status: 422, callback: params['callback'], content_type: "application/javascript"
+    end
   end
 
   def resend_confirmation
@@ -205,12 +202,9 @@ class ParticipantsController < ApplicationController
     @participant.send_confirmation
   end
 
-
-
   protected
 
   def create_participant
-
     days = []
     days.push(Day.find_by_number(1)) if params[:day1] == 'true'
     days.push(Day.find_by_number(2)) if params[:day2] == 'true'
@@ -225,7 +219,7 @@ class ParticipantsController < ApplicationController
     parameters = params.permit(:name, :surname, :age, :city, :email, :phone)
     participant = Participant.new(parameters)
 
-    params[:gender]=='false' ? participant.gender = 'K' : participant.gender = 'M'
+    params[:gender] == 'false' ? participant.gender = 'K' : participant.gender = 'M'
 
     puts "#{participant.name}"
     puts "#{participant.gender} w środku!"
@@ -237,15 +231,12 @@ class ParticipantsController < ApplicationController
     puts "noc 1 : #{params[:night1]}"
     puts "noc 2 : #{params[:night2]}"
 
-
     participant.nights = nights
-
 
     puts "obiad 1 : #{params[:dinner1]}"
     puts "obiad 2 : #{params[:dinner2]}"
 
     participant.dinners = dinners
-
 
     puts "DNIII : #{participant.days.length}"
     puts "NOCE : #{participant.nights.length}"
@@ -254,20 +245,12 @@ class ParticipantsController < ApplicationController
     participant
   end
 
-
-
-
-
-
-
   private
 
-    def set_headers
+  def set_headers
     headers['Access-Control-Allow-Origin'] = 'blu-soft.pl'
     headers['Access-Control-Allow-Methods'] = 'GET, POST, PATCH, PUT, DELETE, OPTIONS, HEAD'
     headers['Access-Control-Allow-Headers'] = '*,x-requested-with,Content-Type,If-Modified-Since,If-None-Match'
     headers['Access-Control-Max-Age'] = '86400'
   end
-
-
 end
