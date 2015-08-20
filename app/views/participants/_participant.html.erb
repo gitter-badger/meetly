@@ -55,7 +55,7 @@
     <td><%=participant.nights.length%></td>
     <td><%= participant.created_at%></td>
     <td><%=participant.payment_deadline%></td>
-    <td class="status"><%= participant.get_status %></td>
+    <td class="status"><%= participant.status %></td>
     <% if participant.archived==false %>
     <td>
     <%= link_to set_arrived_participant_path(participant), :method => :patch, :remote => :true do %>

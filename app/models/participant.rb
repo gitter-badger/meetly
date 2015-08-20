@@ -49,7 +49,7 @@ class Participant < ActiveRecord::Base
     @mandrill.send_message('confirm_payment')
   end
 
-  def get_status
+  def status
     arrived_status if arrived
 
     if payment_deadline > Time.current.beginning_of_day
