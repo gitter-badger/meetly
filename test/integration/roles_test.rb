@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class RolesTest < ActionDispatch::IntegrationTest
-  test 'get_role_price_table should return proper hash' do
-    get '/get_role_price_table?name=Uczestnik'
+  test 'role_price_table should return proper hash' do
+    get '/role_price_table?name=Uczestnik'
 
     cost = JSON.parse(response.body, symbolize_names: true)
 
@@ -18,8 +18,8 @@ class RolesTest < ActionDispatch::IntegrationTest
     assert_not_nil cost[:night]
   end
 
-  test 'get_role_price_table should not return with bad role name' do
-    get '/get_role_price_table?name=Pastor'
+  test 'role_price_table should not return with bad role name' do
+    get '/role_price_table?name=Pastor'
 
     assert_equal 422, response.status
     assert_equal response.body, "null"
