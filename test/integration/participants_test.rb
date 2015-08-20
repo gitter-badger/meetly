@@ -1,10 +1,9 @@
 require 'test_helper'
 
 class ParticipantsTest < ActionDispatch::IntegrationTest
-
   setup { host! 'api.blu-soft.pl' }
 
-  test "root should lead to participant list" do
+  test 'root should lead to participant list' do
     visit root_url
 
     assert_equal root_path, current_path
@@ -13,8 +12,7 @@ class ParticipantsTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "receive_form with correct parameters should create new participant" do
-
+  test 'receive_form with correct parameters should create new participant' do
     Participant.any_instance.stubs(:send_confirmation)
 
     participants_before = Participant.all.length
@@ -25,7 +23,7 @@ class ParticipantsTest < ActionDispatch::IntegrationTest
     assert_not_equal participants_before, participants_after
   end
 
-  test "receive_form with incorrect parameters should return error" do
+  test 'receive_form with incorrect parameters should return error' do
     Participant.any_instance.stubs(:send_confirmation)
 
     get '/receive_form?name=todd'
@@ -36,6 +34,4 @@ class ParticipantsTest < ActionDispatch::IntegrationTest
     assert_match /can't be blank/, errors[:surname].join
     assert_match /participant should attend at least one days/, errors[:days].join
   end
-
-
 end
