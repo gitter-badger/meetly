@@ -6,11 +6,137 @@ class ParticipantsController < ApplicationController
   protect_from_forgery with: :exception
   respond_to :json, :js
 
+  def create
+    parameters = params.require(:participant).permit(:arrived, :gender, :paid, :name, :surname, :age, :city, :email, :phone)
+    
+    @participant=Participant.new(parameters)
+
+    role_id = params[:participant][:role_id]
+    @participant.role = Role.find(role_id)
+
+    day_ids = params[:participant][:day_ids]
+    dinner_ids = params[:participant][:dinner_ids]
+    night_ids = params[:participant][:night_ids]
+
+    day_ids.reject! {|d| d.empty?}
+    dinner_ids.reject! {|d| d.empty?}
+    night_ids.reject! {|d| d.empty?}
+
+    @participant.days = Day.none
+    @participant.dinners = Dinner.none
+    @participant.nights = Night.none
+    
+    day_ids.each do |d|
+      @participant.days.push(Day.find(d.to_i))
+    end
+    dinner_ids.each do |d|
+      @participant.dinners.push(Dinner.find(d.to_i))
+    end
+    night_ids.each do |d|
+      @participant.nights.push(Night.find(d.to_i))
+    end
+
+    @participant.payment_deadline = DateTime.new(params[:participant]["payment_deadline(1i)"].to_i, params[:participant]["payment_deadline(2i)"].to_i, params[:participant]["payment_deadline(3i)"].to_i)
+    
+    @participant.save!
+
+    redirect_to root_url
+  end
+
+  def edit
+    @participant = Participant.find(params[:id])
+    parameters = params.require(:participant).permit(:arrived, :paid, :name, :surname, :age, :city, :email, :phone)
+    @participant.update(parameters)
+    role_id = params[:participant][:role_id]
+    @participant.role = Role.find(role_id)
+
+    day_ids = params[:participant][:day_ids]
+    dinner_ids = params[:participant][:dinner_ids]
+    night_ids = params[:participant][:night_ids]
+
+    day_ids.reject! {|d| d.empty?}
+    dinner_ids.reject! {|d| d.empty?}
+    night_ids.reject! {|d| d.empty?}
+
+    @participant.days = Day.none
+    @participant.dinners = Dinner.none
+    @participant.nights = Night.none
+    
+    day_ids.each do |d|
+      @participant.days.push(Day.find(d.to_i))
+    end
+    dinner_ids.each do |d|
+      @participant.dinners.push(Dinner.find(d.to_i))
+    end
+    night_ids.each do |d|
+      @participant.nights.push(Night.find(d.to_i))
+    end
+
+    @participant.payment_deadline = DateTime.new(params[:participant]["payment_deadline(1i)"].to_i, params[:participant]["payment_deadline(2i)"].to_i, params[:participant]["payment_deadline(3i)"].to_i)
+    
+    @participant.save!
+
+    redirect_to root_url
+  end
+
+  def edit_form
+    @participant = Participant.find(params[:id])
+    respond_to do |format|
+      format.js {render "edit_form", :locals => {:participant => @participant}}
+    end
+  end
+
+  def list_mail
+    @participant = Participant.find(params[:id])
+    respond_to do |format|
+      format.js {render "list_mail", :locals => {:participant => @participant}}
+    end
+  end
+
+  def summary
+    @participants = Participant.includes(:days).includes(:role).all
+    @vol = Participant.all.where(role_id: 31).inject(0) do |sum, e| 
+                if (e.cost - e.paid) < 0 
+                  sum = sum - (e.cost - e.paid)
+                else
+                  sum
+                end
+              end
+
+    @par = Participant.all.where.not(role_id: 31).inject(0) do |sum, e| 
+                if (e.cost - e.paid) < 0 
+                  sum = sum - (e.cost - e.paid)
+                else
+                  sum
+                end
+              end
+  end
+
   def index
-    @participants = Participant.includes(:days).includes(:role).all.order("participants.created_at ASC")
+    @participants = Participant.includes(:days).includes(:role).all
   end
 
   def destroy
+    @participant = Participant.find(params[:id])
+    @participant.archived = true
+    @participant.save!
+    respond_to do |format|
+     # format.html {redirect_to participants_url}
+     # format.json {head :ok}
+      format.js {render "destroy", :locals => {:id => params[:id]}}
+    end
+  end
+
+  def set_arrived
+    @participant = Participant.find(params[:id])
+    @participant.arrived =  !@participant.arrived 
+    @participant.save!
+    respond_to do |format|
+      format.js {render "refresh", :locals => {:id => params[:id]}}
+    end
+  end
+
+  def destroy_and_mail
     @participant = Participant.find(params[:id])
     @participant.archived = true
     @participant.save!
@@ -21,6 +147,7 @@ class ParticipantsController < ApplicationController
       format.js {render "destroy", :locals => {:id => params[:id]}}
     end
   end
+
 
   def wipe
     @participant = Participant.find(params[:id])

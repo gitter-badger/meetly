@@ -1,0 +1,48 @@
+<%= form_for @participant, url: edit_participant_path(@participant), html: {class: "new-form"} do |f| %>
+<div id="update-close" class="icon icon_close"></div>
+<h2>Edytuj uczestnika</h2>
+<div class="form-row">
+	<%= f.text_field :name, placeholder: 'IMIĘ' %>
+	<%= f.text_field :surname, placeholder: 'NAZWISKO'%>
+	<div class="clearfix"></div>
+</div>
+<div class="form-row">
+	<%= f.number_field :age, placeholder:  'WIEK'%>
+	<%= f.text_field :city, placeholder: 'MIASTO'%>
+    <div class="clearfix"></div>
+</div>
+<div class="form-row">
+      <%= f.collection_select :role_id, Role.all, :id, :name, {}, {:class => "change-select sbHolder"} %>
+      <div class="clearfix"></div>
+</div>
+<div class="form-row">
+	<%= f.email_field :email, placeholder: 'EMAIL'%>
+	<%= f.telephone_field :phone, placeholder: 'TELEFON'%>
+	<div class="clearfix"></div>
+</div>
+<div class="form-row">
+      <%= f.select :day_ids, Day.all.map{|x| ["Dzień " + x.number.to_s, x.id]} , {}, {multiple: true}%>
+      <%= f.select :night_ids, Night.all.map{|x| ["Nocleg " + x.number.to_s, x.id]} , {}, {multiple: true}%>
+      <%= f.select :dinner_ids, Dinner.all.map{|x| ["Obiad " + x.number.to_s, x.id]} , {}, {multiple: true}%>
+      <div class="clearfix"></div>
+</div>
+<div class="form-row">
+  <%= f.select :gender, [['KOBIETA', 'K'], ['MĘŻCZYZNA','M']] , {}, {multiple: false}%>
+</div>
+<div class="form-row">
+	<%= f.number_field :paid, placeholder: 'ZAPŁACONO' %>
+	<div style="float: right;">
+		<%= f.date_select :payment_deadline%>
+		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="form-row">
+    <label> PRZYJECHAŁ: </label>
+    <div> <%= f.check_box :arrived%></div>
+  <div class="clearfix"></div>  
+  </div>
+
+    <%= f.submit 'Zapisz', :class =>  "Edit_Participant"%>
+    <div class="clearfix"></div>
+<% end %>

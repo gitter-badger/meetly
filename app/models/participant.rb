@@ -15,7 +15,7 @@ class Participant < ActiveRecord::Base
 
   validates_presence_of :name, :surname, :email, :age, :city, :phone, :role, :gender
   validates_numericality_of :age
-  validates :email, :uniqueness => {:scope => [:name, :surname, :archived]}
+  #validates :email, :uniqueness => {:scope => [:name, :surname, :archived]}
   validate :days_are_limited, on: [:create, :update]
 
   before_save :fill_attributes
@@ -24,6 +24,10 @@ class Participant < ActiveRecord::Base
   scope :night2_sleeper, -> {where(nights: {number: 2}).includes(:nights)}
   scope :dinner1_eater, -> {where(dinners: {number: 1}).includes(:dinners)}
   scope :dinner2_eater, -> {where(dinners: {number: 2}).includes(:dinners)}
+
+  scope :dayer1, -> {where(days: {number: 1}).includes(:days)}
+  scope :dayer2, -> {where(days: {number: 2}).includes(:days)}
+  scope :dayer3, -> {where(days: {number: 3}).includes(:days)}
 
   scope :men, -> {where(gender: 'M')}
   scope :women, -> {where(gender: 'K')}
@@ -48,6 +52,10 @@ class Participant < ActiveRecord::Base
   end
 
   def get_status
+
+    if arrived==true
+      return arrived_status
+    end 
 
     if payment_deadline > Time.current.beginning_of_day
       color = 'green'
@@ -76,6 +84,11 @@ class Participant < ActiveRecord::Base
 
 def format_status(color, status)
   status = '<p style="background-color:' + color + '; color:white; text-align:center">' + status + '</p>'
+  status.html_safe
+end
+
+def arrived_status
+  status = '<p style="background-color: transparent; color: green; text-align: center; font-weight: 900;">PRZYJECHAŁ</p>'
   status.html_safe
 end
 

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.5'
+ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
@@ -27,6 +27,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'mandrill-api'
 
 gem 'bcrypt', :require => 'bcrypt'
+
+gem 'jquery-datatables-rails', '~> 3.1.1'
 
 group :production do
   gem 'puma'

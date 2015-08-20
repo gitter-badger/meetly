@@ -1,0 +1,35 @@
+<form class="new-form">
+<div id="mail-close" class="icon icon_close"></div>
+<h3>Wyślij e-mail do <%= @participant.name%> <%= @participant.surname %></h3>
+<br />
+<div class="form-row">
+	<%= link_to payment_confirm_participant_path(@participant), :method => :post, :data => {:confirm =>	'Na pewno wysłać potwierdzenie zapłaty?'}, :remote => true  do %>
+	<span class="icon icon_mail_alt" title="Wyślij potwierdzenie wpłaty"></span>
+	<% end %>
+	WYŚLIJ POTWIERDZENIE ZAPŁATY
+</div>
+<br />
+<div class="form-row">
+    <%= link_to resend_confirmation_participant_path(@participant), :method => :get, :data => {:confirm => 'Na pewno wysłać ponowne potwierdzenie rejestracji?'}, :remote => true  do %>
+	<span class="icon icon_mail_alt" title="Wyślij ponowne potwierdzenie rejestracji"></span>
+    <% end %>
+    WYŚLIJ PONOWNE POTWIERDZENIE REJESTRACJI
+</div>
+<br />
+<% if @participant.archived == false %>
+<div class="form-row">
+	<%= link_to @participant, :method => :delete, :data => {:confirm => 'Na pewno usunąć? Uczestnik otrzyma maila z potwierdzeniem!'} , :remote => true  do %>
+	<span class="icon icon_mail_alt" title="Usuń i wyślij wiadomość"></span>
+	<% end %>
+	USUŃ I WYŚLIJ WIADOMOŚĆ
+</div>
+<% else %>
+<div class="form-row">
+	<%= link_to unarchive_participant_path(@participant), :method => :patch, :data => {:confirm => 'Na pewno przywrócić?'}, :remote => true do %>
+	<span class="icon icon_mail_alt" title="Przywróć uczestnika"></span>
+	PRZYWRÓĆ UCZESTNIKA
+<% end %>
+</div>
+<br />
+<% end %>
+</form>

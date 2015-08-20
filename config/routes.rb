@@ -6,9 +6,17 @@ Rails.application.routes.draw do
     delete :wipe, on: :member
     patch :unarchive, on: :member
     get :resend_confirmation, on: :member
+    put :edit_form, on: :member
+    get :list_mail, on: :member
+    patch :edit, on: :member
+    delete :destroy_and_mail, on: :member
+    patch :set_arrived, on: :member, defaults: {format: 'js'}
   end
+
+
   root to: 'participants#index'
 
+  match '/summary' => 'participants#summary', via: :get
   match '/receive_form' => 'participants#receive_form', via: :post, defaults: {format: 'json'}
   match '/receive_form' => 'participants#receive_form', via: :get, defaults: {format: 'json'}
   match '/get_role_price_table' => 'roles#get_role_price_table', via: :get, defaults: {format: 'json'}
