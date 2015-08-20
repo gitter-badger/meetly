@@ -1,4 +1,4 @@
-App.Poczatek
+Meetly
 ============
 
-Application for managing Poczatek conference
+Event management web application.
