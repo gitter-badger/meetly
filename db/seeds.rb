@@ -101,3 +101,5 @@ Participant.create!([
       gender: 'M'
 		}
 	])
+
+User.create!(name: 'admin', password: 'password')
