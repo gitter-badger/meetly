@@ -103,21 +103,21 @@ class Participant < ActiveRecord::Base
 
   def fill_attributes
     # set basic attributes
-    paid = 0 if paid.nil?
-    cost = calculate_price
-    role = Role.find_by(name: 'UczestnikPo1012') if role.nil?
+    self.paid = 0 if paid.nil?
+    self.cost = calculate_price
+    self.role = Role.find_by(name: 'UczestnikPo1012') if role.nil?
 
     # set deadline
-    payment_deadline = Date.today + 7.days if payment_deadline.nil?
+    self.payment_deadline = Date.today + 7.days if self.payment_deadline.nil?
 
     # prepare dates
     eve = Date.new(2014, 12, 24)
     today = Date.today
 
-    if payment_deadline > eve && today <= eve
-      payment_deadline = eve
+    if self.payment_deadline > eve && today <= eve
+      self.payment_deadline = eve
     elsif today > eve && today
-      payment_deadline = today
+      self.payment_deadline = today
     end
   end
 
@@ -128,13 +128,13 @@ class Participant < ActiveRecord::Base
       sum = price_table.days
     else
       sum = 0
-      sum += price_table.day1 if days.include?(Day.find_by_number(1))
-      sum += price_table.day2 if days.include?(Day.find_by_number(2))
-      sum += price_table.day3 if days.include?(Day.find_by_number(3))
+      sum += price_table.day1 if self.days.include?(Day.find_by_number(1))
+      sum += price_table.day2 if self.days.include?(Day.find_by_number(2))
+      sum += price_table.day3 if self.days.include?(Day.find_by_number(3))
     end
 
-    sum += nights.length * price_table.night
-    sum += dinners.length * price_table.dinner
+    sum += self.nights.length * price_table.night
+    sum += self.dinners.length * price_table.dinner
     sum
   end
 end
