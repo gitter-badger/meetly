@@ -9,11 +9,11 @@ class User < ActiveRecord::Base
   validates :password, presence: true
 
   def encrypt_password
-    salt = BCrypt::Engine.generate_salt
+    self.salt = BCrypt::Engine.generate_salt
     puts 'salt created!'
     puts "#{salt}"
 
-    encrypted_password = BCrypt::Engine.hash_secret(password, salt)
+    self.encrypted_password = BCrypt::Engine.hash_secret(password, self.salt)
     puts 'encryption created!'
     puts "#{encrypted_password}"
   end
@@ -23,12 +23,8 @@ class User < ActiveRecord::Base
     puts 'pswd cleared!'
   end
 
-  def self.authenticate(username = "", login_password = "")
-    user = User.find_by(name: username)
-    user && user.match_password(login_password) if user
-  end
-
-  def match_password(login_password = "")
-    encrypted_password == BCrypt::Engine.hash_secret(login_password, salt)
+  def self.authenticate(username, login_password)
+    user = Account.find_by(name: username)
+    user.authenticate(login_password) if user
   end
 end
