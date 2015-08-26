@@ -1,0 +1,112 @@
+#header {
+    background: $white;
+}
+
+a#menu-toggle {
+    display: inline-block;
+    height: 100%;
+    font-size: $menu-toggle-height;
+    line-height: $menu-toggle-height;
+    padding: $menu-toggle-padding-v 0;
+    color: #fff;
+    width: 60px;
+    text-align: center;
+
+    i.zmdi {
+        color: #fff;
+        -webkit-perspective: 1000;
+        font-weight: normal;
+        font-style: normal;
+    }
+}
+
+img.user-thumb {
+    width: $user-thumb-size;
+    height: $user-thumb-size;
+}
+
+h4.event-name {
+    font-weight: 400;
+
+    i.event-icon {
+        margin-right: 10px;
+    }
+}
+
+.navbar-custom {
+    .nav {
+        li {
+            a {
+                &:hover, &:focus {
+                    background: $dropdown-link-hover-bg;
+                }
+            }
+        }
+    }
+}
+
+.navbar-nav {
+
+
+    .open .dropdown {
+
+        .dropdown-menu {
+            li {
+                a {
+                    padding: 8px 15px 8px 25px;
+                }
+            }
+        }
+    }
+
+    .dropdown-menu {
+        padding: 0;
+
+        .divider {
+            margin-top: 1px;
+            margin-bottom: 1px;
+            background: rgba(0, 0, 0, 0.0588235);
+        }
+    }
+}
+
+@media(max-width:768px) {
+    .navbar-custom {
+
+        .navbar-header {
+            width: 100%;
+        }
+
+        .navbar-content {
+            width: 100%;
+        }
+
+        .navbar-nav {
+            margin: 0 auto;
+            display: inline-block;
+            &.navbar-right {
+                padding-right: 0;
+                overflow: visible;
+                float: right;
+            }
+
+            &.navbar-left {
+                float: left;
+            }
+
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar .dropdown-menu.no-collapse {
+        background-color: #ffffff;
+        border-color: rgba(0, 0, 0, 0.2);
+        box-shadow: 0px 6px 12px 0px rgba(0,0,0,0.175);
+        float: left;
+        margin: 0;
+        position: absolute;
+        top: 100%;
+    }
+    /* ... */
+}

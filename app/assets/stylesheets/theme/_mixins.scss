@@ -1,0 +1,42 @@
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin transform($transforms) {
+     -moz-transform: $transforms;
+       -o-transform: $transforms;
+      -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+          transform: $transforms;
+}
+
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+@mixin scale($scale) {
+   @include transform(scale($scale));
+}
+
+@mixin translateX ($px) {
+  @include transform(perspective(1px) translateX(#{$px}px))
+}
+
+@mixin calc($property, $expression) {
+  #{$property}: -moz-calc(#{$expression});
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: calc(#{$expression});
+}
+
+@mixin translate3d(
+  $translate-x: 0,
+  $translate-y: 0,
+  $translate-z: 0) {
+  -webkit-transform: translate3d($translate-x, $translate-y, $translate-z);
+  -ms-transform: translate3d($translate-x, $translate-y, $translate-z);
+  transform: translate3d($translate-x, $translate-y, $translate-z);
+}

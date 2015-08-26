@@ -1,0 +1,189 @@
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Toggle Styles */
+
+//@import 'metis';
+
+#wrapper {
+    padding-left: 0;
+    padding-top: $navbar-height;
+    @include transition(all 0.3s ease-in-out);
+
+    &.toggled {
+        padding-left: $sidebar-width;
+
+        #sidebar-wrapper {
+            width: $sidebar-width;
+        }
+
+        #page-content-wrapper {
+            position: absolute;
+            margin-right: -$sidebar-width;
+        }
+    }
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: $sidebar-width;
+    width: 0;
+    height: 100%;
+    margin-left: -$sidebar-width;
+    overflow-y: auto;
+    background: $sidebar-bg;
+    @include transition(all 0.3s ease-in-out);
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 20px 20px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: $sidebar-width;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    list-style-type: none;
+
+    ul.submenu {
+        list-style-type: none;
+        padding-left: 0;
+
+        li {
+            -webkit-perspective: 1000;
+            a {
+                color: $sidebar-link;
+                @include transition(all 0.1s ease-in-out);
+                backface-visibility: hidden;
+
+                &:hover {
+                    color: $white;
+                    text-indent: 4px;
+                    @include transition(all 0.1s ease-in-out);
+                }
+            }
+        }
+    }
+
+    li {
+        line-height: 40px;
+
+        a {
+            color: $sidebar-link;
+            display: block;
+            text-decoration: none;
+            font-weight: $sidebar-link-weight;
+            font-size: $sidebar-link-size;
+            line-height: $sidebar-link-line-height;
+            letter-spacing: $sidebar-link-spacing;
+            height: $sidebar-item-height;
+            padding: $sidebar-item-padding-v 20px;
+            padding-right: 0;
+
+            i.zmdi {
+                width: 22px;
+                text-align: center;
+            }
+
+            span {
+                padding-left: 10px;
+                text-align: left;
+            }
+
+            &.top-link {
+
+                @include transition(all 0.2s ease-in);
+
+                &:hover {
+                    color: $white;
+                    background: $sidebar-link-hover-bg;
+                    @include transition(all 0.2s ease-in);
+                }
+
+                i.icon {
+                    display: inline-block;
+                    font-size: $sidebar-link-icon-size;
+                    float: left;
+                }
+
+                span.item-name {
+                    float: left;
+                }
+
+                i.arrow {
+                    width: 60px;
+                    @include transition(all 0.2s ease-in);
+                }
+            }
+        }
+
+        &.active {
+
+            > a {
+                color: $white;
+                background: $sidebar-link-hover-bg;
+
+                &.top-link {
+                    i.arrow {
+                        @include rotate(90deg);
+                        @include transition(all 0.2s ease-in);
+                    }
+                }
+            }
+
+            ul.submenu {
+                background: $sidebar-submenu-bg;
+            }
+        }
+    }
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: $sidebar-width;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: $sidebar-width;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        position: relative;
+        padding-top: 20px;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+@media(max-width:768px) {
+    #wrapper {
+        padding-top: $navbar-height * 2;
+    }
+}
