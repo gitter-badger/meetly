@@ -28,6 +28,8 @@ gem 'bcrypt', :require => 'bcrypt'
 
 gem 'jquery-datatables-rails', '~> 3.1.1'
 
+gem 'slim'
+
 group :production do
   gem 'puma'
 end
