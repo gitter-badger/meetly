@@ -78,3 +78,5 @@ bower.json
 
 config/database.yml
 config/google_analytics.yml
+
+/node_modules/

@@ -28,6 +28,8 @@ gem 'jquery-datatables-rails', '~> 3.1.1'
 
 gem 'slim'
 
+gem 'browserify-rails'
+
 group :production do
   gem 'puma'
 end
@@ -45,8 +47,6 @@ group :development do
 end
 
 source 'https://rails-assets.org' do
-  gem 'rails-assets-jquery'
-  gem 'rails-assets-jquery_ujs'
   gem 'rails-assets-bootstrap'
 end
 
