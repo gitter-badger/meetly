@@ -1,0 +1,11 @@
+doctype html
+html lang="pl"
+head
+  = render 'shared/head'
+body
+  = render 'shared/header'
+  #wrapper"
+    = render 'shared/sidebar'
+    #page-content-wrapper
+      .container-fluid
+        = yield
