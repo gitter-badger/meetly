@@ -15,3 +15,30 @@
 //= require dataTables/jquery.dataTables
 //= require turbolinks
 //= require_tree .
+
+'use strict';
+
+// var $ = require('jquery');
+// var bootstrap = require('bootstrap');
+var metismenu = require('metismenu');
+
+// var assets = require('./assets');
+// var components = require('./components');
+
+;(function($) {
+
+  $(document).ready(function(){
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+
+    $(".sidebar-nav").metisMenu();
+
+    setTimeout(function(){  $(".loading-mask").fadeOut( "fast", function() {
+      $(".loading-mask").hide();
+    }) }, 1500);
+  });
+
+})(jQuery);
+

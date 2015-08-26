@@ -19,8 +19,9 @@
     "url": "https://github.com/barnski/meetly/issues"
   },
   "homepage": "https://github.com/barnski/meetly#readme",
-  "dependencies" : {
+  "dependencies": {
     "browserify": "~> 10.2.4",
-    "browserify-incremental": "^3.0.1"
+    "browserify-incremental": "^3.0.1",
+    "metismenu": "^2.1.0"
   }
 }
