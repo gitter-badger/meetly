@@ -3,25 +3,33 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :null_session
 
-  protected
+  helper_method :current_person
+  helper_method :current_account
+  helper_method :user_signed_in?
 
-  def authenticate_user
-    if session[:user_id]
-      # set current user object to @current_user object variable
-      @current_user = User.find session[:user_id]
-      return true
-    else
-      redirect_to login_url
-      return false
-    end
+  private
+
+  def current_person
+    User.find_by(id: session[:user_id])
   end
 
-  def save_login_state
-    if session[:user_id]
-      redirect_to root_url
-      return false
+  def authorize_user
+    return unless current_user.nil?
+    session[:return_to] = request.url
+    redirect_to login_path, notice: 'Please sign in!'
+  end
+
+  def user_signed_in?
+    !current_user.nil?
+  end
+
+  def sign_in(user)
+    if user
+      session[:user_id] = user.id
+      redirect_to session.delete(:return_to) || root_path
     else
-      return true
+      flash.now[:error] = 'Wrong credentials'
+      render :new
     end
   end
 end
