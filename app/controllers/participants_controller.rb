@@ -1,8 +1,8 @@
 require 'mandrill_mailer'
 
 class ParticipantsController < ApplicationController
-  before_filter :set_headers
-  before_filter :authorize_user, except: [:receive_form, :create_participant]
+  before_action :set_headers
+  before_action :authorize_user, except: [:receive_form, :create_participant]
   protect_from_forgery with: :exception
   respond_to :json, :js
 
