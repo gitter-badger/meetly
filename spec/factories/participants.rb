@@ -1,13 +1,14 @@
 FactoryGirl.define do
   factory :participant do
-    name 'Todd'
-    surname 'White'
+    first_name 'Todd'
+    last_name 'White'
     age 60
     city 'New York'
     email 'todd@betelnet.pl'
     phone '664752055'
-    days { [FactoryGirl.build(:day), FactoryGirl.build(:day), FactoryGirl.build(:day)] }
-    association :role, factory: :role
+    role
     gender true
+    event
+    days { [FactoryGirl.build(:day), FactoryGirl.build(:day), FactoryGirl.build(:day)] }
   end
 end
