@@ -35,9 +35,14 @@ group :production do
 end
 
 group :development, :test do
+  gem 'spring'
+  gem 'spring-commands-rspec', '~> 1.0.4'
+  gem 'rspec-rails', '~> 3.3.3'
+  gem 'capybara', '~> 2.4.4'
+  gem 'guard-rspec', '~> 4.6.3'
+  gem 'growl'
   gem 'factory_girl_rails'
   gem 'shoulda'
-  gem 'capybara'
   gem 'mocha'
   gem 'rubocop'
 end
