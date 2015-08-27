@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827092303) do
+ActiveRecord::Schema.define(version: 20150827153759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: true do |t|
+    t.string   "city"
+    t.string   "address_line_1"
+    t.string   "address_line_2"
+    t.string   "zip_code"
+    t.string   "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "days", force: true do |t|
     t.integer  "number"
@@ -94,8 +104,10 @@ ActiveRecord::Schema.define(version: 20150827092303) do
     t.datetime "payment_deadline"
     t.boolean  "archived",         default: false
     t.boolean  "arrived",          default: false
+    t.integer  "event_id"
   end
 
+  add_index "participants", ["event_id"], name: "index_participants_on_event_id", using: :btree
   add_index "participants", ["role_id"], name: "index_participants_on_role_id", using: :btree
 
   create_table "price_tables", force: true do |t|
@@ -121,6 +133,14 @@ ActiveRecord::Schema.define(version: 20150827092303) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "email"
+  end
+
+  create_table "venues", force: true do |t|
+    t.string   "name"
+    t.string   "website"
+    t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

@@ -12,7 +12,7 @@ class Participant < ActiveRecord::Base
   has_many :participant_dinners
   has_many :dinners, through: :participant_dinners
 
-  validates_presence_of :name, :surname, :email, :age, :city, :phone, :role, :gender
+  validates_presence_of :name, :surname, :email, :age, :city, :phone, :role, :gender, :event_id
   validates_numericality_of :age
   # validates :email, :uniqueness => {:scope => [:name, :surname, :archived]}
   validate :days_are_limited, on: [:create, :update]
