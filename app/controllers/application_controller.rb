@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   def sign_in(user)
     if user
       session[:user_id] = user.id
-      redirect_back_or_root
+      redirect_back_or_to_root
     else
       flash.now[:error] = 'Wrong credentials'
       render :new
