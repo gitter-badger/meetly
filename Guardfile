@@ -70,6 +70,9 @@ guard :rspec, cmd: "bundle exec rspec" do
   watch(rails.routes)          { "#{rspec.spec_dir}/routing" }
   watch(rails.app_controller)  { "#{rspec.spec_dir}/controllers" }
 
+  # Factory Girl
+  watch(%r{^spec/factories/(.+)\.rb$}) { "spec/models" }
+
   # Capybara features specs
   watch(rails.view_dirs)     { |m| rspec.spec.("features/#{m[1]}") }
   watch(rails.layouts)       { |m| rspec.spec.("features/#{m[1]}") }
