@@ -26,10 +26,14 @@ class ApplicationController < ActionController::Base
   def sign_in(user)
     if user
       session[:user_id] = user.id
-      redirect_to session.delete(:return_to) || root_path
+      redirect_back_or_root
     else
       flash.now[:error] = 'Wrong credentials'
       render :new
     end
+  end
+
+  def redirect_back_or_to_root
+    redirect_to session.delete(:return_to) || root_path
   end
 end

@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
+  layout 'login'
+
   def new
+    redirect_back_or_to_root if current_user
   end
 
   def create
