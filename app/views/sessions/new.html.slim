@@ -1,0 +1,10 @@
+.wrapper.sign_form
+  section.container.container-login
+    h1.main-header Logowanie
+    = form_tag session_path do
+        div = text_field_tag :username,  nil, placeholder: 'login'
+        .clearfix
+        div = password_field_tag :password, nil, placeholder: 'hasło'
+        .clearfix
+        = button_tag(type: 'submit', class: "login") do
+         i.icon_lock Zaloguj
