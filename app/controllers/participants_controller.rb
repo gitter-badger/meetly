@@ -7,7 +7,7 @@ class ParticipantsController < ApplicationController
   respond_to :json, :js
 
   def create
-    parameters = params.require(:participant).permit(:arrived, :gender, :paid, :name, :surname, :age, :city, :email, :phone)
+    parameters = params.require(:participant).permit(:arrived, :gender, :paid, :first_name, :last_name, :age, :city, :email, :phone)
 
     @participant = Participant.new(parameters)
 
@@ -45,7 +45,7 @@ class ParticipantsController < ApplicationController
 
   def edit
     @participant = Participant.find(params[:id])
-    parameters = params.require(:participant).permit(:arrived, :paid, :name, :surname, :age, :city, :email, :phone)
+    parameters = params.require(:participant).permit(:arrived, :paid, :first_name, :last_name, :age, :city, :email, :phone)
     @participant.update(parameters)
     role_id = params[:participant][:role_id]
     @participant.role = Role.find(role_id)
@@ -216,7 +216,7 @@ class ParticipantsController < ApplicationController
     dinners.push(Dinner.find_by_number(1)) if params[:dinner1] == 'true'
     dinners.push(Dinner.find_by_number(2)) if params[:dinner2] == 'true'
 
-    parameters = params.permit(:name, :surname, :age, :city, :email, :phone)
+    parameters = params.permit(:first_name, :last_name, :age, :city, :email, :phone)
     participant = Participant.new(parameters)
 
     params[:gender] == 'false' ? participant.gender = 'K' : participant.gender = 'M'

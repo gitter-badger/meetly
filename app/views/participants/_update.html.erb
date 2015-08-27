@@ -2,8 +2,8 @@
 <div id="update-close" class="icon icon_close"></div>
 <h2>Edytuj uczestnika</h2>
 <div class="form-row">
-	<%= f.text_field :name, placeholder: 'IMIĘ' %>
-	<%= f.text_field :surname, placeholder: 'NAZWISKO'%>
+	<%= f.text_field :first_name, placeholder: 'IMIĘ' %>
+	<%= f.text_field :last_name, placeholder: 'NAZWISKO'%>
 	<div class="clearfix"></div>
 </div>
 <div class="form-row">
@@ -40,7 +40,7 @@
 <div class="form-row">
     <label> PRZYJECHAŁ: </label>
     <div> <%= f.check_box :arrived%></div>
-  <div class="clearfix"></div>  
+  <div class="clearfix"></div>
   </div>
 
     <%= f.submit 'Zapisz', :class =>  "Edit_Participant"%>
