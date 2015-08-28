@@ -2,6 +2,7 @@ class Participant < ActiveRecord::Base
   default_scope { where(archived: false) }
 
   belongs_to :role
+  belongs_to :event
 
   has_many :participant_days
   has_many :days, through: :participant_days
@@ -91,10 +92,10 @@ class Participant < ActiveRecord::Base
   private
 
   def days_are_limited
-    if days.length > 3
+    if self.days.length > 3
       errors.add(:days, "there's no more days than 3")
       false
-    elsif days.length < 1
+    elsif self.days.length < 1
       errors.add(:days, "participant should attend at least one days")
       false
     end
@@ -121,19 +122,23 @@ class Participant < ActiveRecord::Base
   end
 
   def calculate_price
-    price_table = role.price_table
+    price_table = self.role.price_table
 
-    if days.length > 2
+    if self.days.length > 2
       sum = price_table.days
     else
       sum = 0
-      sum += price_table.day1 if self.days.include?(Day.find_by_number(1))
-      sum += price_table.day2 if self.days.include?(Day.find_by_number(2))
-      sum += price_table.day3 if self.days.include?(Day.find_by_number(3))
+      sum += price_table.day1 if days_include?(1)
+      sum += price_table.day2 if days_include?(2)
+      sum += price_table.day3 if days_include?(3)
     end
 
     sum += self.nights.length * price_table.night
     sum += self.dinners.length * price_table.dinner
     sum
+  end
+
+  def days_include?(day_id)
+    self.days.include?(Day.find_by_number(day_id))
   end
 end
