@@ -1,4 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Night, type: :model do
+describe Night do
+  describe 'ActiveModel validations' do
+    it 'has a valid factory' do
+      expect(FactoryGirl.create(:night)).to be_valid
+    end
+  end
 end
