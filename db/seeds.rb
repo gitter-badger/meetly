@@ -56,8 +56,8 @@ ro = Role.create!(
 
 Participant.create!([
 		{
-			name: 'Bartek',
-			surname: 'Szczepanski',
+			first_name: 'Bartek',
+			last_name: 'Szczepanski',
       age: 24,
       email: 'szczepan97@gmail.com',
       phone: '664752055',
@@ -72,8 +72,8 @@ Participant.create!([
 
 Participant.create!([
 		{
-			name: 'Bartek1',
-			surname: 'Szczepanski',
+			first_name: 'Bartek1',
+			last_name: 'Szczepanski',
       age: 24,
       email: 'szczepan97@gmail.com',
       phone: '664752055',
@@ -88,8 +88,8 @@ Participant.create!([
 
 Participant.create!([
 		{
-			name: 'Bartek2',
-			surname: 'Szczepanski',
+			first_name: 'Bartek2',
+			last_name: 'Szczepanski',
       age: 24,
       email: 'szczepan97@gmail.com',
       phone: '664752055',
