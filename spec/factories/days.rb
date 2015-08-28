@@ -1,5 +1,7 @@
 FactoryGirl.define do
+  sequence(:number) { |i| i + 1 }
+
   factory :day do
-    sequence(:number) { |i| i + rand(10) }
+    number
   end
 end
