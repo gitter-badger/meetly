@@ -22,9 +22,9 @@ e = Event.create!(name: 'Poczatek15/16',
 						start_date: Date.new(2015,12,29), end_date: Date.new(2015, 12,31), owner: u)
 
 
-d1 = Day.create!(number: 1)
-d2 = Day.create!(number: 2)
-d3 = Day.create!(number: 3)
+d1 = Day.create!(number: 1, event: e)
+d2 = Day.create!(number: 2, event: e)
+d3 = Day.create!(number: 3, event: e)
 
 n1 = Night.create!(number: 1)
 n2 = Night.create!(number: 2)
