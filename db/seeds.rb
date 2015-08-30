@@ -12,6 +12,15 @@ PriceTable.destroy_all
 Day.destroy_all
 Night.destroy_all
 Dinner.destroy_all
+Event.destroy_all
+User.destroy_all
+
+u = User.create!(name: 'Marcela', email: 'marcela@poczatek.org', password: 'password')
+#  validates :name, :start_date, :end_date, :owner_id, presence: true
+
+e = Event.create!(name: 'Poczatek15/16', 
+						start_date: Date.new(2015,12,29), end_date: Date.new(2015, 12,31), owner: u)
+
 
 d1 = Day.create!(number: 1)
 d2 = Day.create!(number: 2)
@@ -66,7 +75,8 @@ Participant.create!([
 			nights: [],
 			dinners: [dn1, dn2],
 			days: [d1, d2, d3],
-      gender: 'M'
+      gender: 'M',
+      event: e
 		}
 	])
 
@@ -82,7 +92,8 @@ Participant.create!([
 			nights: [],
 			dinners: [dn1, dn2],
 			days: [d1, d2, d3],
-      gender: 'M'
+      gender: 'M',
+      event: e
 		}
 	])
 
@@ -98,8 +109,8 @@ Participant.create!([
 			nights: [],
 			dinners: [dn1, dn2],
 			days: [d1, d2, d3],
-      gender: 'M'
+      gender: 'M',
+      event: e
 		}
 	])
 
-User.create!(name: 'admin', password: 'password')
