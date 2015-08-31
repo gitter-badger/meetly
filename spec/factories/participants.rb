@@ -8,7 +8,7 @@ FactoryGirl.define do
     phone '664752055'
     role
     gender true
-    event
+    event { Event.first }
     days { [FactoryGirl.build(:day), FactoryGirl.build(:day), FactoryGirl.build(:day)] }
   end
 end

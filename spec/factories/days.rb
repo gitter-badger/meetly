@@ -3,5 +3,6 @@ FactoryGirl.define do
 
   factory :day do
     number
+    event { Event.first }
   end
 end
