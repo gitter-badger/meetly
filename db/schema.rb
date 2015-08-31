@@ -11,20 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150831212752) do
+ActiveRecord::Schema.define(version: 20150831223837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "addresses", force: true do |t|
-    t.string   "city"
-    t.string   "address_line_1"
-    t.string   "address_line_2"
-    t.string   "zip_code"
-    t.string   "country"
+  create_table "day_prices", force: true do |t|
+    t.decimal  "price"
+    t.integer  "day_id"
+    t.integer  "role_id"
+    t.integer  "pricing_period_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "day_prices", ["day_id"], name: "index_day_prices_on_day_id", using: :btree
+  add_index "day_prices", ["pricing_period_id"], name: "index_day_prices_on_pricing_period_id", using: :btree
+  add_index "day_prices", ["role_id"], name: "index_day_prices_on_role_id", using: :btree
 
   create_table "days", force: true do |t|
     t.integer  "number"
@@ -40,6 +43,19 @@ ActiveRecord::Schema.define(version: 20150831212752) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "event_prices", force: true do |t|
+    t.decimal  "price"
+    t.integer  "pricing_period_id"
+    t.integer  "event_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "event_prices", ["event_id"], name: "index_event_prices_on_event_id", using: :btree
+  add_index "event_prices", ["pricing_period_id"], name: "index_event_prices_on_pricing_period_id", using: :btree
+  add_index "event_prices", ["role_id"], name: "index_event_prices_on_role_id", using: :btree
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -151,6 +167,19 @@ ActiveRecord::Schema.define(version: 20150831212752) do
     t.string "name"
   end
 
+  create_table "service_prices", force: true do |t|
+    t.decimal  "price"
+    t.integer  "pricing_period_id"
+    t.integer  "service_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "service_prices", ["pricing_period_id"], name: "index_service_prices_on_pricing_period_id", using: :btree
+  add_index "service_prices", ["role_id"], name: "index_service_prices_on_role_id", using: :btree
+  add_index "service_prices", ["service_id"], name: "index_service_prices_on_service_id", using: :btree
+
   create_table "services", force: true do |t|
     t.string  "name"
     t.decimal "price"
@@ -167,14 +196,6 @@ ActiveRecord::Schema.define(version: 20150831212752) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "email"
-  end
-
-  create_table "venues", force: true do |t|
-    t.string   "name"
-    t.string   "website"
-    t.integer  "location_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
 end

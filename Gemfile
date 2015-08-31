@@ -45,6 +45,7 @@ group :development, :test do
   gem 'shoulda'
   gem 'mocha'
   gem 'rubocop'
+  gem 'database_cleaner'
 end
 
 group :development do
