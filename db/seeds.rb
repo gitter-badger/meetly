@@ -14,6 +14,9 @@ Night.destroy_all
 Dinner.destroy_all
 Event.destroy_all
 User.destroy_all
+Service.destroy_all
+ServiceGroup.destroy_all
+PricingPeriod.destroy_all
 
 u = User.create!(name: 'Marcela', email: 'marcela@poczatek.org', password: 'password')
 #  validates :name, :start_date, :end_date, :owner_id, presence: true
@@ -21,6 +24,12 @@ u = User.create!(name: 'Marcela', email: 'marcela@poczatek.org', password: 'pass
 e = Event.create!(name: 'Poczatek15/16', 
 						start_date: Date.new(2015,12,29), end_date: Date.new(2015, 12,31), owner: u)
 
+
+pp = PricingPeriod.create!(name: 'turboprzedplata', event: e, start_date: Date.new(2015, 10, 1), end_date: Date.new(2015, 11, 11))
+
+sg = ServiceGroup.create!(name: 'Obiady')
+s1 = Service.create!(name: 'Obiad1', event: e, service_group: sg, price: 10)
+s2 = Service.create!(name: 'Obiad2', event: e, service_group: sg, price: 10)
 
 d1 = Day.create!(number: 1, event: e)
 d2 = Day.create!(number: 2, event: e)
@@ -76,7 +85,8 @@ Participant.create!([
 			dinners: [dn1, dn2],
 			days: [d1, d2, d3],
       gender: 'M',
-      event: e
+      event: e,
+      services: [s1, s2]
 		}
 	])
 

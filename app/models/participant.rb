@@ -6,12 +6,15 @@ class Participant < ActiveRecord::Base
 
   has_many :participant_days
   has_many :days, through: :participant_days
-
+  # deprecated 
   has_many :participant_nights
   has_many :nights, through: :participant_nights
-
+  # deprecated
   has_many :participant_dinners
   has_many :dinners, through: :participant_dinners
+
+  has_many :participant_services
+  has_many :services, through: :participant_services
 
   validates_presence_of :first_name, :last_name, :email, :age, :city, :phone, :role, :gender, :event_id
   validates_numericality_of :age

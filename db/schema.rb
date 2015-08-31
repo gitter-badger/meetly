@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150831200659) do
+ActiveRecord::Schema.define(version: 20150831212752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,14 @@ ActiveRecord::Schema.define(version: 20150831200659) do
   add_index "participant_nights", ["night_id"], name: "index_participant_nights_on_night_id", using: :btree
   add_index "participant_nights", ["participant_id"], name: "index_participant_nights_on_participant_id", using: :btree
 
+  create_table "participant_services", force: true do |t|
+    t.integer "participant_id"
+    t.integer "service_id"
+  end
+
+  add_index "participant_services", ["participant_id"], name: "index_participant_services_on_participant_id", using: :btree
+  add_index "participant_services", ["service_id"], name: "index_participant_services_on_service_id", using: :btree
+
   create_table "participants", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -123,12 +131,35 @@ ActiveRecord::Schema.define(version: 20150831200659) do
     t.integer "dinner"
   end
 
+  create_table "pricing_periods", force: true do |t|
+    t.string   "name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "event_id"
+  end
+
+  add_index "pricing_periods", ["event_id"], name: "index_pricing_periods_on_event_id", using: :btree
+
   create_table "roles", force: true do |t|
     t.string  "name"
     t.integer "price_table_id"
   end
 
   add_index "roles", ["price_table_id"], name: "index_roles_on_price_table_id", using: :btree
+
+  create_table "service_groups", force: true do |t|
+    t.string "name"
+  end
+
+  create_table "services", force: true do |t|
+    t.string  "name"
+    t.decimal "price"
+    t.integer "service_group_id"
+    t.integer "event_id"
+  end
+
+  add_index "services", ["event_id"], name: "index_services_on_event_id", using: :btree
+  add_index "services", ["service_group_id"], name: "index_services_on_service_group_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"

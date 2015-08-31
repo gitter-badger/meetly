@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
   has_many :days
   has_many :participants
   has_many :services
+  has_many :pricing_periods
 
   before_create :generate_random_id
 
