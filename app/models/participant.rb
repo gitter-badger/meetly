@@ -6,7 +6,7 @@ class Participant < ActiveRecord::Base
 
   has_many :participant_days
   has_many :days, through: :participant_days
-  # deprecated 
+  # deprecated
   has_many :participant_nights
   has_many :nights, through: :participant_nights
   # deprecated
@@ -17,7 +17,7 @@ class Participant < ActiveRecord::Base
   has_many :services, through: :participant_services
 
   validates_presence_of :first_name, :last_name, :email, :age, :city, :phone, :role, :gender, :event_id
-  validates_numericality_of :age
+  validates :age, numericality: { only_integer: true }
   validate :days_are_limited, on: [:create, :update]
 
   before_save :fill_attributes
