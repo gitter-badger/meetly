@@ -7,7 +7,7 @@ FactoryGirl.define do
     email 'todd@betelnet.pl'
     phone '664752055'
     role
-    gender true
+    gender :man
     event { Event.first }
     days { [FactoryGirl.build(:day), FactoryGirl.build(:day), FactoryGirl.build(:day)] }
   end

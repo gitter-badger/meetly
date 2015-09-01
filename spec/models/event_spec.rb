@@ -2,7 +2,7 @@ require 'rails_helper'
 describe Event do
   describe 'ActiveModel validations' do
     it 'has a valid factory' do
-      expect(FactoryGirl.create(:event)).to be_valid
+      expect(FactoryGirl.create(:event, capacity: 100)).to be_valid
     end
 
     it 'is invalid without a name' do

@@ -3,7 +3,6 @@ FactoryGirl.define do
     price 10
     service
     role 
-    pricing_period
   end
 
 end

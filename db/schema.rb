@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20150901221131) do
 
   add_index "participant_services", ["participant_id"], name: "index_participant_services_on_participant_id", using: :btree
   add_index "participant_services", ["service_id"], name: "index_participant_services_on_service_id", using: :btree
-
+  
   create_table "participants", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
