@@ -31,8 +31,9 @@ class Participant < ActiveRecord::Base
   scope :dayer2, -> { where(days: { number: 2 }).includes(:days) }
   scope :dayer3, -> { where(days: { number: 3 }).includes(:days) }
 
-  scope :men, -> { where(gender: 'M') }
-  scope :women, -> { where(gender: 'K') }
+  enum gender: [:man, :woman]
+  enum status: [:created, :pending, :delayed, :paid, :arrived]
+
 
   def send_confirmation
     @mandrill = MandrillMailer.new
