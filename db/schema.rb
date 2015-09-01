@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150831223837) do
+ActiveRecord::Schema.define(version: 20150901220044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,12 +38,6 @@ ActiveRecord::Schema.define(version: 20150831223837) do
 
   add_index "days", ["event_id"], name: "index_days_on_event_id", using: :btree
 
-  create_table "dinners", force: true do |t|
-    t.integer  "number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "event_prices", force: true do |t|
     t.decimal  "price"
     t.integer  "pricing_period_id"
@@ -66,16 +60,11 @@ ActiveRecord::Schema.define(version: 20150831223837) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "unique_id"
+    t.integer  "capacity"
   end
 
   add_index "events", ["owner_id"], name: "index_events_on_owner_id", using: :btree
   add_index "events", ["unique_id"], name: "index_events_on_unique_id", using: :btree
-
-  create_table "nights", force: true do |t|
-    t.integer  "number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "participant_days", force: true do |t|
     t.integer  "participant_id"
@@ -86,26 +75,6 @@ ActiveRecord::Schema.define(version: 20150831223837) do
 
   add_index "participant_days", ["day_id"], name: "index_participant_days_on_day_id", using: :btree
   add_index "participant_days", ["participant_id"], name: "index_participant_days_on_participant_id", using: :btree
-
-  create_table "participant_dinners", force: true do |t|
-    t.integer  "participant_id"
-    t.integer  "dinner_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "participant_dinners", ["dinner_id"], name: "index_participant_dinners_on_dinner_id", using: :btree
-  add_index "participant_dinners", ["participant_id"], name: "index_participant_dinners_on_participant_id", using: :btree
-
-  create_table "participant_nights", force: true do |t|
-    t.integer  "participant_id"
-    t.integer  "night_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "participant_nights", ["night_id"], name: "index_participant_nights_on_night_id", using: :btree
-  add_index "participant_nights", ["participant_id"], name: "index_participant_nights_on_participant_id", using: :btree
 
   create_table "participant_services", force: true do |t|
     t.integer "participant_id"
@@ -129,23 +98,11 @@ ActiveRecord::Schema.define(version: 20150831223837) do
     t.integer  "role_id"
     t.string   "gender"
     t.datetime "payment_deadline"
-    t.boolean  "archived",         default: false
-    t.boolean  "arrived",          default: false
     t.integer  "event_id"
   end
 
   add_index "participants", ["event_id"], name: "index_participants_on_event_id", using: :btree
   add_index "participants", ["role_id"], name: "index_participants_on_role_id", using: :btree
-
-  create_table "price_tables", force: true do |t|
-    t.string  "name"
-    t.integer "days"
-    t.integer "day1"
-    t.integer "day2"
-    t.integer "day3"
-    t.integer "night"
-    t.integer "dinner"
-  end
 
   create_table "pricing_periods", force: true do |t|
     t.string   "name"
@@ -158,10 +115,10 @@ ActiveRecord::Schema.define(version: 20150831223837) do
 
   create_table "roles", force: true do |t|
     t.string  "name"
-    t.integer "price_table_id"
+    t.integer "event_id"
   end
 
-  add_index "roles", ["price_table_id"], name: "index_roles_on_price_table_id", using: :btree
+  add_index "roles", ["event_id"], name: "index_roles_on_event_id", using: :btree
 
   create_table "service_groups", force: true do |t|
     t.string "name"
@@ -169,22 +126,20 @@ ActiveRecord::Schema.define(version: 20150831223837) do
 
   create_table "service_prices", force: true do |t|
     t.decimal  "price"
-    t.integer  "pricing_period_id"
     t.integer  "service_id"
     t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "service_prices", ["pricing_period_id"], name: "index_service_prices_on_pricing_period_id", using: :btree
   add_index "service_prices", ["role_id"], name: "index_service_prices_on_role_id", using: :btree
   add_index "service_prices", ["service_id"], name: "index_service_prices_on_service_id", using: :btree
 
   create_table "services", force: true do |t|
     t.string  "name"
-    t.decimal "price"
     t.integer "service_group_id"
     t.integer "event_id"
+    t.integer "limit"
   end
 
   add_index "services", ["event_id"], name: "index_services_on_event_id", using: :btree
