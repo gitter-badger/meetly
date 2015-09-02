@@ -3,6 +3,6 @@ class Day < ActiveRecord::Base
   has_many :participants, through: :participant_days
   has_many :day_prices
   belongs_to :event
-  validates :number, presence: true, uniqueness: true
+  validates :number, presence: true, uniqueness: true, numericality: { only_integer: true }
   validates :event_id, presence: true
 end
