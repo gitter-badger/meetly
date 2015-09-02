@@ -16,8 +16,8 @@ class Event < ActiveRecord::Base
   private
 
   def generate_random_id
-  begin
-    self.unique_id = SecureRandom.random_number(9999999)
-  end while self.class.exists?(unique_id: unique_id.to_s)
+    begin
+      self.unique_id = SecureRandom.random_number(999_999_9)
+    end while self.class.exists?(unique_id: unique_id.to_s)
   end
 end

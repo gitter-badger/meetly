@@ -2,7 +2,6 @@ FactoryGirl.define do
   factory :service_price do
     price 10
     service
-    role 
+    role
   end
-
 end

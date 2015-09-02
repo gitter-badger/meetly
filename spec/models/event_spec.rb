@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 describe Event do
   describe 'ActiveModel validations' do
     it 'has a valid factory' do
@@ -22,4 +23,3 @@ describe Event do
     end
   end
 end
-

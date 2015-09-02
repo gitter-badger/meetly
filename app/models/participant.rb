@@ -42,17 +42,17 @@ class Participant < ActiveRecord::Base
 
   attr_accessor :mandrill
 
-  private
+  # private
 
   def fill_attributes
-    #TODO fill cost, deadline etc.
+    # TODO: fill cost, deadline etc.
   end
 
   def calculate_price
-    #TODO 
+    # TODO: calculate the price
   end
 
   def days_include?(day_id)
-    self.days.include?(Day.find_by_number(day_id))
+    days.include?(Day.find_by_number(day_id))
   end
 end
