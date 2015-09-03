@@ -24,9 +24,8 @@ RSpec.describe ServicePrice, type: :model do
 
     it 'validates uniqueness of role in scope of service' do
       FactoryGirl.create(:service_price, service_id: 1, role_id: 1)
-      f2 = FactoryGirl.build(:service_price, service_id: 1, role_id: 1)
 
-      expect(f2).to_not be_valid
+      expect(FactoryGirl.build(:service_price, service_id: 1, role_id: 1)).to_not be_valid
     end
   end
 end
