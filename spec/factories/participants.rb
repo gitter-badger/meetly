@@ -10,5 +10,6 @@ FactoryGirl.define do
     gender :man
     event { Event.first }
     days { [FactoryGirl.build(:day), FactoryGirl.build(:day), FactoryGirl.build(:day)] }
+    status :created
   end
 end

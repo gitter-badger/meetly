@@ -5,4 +5,5 @@ class Role < ActiveRecord::Base
   has_many :service_prices
 
   validates :name, presence: true, uniqueness: { scope: :event_id }
+  validates :event_id, presence: true
 end

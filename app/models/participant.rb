@@ -10,7 +10,7 @@ class Participant < ActiveRecord::Base
   has_many :participant_services
   has_many :services, through: :participant_services
 
-  validates_presence_of :first_name, :last_name, :email, :age, :city, :phone, :role, :gender, :event_id
+  validates_presence_of :first_name, :last_name, :email, :age, :city, :phone, :role, :gender, :event_id, :status
   validates :age, numericality: { only_integer: true }
 
   before_save :fill_attributes
