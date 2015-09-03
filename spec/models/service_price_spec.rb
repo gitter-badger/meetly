@@ -10,12 +10,23 @@ RSpec.describe ServicePrice, type: :model do
       expect(FactoryGirl.create(:service_price)).to be_valid
     end
 
-    it 'is not valid without price'
+    it 'is not valid without price' do
+      expect(FactoryGirl.build(:service_price, price: nil)).to_not be_valid
+    end
 
-    it 'is not valid without role'
+    it 'is not valid without role' do
+      expect(FactoryGirl.build(:service_price, role_id: nil)).to_not be_valid
+    end
 
-    it 'is not valid without service'
+    it 'is not valid without service' do
+      expect(FactoryGirl.build(:service_price, service_id: nil)).to_not be_valid
+    end
 
-    it 'validates uniqueness of role in scope of service'
+    it 'validates uniqueness of role in scope of service' do
+      f1 = FactoryGirl.create(:service_price, service_id: 1, role_id: 1)
+      f2 = FactoryGirl.build(:service_price, service_id: 1, role_id: 1)
+
+      expect(f2).to_not be_valid
+    end
   end
 end
