@@ -12,12 +12,20 @@ RSpec.describe Service, type: :model do
       expect(FactoryGirl.create(:service)).to be_valid
     end
 
-    it 'is not valid without name'
+    it 'is not valid without name' do
+      expect(FactoryGirl.build(:service, name: nil)).to_not be_valid
+    end
 
-    it 'is not valid without event'
+    it 'is not valid without event' do
+      expect(FactoryGirl.build(:service, event_id: nil)).to_not be_valid
+    end
 
-    it 'is valid when limit is nil'
+    it 'is valid when limit is nil' do
+      expect(FactoryGirl.build(:service, limit: nil)).to be_valid
+    end
 
-    it 'is valid without service_group'
+    it 'is valid without service_group' do
+      expect(FactoryGirl.build(:service, service_group_id: nil)).to be_valid
+    end
   end
 end
