@@ -46,6 +46,7 @@ group :development, :test do
   gem 'mocha'
   gem 'rubocop'
   gem 'database_cleaner'
+  gem 'timecop', '~>0.8.0' 
 end
 
 group :development do
