@@ -12,8 +12,9 @@ class Participant < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name, :email, :age, :city, :phone, :role, :gender, :event_id, :status
   validates :age, numericality: { only_integer: true }
-
-  before_save :fill_attributes
+  validates :days, length: { minimum: 1 }
+  
+  before_save :calculate_deadline, :calculate_price
 
   scope :dayer1, -> { where(days: { number: 1 }).includes(:days) }
   scope :dayer2, -> { where(days: { number: 2 }).includes(:days) }
@@ -44,8 +45,8 @@ class Participant < ActiveRecord::Base
 
   # private
 
-  def fill_attributes
-    # TODO: fill cost, deadline etc.
+  def calculate_deadline
+    # TODO: calculate deadline
   end
 
   def calculate_price
