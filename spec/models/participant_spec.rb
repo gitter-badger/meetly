@@ -55,6 +55,10 @@ describe Participant, type: :model do
       expect(FactoryGirl.build(:participant, event_id: nil)).to_not be_valid
     end
 
+    it 'is invalid with no days' do
+      expect(FactoryGirl.build(:participant, days: [])).to_not be_valid
+    end
+
     it 'calculates expected cost for whole event' do
       u = FactoryGirl.create(:user, name: 'admin')
       e = FactoryGirl.create(:event, name: 'event', owner: u)
@@ -103,6 +107,19 @@ describe Participant, type: :model do
       expected_cost = dp1.price + dp2.price + sp1.price + sp2.price
 
       expect(p.cost).to be(expected_cost)
+    end
+
+    it 'calculates expected cost with no services' do
+      u = FactoryGirl.create(:user, name: 'admin')
+      e = FactoryGirl.create(:event, name: 'event', owner: u)
+      r = FactoryGirl.create(:role, name: 'participant')
+      pp = FactoryGirl.create(:pricing_period, name: 'first', start_date: Date.new(2015, 9, 1), end_date: Date.new(2015, 11, 11))
+      ep = FactoryGirl.create(:event_price, price: 90, pricing_period: pp, role: r, event: e)
+      d1 = FactoryGirl.create(:day, number: 1)
+      dp1 = FactoryGirl.create(:day_price, price: 40, pricing_period: pp, role: r, day: d1)
+      p = FactoryGirl.create(:participant, days: [d1, d2], services: [s1, s2])
+
+      expect(p.cost).to be(dp1.price)
     end
 
     it 'calculates expected deadline before end_date of pricing period' do
