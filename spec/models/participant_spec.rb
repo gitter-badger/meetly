@@ -60,47 +60,41 @@ describe Participant, type: :model do
     end
 
     it 'calculates expected cost for whole event' do
-      u = FactoryGirl.create(:user, name: 'admin')
-      e = FactoryGirl.create(:event, name: 'event', owner: u)
-      r = FactoryGirl.create(:role, name: 'participant')
-      pp = FactoryGirl.create(:pricing_period, name: 'first', start_date: Date.new(2015, 9, 1), end_date: Date.new(2015, 11, 11))
-      ep = FactoryGirl.create(:event_price, price: 90, pricing_period: pp, role: r, event: e)
+      db = FactoryHelper.setup_database Date.new(2015, 9, 1), Date.new(2015, 11, 11), 90
+
       sg = FactoryGirl.create(:service_group, name: 'dinners')
       s1 = FactoryGirl.create(:service, name: 'dinner1', service_group: sg)
       s2 = FactoryGirl.create(:service, name: 'dinner2', service_group: sg)
-      sp1 = FactoryGirl.create(:service_price, price: 10, role: r, service: s1)
-      sp2 = FactoryGirl.create(:service_price, price: 10, role: r, service: s2)
+      sp1 = FactoryGirl.create(:service_price, price: 10, role: db['role'], service: s1)
+      sp2 = FactoryGirl.create(:service_price, price: 10, role: db['role'], service: s2)
 
       d1 = FactoryGirl.create(:day, number: 1)
       d2 = FactoryGirl.create(:day, number: 2)
-      dp1 = FactoryGirl.create(:day_price, price: 40, pricing_period: pp, role: r, day: d1)
-      dp2 = FactoryGirl.create(:day_price, price: 60, pricing_period: pp, role: r, day: d2)
+      dp1 = FactoryGirl.create(:day_price, price: 40, pricing_period: db['pricing_period'], role: db['role'], day: d1)
+      dp2 = FactoryGirl.create(:day_price, price: 60, pricing_period: db['pricing_period'], role: db['role'], day: d2)
 
       p = FactoryGirl.create(:participant, days: [d1, d2], services: [s1, s2])
 
-      expected_cost = ep.price + sp1.price + sp2.price
+      expected_cost = db['event_price'].price + sp1.price + sp2.price
 
       expect(p.cost).to be(expected_cost)
     end
 
     it 'calculates expected cost for single days' do
-      u = FactoryGirl.create(:user, name: 'admin')
-      e = FactoryGirl.create(:event, name: 'event', owner: u)
-      r = FactoryGirl.create(:role, name: 'participant')
-      pp = FactoryGirl.create(:pricing_period, name: 'first', start_date: Date.new(2015, 9, 1), end_date: Date.new(2015, 11, 11))
-      ep = FactoryGirl.create(:event_price, price: 90, pricing_period: pp, role: r, event: e)
+      db = FactoryHelper.setup_database Date.new(2015, 9, 1), Date.new(2015, 11, 11), 90
+
       sg = FactoryGirl.create(:service_group, name: 'dinners')
       s1 = FactoryGirl.create(:service, name: 'dinner1', service_group: sg)
       s2 = FactoryGirl.create(:service, name: 'dinner2', service_group: sg)
-      sp1 = FactoryGirl.create(:service_price, price: 10, role: r, service: s1)
-      sp2 = FactoryGirl.create(:service_price, price: 10, role: r, service: s2)
+      sp1 = FactoryGirl.create(:service_price, price: 10, role: db['role'], service: s1)
+      sp2 = FactoryGirl.create(:service_price, price: 10, role: db['role'], service: s2)
 
       d1 = FactoryGirl.create(:day, number: 1)
       d2 = FactoryGirl.create(:day, number: 2)
       d3 = FactoryGirl.create(:day, number: 3)
-      dp1 = FactoryGirl.create(:day_price, price: 40, pricing_period: pp, role: r, day: d1)
-      dp2 = FactoryGirl.create(:day_price, price: 60, pricing_period: pp, role: r, day: d2)
-      dp3 = FactoryGirl.create(:day_price, price: 60, pricing_period: pp, role: r, day: d3)
+      dp1 = FactoryGirl.create(:day_price, price: 40, pricing_period: db['pricing_period'], role: db['role'], day: d1)
+      dp2 = FactoryGirl.create(:day_price, price: 60, pricing_period: db['pricing_period'], role: db['role'], day: d2)
+      dp3 = FactoryGirl.create(:day_price, price: 60, pricing_period: db['pricing_period'], role: db['role'], day: d3)
 
       p = FactoryGirl.create(:participant, days: [d1, d2], services: [s1, s2])
 
@@ -110,26 +104,18 @@ describe Participant, type: :model do
     end
 
     it 'calculates expected cost with no services' do
-      u = FactoryGirl.create(:user, name: 'admin')
-      e = FactoryGirl.create(:event, name: 'event', owner: u)
-      r = FactoryGirl.create(:role, name: 'participant')
-      pp = FactoryGirl.create(:pricing_period, name: 'first', start_date: Date.new(2015, 9, 1), end_date: Date.new(2015, 11, 11))
-      ep = FactoryGirl.create(:event_price, price: 90, pricing_period: pp, role: r, event: e)
+      db = FactoryHelper.setup_database Date.new(2015, 9, 1), Date.new(2015, 11, 11), 90
       d1 = FactoryGirl.create(:day, number: 1)
-      dp1 = FactoryGirl.create(:day_price, price: 40, pricing_period: pp, role: r, day: d1)
-      p = FactoryGirl.create(:participant, days: [d1, d2], services: [s1, s2])
+      dp1 = FactoryGirl.create(:day_price, price: 40, pricing_period: db['pricing_period'], role: db['role'], day: d1)
+      p = FactoryGirl.create(:participant, days: [d1], services: [])
 
       expect(p.cost).to be(dp1.price)
     end
 
     it 'calculates expected deadline before end_date of pricing period' do
-      u = FactoryGirl.create(:user, name: 'admin')
-      e = FactoryGirl.create(:event, name: 'event', owner: u)
-      r = FactoryGirl.create(:role, name: 'participant')
-      pp = FactoryGirl.create(:pricing_period, name: 'first', start_date: Date.new(2015, 9, 1), end_date: Date.new(2015, 11, 11))
-      ep = FactoryGirl.create(:event_price, price: 90, pricing_period: pp, role: r, event: e)
+      db = FactoryHelper.setup_database Date.new(2015, 9, 1), Date.new(2015, 11, 11), 90
       d1 = FactoryGirl.create(:day, number: 1)
-      dp1 = FactoryGirl.create(:day_price, price: 40, pricing_period: pp, role: r, day: d1)
+      dp1 = FactoryGirl.create(:day_price, price: 40, pricing_period: db['pricing_period'], role: db['role'], day: d1)
 
       Timecop.travel(Time.parse('2015-10-01'))
       p = FactoryGirl.create(:participant, days: [d1])
@@ -137,13 +123,9 @@ describe Participant, type: :model do
     end
 
     it 'calculates expected deadline after end_date of pricing period' do
-      u = FactoryGirl.create(:user, name: 'admin')
-      e = FactoryGirl.create(:event, name: 'event', owner: u)
-      r = FactoryGirl.create(:role, name: 'participant')
-      pp = FactoryGirl.create(:pricing_period, name: 'first', start_date: Date.new(2015, 9, 1), end_date: Date.new(2015, 11, 11))
-      ep = FactoryGirl.create(:event_price, price: 90, pricing_period: pp, role: r, event: e)
+      db = FactoryHelper.setup_database Date.new(2015, 9, 1), Date.new(2015, 11, 11), 90
       d1 = FactoryGirl.create(:day, number: 1)
-      dp1 = FactoryGirl.create(:day_price, price: 40, pricing_period: pp, role: r, day: d1)
+      dp1 = FactoryGirl.create(:day_price, price: 40, pricing_period: db['pricing_period'], role: db['role'], day: d1)
 
       Timecop.travel(Time.parse('2015-11-10'))
       p = FactoryGirl.create(:participant, days: [d1])

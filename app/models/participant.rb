@@ -13,7 +13,7 @@ class Participant < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email, :age, :city, :phone, :role, :gender, :event_id, :status
   validates :age, numericality: { only_integer: true }
   validates :days, length: { minimum: 1 }
-  
+
   before_save :calculate_deadline, :calculate_price
 
   scope :dayer1, -> { where(days: { number: 1 }).includes(:days) }
