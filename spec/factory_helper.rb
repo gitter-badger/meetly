@@ -24,8 +24,10 @@ class FactoryHelper
     services = []
     (1..services_count).each do |i|
       service_pack = {}
-      service_pack[:service] = FactoryGirl.create(:service, name: single_name + i.to_s, service_group: sg)
-      service_pack[:service_price] = FactoryGirl.create(:service_price, price: price, role: role, service: service_pack[:service])
+      s = FactoryGirl.create(:service, name: single_name + i.to_s, service_group: sg)
+      sp = FactoryGirl.create(:service_price, price: price, role: role, service: s)
+      service_pack[:service] = s
+      service_pack[:service_price] = sp
       services.push service_pack
     end
     services

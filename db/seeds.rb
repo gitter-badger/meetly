@@ -5,117 +5,81 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
+puts "Clearing DB..."
 Role.destroy_all
-Participant.unscoped.destroy_all
+Participant.destroy_all
 Day.destroy_all
+DayPrice.destroy_all
 Event.destroy_all
+EventPrice.destroy_all
 User.destroy_all
 Service.destroy_all
+ServicePrice.destroy_all
 ServiceGroup.destroy_all
 PricingPeriod.destroy_all
 
 u = User.create!(name: 'admin', email: 'admin@poczatek.org', password: 'pcztk2015')
+puts "User #{u.name} craeted!"
+e = Event.create!(name: 'Poczatek15/16', 
+						start_date: Date.new(2015,12,29), end_date: Date.new(2015, 12,31), owner: u)
+puts "Event #{e.name} created!"
 
-# e = Event.create!(name: 'Poczatek15/16', 
-# 						start_date: Date.new(2015,12,29), end_date: Date.new(2015, 12,31), owner: u)
+pp = PricingPeriod.create!(name: 'turboprzedplata', event: e, start_date: Date.new(2015, 9, 1), end_date: Date.new(2015, 11, 11))
+puts "PricingPeriod #{pp.name} created!"
 
-# pp = PricingPeriod.create!(name: 'turboprzedplata', event: e, start_date: Date.new(2015, 10, 1), end_date: Date.new(2015, 11, 11))
+r = Role.create!(
+  name: 'Uczestnik',
+  event_id: e.id
+  )
+puts "Role #{r.name} created!"
 
-# sg = ServiceGroup.create!(name: 'Obiady')
-# s1 = Service.create!(name: 'Obiad1', event: e, service_group: sg, price: 10)
-# s2 = Service.create!(name: 'Obiad2', event: e, service_group: sg, price: 10)
+ep = EventPrice.create!(pricing_period: pp, role: r, event: e, price: 140)
+puts "Event price created!"
 
-# d1 = Day.create!(number: 1, event: e)
-# d2 = Day.create!(number: 2, event: e)
-# d3 = Day.create!(number: 3, event: e)
-
-# n1 = Night.create!(number: 1)
-# n2 = Night.create!(number: 2)
-
-# dn1=Dinner.create!(number:1)
-# dn2 = Dinner.create!(number:2)
-
-# pt = PriceTable.create!(
-# 	name: 'Podstawowa',
-# 	days: 99,
-# 	day1: 20,
-# 	day2: 40,
-# 	day3: 60,
-# 	night: 10,
-# 	dinner: 15
-# 	)
-
-# pt2 = PriceTable.create!(
-#     name: 'PodstawowaPo5',
-#     days: 120,
-#     day1: 20,
-#     day2: 40,
-#     day3: 60,
-#     night: 10,
-#     dinner: 15
-# )
-
-
-# ru = Role.create!(
-# 	name: 'Uczestnik',
-# 	price_table: pt
-# 	)
-
-# ro = Role.create!(
-# 	name: 'Organizator',
-# 	price_table: pt
-# 	)
-
-# Participant.create!([
-# 		{
-# 			first_name: 'Bartek',
-# 			last_name: 'Szczepanski',
-#       age: 24,
-#       email: 'szczepan97@gmail.com',
-#       phone: '664752055',
-# 			role: ro,
-# 			city: 'Wroclaw',
-# 			nights: [],
-# 			dinners: [dn1, dn2],
-# 			days: [d1, d2, d3],
-#       gender: 'M',
-#       event: e,
-#       services: [s1, s2]
-# 		}
-# 	])
-
-# Participant.create!([
-# 		{
-# 			first_name: 'Bartek1',
-# 			last_name: 'Szczepanski',
-#       age: 24,
-#       email: 'szczepan97@gmail.com',
-#       phone: '664752055',
-# 			role: ro,
-# 			city: 'Wroclaw',
-# 			nights: [],
-# 			dinners: [dn1, dn2],
-# 			days: [d1, d2, d3],
-#       gender: 'M',
-#       event: e
-# 		}
-# 	])
-
-# Participant.create!([
-# 		{
-# 			first_name: 'Bartek2',
-# 			last_name: 'Szczepanski',
-#       age: 24,
-#       email: 'szczepan97@gmail.com',
-#       phone: '664752055',
-# 			role: ro,
-# 			city: 'Wroclaw',
-# 			nights: [],
-# 			dinners: [dn1, dn2],
-# 			days: [d1, d2, d3],
-#       gender: 'M',
-#       event: e
-# 		}
-# 	])
-
+sg = ServiceGroup.create!(name: 'Obiady')
+s1 = Service.create!(name: 'Obiad1', event: e, service_group: sg)
+s2 = Service.create!(name: 'Obiad2', event: e, service_group: sg)
+sp1 = ServicePrice.create!(price: 10, role: r, service: s1)
+sp2 = ServicePrice.create!(price: 10, role: r, service: s2)
+puts "Services #{sg.name} created!"
+d1 = Day.create!(number: 1, event: e)
+d2 = Day.create!(number: 2, event: e)
+d3 = Day.create!(number: 3, event: e)
+dp1 = DayPrice.create!(price: 40, pricing_period: pp, role: r, day: d1)
+dp2 = DayPrice.create!(price: 60, pricing_period: pp, role: r, day: d2)
+dp3 = DayPrice.create!(price: 60, pricing_period: pp, role: r, day: d3)
+puts "Days created!"
+Participant.create!([
+		{
+			first_name: 'Bartek',
+			last_name: 'Szczepanski',
+      age: 24,
+      email: 'szczepan97@gmail.com',
+      phone: '664752055',
+			role: r,
+			city: 'Wroclaw',
+			days: [d1, d2, d3],
+      gender: 'man',
+      event: e,
+      services: [s1, s2],
+      status: 'created'
+		}
+	])
+puts "Bartek created!"
+Participant.create!([
+    {
+      first_name: 'Dawid',
+      last_name: 'Leszczynski',
+      age: 24,
+      email: 'davebream@gmail.com',
+      phone: '555555555',
+      role: r,
+      city: 'Wroclaw',
+      days: [d1, d2],
+      gender: 'man',
+      event: e,
+      services: [s1],
+      status: 'created'
+    }
+  ])
+puts "Dawid created!"

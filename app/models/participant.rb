@@ -1,6 +1,4 @@
 class Participant < ActiveRecord::Base
-  default_scope { where(archived: false) }
-
   belongs_to :role
   belongs_to :event
 
@@ -14,11 +12,7 @@ class Participant < ActiveRecord::Base
   validates :age, numericality: { only_integer: true }
   validates :days, length: { minimum: 1 }
 
-  before_save :calculate_deadline, :calculate_price
-
-  scope :dayer1, -> { where(days: { number: 1 }).includes(:days) }
-  scope :dayer2, -> { where(days: { number: 2 }).includes(:days) }
-  scope :dayer3, -> { where(days: { number: 3 }).includes(:days) }
+  before_save :calculate_deadline, :calculate_cost
 
   enum gender: [:man, :woman]
   enum status: [:created, :pending, :delayed, :paid, :arrived]
@@ -46,11 +40,40 @@ class Participant < ActiveRecord::Base
   # private
 
   def calculate_deadline
-    # TODO: calculate deadline
+    logger.debug "Started deadline calculation..."
+    current_period = PricingPeriod.current_period
+    payment_time = 7
+    payment_deadline = Time.now.to_date + payment_time.days
+    if payment_deadline > current_period.end_date
+      payment_deadline = current_period.end_date.to_date
+    end
+    self.payment_deadline = payment_deadline
+    logger.debug "Finished deadline calculation. Deadline: #{payment_deadline}"
   end
 
-  def calculate_price
-    # TODO: calculate the price
+  def calculate_cost
+    logger.debug "Started cost calculation..."
+    current_period = PricingPeriod.current_period
+    cost = 0
+    services.each do |service|
+      logger.debug "Adding service #{service.name} cost. For role: #{role_id}"
+      service_price = service.service_prices.select { |sp| sp.role_id == role_id }
+      cost += service_price[0].price
+    end
+    event = Event.find(event_id)
+    if days.length == event.days.length
+      logger.debug "Adding event price for role: #{role_id} and pricing_period: #{current_period.id}"
+      event_price = event.event_prices.select { |ep| ep.role_id == role_id && ep.pricing_period_id == current_period.id }
+      cost += event_price[0].price
+    else
+      days.each do |day|
+        logger.debug "Adding day price for role: #{role_id} and pricing_period: #{current_period.id}"
+        day_price = day.day_prices.select { |dp| dp.role_id == role_id && dp.pricing_period_id == current_period.id }
+        cost += day_price[0].price
+      end
+    end
+    self.cost = cost
+    logger.debug "Finished cost calculation. Cost #{cost}"
   end
 
   def days_include?(day_id)
