@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   match '/receive_form' => 'participants#receive_form', via: :get, defaults: {format: 'json'}
   match '/role_price_table' => 'roles#role_price_table', via: :get, defaults: {format: 'json'}
 
+  post '/participant_form' => 'participants#receive_form', defaults: { format: 'json' }
+
   match '/form_data' => 'events#form_data', via: :get, defaults: { format: 'json' }
   get '/archived', to: 'participants#show_archived'
 
