@@ -61,8 +61,7 @@ Participant.create!([
 			days: [d1, d2, d3],
       gender: 'man',
       event: e,
-      services: [s1, s2],
-      status: 'created'
+      services: [s1, s2]
 		}
 	])
 puts "Bartek created!"
@@ -78,8 +77,7 @@ Participant.create!([
       days: [d1, d2],
       gender: 'man',
       event: e,
-      services: [s1],
-      status: 'created'
+      services: [s1]
     }
   ])
 puts "Dawid created!"
