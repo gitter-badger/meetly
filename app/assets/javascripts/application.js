@@ -18,23 +18,19 @@
 //= require turbolinks
 //= require_tree .
 
-'use strict';
-
-;(function($) {
-
-  $(document).ready(function(){
-
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
-
-    $(".sidebar-nav").metisMenu();
-
-    setTimeout(function(){  $(".loading-mask").fadeOut( "fast", function() {
-      $(".loading-mask").hide();
-    }) }, 1500);
+var ready;
+ready = function() {
+  $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
   });
 
-})(jQuery);
+  $(".sidebar-nav").metisMenu();
+
+  setTimeout(function(){  $(".loading-mask").fadeOut( "fast", function() {
+    $(".loading-mask").hide();
+  }) }, 1500);
+};
+$(document).ready(ready);
+$(document).on('page:load', ready);
 

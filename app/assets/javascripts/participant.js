@@ -1,4 +1,5 @@
-$(document).ready(function(){
+var ready;
+ready = function() {
   $('#participants').DataTable( {
     responsive: true,
     searching: true,
@@ -34,4 +35,6 @@ $(document).ready(function(){
       }
     }
   });
-});
+};
+$(document).ready(ready);
+$(document).on('page:load', ready);
