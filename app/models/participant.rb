@@ -11,7 +11,7 @@ class Participant < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email, :age, :city, :phone, :role, :gender, :event_id, :status
   validates :age, numericality: { only_integer: true }
   validates :days, length: { minimum: 1 }
-
+  validates :email, uniqueness: { scope: [:first_name, :last_name] }
   before_save :calculate_deadline, :calculate_cost
 
   enum gender: [:man, :woman]

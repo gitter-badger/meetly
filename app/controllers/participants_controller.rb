@@ -191,53 +191,41 @@ class ParticipantsController < ApplicationController
   def receive_form
     logger.info "Received participant form request. Params: #{params}"
     logger.info "Request body: #{request.body.read}"
-    participant_param = params[:participant]
+    participant_param = participant_params
     logger.info "Participant: #{participant_param}"
     if participant_param.nil? || participant_param.empty?
       logger.info "Request has no participant in its parameters. Request failed."
-      respond_with( 'error: "No participant in request parameters."', status: :bad_request, location: @participant ) do |format|
+      respond_with('error: "No participant in request parameters."', status: :bad_request, location: @participant) do |format|
         format.json
       end
       return
     else
       event = Event.find_by(name: params[:event])
       if event
+        @participant = Participant.new(participant_param)
+        @participant.role = Role.find_by(name: "Uczestnik")
+        @participant.event = event
+        if @participant.save
+        else
+          logger.info "Saving of participant failed. Responding with 601."
+          respond_with('error: "Participant invalid."', status: 601, location: nil) do |format|
+            format.json
+          end
+          return
+        end
       else
         logger.info "Event provided in request not found."
-        respond_with( 'error: "Event provided in request not found."', status: :not_found, location: @participant ) do |format|
+        respond_with('error: "Event provided in request not found."', status: :not_found, location: @participant) do |format|
           format.json
         end
         return
       end
     end
 
-
     respond_with({ first_name: params.permit(:first_name)[:first_name] }, status: :internal_server_error, location: @participant) do |format|
       format.json
     end
-
-
-    # render status: :not_implemented, json: {response: "failed"}
-
-    # respond_with(nil, status: :internal_server_error) do |format|
-    #   format.json { response: "error"}
-    # end
-
-    # respond_to do |format|
-    #   format.json { :not_implemented}
-    # end
-    # @participant = create_participant
-    # if @participant.save!
-    #   @participant.send_confirmation
-    #   respond_with @participant.to_json, status: 201, callback: params['callback'], content_type: "application/javascript"
-    # else
-    #   puts @participant.errors.full_messages
-    #   respond_with @participant.errors.to_json, status: 422, callback: params['callback'], content_type: "application/javascript"
-    # end
   end
-
-
-
 
   def resend_confirmation
     @participant = Participant.find(params[:id])
@@ -298,5 +286,11 @@ class ParticipantsController < ApplicationController
     headers['Access-Control-Allow-Methods'] = 'GET, POST, PATCH, PUT, DELETE, OPTIONS, HEAD'
     headers['Access-Control-Allow-Headers'] = '*,x-requested-with,Content-Type,If-Modified-Since,If-None-Match'
     headers['Access-Control-Max-Age'] = '86400'
+  end
+
+  def participant_params
+    params.require(:participant).permit(:first_name, :last_name, :email, :gender, :phone, :city, :days, :age)
+  rescue ActionController::ParameterMissing => e
+    nil
   end
 end
