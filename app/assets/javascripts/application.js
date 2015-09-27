@@ -13,21 +13,17 @@
 //= require jquery
 //= require bootstrap
 //= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require dataTables/extras/dataTables.responsive
 //= require turbolinks
 //= require_tree .
 
 'use strict';
 
-// var $ = require('jquery');
-// var bootstrap = require('bootstrap');
-var metismenu = require('metismenu');
-
-// var assets = require('./assets');
-// var components = require('./components');
-
 ;(function($) {
 
   $(document).ready(function(){
+
     $("#menu-toggle").click(function(e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");

@@ -158,3 +158,41 @@ table.dataTable > tbody > tr.child span.dtr-title {
   min-width: 75px;
   font-weight: bold;
 }
+
+// Custom datatables style
+
+.dataTables_wrapper {
+  .row:first-child {
+    margin-bottom: 10px;
+  }
+}
+
+// Custom tables style
+
+table.table {
+  > tbody {
+    > tr {
+      > td {
+        vertical-align: middle;
+        &.boolean {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+div.dataTables_filter {
+  float: right;
+}
+
+.boolean-icon {
+  font-size: 26px;
+}
+
+td.status {
+  text-align: center;
+  .status-label {
+    font-size: 14px;
+  }
+}
