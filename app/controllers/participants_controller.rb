@@ -6,6 +6,12 @@ class ParticipantsController < ApplicationController
   protect_from_forgery with: :exception
   respond_to :json, :js
 
+  def index
+    @participants = event.participants.order(:id)
+    @days = event.days.sort
+    @services = event.services.sort
+  end
+
   def create
     parameters = params.require(:participant).permit(:arrived, :gender, :paid, :first_name, :last_name, :age, :city, :email, :phone)
 
@@ -112,10 +118,6 @@ class ParticipantsController < ApplicationController
     end
   end
 
-  def index
-    @participants = Participant.includes(:days).includes(:role).all
-  end
-
   def destroy
     @participant = Participant.find(params[:id])
     @participant.archived = true
@@ -192,11 +194,11 @@ class ParticipantsController < ApplicationController
     participant_param = params[:participant]
     logger.info "Participant: #{participant_param}"
     if participant_param.nil? || participant_param.empty?
-      logger.info "Request has no participant in its parameters. Request failed." 
+      logger.info "Request has no participant in its parameters. Request failed."
       respond_with( 'error: "No participant in request parameters."', status: :bad_request, location: @participant ) do |format|
         format.json
       end
-      return 
+      return
     else
       event = Event.find_by(name: params[:event])
       if event
@@ -286,6 +288,10 @@ class ParticipantsController < ApplicationController
   end
 
   private
+
+  def event
+    @event ||= Event.find_by(unique_id: params[:event_id].to_s)
+  end
 
   def set_headers
     headers['Access-Control-Allow-Origin'] = 'blu-soft.pl'

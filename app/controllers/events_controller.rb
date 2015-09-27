@@ -2,6 +2,10 @@ class EventsController < ApplicationController
   layout 'event_list'
   respond_to :json
 
+  def index
+    @events = Event.all
+  end
+
   def form_data
     logger.debug "Received request for form_data for event #{query_parameters[:event]} for role #{query_parameters[:role]}"
     role = Role.find_by(name: query_parameters[:role])
