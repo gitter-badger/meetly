@@ -7,6 +7,6 @@ class PricingPeriod < ActiveRecord::Base
   def self.current_period
     current_date = Time.now.to_date
     current_period = PricingPeriod.all.select { |pp| current_date < pp.end_date && current_date >= pp.start_date }
-    current_period[0]
+    current_period.first
   end
 end
