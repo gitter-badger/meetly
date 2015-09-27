@@ -6,6 +6,10 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
+  def show
+    redirect_to event_participants_path(params[:id])
+  end
+
   def form_data
     logger.debug "Received request for form_data for event #{query_parameters[:event]} for role #{query_parameters[:role]}"
     role = Role.find_by(name: query_parameters[:role])
