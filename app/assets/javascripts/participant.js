@@ -1,7 +1,17 @@
 var ready;
 ready = function() {
   $('#participants').DataTable( {
-    responsive: true,
+    responsive: {
+            details: {
+                type: 'column',
+                target: 'tr'
+            }
+        },
+        columnDefs: [ {
+            className: 'control',
+            orderable: false,
+            targets:   0
+        } ],
     searching: true,
     ordering:  true,
     sPaginationType: "full_numbers",

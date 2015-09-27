@@ -7,6 +7,7 @@
           table#participants.table.table-striped.table-bordered.table-hover.display.responsive.no-wrap cellspacing="0" width="100%" data-order='[[ 1, "asc" ]]' data-page-length='25'
             thead
               tr
+                th
                 th Id
                 th Imię
                 th Nazwisko
@@ -25,6 +26,7 @@
                 th Status
             tfoot
               tr
+                th
                 th Id
                 th Imię
                 th Nazwisko
@@ -44,6 +46,7 @@
             tbody
               - @participants.each do |participant|
                 tr
+                  td
                   td= participant.id
                   td= participant.first_name
                   td= participant.last_name

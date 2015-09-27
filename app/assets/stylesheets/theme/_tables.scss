@@ -50,44 +50,88 @@ table.fixedHeader-locked {
 
 // Responsive
 
-table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child,
-table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child {
-  position: relative;
-  padding-left: 30px;
-  cursor: pointer;
-}
-table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before,
-table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
-  top: 50%;
-  left: 6px;
-  margin-top: -10px;
-  display: block;
-  position: absolute;
-  color: $brand-info;
-  text-align: center;
-  line-height: 20px;
-  font-size: 20px;
-  box-sizing: content-box;
-  content: '';
-  font-family: Material-Design-Iconic-Font;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: normal;
-  font-stretch: normal;
-  line-height: 1;
-}
+  // Participants table toggle details buttons
+
+  table.dataTable.dtr-column {
+    > tbody {
+      > tr {
+
+        > td.control:before,
+        > th.control:before {
+          border: none;
+          box-shadow: none;
+          background: none;
+          background-color: transparent;
+          content: '';
+          color: $brand-success;
+          font-family: Material-Design-Iconic-Font;
+          font-size: 20px;
+          font-style: normal;
+          font-variant: normal;
+          font-weight: normal;
+          font-stretch: normal;
+          line-height: 1;
+          top: 50%;
+          left: 50%;
+          margin-top: -8px;
+          margin-left: -9px;
+        }
+
+        &.child {
+          td {
+            &.child {
+              ul li {
+                height: 40px;
+                display: table-row;
+                span {
+                  min-height: 20px;
+                  line-height: 20px;
+                  display: table-cell;
+                  padding: 8px;
+                  &.dtr-title {
+                    font-size: 13px;
+                    font-weight: 600;
+                    vertical-align: middle;
+                  }
+
+                  &.dtr-data {
+                    font-size: 13px;
+                    vertical-align: middle;
+
+                    i.boolean-icon, label {
+                      font-size: 20px;
+                      vertical-align: middle;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  table.dataTable.dtr-column > tbody > tr.parent td.control:before,
+  table.dataTable.dtr-column > tbody > tr.parent th.control:before {
+    background: none;
+    background-color: transparent;
+    content: '';
+    color: $brand-danger;
+  }
+
+  // End
+
 table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child.dataTables_empty:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child.dataTables_empty:before {
   display: none;
 }
-table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before,
-table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
-  content: '';
-  color: $brand-info;
-}
+
 table.dataTable.dtr-inline.collapsed > tbody > tr.child td:before {
   display: none;
 }
+
 table.dataTable.dtr-inline.collapsed.compact > tbody > tr > td:first-child,
 table.dataTable.dtr-inline.collapsed.compact > tbody > tr > th:first-child {
   padding-left: 27px;
@@ -106,31 +150,7 @@ table.dataTable.dtr-column > tbody > tr > th.control {
   position: relative;
   cursor: pointer;
 }
-table.dataTable.dtr-column > tbody > tr > td.control:before,
-table.dataTable.dtr-column > tbody > tr > th.control:before {
-  top: 50%;
-  left: 50%;
-  height: 16px;
-  width: 16px;
-  margin-top: -10px;
-  margin-left: -10px;
-  display: block;
-  position: absolute;
-  color: white;
-  border: 2px solid white;
-  border-radius: 16px;
-  text-align: center;
-  line-height: 14px;
-  box-shadow: 0 0 3px #444;
-  box-sizing: content-box;
-  content: '+';
-  background-color: $brand-success;
-}
-table.dataTable.dtr-column > tbody > tr.parent td.control:before,
-table.dataTable.dtr-column > tbody > tr.parent th.control:before {
-  content: '-';
-  background-color: #d33333;
-}
+
 table.dataTable > tbody > tr.child {
   padding: 0.5em 1em;
 }
@@ -178,6 +198,18 @@ table.table {
           text-align: center;
         }
       }
+    }
+  }
+
+  td.responsive-details {
+    padding: 6px;
+    vertical-align: middle;
+
+    .boolean-icon {
+      font-size: 20px;
+      line-height: 100%;
+      display: inline-block;
+      vertical-align: middle;
     }
   }
 }
