@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  layout 'event_list'
   respond_to :json
 
   def form_data

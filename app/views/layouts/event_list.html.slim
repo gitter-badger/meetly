@@ -1,0 +1,8 @@
+doctype html
+html
+  head
+    == render 'shared/head'
+  body
+    == render 'shared/header/events_list_header'
+    .container.event-list-container
+      == yield
