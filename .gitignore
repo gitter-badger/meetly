@@ -36,6 +36,7 @@ Test-Form/
 Gemfile.lock
 .env
 tmp/
+tmp
 
 #Log
 *.log
