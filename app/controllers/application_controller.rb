@@ -3,9 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :null_session
 
-  helper_method :current_person
-  helper_method :current_account
-  helper_method :user_signed_in?
+  helper_method :current_person, :current_account, :user_signed_in?
+
+  def redirect_to_events_list
+    redirect_to events_path
+  end
 
   private
 

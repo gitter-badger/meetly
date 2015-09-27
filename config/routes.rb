@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  
   # TODO: review these resources and uncomment them
   # resources :participants do
   #   patch :edit_payment, on: :member, defaults: {format: 'js'}
@@ -14,12 +13,18 @@ Rails.application.routes.draw do
   #   patch :set_arrived, on: :member, defaults: {format: 'js'}
   # end
 
-  get '/participant_form' => 'events#form_data', defaults: { format: 'json'}
-  post '/participant_form' => 'participants#receive_form', defaults: { format: 'json' }
+  resources :events do
+    resources :participants
+  end
+
+  # get 'participants', to: 'participants#index', as: :participants
+
+  get '/participant_form', to: 'events#form_data', defaults: { format: 'json'}
+  post '/participant_form', to: 'participants#receive_form', defaults: { format: 'json' }
 
   get 'login', to: 'sessions#new', as: :login
   post 'login', to: 'sessions#create', as: :session
   delete 'logout', to: 'sessions#destroy', as: :logout
 
-  root to: 'participants#index'
+  root to: 'application#redirect_to_events_list'
 end
