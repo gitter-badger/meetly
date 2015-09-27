@@ -1,11 +1,11 @@
 doctype html
 html
-head
-  == render 'shared/head'
-body
-  == render 'shared/header'
-  #wrapper
-    == render 'shared/sidebar'
-    #page-content-wrapper
-      .container-fluid
-        == yield
+  head
+    == render 'shared/head'
+  body
+    == render 'shared/header/event_header'
+    #wrapper
+      == render 'shared/sidebar'
+      #page-content-wrapper
+        .container-fluid
+          == yield

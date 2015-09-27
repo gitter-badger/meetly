@@ -1,0 +1,13 @@
+nav#header.navbar.navbar-custom.navbar-fixed-top
+    .navbar-header
+      a.navbar-brand href="#" meetly
+      a#menu-toggle.hamburger.pull-right href="#"
+        i.zmdi.zmdi-hc-hw 
+    .navbar-content
+      .container-fluid
+          ul.nav.navbar-nav.navbar-left
+            li
+              h4.navbar-text.event-name
+                i.zmdi.zmdi-hc-hw.event-icon 
+                span #{Event.find_by(unique_id: params[:event_id].to_s).name}
+          == render 'shared/header/user_options'
