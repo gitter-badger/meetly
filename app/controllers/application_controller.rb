@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
     User.find_by(id: session[:user_id])
   end
 
+  def current_person
+    User.find_by(id: session[:user_id]).name
+  end
+
   def authorize_user
     return unless current_user.nil?
     session[:return_to] = request.url
