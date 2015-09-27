@@ -205,25 +205,39 @@ class ParticipantsController < ApplicationController
         @participant = Participant.new(participant_param)
         @participant.role = Role.find_by(name: "Uczestnik")
         @participant.event = event
+        days = []
+        services = []
+
+        if params[:participant].key?("days")
+          params[:participant][:days].each do |paramDay|
+            days.push Day.find_by_number(paramDay["number"])
+          end
+          @participant.days = days
+        end
+
+        if params[:participant].key?("services")
+          params[:participant][:services].each do |paramService|
+            services.push Service.find_by_name(paramService["name"])
+          end
+          @participant.services = services
+        end
+
         if @participant.save
-        else
-          logger.info "Saving of participant failed. Responding with 601."
-          respond_with('error: "Participant invalid."', status: 601, location: nil) do |format|
+          respond_with(@participant, status: :created, location: nil) do |format|
             format.json
           end
-          return
+        else
+          logger.info "Saving of participant failed. Responding with 601."
+          respond_with("error: #{@participant.errors.to_a.join(', ')}", status: 601, location: nil) do |format|
+            format.json
+          end
         end
       else
         logger.info "Event provided in request not found."
-        respond_with('error: "Event provided in request not found."', status: :not_found, location: @participant) do |format|
+        respond_with('error: "Event provided in request not found."', status: :not_found, location: nil) do |format|
           format.json
         end
-        return
       end
-    end
-
-    respond_with({ first_name: params.permit(:first_name)[:first_name] }, status: :internal_server_error, location: @participant) do |format|
-      format.json
     end
   end
 
@@ -289,7 +303,7 @@ class ParticipantsController < ApplicationController
   end
 
   def participant_params
-    params.require(:participant).permit(:first_name, :last_name, :email, :gender, :phone, :city, :days, :age)
+    params.require(:participant).permit(:first_name, :last_name, :email, :gender, :phone, :city, :age, days: [], services: [])
   rescue ActionController::ParameterMissing => e
     nil
   end

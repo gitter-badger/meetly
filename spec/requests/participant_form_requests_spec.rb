@@ -33,7 +33,44 @@ RSpec.describe "participant_form requests", type: :request do
     expect(response).to have_http_status(:not_found)
   end
 
-  it "responds with created and creates participant on valid participant request"
+  it "responds with created and creates participant on valid participant request" do
+    participant = {
+      "first_name": "Chris",
+      "last_name": "Pratt",
+      "email": "CP@hollywood.pl",
+      "age": 35,
+      "city": "Wroclaw",
+      "phone": "222222222",
+      "gender": "man",
+      "days": [{ "number": 1 }, { "number": 2 }],
+      "services": [{ "name": "Obiad1" }]
+    }
+
+    params = { event: "Poczatek", participant: participant }
+
+    post "participant_form", params.to_json, 'CONTENT_TYPE': 'application/json', 'ACCEPT': 'application/json'
+
+    expect(response.status).to eq(201)
+
+    participant_response = {
+      "first_name": "Chris",
+      "last_name": "Pratt",
+      "email": "CP@hollywood.pl",
+      "age": 35,
+      "city": "Wroclaw",
+      "phone": "222222222",
+      "cost": 110.0,
+      "paid": 0.0,
+      "gender": "man",
+      "event_id": Event.find_by(name: "Poczatek").id,
+      "status": "created",
+      "role_id": Role.find_by(name: "Uczestnik").id
+    }
+
+    participant_response = eval(response.body).merge(participant_response)
+
+    expect(eval(response.body)).to eq(participant_response)
+  end
 
   it "responds with 601 when participant violates unique constraint" do
     participant = {
@@ -58,13 +95,14 @@ RSpec.describe "participant_form requests", type: :request do
       "age": 24,
       "city": "Wroclaw",
       "phone": "665554445",
-      "gender": "man"
+      "gender": "man",
+      "days": [{ number: 1 }]
     } }
 
     post "participant_form", params.to_json, 'CONTENT_TYPE': 'application/json', 'ACCEPT': 'application/json'
 
     expect(response.status).to eq(601)
-    expect(response.body).to eq('error: "Participant invalid."')
+    expect(response.body).to eq('error: Email has already been taken')
   end
 
   it "responds with bad request when request parameters does not contain participant" do
