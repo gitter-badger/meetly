@@ -24,7 +24,7 @@ gem 'mandrill-api'
 
 gem 'bcrypt', :require => 'bcrypt'
 
-gem 'jquery-datatables-rails', '~> 3.1.1'
+gem 'jquery-datatables-rails', github: "rweng/jquery-datatables-rails", branch: "master"
 
 gem 'slim'
 
@@ -46,7 +46,7 @@ group :development, :test do
   gem 'mocha'
   gem 'rubocop'
   gem 'database_cleaner'
-  gem 'timecop', '~>0.8.0' 
+  gem 'timecop', '~>0.8.0'
 end
 
 group :development do
