@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   layout 'event_list'
+  before_action :authorize_user
   respond_to :json
 
   def index
