@@ -1,17 +1,18 @@
 var ready;
 ready = function() {
-  $('#participants').DataTable( {
+  var table = $('#participants').DataTable( {
     responsive: {
-            details: {
-                type: 'column',
-                target: 'tr'
-            }
-        },
-        columnDefs: [ {
-            className: 'control',
-            orderable: false,
-            targets:   0
-        } ],
+      details: {
+        type: 'column',
+        target: 'tr'
+      }
+    },
+    columnDefs: [ {
+      className: 'control',
+      orderable: false,
+      targets:   0
+    }],
+    autoWidth: false,
     searching: true,
     ordering:  true,
     sPaginationType: "full_numbers",
@@ -45,6 +46,8 @@ ready = function() {
       }
     }
   });
+
 };
+
 $(document).ready(ready);
 $(document).on('page:load', ready);
