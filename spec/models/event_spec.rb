@@ -21,5 +21,16 @@ describe Event do
     it 'is invalid without end date' do
       expect(FactoryGirl.build(:event, end_date: nil)).to_not be_valid
     end
+
+    it 'has registration status closed when capacity is exceeded' do
+      event = FactoryGirl.build(:event, capacity: 0)
+      expect(event.registration_status).to eq("closed")
+    end
+
+    it 'has registration status opened when capacity is not exceeded' do
+      event = FactoryGirl.build(:event, capacity: 100)
+      expect(event.registration_status).to eq("open")
+    end
+
   end
 end

@@ -13,11 +13,23 @@ class Event < ActiveRecord::Base
     unique_id
   end
 
+  def registration_status
+    if participant_count >= capacity
+      "closed"
+    else
+      "open"
+    end
+  end
+
   private
 
   def generate_random_id
     begin
       self.unique_id = SecureRandom.random_number(999_999_9)
     end while self.class.exists?(unique_id: unique_id.to_s)
+  end
+
+  def participant_count
+    self.participants.count
   end
 end
