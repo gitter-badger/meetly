@@ -33,14 +33,30 @@ class EventsController < ApplicationController
   def build_form_data_json(role, event)
     data = {}
     current_period = PricingPeriod.current_period
-    data[:event_price] = event.event_prices.select { |ep| ep.role_id == role.id && ep.pricing_period.id == current_period.id }.first.price
-    data[:services] = []
-    event.services.each do |service|
-      service_pack = {}
-      service_pack[:name] = service.name
-      service_pack[:price] = service.service_prices.select { |sp| sp.role_id == role.id }.first.price
-      data[:services].push service_pack
+    data["registration_status"] = event.registration_status
+    data["event_price"] = EventPrice.find_by(event_id: event.id, role_id: role.id, pricing_period_id: current_period.id).price
+    data["services"] = []
+
+    ServiceGroup.all.to_a.each do |group|
+      if group.services.count > 0
+        groupData = {}
+        groupData["group"] = group.name
+        groupData["items"] = []
+        data["services"].push groupData
+        group.services.each do |service|
+          sp = ServicePrice.find_by(role_id: role.id, service_id: service.id)
+          if sp != nil
+            spData = {}
+            spData["name"] = service.name
+            spData["description"] = service.description
+            spData["price"] = sp.price
+            logger.debug "data: #{data}"
+            data["services"].last["items"].push spData
+          end
+        end
+      end
     end
+
     data[:days] = []
     event.days.each do |day|
       day_pack = {}
