@@ -20,14 +20,11 @@ module PWebApp
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.middleware.insert 0, Rack::Cors do
+     config.middleware.insert_before 0, "Rack::Cors" do
       allow do
-        origins 'blu-soft.pl'
-        resource %r{/receive_form},
-                 :headers => ['Origin', 'Accept', 'Content-Type'],
-                 :methods => [:put, :delete, :post]
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
       end
     end
-
   end
 end

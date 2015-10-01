@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   layout 'event_list'
-  before_action :authorize_user
+  before_action :authorize_user, except: [:form_data]
   respond_to :json
 
   def index
