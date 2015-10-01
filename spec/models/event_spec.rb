@@ -31,6 +31,5 @@ describe Event do
       event = FactoryGirl.build(:event, capacity: 100)
       expect(event.registration_status).to eq("open")
     end
-
   end
 end
