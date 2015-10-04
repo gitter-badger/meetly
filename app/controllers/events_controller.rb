@@ -12,10 +12,10 @@ class EventsController < ApplicationController
   end
 
   def form_data
-    logger.debug "Received request for form_data for event #{query_parameters[:event]} for role #{query_parameters[:role]}"
-    role = Role.find_by(name: query_parameters[:role])
-    event = Event.includes(days: :day_prices, services: :service_prices).find_by(name: query_parameters[:event])
-    if role && event
+    logger.debug "Received request for form_data for event #{query_parameters[:event_id]}"
+    role = Role.find_by(name: 'Uczestnik')
+    event = Event.includes(days: :day_prices).find_by(unique_id: query_parameters[:event_id])
+    if event
       form_data = build_form_data_json role, event
       logger.info form_data
       respond_with form_data, status: 200
@@ -27,7 +27,7 @@ class EventsController < ApplicationController
   protected
 
   def query_parameters
-    params.permit(:role, :event)
+    params.permit(:event_id)
   end
 
   def build_form_data_json(role, event)

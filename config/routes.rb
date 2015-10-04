@@ -15,12 +15,9 @@ Rails.application.routes.draw do
 
   resources :events do
     resources :participants
+    get '/participant_form', to: 'events#form_data', defaults: { format: 'json'}
+    post '/participant_form', to: 'participants#receive_form', defaults: { format: 'json' }
   end
-
-  # get 'participants', to: 'participants#index', as: :participants
-
-  get '/participant_form', to: 'events#form_data', defaults: { format: 'json'}
-  post '/participant_form', to: 'participants#receive_form', defaults: { format: 'json' }
 
   get 'login', to: 'sessions#new', as: :login
   post 'login', to: 'sessions#create', as: :session

@@ -200,7 +200,7 @@ class ParticipantsController < ApplicationController
       end
       return
     else
-      event = Event.find_by(name: params[:event])
+      event = Event.find_by(unique_id: params[:event_id])
       if event
         @participant = Participant.new(participant_param)
         @participant.role = Role.find_by(name: "Uczestnik")
