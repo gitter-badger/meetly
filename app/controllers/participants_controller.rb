@@ -207,15 +207,17 @@ class ParticipantsController < ApplicationController
         days = []
         services = []
 
-        if params[:participant].key?("days")
-          params[:participant][:days].each do |paramDay|
+        if participant_param.key?("days")
+          participant_param[:days] ||= []
+          participant_param[:days].each do |paramDay|
             days.push Day.find_by_number(paramDay["number"])
           end
           @participant.days = days
         end
 
-        if params[:participant].key?("services")
-          params[:participant][:services].each do |paramService|
+        if participant_param.key?("services")
+          participant_param[:services] ||= []
+          participant_param[:services].each do |paramService|
             services.push Service.find_by_name(paramService["name"])
           end
           @participant.services = services
