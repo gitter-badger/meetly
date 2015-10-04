@@ -226,7 +226,7 @@ class ParticipantsController < ApplicationController
             format.json
           end
         else
-          logger.info "Saving of participant failed. Responding with 601."
+          logger.info "Saving of participant failed. Responding with 601. Error: #{@participant.errors.to_a.join(', ')}"
           respond_with("error: #{@participant.errors.to_a.join(', ')}", status: 601, location: nil) do |format|
             format.json
           end
