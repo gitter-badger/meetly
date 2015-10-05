@@ -84,48 +84,8 @@ class ParticipantsController < ApplicationController
     redirect_to root_url
   end
 
-  def edit_form
-    @participant = Participant.find(params[:id])
-    respond_to do |format|
-      format.js { render "edit_form", locals: { participant: @participant } }
-    end
-  end
-
-  def list_mail
-    @participant = Participant.find(params[:id])
-    respond_to do |format|
-      format.js { render "list_mail", locals: { participant: @participant } }
-    end
-  end
-
-  def summary
-    @participants = Participant.includes(:days).includes(:role).all
-    @vol = Participant.all.where(role_id: 31).inject(0) do |sum, e|
-      if (e.cost - e.paid) < 0
-        sum -= (e.cost - e.paid)
-      else
-        sum
-      end
-    end
-
-    @par = Participant.all.where.not(role_id: 31).inject(0) do |sum, e|
-      if (e.cost - e.paid) < 0
-        sum -= (e.cost - e.paid)
-      else
-        sum
-      end
-    end
-  end
-
   def destroy
-    @participant = Participant.find(params[:id])
-    @participant.archived = true
-    @participant.save!
-    respond_to do |format|
-      # format.html {redirect_to participants_url}
-      # format.json {head :ok}
-      format.js { render "destroy", locals: { id: params[:id] } }
-    end
+    # TODO
   end
 
   def set_arrived
@@ -227,6 +187,7 @@ class ParticipantsController < ApplicationController
           respond_with(@participant, status: :created, location: nil) do |format|
             format.json
           end
+          send_confirmation
         else
           logger.info "Saving of participant failed. Responding with 601. Error: #{@participant.errors.to_a.join(', ')}"
           respond_with("error: #{@participant.errors.to_a.join(', ')}", status: 601, location: nil) do |format|
@@ -247,49 +208,6 @@ class ParticipantsController < ApplicationController
     @participant.send_confirmation
   end
 
-  protected
-
-  def create_participant
-    days = []
-    days.push(Day.find_by_number(1)) if params[:day1] == 'true'
-    days.push(Day.find_by_number(2)) if params[:day2] == 'true'
-    days.push(Day.find_by_number(3)) if params[:day3] == 'true'
-    nights = []
-    nights.push(Night.find_by_number(1)) if params[:night1] == 'true'
-    nights.push(Night.find_by_number(2)) if params[:night2] == 'true'
-    dinners = []
-    dinners.push(Dinner.find_by_number(1)) if params[:dinner1] == 'true'
-    dinners.push(Dinner.find_by_number(2)) if params[:dinner2] == 'true'
-
-    parameters = params.permit(:first_name, :last_name, :age, :city, :email, :phone)
-    participant = Participant.new(parameters)
-
-    params[:gender] == 'false' ? participant.gender = 'K' : participant.gender = 'M'
-
-    puts "#{participant.name}"
-    puts "#{participant.gender} w środku!"
-
-    participant.role = Role.find_by(name: 'UczestnikPo1012')
-
-    participant.days = days
-
-    puts "noc 1 : #{params[:night1]}"
-    puts "noc 2 : #{params[:night2]}"
-
-    participant.nights = nights
-
-    puts "obiad 1 : #{params[:dinner1]}"
-    puts "obiad 2 : #{params[:dinner2]}"
-
-    participant.dinners = dinners
-
-    puts "DNIII : #{participant.days.length}"
-    puts "NOCE : #{participant.nights.length}"
-    puts "obiady : #{participant.dinners.length}"
-
-    participant
-  end
-
   private
 
   def event
@@ -307,5 +225,9 @@ class ParticipantsController < ApplicationController
     params.require(:participant).permit(:first_name, :last_name, :email, :gender, :phone, :city, :age, days: [], services: [])
   rescue ActionController::ParameterMissing => e
     nil
+  end
+
+  def send_confirmation
+    logger.debug "Sending email to #{@participant.first_name} #{@participant.last_name}"
   end
 end
