@@ -1,4 +1,4 @@
-require 'mandrill_mailer'
+require 'participant_mailer'
 
 class ParticipantsController < ApplicationController
   before_action :set_headers
@@ -229,5 +229,7 @@ class ParticipantsController < ApplicationController
 
   def send_confirmation
     logger.debug "Sending email to #{@participant.first_name} #{@participant.last_name}"
+    mailer =  ParticipantMailer.new
+    mailer.send_confirmation @participant
   end
 end
