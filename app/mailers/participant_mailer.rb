@@ -3,6 +3,7 @@ require 'active_support'
 
 class ParticipantMailer
   def initialize
+    logger.debug "Initializing participant mailer with key: #{ENV['MANDRILL_API_KEY']}"
   	@mailer = Mandrill::API.new ENV['MANDRILL_API_KEY']
   end
 
