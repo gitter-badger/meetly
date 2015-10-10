@@ -31,7 +31,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 # set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
-# set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 namespace :puma do
@@ -58,6 +58,11 @@ namespace :deploy do
     end
   end
 
+  # desc 'Database symlink'
+  # task :symlink do
+  #   execute "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  # end
+
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
@@ -65,6 +70,8 @@ namespace :deploy do
       invoke 'deploy'
     end
   end
+
+
 
   desc 'Restart application'
   task :restart do
@@ -74,6 +81,7 @@ namespace :deploy do
   end
 
   before :starting,     :check_revision
+  # after :updating, :symlink
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
