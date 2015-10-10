@@ -1,7 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-
+require 'rack'
+require 'rack/cors'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -20,7 +21,7 @@ module PWebApp
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.logger = Logger.new(STDOUT)
+    # config.logger = Logger.new(STDOUT)
 
      config.middleware.insert_before 0, "Rack::Cors" do
       allow do
