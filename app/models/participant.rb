@@ -12,6 +12,7 @@ class Participant < ActiveRecord::Base
   validates :age, numericality: { only_integer: true }
   validates :days, length: { minimum: 1 }
   validates :email, uniqueness: { scope: [:first_name, :last_name] }
+  validate :days_must_be_in_proper_groups
   before_save :calculate_deadline, :calculate_cost
 
   enum gender: [:man, :woman]
@@ -38,6 +39,20 @@ class Participant < ActiveRecord::Base
   attr_accessor :mandrill
 
   # private
+
+  def days_must_be_in_proper_groups
+    day1 = Day.find_by_number(1)
+    day2 = Day.find_by_number(2)
+    day3 = Day.find_by_number(3)
+
+    if days.length == 1 && !days.include?(day3)
+      errors.add(:days, 'only third day can be chosen single')
+    elsif days.length == 2 && (!days.include?(day1) || !days.include?(day2))
+      errors.add(:days, 'only first and second day can be chosen in pair')
+    elsif days.length > Day.all.length
+      errors.add(:days, 'too many days')
+    end
+  end
 
   def calculate_deadline
     logger.debug "Started deadline calculation..."
