@@ -50,7 +50,7 @@ class ParticipantMailer
       },
       {
         name: "DATAP",
-        content: "#{participant.payment_deadline}"
+        content: "#{participant.payment_deadline.strftime('%d-%m-%Y')}"
       },
       {
         name: "KOSZT",
@@ -60,7 +60,7 @@ class ParticipantMailer
   end
 
   def gender_ending(participant)
-    if participant.gender == :man
+    if participant.gender == 'man'
       "eś"
     else
       "aś"
@@ -75,7 +75,7 @@ class ParticipantMailer
         options = 'Cała konferencja'
       elsif pdays.length == 1 && pdays.first.number == 3
         options = 'Dzień 3'
-      elsif (pdays.length == 2 && ((pdays[0].number == 2 || pdays[1].number == 1) && (pdays[0].number == 1 || pdays[1].number == 2)))
+      elsif pdays.length == 2
         options = 'Dzień 1 i 2'
       else
         options = 'Nieznana ilość dni - skontaktuj się z rejestracją'
