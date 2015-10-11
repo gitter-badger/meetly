@@ -43,7 +43,7 @@ class EventsController < ApplicationController
         groupData["group"] = group.name
         groupData["items"] = []
         data["services"].push groupData
-        group.services.each do |service|
+        group.services.sort.each do |service|
           sp = ServicePrice.find_by(role_id: role.id, service_id: service.id)
           if sp != nil
             spData = {}
