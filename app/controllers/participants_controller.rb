@@ -229,7 +229,7 @@ class ParticipantsController < ApplicationController
 
   def send_confirmation
     logger.debug "Sending email to #{@participant.first_name} #{@participant.last_name}"
-    mailer =  ParticipantMailer.new
+    mailer =  ParticipantMailer.new logger
     mailer.send_confirmation @participant
   end
 end
