@@ -11,9 +11,9 @@ puts "PricingPeriod #{pp.name} created!"
 ep = EventPrice.create!(pricing_period: pp, role: r, event: e, price: 129.0)
 puts "Event price for first period and 'Uczestnik' role created!"
 
-d1 = Day.create!(number: 1, event: e)
-d2 = Day.create!(number: 2, event: e)
-d3 = Day.create!(number: 3, event: e)
+d1 = Day.find_by_number(1)
+d2 = Day.find_by_number(2)
+d3 = Day.find_by_number(3)
 dp1 = DayPrice.create!(price: 0.0, pricing_period: pp, role: r, day: d1)
 dp2 = DayPrice.create!(price: 59.0, pricing_period: pp, role: r, day: d2)
 dp3 = DayPrice.create!(price: 79.0, pricing_period: pp, role: r, day: d3)
