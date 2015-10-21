@@ -45,12 +45,12 @@
                   td= amount_or_zero_pln(participant.paid)
                   - case participant.status
                     - when 'created'
-                      td.status: span class=['label', 'status-label', "label-info"] Utworzone
+                      td.status: span class=['label', 'status-label', "label-info"] Zarejestrowany
                     - when 'pending'
-                      td.status: span class=['label', 'status-label', "label-warning"] Oczekujące
+                      td.status: span class=['label', 'status-label', "label-warning"] Czekamy
                     - when 'delayed'
-                      td.status: span class=['label', 'status-label', "label-danger"] Nieopłacone
+                      td.status: span class=['label', 'status-label', "label-danger"] Nieopłacony
                     - when 'paid'
-                      td.status: span class=['label', 'status-label', "label-success"] Opłacone
+                      td.status: span class=['label', 'status-label', "label-success"] Opłacony
                     - when 'arrived'
-                      td.status: span class=['label', 'status-label', "label-default"] Zrealizowane
+                      td.status: span class=['label', 'status-label', "label-default"] Przyjechał
