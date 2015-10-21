@@ -91,6 +91,7 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
+    ffaker (2.1.0)
     ffi (1.9.10)
     ffi (1.9.10-x64-mingw32)
     formatador (0.2.5)
@@ -298,6 +299,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner
   factory_girl_rails
+  ffaker
   growl
   guard-bundler
   guard-rspec (~> 4.6.3)

@@ -1,11 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-puts "Clearing DB..."
+require 'ffaker'
+
+# script for first database seed with production data
+puts "Clearing database..."
 Role.destroy_all
 Participant.destroy_all
 Day.destroy_all
@@ -19,65 +15,63 @@ ServiceGroup.destroy_all
 PricingPeriod.destroy_all
 
 u = User.create!(name: 'admin', email: 'admin@poczatek.org', password: 'pcztk2015')
-puts "User #{u.name} craeted!"
-e = Event.create!(name: 'Poczatek', 
-						start_date: Date.new(2015,12,29), end_date: Date.new(2015, 12,31), owner: u, capacity: 20)
+puts "User #{u.name} created!"
+e = Event.create!(name: 'Poczatek 15/16', start_date: Date.new(2015,12,29), end_date: Date.new(2015, 12,31), owner: u, capacity: 700, days_to_pay: 7)
 puts "Event #{e.name} created!"
 
-pp = PricingPeriod.create!(name: 'turboprzedplata', event: e, start_date: Date.new(2015, 9, 1), end_date: Date.new(2015, 11, 11))
+pp = PricingPeriod.create!(name: 'Pierwszy termin', event: e, start_date: Date.new(2015, 10, 1), end_date: Date.new(2015, 12, 10))
 puts "PricingPeriod #{pp.name} created!"
 
 r = Role.create!(
   name: 'Uczestnik',
   event_id: e.id
   )
+
 puts "Role #{r.name} created!"
 
-ep = EventPrice.create!(pricing_period: pp, role: r, event: e, price: 140)
-puts "Event price created!"
+ep = EventPrice.create!(pricing_period: pp, role: r, event: e, price: 99.0)
+puts "Event price for first period and 'Uczestnik' role created!"
 
 sg = ServiceGroup.create!(name: 'Obiady')
-s1 = Service.create!(name: 'Obiad1', event: e, service_group: sg)
-s2 = Service.create!(name: 'Obiad2', event: e, service_group: sg)
-sp1 = ServicePrice.create!(price: 10, role: r, service: s1)
-sp2 = ServicePrice.create!(price: 10, role: r, service: s2)
+s1 = Service.create!(name: 'Obiad 1', event: e, service_group: sg, description: "Obiad 1 - Dzień 30.12")
+s2 = Service.create!(name: 'Obiad 2', event: e, service_group: sg, description: "Obiad 2 - Dzień 31.12")
+sp1 = ServicePrice.create!(price: 18, role: r, service: s1)
+sp2 = ServicePrice.create!(price: 18, role: r, service: s2)
 puts "Services #{sg.name} created!"
+
+sg2 = ServiceGroup.create!(name: 'Noclegi')
+s12 = Service.create!(name: 'Nocleg 1', event: e, service_group: sg2, description: "Nocleg 1 - Dzień 29.12")
+s22 = Service.create!(name: 'Nocleg 2', event: e, service_group: sg2, description: "Nocleg 2 - Dzień 30.12")
+sp12 = ServicePrice.create!(price: 10, role: r, service: s12)
+sp22 = ServicePrice.create!(price: 10, role: r, service: s22)
+puts "Services #{sg2.name} created!"
+
 d1 = Day.create!(number: 1, event: e)
 d2 = Day.create!(number: 2, event: e)
 d3 = Day.create!(number: 3, event: e)
-dp1 = DayPrice.create!(price: 40, pricing_period: pp, role: r, day: d1)
-dp2 = DayPrice.create!(price: 60, pricing_period: pp, role: r, day: d2)
-dp3 = DayPrice.create!(price: 60, pricing_period: pp, role: r, day: d3)
+dp1 = DayPrice.create!(price: 0.0, pricing_period: pp, role: r, day: d1)
+dp2 = DayPrice.create!(price: 49.0, pricing_period: pp, role: r, day: d2)
+dp3 = DayPrice.create!(price: 69.0, pricing_period: pp, role: r, day: d3)
+
 puts "Days created!"
-Participant.create!([
-		{
-			first_name: 'Bartek',
-			last_name: 'Szczepanski',
-      age: 24,
-      email: 'szczepan97@gmail.com',
-      phone: '664752055',
-			role: r,
-			city: 'Wroclaw',
-			days: [d1, d2, d3],
-      gender: 'man',
-      event: e,
-      services: [s1, s2]
-		}
-	])
-puts "Bartek created!"
-Participant.create!([
+
+30.times {
+  Participant.create!([
     {
-      first_name: 'Dawid',
-      last_name: 'Leszczynski',
-      age: 24,
-      email: 'davebream@gmail.com',
-      phone: '555555555',
+      first_name: FFaker::Name.first_name,
+      last_name: FFaker::Name.last_name,
+      age: rand(16..36),
+      email: FFaker::Internet.email,
+      phone: FFaker::PhoneNumber.short_phone_number,
       role: r,
-      city: 'Wroclaw',
-      days: [d1, d2],
-      gender: 'man',
+      city: FFaker::Address.city,
+      days: [d1, d2, d3],
+      gender: [:man, :woman].sample,
       event: e,
-      services: [s1]
+      services: [s1, s2, s12, s22].sample(rand(1..4)),
+      status: rand(0..4)
     }
   ])
-puts "Dawid created!"
+}
+
+puts 'Participants created!'
