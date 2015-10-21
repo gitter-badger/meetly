@@ -18,6 +18,10 @@ class Participant < ActiveRecord::Base
   enum gender: [:man, :woman]
   enum status: [:created, :pending, :delayed, :paid, :arrived]
 
+  def full_name
+    [last_name, first_name].compact.join(' ')
+  end
+
   def send_confirmation
     @mandrill = MandrillMailer.new
     @mandrill.prepare_confirmation_message(self, Day.all)

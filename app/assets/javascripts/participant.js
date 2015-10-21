@@ -7,11 +7,8 @@ ready = function() {
     ordering:  true,
     sPaginationType: "full_numbers",
     columnDefs: [
-      { visible: false, targets: [3, 5, 6, 7] }
+      { visible: false, targets: [2, 4, 5, 6] }
     ],
-    fixedColumns: {
-        leftColumns: 2
-    },
     language: {
       emptyTable:     "Brak danych",
       info:           "Wyświetlanie _START_ do _END_ z _TOTAL_ wyników",
@@ -40,19 +37,19 @@ ready = function() {
   var colvis = new $.fn.dataTable.ColVis( table,
   {
     buttonText: 'Widok kolumn',
-    exclude: [8, 9, 10, 11, 12, 13, 14],
+    exclude: [7, 8, 9, 10, 11, 12, 13],
     groups: [
       {
         title: 'Dni',
-        columns: [8, 9, 10]
+        columns: [7, 8, 9]
       },
       {
         title: 'Obiady',
-        columns: [11, 12]
+        columns: [10, 11]
       },
       {
         title: 'Noclegi',
-        columns: [13, 14]
+        columns: [12, 13]
       }
     ]
   } );

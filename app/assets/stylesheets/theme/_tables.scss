@@ -25,6 +25,12 @@ th {
   font-weight: 600;
   position: relative;
 
+  &.sorting,
+  &.sorting_asc,
+  &.sorting_desc {
+    cursor: pointer;
+  }
+
   &:after {
     font-family: $icon-family;
     font-size: $th-icon-size;
