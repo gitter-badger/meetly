@@ -4,30 +4,9 @@
       .panel-heading Lista uczestników
       .panel-body
         #participants-table
-          table#participants.table.table-striped.table-bordered.table-hover.display.responsive.no-wrap cellspacing="0" width="100%" data-order='[[ 1, "asc" ]]' data-page-length='25'
+          table#participants.table.table-striped.table-bordered.table-hover.display.no-wrap.order-column cellspacing="0" width="100%" data-order='[[ 1, "asc" ]]' data-page-length='10'
             thead
               tr
-                th
-                th Id
-                th Imię
-                th Nazwisko
-                th Rola
-                th Wiek
-                th Płeć
-                th Miejscowość
-                th E-mail
-                th Telefon
-                - @days.each do |day|
-                  th Dzień #{day.number}
-                - @services.each do |service|
-                  th= service.name
-                th Koszt
-                th Opłacono
-                th Status
-            tfoot
-              tr
-                th
-                th Id
                 th Imię
                 th Nazwisko
                 th Rola
@@ -46,13 +25,11 @@
             tbody
               - @participants.each do |participant|
                 tr
-                  td
-                  td= participant.id
                   td= participant.first_name
                   td= participant.last_name
                   td= participant.role.name
                   td= participant.age
-                  td= participant.gender
+                  td= polish_humanized_gender(participant.gender)
                   td= participant.city
                   td= participant.email
                   td= participant.phone
@@ -68,4 +45,14 @@
                       td.boolean: i.icon.zmdi.zmdi-hc-fw.boolean-icon.text-danger 
                   td= amount_or_zero_pln(participant.cost)
                   td= amount_or_zero_pln(participant.paid)
-                  td.status: span.label.label-success.status-label = participant.status
+                  - case participant.status
+                    - when 'created'
+                      td.status: span class=['label', 'status-label', "label-info"] Utworzone
+                    - when 'pending'
+                      td.status: span class=['label', 'status-label', "label-warning"] Oczekujące
+                    - when 'delayed'
+                      td.status: span class=['label', 'status-label', "label-danger"] Nieopłacone
+                    - when 'paid'
+                      td.status: span class=['label', 'status-label', "label-success"] Opłacone
+                    - when 'arrived'
+                      td.status: span class=['label', 'status-label', "label-default"] Zrealizowane

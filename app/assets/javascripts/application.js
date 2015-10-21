@@ -14,7 +14,7 @@
 //= require bootstrap
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
-//= require dataTables/extras/dataTables.responsive
+//= require dataTables/extras/dataTables.fixedColumns
 //= require turbolinks
 //= require_tree .
 
@@ -23,6 +23,11 @@ ready = function() {
   $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
+    $("#wrapper").on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
+      function(e){
+      $.event.trigger({ type: "menuToggled" });
+      $(this).off(e);
+    });
   });
 
   $(".sidebar-nav").metisMenu();

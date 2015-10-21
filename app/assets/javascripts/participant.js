@@ -1,27 +1,16 @@
 var ready;
 ready = function() {
   var table = $('#participants').DataTable( {
-    responsive: {
-      details: {
-        type: 'column',
-        target: 'tr'
-      }
-    },
-    columnDefs: [ {
-      className: 'control',
-      orderable: false,
-      targets:   0
-    }],
-    autoWidth: false,
+    stateSave: true,
+    scrollX: true,
+    scrollCollapse: true,
+    autoWidth: true,
     searching: true,
     ordering:  true,
     sPaginationType: "full_numbers",
-    buttons: [{
-      extend: 'print',
-      text: 'Drukuj',
-      className: 'print-button btn btn-default',
-      title: 'Lista uczestników'
-    }],
+    fixedColumns: {
+      leftColumns: 2
+    },
     language: {
       emptyTable:     "Brak danych",
       info:           "Wyświetlanie _START_ do _END_ z _TOTAL_ wyników",
@@ -45,6 +34,10 @@ ready = function() {
         sortDescending: ": aktywuj, aby sortować malejąco"
       }
     }
+  });
+
+  $(document).on('menuToggled', function(table) {
+    table.columns.adjust();
   });
 
 };

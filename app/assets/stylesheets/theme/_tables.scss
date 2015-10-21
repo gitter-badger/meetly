@@ -1,10 +1,11 @@
 #participants-table {
-  display: inline-block;
-  overflow-y: visible;
+  // display: inline-block;
+  // overflow-y: visible;
   height: auto;
   width: 100%;
   font-size: 13px;
   font-weight: 400;
+  white-space: nowrap;
 }
 
 th {
@@ -29,24 +30,24 @@ tr {
 
 // Fixed Header
 
-table.fixedHeader-floating {
-  position: fixed;
-  background-color: white;
-}
+// table.fixedHeader-floating {
+//   position: fixed;
+//   background-color: white;
+// }
 
-table.fixedHeader-floating.no-footer {
-  border-bottom-width: 0;
-}
+// table.fixedHeader-floating.no-footer {
+//   border-bottom-width: 0;
+// }
 
-table.fixedHeader-locked {
-  position: absolute;
-  background-color: white;
-}
+// table.fixedHeader-locked {
+//   position: absolute;
+//   background-color: white;
+// }
 
-table.fixedHeader-locked {
-  position: absolute;
-  background-color: white;
-}
+// table.fixedHeader-locked {
+//   position: absolute;
+//   background-color: white;
+// }
 
 // Responsive
 
@@ -190,6 +191,7 @@ table.dataTable > tbody > tr.child span.dtr-title {
 // Custom tables style
 
 table.table {
+  margin-bottom: 0;
   > tbody {
     > tr {
       > td {
