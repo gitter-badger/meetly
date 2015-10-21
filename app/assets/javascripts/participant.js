@@ -1,15 +1,16 @@
 var ready;
 ready = function() {
   var table = $('#participants').DataTable( {
-    stateSave: true,
-    scrollX: true,
-    scrollCollapse: true,
+    stateSave: false,
     autoWidth: true,
     searching: true,
     ordering:  true,
     sPaginationType: "full_numbers",
+    columnDefs: [
+      { visible: false, targets: [3, 5, 6, 7] }
+    ],
     fixedColumns: {
-      leftColumns: 2
+        leftColumns: 2
     },
     language: {
       emptyTable:     "Brak danych",
@@ -36,8 +37,33 @@ ready = function() {
     }
   });
 
+  var colvis = new $.fn.dataTable.ColVis( table,
+  {
+    buttonText: 'Widok kolumn',
+    exclude: [8, 9, 10, 11, 12, 13, 14],
+    groups: [
+      {
+        title: 'Dni',
+        columns: [8, 9, 10]
+      },
+      {
+        title: 'Obiady',
+        columns: [11, 12]
+      },
+      {
+        title: 'Noclegi',
+        columns: [13, 14]
+      }
+    ]
+  } );
+  $( colvis.button() ).insertBefore('#participants_length');
+  $(".ColVis_MasterButton").removeClass("ColVis_Button");
+  $(".ColVis_MasterButton").addClass("btn btn-default");
+
+  $( "#participants" ).wrap( "<div class='table-container'></div>" );
+
   $(document).on('menuToggled', function(table) {
-    table.columns.adjust();
+    console.log('menu toggled');
   });
 
 };

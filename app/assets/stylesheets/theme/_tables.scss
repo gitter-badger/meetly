@@ -6,6 +6,19 @@
   font-size: 13px;
   font-weight: 400;
   white-space: nowrap;
+
+  .table-container {
+    overflow-x: scroll;
+  }
+
+  #participants_length {
+    display: inline-block;
+    float: left;
+  }
+}
+
+#participants_info {
+  line-height: 70px;
 }
 
 th {
@@ -226,6 +239,10 @@ div.dataTables_filter {
 
 td.status {
   text-align: center;
+  .label {
+    width: 100%;
+  }
+
   .status-label {
     font-size: 14px;
   }

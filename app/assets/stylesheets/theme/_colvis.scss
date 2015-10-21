@@ -1,0 +1,21 @@
+div.ColVis {
+  display: inline-block;
+  float: left;
+  margin-right: 20px;
+}
+
+ul.ColVis_collection {
+  border-radius: 0;
+  background: $white;
+
+  label {
+    margin-bottom: 0;
+  }
+
+  li {
+    border-radius: 0;
+    background: $white;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+}
