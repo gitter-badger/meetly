@@ -30,6 +30,8 @@ gem 'slim'
 
 gem 'browserify-rails'
 
+gem 'ffaker'
+
 group :production do
   gem 'puma'
 end
@@ -47,7 +49,6 @@ group :development, :test do
   gem 'rubocop'
   gem 'database_cleaner'
   gem 'timecop', '~>0.8.0'
-  gem 'ffaker'
 end
 
 group :development do
