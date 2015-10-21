@@ -78,5 +78,4 @@ bower.json
 config/app_env_variables.rb
 config/google_analytics.yml
 config/database.yml
-config/secrets.yml
 /node_modules/
