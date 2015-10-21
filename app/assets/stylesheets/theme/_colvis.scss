@@ -17,5 +17,9 @@ ul.ColVis_collection {
     background: $white;
     box-shadow: none;
     -webkit-box-shadow: none;
+
+    &.ColVis_Special {
+      background: $gray-lighter;
+    }
   }
 }

@@ -88,6 +88,8 @@ $icon-font-name:          "glyphicons-halflings-regular" !default;
 //** Element ID within SVG icon file.
 $icon-font-svg-id:        "glyphicons_halflingsregular" !default;
 
+$icon-family: Material-Design-Iconic-Font;
+
 
 //== Components
 //
@@ -143,6 +145,8 @@ $table-bg-active:               $table-bg-hover !default;
 
 //** Border color for table and cell borders.
 $table-border-color:            #ddd !default;
+
+$th-icon-size: 12px;
 
 
 //== Buttons

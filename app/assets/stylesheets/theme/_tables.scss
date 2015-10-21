@@ -23,6 +23,29 @@
 
 th {
   font-weight: 600;
+  position: relative;
+
+  &:after {
+    font-family: $icon-family;
+    font-size: $th-icon-size;
+    line-height: $th-icon-size;
+    position: absolute;
+    top: 50%;
+    margin-top: -($th-icon-size/2);
+    right: 5px;
+  }
+
+  &.sorting:after {
+    content: '\F312';
+  }
+
+  &.sorting_desc:after {
+    content: '\F2F9';
+  }
+
+  &.sorting_asc:after {
+    content: '\F2FC';
+  }
 }
 
 tr {
