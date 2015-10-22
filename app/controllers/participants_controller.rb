@@ -99,13 +99,21 @@ class ParticipantsController < ApplicationController
 
   def destroy_and_mail
     @participant = Participant.find(params[:id])
-    @participant.archived = true
+    @participant.status = 'deleted'
     @participant.save!
-    @participant.send_delete_info
-    respond_to do |format|
-      # format.html {redirect_to participants_url}
-      # format.json {head :ok}
-      format.js { render "destroy", locals: { id: params[:id] } }
+    send_canceletion_information
+    respond_with(@participant, status: :ok, location: nil) do |format|
+      format.json
+    end
+  end
+
+  def set_paid_and_mail
+    @participant = Participant.find(params[:id])
+    @participant.paid = @participant.cost
+    @participant.status = 'paid'
+    send_payment_confirmation
+    respond_with(@participant, status: :ok, location: nil) do |format|
+      format.json
     end
   end
 
@@ -187,7 +195,7 @@ class ParticipantsController < ApplicationController
           respond_with(@participant, status: :created, location: nil) do |format|
             format.json
           end
-          send_confirmation
+          send_registration_confirmation
         else
           logger.info "Saving of participant failed. Responding with 601. Error: #{@participant.errors.to_a.join(', ')}"
           respond_with("error: #{@participant.errors.to_a.join(', ')}", status: 601, location: nil) do |format|
@@ -227,9 +235,21 @@ class ParticipantsController < ApplicationController
     nil
   end
 
-  def send_confirmation
-    logger.debug "Sending email to #{@participant.first_name} #{@participant.last_name}"
+  def send_registration_confirmation
+    logger.debug "Sending registration confirmation to #{@participant.first_name} #{@participant.last_name}"
     mailer =  ParticipantMailer.new logger
-    mailer.send_confirmation @participant
+    mailer.send_registration_confirmation @participant
+  end
+
+  def send_canceletion_information
+    logger.debug "Sending cancelation information to #{@participant.first_name} #{@participant.last_name}"
+    mailer = ParticipantMailer.new logger
+    mailer.send_canceletion_information @participant
+  end
+
+  def send_payment_confirmation
+    logger.debug "Sending payment confirmation to #{@participant.first_name} #{@participant.last_name}"
+    mailer = ParticipantMailer.new logger
+    mailer.send_payment_confirmation @participant
   end
 end

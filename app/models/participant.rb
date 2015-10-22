@@ -16,7 +16,7 @@ class Participant < ActiveRecord::Base
   before_save :calculate_deadline, :calculate_cost
 
   enum gender: [:man, :woman]
-  enum status: [:created, :pending, :delayed, :paid, :arrived]
+  enum status: [:created, :pending, :delayed, :paid, :arrived, :deleted]
 
   def full_name
     [last_name, first_name].compact.join(' ')

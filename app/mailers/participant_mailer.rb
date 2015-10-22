@@ -11,12 +11,41 @@ class ParticipantMailer
 
   attr_accessor :mailer, :logger
 
-  def send_confirmation(participant)
+  def send_registration_confirmation(participant)
   	prepare_confirmation_message(participant)
   	send_message('pocz-tek-registration-confirmation')
   end
 
+  def send_payment_confirmation(participant)
+    prepare_payment_confirmation_message(participant)
+    send_message('pocz-tek-payment-confirmation')
+  end
+
+  def send_canceletion_information(participant)
+    prepare_canceletion_information_message(participant)
+    send_message('pocz-tek-registration-canceled')
+  end
+
   private
+
+  def prepare_canceletion_information_message(participant)
+    ending = gender_ending(participant)
+    @message = {
+      from_name: "Rejestracja Początek 15/16",
+      from_email: "rejestracja@poczatek.org",
+      subject: "Twoje zgłoszenie zostało anulowane",
+      to: [
+        {
+          email: "#{participant.email}",
+          name: "#{participant.first_name} #{participant.last_name}"
+        }
+      ],
+      global_merge_vars: [{
+        name: "KONCOWKA",
+        content: "#{ending}"
+      }]
+    }
+  end
 
   def prepare_confirmation_message(participant)
     ending = gender_ending(participant)
@@ -56,6 +85,44 @@ class ParticipantMailer
         name: "KOSZT",
         content: "#{participant.cost}"
       }]
+    }
+  end
+
+  def prepare_payment_confirmation_message(participant)
+    ending = gender_ending(participant)
+    options = registration_options(participant)
+    @message = {
+      from_name: "Rejestracja Początek 15/16",
+      from_email: "rejestracja@poczatek.org",
+      subject: "Dziękujemy za wpłatę",
+      to: [
+        {
+          email: "#{participant.email}",
+          name: "#{participant.first_name} #{participant.last_name}"
+        }
+      ],
+      global_merge_vars: [{
+      {
+        name: "KONCOWKA",
+        content: "#{ending}"
+      },
+      {
+        name: "OPCJE",
+        content: "#{options}"
+      },
+      {
+        name: "KOSZT",
+        content: "#{participant.cost}"
+      },
+      {
+        name: "OPLACONO",
+        content: "#{participant.paid}"
+      },
+      {
+        name: 'DOZAPLATY',
+        content: "#{participant.cost - participant.paid}"
+      }
+      ]
     }
   end
 
