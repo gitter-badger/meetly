@@ -59,8 +59,15 @@ ready = function() {
 
   $( "#participants" ).wrap( "<div class='table-container'></div>" );
 
-  $(document).on('menuToggled', function(table) {
-    console.log('menu toggled');
+  table.$('.delete-participant').each(function(){
+    $(this).bind('ajax:success', function() {
+      console.log('Participant has been removed.');
+      table.row( $(this).parents('tr') ).remove().draw();
+      toast('success', 'Udało się!', 'Użytkownik został poprawnie usunięty.');
+    }).bind('ajax:error', function() {
+      console.log('Error on removing a participant.');
+      toast('danger', 'Wystapił błąd!', 'Użytkownik nie został usunięty, spróbuj ponownie.');
+    });
   });
 
 };

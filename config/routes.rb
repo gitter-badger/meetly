@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :participants
     get '/participant_form', to: 'events#form_data', defaults: { format: 'json'}
     post '/participant_form', to: 'participants#receive_form', defaults: { format: 'json' }
+    delete '/participant_destroy/:id', to: 'participants#destroy_and_mail', defaults: { format: 'json' }, as: :participant_destroy
   end
 
   get 'login', to: 'sessions#new', as: :login

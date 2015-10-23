@@ -21,6 +21,7 @@
                 th Koszt
                 th Opłacono
                 th Status
+                th Akcje
             tbody
               - @participants.each do |participant|
                 tr
@@ -54,3 +55,6 @@
                       td.status: span class=['label', 'status-label', "label-success"] Opłacony
                     - when 'arrived'
                       td.status: span class=['label', 'status-label', "label-default"] Przyjechał
+                    - when 'deleted'
+                      td.status: span class=['label', 'status-label', "label-default"] Usunięty
+                  td= link_to 'Usuń', event_participant_destroy_path(participant.event, participant.id), method: 'delete', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz usunąć tego uczestnika?', type: 'script'}, class: 'delete-participant btn btn-small btn-danger'

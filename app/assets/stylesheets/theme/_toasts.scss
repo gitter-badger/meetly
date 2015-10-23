@@ -1,0 +1,8 @@
+.toast {
+  position: fixed;
+  top: $navbar-height + 30;
+  right: 30px;
+  z-index: 99999;
+  margin-bottom: 0;
+  font-size: 14px;
+}
