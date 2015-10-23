@@ -101,7 +101,7 @@ class ParticipantMailer
           name: "#{participant.first_name} #{participant.last_name}"
         }
       ],
-      global_merge_vars: [{
+      global_merge_vars: [
       {
         name: "KONCOWKA",
         content: "#{ending}"
