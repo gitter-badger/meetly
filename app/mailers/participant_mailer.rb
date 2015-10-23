@@ -21,14 +21,14 @@ class ParticipantMailer
     send_message('pocz-tek-payment-confirmation')
   end
 
-  def send_canceletion_information(participant)
-    prepare_canceletion_information_message(participant)
+  def send_cancellation_information(participant)
+    prepare_cancellation_information_message(participant)
     send_message('pocz-tek-registration-canceled')
   end
 
   private
 
-  def prepare_canceletion_information_message(participant)
+  def prepare_cancellation_information_message(participant)
     ending = gender_ending(participant)
     @message = {
       from_name: "Rejestracja Początek 15/16",

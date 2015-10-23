@@ -244,7 +244,7 @@ class ParticipantsController < ApplicationController
   def send_cancellation_information
     logger.debug "Sending cancelation information to #{@participant.first_name} #{@participant.last_name}"
     mailer = ParticipantMailer.new logger
-    mailer.send_canceletion_information @participant
+    mailer.send_cancellation_information @participant
   end
 
   def send_payment_confirmation
