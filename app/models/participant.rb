@@ -18,6 +18,8 @@ class Participant < ActiveRecord::Base
   enum gender: [:man, :woman]
   enum status: [:created, :pending, :delayed, :paid, :arrived, :deleted]
 
+  scope :active, -> { where.not(status: statuses[:deleted]) }
+
   def full_name
     [last_name, first_name].compact.join(' ')
   end

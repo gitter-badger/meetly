@@ -6,7 +6,7 @@ class ParticipantsController < ApplicationController
   respond_to :json, :js
 
   def index
-    @participants = event.participants.order(:id)
+    @participants = event.participants.active.order(:id)
     @days = event.days.sort
     @services = event.services.sort
   end
