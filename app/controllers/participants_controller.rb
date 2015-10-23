@@ -101,7 +101,7 @@ class ParticipantsController < ApplicationController
     @participant = Participant.find(params[:id])
     @participant.status = 'deleted'
     @participant.save!
-    send_canceletion_information
+    send_cancellation_information
     respond_with(@participant, status: :ok, location: nil) do |format|
       format.json
     end
@@ -241,7 +241,7 @@ class ParticipantsController < ApplicationController
     mailer.send_registration_confirmation @participant
   end
 
-  def send_canceletion_information
+  def send_cancellation_information
     logger.debug "Sending cancelation information to #{@participant.first_name} #{@participant.last_name}"
     mailer = ParticipantMailer.new logger
     mailer.send_canceletion_information @participant
