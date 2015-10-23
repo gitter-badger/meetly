@@ -305,6 +305,7 @@ DEPENDENCIES
   guard-rspec (~> 4.6.3)
   jbuilder (~> 2.0)
   jquery-datatables-rails!
+  jquery-rails
   mandrill-api
   mocha
   pg
