@@ -1,0 +1,13 @@
+- case status
+  - when 'created'
+    td.status: span class=['label', 'status-label', "label-info"] Zarejestrowany
+  - when 'pending'
+    td.status: span class=['label', 'status-label', "label-warning"] Czekamy
+  - when 'delayed'
+    td.status: span class=['label', 'status-label', "label-danger"] Nieopłacony
+  - when 'paid'
+    td.status: span class=['label', 'status-label', "label-success"] Opłacony
+  - when 'arrived'
+    td.status: span class=['label', 'status-label', "label-default"] Przyjechał
+  - when 'deleted'
+    td.status: span class=['label', 'status-label', "label-default"] Usunięty
