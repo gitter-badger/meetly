@@ -221,6 +221,8 @@ class ParticipantsController < ApplicationController
     @participant.send_confirmation
   end
 
+  helper_method :event
+
   private
 
   def event
