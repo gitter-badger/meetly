@@ -84,7 +84,7 @@ GEM
     database_cleaner (1.4.1)
     diff-lcs (1.2.5)
     erubis (2.7.0)
-    excon (0.40.0)
+    excon (0.45.4)
     execjs (2.2.2)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
