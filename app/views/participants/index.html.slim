@@ -1,11 +1,5 @@
 .row
   .col-lg-12
-    .btn-toolbar role="toolbar" aria-label="..."
-      = link_to new_event_participant_path(event), class: 'edit-participant btn btn-success btn-small iconic-button' do
-          span.icon aria-hidden="true" 
-          span.text Dodaj uczestnika
-.row
-  .col-lg-12
     .panel.panel-default
       .panel-heading Lista uczestników
       .panel-body
@@ -52,9 +46,6 @@
                   td.paid= amount_or_zero_pln(participant.paid)
                   = render partial: 'participant_status', locals: { status: participant.status }
                   td
-                    = link_to edit_event_participant_path(participant.event, participant.id), class: 'edit-participant btn btn-small btn-default participant-action' do
-                      i.icon 
-                      span.text Edytuj
                     - unless participant.status == 'paid'
                       = link_to event_participant_set_paid_and_notify_path(participant.event, participant.id), method: 'patch', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz ustawić uczestnika jako opłaconego i wysłać mu powiadomienie e-mail o otrzymaniu wpłaty?', confirm_type: 'success', confirm_text: 'Potwierdź' }, class: 'paid-participant btn btn-success btn-small participant-action' do
                         i.icon 
