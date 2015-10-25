@@ -97,7 +97,7 @@ class ParticipantsController < ApplicationController
     end
   end
 
-  def destroy_and_mail
+  def set_status_deleted_and_notify
     @participant = Participant.find(params[:id])
     @participant.status = 'deleted'
     @participant.save!
@@ -107,14 +107,19 @@ class ParticipantsController < ApplicationController
     end
   end
 
-  def set_paid_and_mail
+  def set_paid_and_notify
     @participant = Participant.find(params[:id])
-    @participant.paid = @participant.cost
-    @participant.status = 'paid'
-    send_payment_confirmation
-    respond_with(@participant, status: :ok, location: nil) do |format|
-      format.json
+
+    unless @participant.status == 'paid'
+      @participant.paid = @participant.cost
+      @participant.status = 'paid'
+      @participant.save!
+      send_payment_confirmation
+      respond_to do |format|
+        format.json { render :json => @participant}
+      end
     end
+
   end
 
   def wipe
