@@ -26,6 +26,10 @@ body.container-fluid,
 
 #page-content-wrapper .container-fluid {
   padding: 0;
+
+  .row {
+    margin-bottom: 20px;
+  }
 }
 
 b, strong {
@@ -235,11 +239,40 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
     padding: $padding-xs-vertical $padding-xs-horizontal;
     border-radius: $btn-border-radius-small;
   }
+
+  i {
+    &.icon {
+      font-family: $icon-family !important;
+      margin-right: 6px;
+      font-style: normal;
+      font-size: 16px;
+      vertical-align: middle;
+    }
+  }
+
+  span {
+    &.text {
+      // display: inline-block;
+      // float: left;
+      vertical-align: middle;
+    }
+  }
 }
 
-.iconic-button {
-  font-family: $icon-family !important;
-  font-size: 20px;
+.btn.iconic-button {
+  span {
+    &.icon {
+      font-family: $icon-family !important;
+      font-size: 15px;
+    }
+
+    &.text {
+      margin-left: 6px;
+    }
+
+    display: inline-block;
+    float: left;
+  }
 }
 
 .btn-group {

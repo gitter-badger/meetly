@@ -77,6 +77,19 @@ ready = function() {
     });
   });
 
+  table.$('.paid-participant').each(function(){
+    $(this).bind('ajax:success', function(response, data) {
+      console.log('Participant has been set as paid and notified by e-mail.');
+      $(this).closest('tr').find('td.status').html('<span class="label status-label label-success">Opłacony</span>');
+      $(this).closest('tr').find('td.paid').html(parseFloat(data.paid).toFixed(2) + ' PLN');
+      $(this).remove();
+      toast('success', 'Udało się!', 'Użytkownik został oznaczony jako opłacony.');
+    }).bind('ajax:error', function() {
+      console.log('Error on setting participant as paid.');
+      toast('danger', 'Wystapił błąd!', 'Użytkownik nie został oznaczony jako opłacony, spróbuj ponownie.');
+    });
+  });
+
 };
 
 $(document).ready(ready);

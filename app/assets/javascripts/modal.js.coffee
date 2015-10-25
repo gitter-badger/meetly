@@ -10,6 +10,8 @@ $.rails.confirmed = (link) ->
 $.rails.showConfirmDialog = (link) ->
   title = link.attr 'data-title'
   message = link.attr 'data-message'
+  confirm_text = link.attr 'data-confirm-text'
+  confirm_type = link.attr 'data-confirm-type'
   html = """
           <div class="modal" id="confirmationDialog" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -23,7 +25,7 @@ $.rails.showConfirmDialog = (link) ->
                 </div>
                 <div class="modal-footer">
                   <a data-dismiss="modal" class="btn btn-default">Anuluj</a>
-                  <a data-dismiss="modal" class="btn btn-danger confirm">Usuń</a>
+                  <a data-dismiss="modal" class="btn btn-#{confirm_type} confirm">#{confirm_text}</a>
                 </div>
               </div>
             </div>

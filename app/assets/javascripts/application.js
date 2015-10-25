@@ -17,7 +17,7 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require dataTables/extras/dataTables.colVis
-//= require delete.modal
+//= require modal
 //= require toast
 //= require_tree .
 
