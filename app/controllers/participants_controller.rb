@@ -218,7 +218,7 @@ class ParticipantsController < ApplicationController
 
   def resend_confirmation
     @participant = Participant.find(params[:id])
-    @participant.send_confirmation
+    send_registration_confirmation @participant
   end
 
   helper_method :event
