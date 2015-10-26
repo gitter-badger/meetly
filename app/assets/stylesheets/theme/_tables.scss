@@ -270,7 +270,10 @@ div.dataTables_filter {
 td.status {
   text-align: center;
   .label {
-    width: 100%;
+    display: inline-block;
+    width: 140px;
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
 
   .status-label {
