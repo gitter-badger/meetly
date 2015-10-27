@@ -19,14 +19,14 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
+pl:
   participant_status:
-    created:  Created
-    pending:  Pending
-    delayed:  Delayed
-    paid:     Paid
-    arrived:  Arrived
-    deleted:  Deleted
+    created:  Zarejestrowany
+    pending:  Czekamy
+    delayed:  Nieopłacony
+    paid:     Opłacony
+    arrived:  Przyjechał
+    deleted:  Usunięty
   participant_gender:
-    man:    Man
-    woman:  Woman
+    man:    Mężczyzna
+    woman:  Kobieta

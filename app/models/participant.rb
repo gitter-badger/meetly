@@ -25,6 +25,14 @@ class Participant < ActiveRecord::Base
     [last_name, first_name].compact.join(' ')
   end
 
+  def status_i18n
+    I18n.t("participant_status.#{status}")
+  end
+
+  def gender_i18n
+    I18n.t("participant_gender.#{gender}")
+  end
+
   def send_confirmation
     @mandrill = MandrillMailer.new
     @mandrill.prepare_confirmation_message(self, Day.all)

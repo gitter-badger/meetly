@@ -1,13 +1,13 @@
-- case status
+- case participant.status
   - when 'created'
-    td.status: span class=['label', 'status-label', "label-info"] Zarejestrowany
+    td.status: span class=['label', 'status-label', "label-info"] = I18n.t :"participant_status.#{participant.status}"
   - when 'pending'
-    td.status: span class=['label', 'status-label', "label-warning"] Czekamy
+    td.status: span class=['label', 'status-label', "label-warning"] = I18n.t :"participant_status.#{participant.status}"
   - when 'delayed'
-    td.status: span class=['label', 'status-label', "label-danger"] Nieopłacony
+    td.status: span class=['label', 'status-label', "label-danger"] = participant.status_i18n
   - when 'paid'
-    td.status: span class=['label', 'status-label', "label-success"] Opłacony
+    td.status: span class=['label', 'status-label', "label-success"] = participant.status_i18n
   - when 'arrived'
-    td.status: span class=['label', 'status-label', "label-default"] Przyjechał
+    td.status: span class=['label', 'status-label', "label-default"] = participant.status_i18n
   - when 'deleted'
-    td.status: span class=['label', 'status-label', "label-default"] Usunięty
+    td.status: span class=['label', 'status-label', "label-default"] = participant.status_i18n

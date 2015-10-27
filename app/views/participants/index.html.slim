@@ -28,7 +28,7 @@
                   td= participant.full_name
                   td= participant.role.name
                   td= participant.age
-                  td= polish_humanized_gender(participant.gender)
+                  td= participant.gender_i18n
                   td= participant.city
                   td= participant.email
                   td= participant.phone
@@ -44,7 +44,7 @@
                       td.boolean: i.icon.zmdi.zmdi-hc-fw.boolean-icon.text-danger 
                   td= amount_or_zero_pln(participant.cost)
                   td.paid= amount_or_zero_pln(participant.paid)
-                  = render partial: 'participant_status', locals: { status: participant.status }
+                  = render partial: 'participant_status', locals: { participant: participant }
                   td
                     - unless participant.status == 'paid'
                       = link_to event_participant_set_paid_and_notify_path(participant.event, participant.id), method: 'patch', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz ustawić uczestnika jako opłaconego i wysłać mu powiadomienie e-mail o otrzymaniu wpłaty?', confirm_type: 'success', confirm_text: 'Potwierdź' }, class: 'paid-participant btn btn-success btn-small participant-action' do
