@@ -56,7 +56,6 @@ class ParticipantsController < ApplicationController
 
   def update
     parameters = params.require(:participant).permit(:status, :role, :paid, :first_name, :last_name, :gender, :city, :age, :email, :phone)
-    participant.update(parameters)
 
     params[:participant][:day_ids] ||= []
     params[:participant][:service_ids] ||= []
@@ -67,16 +66,19 @@ class ParticipantsController < ApplicationController
     params[:participant][:day_ids].each do |d|
       participant.days.push(Day.find(d.to_i))
     end
-    params[:participant][:service_ids].each do |d|
-      participant.services.push(Service.find(d.to_i))
+
+    params[:participant][:service_ids].each do |s|
+      participant.services.push(Service.find(s.to_i))
     end
+
+    participant.assign_attributes(parameters)
 
     # participant.payment_deadline = DateTime.new(params[:participant]["payment_deadline(1i)"].to_i, params[:participant]["payment_deadline(2i)"].to_i, params[:participant]["payment_deadline(3i)"].to_i)
 
-    participant.save
-
-    respond_to do |format|
-      format.json { render :json => @participant}
+    if participant.save
+      respond_to do |format|
+        format.json { render :json => @participant}
+      end
     end
   end
 
