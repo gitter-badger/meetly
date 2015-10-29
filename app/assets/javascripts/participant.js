@@ -77,10 +77,10 @@ ready = function() {
       $(this).bind('ajax:success', function() {
         console.log('Participant has been removed.');
         $(this).parents('tr').remove();
-        toast('success', 'Udało się!', 'Użytkownik został poprawnie usunięty.');
+        toast('success', 'Udało się!', 'Uczestnik został poprawnie usunięty.');
       }).bind('ajax:error', function() {
         console.log('Error on removing a participant.');
-        toast('danger', 'Wystapił błąd!', 'Użytkownik nie został usunięty, spróbuj ponownie.');
+        toast('danger', 'Wystapił błąd!', 'Uczestnik nie został usunięty, spróbuj ponownie.');
       });
     });
 
@@ -90,13 +90,28 @@ ready = function() {
         $(this).closest('tr').find('td.status').html('<span class="label status-label label-success">Opłacony</span>');
         $(this).closest('tr').find('td.paid').html(parseFloat(data.paid).toFixed(2) + ' PLN');
         $(this).remove();
-        toast('success', 'Udało się!', 'Użytkownik został oznaczony jako opłacony.');
+        toast('success', 'Udało się!', 'Uczestnik został oznaczony jako opłacony.');
       }).bind('ajax:error', function() {
         console.log('Error on setting participant as paid.');
-        toast('danger', 'Wystapił błąd!', 'Użytkownik nie został oznaczony jako opłacony, spróbuj ponownie.');
+        toast('danger', 'Wystapił błąd!', 'Uczestnik nie został oznaczony jako opłacony, spróbuj ponownie.');
       });
     });
 
+  });
+
+  /**
+   * Edit Action
+   */
+
+  $('.participant-form-container').ready(function(){
+
+    $('#participant-form').on("ajax:success", function(){
+      console.log('Success! Participant has been succesfully saved.');
+      toast('success', 'Udało się!', 'Uczestnik został pomyślnie zapisany.');
+    }).on("ajax:error", function(){
+      console.log('Error! Participant has not been saved.');
+      toast('danger', 'Wystapił błąd!', 'Uczestnik nie został zapisany.');
+    });
   });
 
 };

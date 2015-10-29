@@ -1,7 +1,7 @@
 .row
   .col-md-10.col-md-offset-1
     .participant-form-container
-      = form_for [event, @participant], html: {id: 'participant-form', data: { toggle: 'validator'} } do |f|
+      = form_for [event, @participant], remote: true, html: {id: 'participant-form', data: { toggle: 'validator'} } do |f|
         h3: strong Ustawienia
         .row
           .form-group.col-md-3
