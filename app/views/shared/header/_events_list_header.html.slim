@@ -1,6 +1,6 @@
 nav#header.navbar.navbar-custom.navbar-events
     .navbar-header
-      a.navbar-brand href="#" meetly
+    = link_to 'meetly', root_path, class: 'navbar-brand'
     .navbar-content
       .container-fluid
           == render 'shared/header/user_options'
