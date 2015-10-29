@@ -8,6 +8,7 @@ nav#header.navbar.navbar-custom.navbar-fixed-top
           ul.nav.navbar-nav.navbar-left
             li
               h4.navbar-text.event-name
-                i.zmdi.zmdi-hc-hw.event-icon 
-                span #{Event.find_by(unique_id: params[:event_id].to_s).name}
+                = link_to event_participants_path(params[:event_id]), class: 'header-event' do
+                  i.zmdi.zmdi-calendar.zmdi-hc-hw.event-icon
+                  span #{Event.find_by(unique_id: params[:event_id].to_s).name}
           == render 'shared/header/user_options'

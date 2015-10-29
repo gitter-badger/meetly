@@ -44,6 +44,15 @@ button::-moz-focus-inner {
 
 a {
   outline: 0;
+
+  &.header-event {
+    color: $text-color;
+
+    &:hover {
+      background: none !important;
+      text-decoration: none !important;
+    }
+  }
 }
 
 a:focus, a:active,
