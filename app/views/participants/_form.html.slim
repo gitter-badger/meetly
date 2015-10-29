@@ -63,7 +63,7 @@
         .row
           .form-group.col-md-3
             = f.label(:cost, 'Koszt:')
-            = f.text_field :cost, class: 'form-control'
+            = f.text_field :cost, class: 'form-control', disabled: true
           .form-group.col-md-3
             = f.label(:paid, 'Zapłacił:')
             = f.text_field :paid, class: 'form-control'
