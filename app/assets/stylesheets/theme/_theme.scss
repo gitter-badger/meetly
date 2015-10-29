@@ -240,7 +240,26 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
     border-radius: $btn-border-radius-small;
   }
 
+  &.icon-button {
+    width: 36px;
+    padding: 6px;
+    float: none;
+    i {
+      margin: 0 auto;
+      font-size: 18px;
+    }
+  }
+
+  &.iconic-button {
+    float: none;
+     i {
+      //vertical-align: middle;
+     }
+  }
+
   i {
+    margin-right: 6px;
+    font-size: 16px;
     &.icon {
       font-family: $icon-family !important;
       margin-right: 6px;
@@ -254,24 +273,8 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
     &.text {
       // display: inline-block;
       // float: left;
-      vertical-align: middle;
+      //vertical-align: middle;
     }
-  }
-}
-
-.btn.iconic-button {
-  span {
-    &.icon {
-      font-family: $icon-family !important;
-      font-size: 15px;
-    }
-
-    &.text {
-      margin-left: 6px;
-    }
-
-    display: inline-block;
-    float: left;
   }
 }
 
