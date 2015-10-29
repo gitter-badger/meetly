@@ -1,17 +1,21 @@
-$.rails.allowAction = (link) ->
-  return true unless link.attr('data-confirm')
-  $.rails.showConfirmDialog(link) # look bellow for implementations
+$.rails.allowAction = (element) ->
+  return true unless element.attr('data-confirm')
+  $.rails.showConfirmDialog(element) # look bellow for implementations
   false # always stops the action since code runs asynchronously
 
-$.rails.confirmed = (link) ->
-  link.removeAttr('data-confirm')
-  link.trigger('click.rails')
+$.rails.confirmed = (element) ->
+  element.removeAttr('data-confirm')
+  if element.attr('data-form')
+    element.trigger('submit.rails')
+    element.attr('data-confirm', 'true')
+  else
+    element.trigger('click.rails')
 
-$.rails.showConfirmDialog = (link) ->
-  title = link.attr 'data-title'
-  message = link.attr 'data-message'
-  confirm_text = link.attr 'data-confirm-text'
-  confirm_type = link.attr 'data-confirm-type'
+$.rails.showConfirmDialog = (element) ->
+  title = element.attr 'data-title'
+  message = element.attr 'data-message'
+  confirm_text = element.attr 'data-confirm-text'
+  confirm_type = element.attr 'data-confirm-type'
   html = """
           <div class="modal" id="confirmationDialog" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -32,4 +36,4 @@ $.rails.showConfirmDialog = (link) ->
           </div>
          """
   $(html).modal()
-  $('#confirmationDialog .confirm').on 'click', -> $.rails.confirmed(link)
+  $('#confirmationDialog .confirm').on 'click', -> $.rails.confirmed(element)
