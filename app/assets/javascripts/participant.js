@@ -105,8 +105,9 @@ ready = function() {
 
   $('.participant-form-container').ready(function(){
 
-    $('#participant-form').on("ajax:success", function(){
+    $('#participant-form').on("ajax:success", function(response, data){
       console.log('Success! Participant has been succesfully saved.');
+      $('.total-cost').val(data.cost);
       toast('success', 'Udało się!', 'Uczestnik został pomyślnie zapisany.');
     }).on("ajax:error", function(){
       console.log('Error! Participant has not been saved.');

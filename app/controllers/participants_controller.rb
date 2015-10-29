@@ -75,7 +75,9 @@ class ParticipantsController < ApplicationController
 
     participant.save
 
-    redirect_to event_participants_path
+    respond_to do |format|
+      format.json { render :json => @participant}
+    end
   end
 
   def destroy
