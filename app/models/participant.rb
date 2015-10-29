@@ -25,6 +25,14 @@ class Participant < ActiveRecord::Base
     [last_name, first_name].compact.join(' ')
   end
 
+  def self.gender_attributes_for_select
+    genders.keys.to_a.map { |g| [I18n.t("participant_gender.#{g}"), g] }
+  end
+
+  def self.status_attributes_for_select
+    statuses.keys.to_a.map { |s| [I18n.t("participant_status.#{s}"), s] }
+  end
+
   def status_i18n
     I18n.t("participant_status.#{status}")
   end

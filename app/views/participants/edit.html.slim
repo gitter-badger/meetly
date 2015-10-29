@@ -1,0 +1,11 @@
+.row
+  .col-md-12
+    .btn-toolbar role="toolbar"
+      = link_to 'Powrót', event_participants_path, class: 'btn btn-default'
+.row
+  .col-md-12.col-lg-12
+    .panel.panel-default
+      .panel-heading Edytuj uczestnika
+      .panel-body
+        = render partial: 'form', locals: { event: event, participant: @participant }
+

@@ -34,22 +34,26 @@
                   td= participant.phone
                   - @days.each do |day|
                     - if participant.days.include?(day)
-                      td.boolean: i.icon.zmdi.zmdi-hc-fw.boolean-icon.text-success 
+                      td.boolean: i.zmdi.zmdi-check-circle.zmdi-hc-lg.boolean-icon.text-success
                     - else
-                      td.boolean: i.icon.zmdi.zmdi-hc-fw.boolean-icon.text-danger 
+                      td.boolean: i.zmdi.zmdi-minus-circle.zmdi-hc-lg.boolean-icon.text-danger
                   - @services.each do |service|
                     - if participant.services.include?(service)
-                      td.boolean: i.icon.zmdi.zmdi-hc-fw.boolean-icon.text-success 
+                      td.boolean: i.zmdi.zmdi-check-circle.zmdi-hc-lg.boolean-icon.text-success
                     - else
-                      td.boolean: i.icon.zmdi.zmdi-hc-fw.boolean-icon.text-danger 
+                      td.boolean: i.zmdi.zmdi-minus-circle.zmdi-hc-lg.boolean-icon.text-danger
                   td= amount_or_zero_pln(participant.cost)
                   td.paid= amount_or_zero_pln(participant.paid)
                   = render partial: 'participant_status', locals: { participant: participant }
                   td
-                    - unless participant.status == 'paid'
-                      = link_to event_participant_set_paid_and_notify_path(participant.event, participant.id), method: 'patch', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz ustawić uczestnika jako opłaconego i wysłać mu powiadomienie e-mail o otrzymaniu wpłaty?', confirm_type: 'success', confirm_text: 'Potwierdź' }, class: 'paid-participant btn btn-success btn-small participant-action' do
-                        i.icon 
-                        span.text Opłać
-                    = link_to event_participant_delete_and_notify_path(participant.event, participant.id), method: 'delete', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz usunąć tego uczestnika?', confirm_type: 'danger', confirm_text: 'Usuń', type: 'script'}, class: 'delete-participant btn btn-small btn-danger participant-action' do
-                      i.icon 
-                      span.text Usuń
+                    .btn-group role="group"
+                      = link_to edit_event_participant_path(participant.event, participant.id), class: 'delete-participant btn btn-small btn-default participant-action iconic-button', title: 'Edytuj zgłoszenie' do
+                        i.zmdi.zmdi-edit.zmdi-hc-lg
+                        span.text Edytuj
+                      = link_to '#', class: 'btn btn-small btn-default participant-action icon-button', title: 'Edytuj zgłoszenie' do
+                        i.zmdi.zmdi-email.zmdi-hc-lg
+                      - unless participant.status == 'paid'
+                        = link_to event_participant_set_paid_and_notify_path(participant.event, participant.id), method: 'patch', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz ustawić uczestnika jako opłaconego i wysłać mu powiadomienie e-mail o otrzymaniu wpłaty?', confirm_type: 'success', confirm_text: 'Potwierdź' }, class: 'paid-participant btn btn-default btn-small participant-action icon-button', title: 'Opłać zgłoszenie' do
+                          i.zmdi.zmdi-money.zmdi-hc-lg
+                      = link_to event_participant_delete_and_notify_path(participant.event, participant.id), method: 'delete', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz usunąć tego uczestnika?', confirm_type: 'danger', confirm_text: 'Usuń', type: 'script'}, class: 'delete-participant btn btn-small btn-default participant-action icon-button', title: 'Usuń zgłoszenie' do
+                        i.zmdi.zmdi-delete.zmdi-hc-lg

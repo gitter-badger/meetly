@@ -50,38 +50,32 @@ class ParticipantsController < ApplicationController
 
   def edit
     @participant = Participant.find(params[:id])
-    parameters = params.require(:participant).permit(:arrived, :paid, :first_name, :last_name, :age, :city, :email, :phone)
-    @participant.update(parameters)
-    role_id = params[:participant][:role_id]
-    @participant.role = Role.find(role_id)
+    @days = event.days.sort
+    @services = event.services.group_by(&:service_group).sort
+  end
 
-    day_ids = params[:participant][:day_ids]
-    dinner_ids = params[:participant][:dinner_ids]
-    night_ids = params[:participant][:night_ids]
+  def update
+    parameters = params.require(:participant).permit(:status, :role, :paid, :first_name, :last_name, :gender, :city, :age, :email, :phone)
+    participant.update(parameters)
 
-    day_ids.reject!(&:empty?)
-    dinner_ids.reject!(&:empty?)
-    night_ids.reject!(&:empty?)
+    params[:participant][:day_ids] ||= []
+    params[:participant][:service_ids] ||= []
 
-    @participant.days = Day.none
-    @participant.dinners = Dinner.none
-    @participant.nights = Night.none
+    participant.days = Day.none
+    participant.services = Service.none
 
-    day_ids.each do |d|
-      @participant.days.push(Day.find(d.to_i))
+    params[:participant][:day_ids].each do |d|
+      participant.days.push(Day.find(d.to_i))
     end
-    dinner_ids.each do |d|
-      @participant.dinners.push(Dinner.find(d.to_i))
-    end
-    night_ids.each do |d|
-      @participant.nights.push(Night.find(d.to_i))
+    params[:participant][:service_ids].each do |d|
+      participant.services.push(Service.find(d.to_i))
     end
 
-    @participant.payment_deadline = DateTime.new(params[:participant]["payment_deadline(1i)"].to_i, params[:participant]["payment_deadline(2i)"].to_i, params[:participant]["payment_deadline(3i)"].to_i)
+    # participant.payment_deadline = DateTime.new(params[:participant]["payment_deadline(1i)"].to_i, params[:participant]["payment_deadline(2i)"].to_i, params[:participant]["payment_deadline(3i)"].to_i)
 
-    @participant.save!
+    participant.save
 
-    redirect_to root_url
+    redirect_to event_participants_path
   end
 
   def destroy
@@ -227,6 +221,10 @@ class ParticipantsController < ApplicationController
 
   def event
     @event ||= Event.find_by(unique_id: params[:event_id].to_s)
+  end
+
+  def participant
+    @participant ||= Participant.find(params[:id])
   end
 
   def set_headers
