@@ -33,6 +33,8 @@ gem 'browserify-rails'
 
 gem 'ffaker'
 
+gem 'gretel'
+
 group :production do
   gem 'puma'
 end

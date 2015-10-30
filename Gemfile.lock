@@ -95,6 +95,8 @@ GEM
     ffi (1.9.10)
     ffi (1.9.10-x64-mingw32)
     formatador (0.2.5)
+    gretel (3.0.8)
+      rails (>= 3.2.0)
     growl (1.0.3)
     guard (2.13.0)
       formatador (>= 0.2.4)
@@ -300,6 +302,7 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   ffaker
+  gretel
   growl
   guard-bundler
   guard-rspec (~> 4.6.3)
