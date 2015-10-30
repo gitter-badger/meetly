@@ -1,77 +1,110 @@
 .row
-  .col-md-10.col-md-offset-1
-    .participant-form-container
-      = form_for [event, @participant], remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz zapisać zmiany?', confirm_type: 'info', confirm_text: 'Zapisz', form: true , calculate_url: event_participant_calculate_cost_path }, html: {id: 'participant-form', data: { toggle: 'validator'} } do |f|
-        h3: strong Ustawienia
-        .row
-          .form-group.col-md-3
-            = f.label(:status, 'Status uczestnika:')
-            = f.select(:status, Participant.status_attributes_for_select, { include_blank: 'Wybierz status' }, { class: 'form-control', required: 'true' } )
-          .form-group.col-md-3
-            = f.label(:role, 'Rola uczestnika:')
-            = collection_select :participant, :role_id, Role.all, :id, :name, { include_blank: 'Wybierz rolę' }, { class: 'form-control', required: 'true' }
-        h3: strong Dane uczestnika
-        .row
-          .form-group.col-md-6
-            = f.label(:first_name, 'Imię:')
-            = f.text_field :first_name, class: 'form-control', placeholder: 'Imię', data: { error: 'Podaj swoje imię.' }, required: 'true'
-            .help-block.with-errors
-          .form-group.col-md-6
-            = f.label(:last_name, 'Nazwisko:')
-            = f.text_field :last_name, class: 'form-control', placeholder: 'Nazwisko', data: { error: 'Podaj swoje nazwisko.' }, required: 'true'
-            .help-block.with-errors
-        .row
-          .form-group.col-md-7
-            = f.label(:gender, 'Płeć:')
-            = f.select(:gender, Participant.gender_attributes_for_select, { include_blank: 'Wybierz płeć' }, { class: 'form-control', required: 'true', data: { error: 'Wybierz płeć.'  } } )
-            .help-block.with-errors
-          .form-group.col-md-5
-            = f.label(:city, 'Miejscowość:')
-            = f.text_field :city, class: 'form-control', placeholder: 'Miasto', data: { error: 'Podaj miejscowość, w której mieszkasz.' }, required: 'true'
-            .help-block.with-errors
-        .row
-          .form-group.col-md-3
-            = f.label(:age, 'Wiek (min. 16 lat):')
-            = f.text_field :age, class: 'form-control', placeholder: 'Wiek', data: { error: 'Podaj swój wiek.' }, required: 'true'
-            .help-block.with-errors
-          .form-group.col-md-5
-            = f.label(:email, 'E-mail:')
-            = f.text_field :email, class: 'form-control', placeholder: 'E-mail', data: { error: 'E-mail jest niepoprawny.' }, required: 'true'
-            .help-block.with-errors
-          .form-group.col-md-4
-            = f.label(:phone, 'Telefon:')
-            = f.text_field :phone, class: 'form-control', placeholder: 'Telefon', data: { error: 'Podaj swój numer telefonu.' }, required: 'true'
-            .help-block.with-errors
-        h3: strong Opcje
-        .row
-          .col-md-4
-            h2 Udział
-            - @days.each do |day|
-              .checkbox
-                label
-                  = check_box_tag "participant[day_ids][]", day.id, @participant.days.include?(day)
-                  | Dzień #{day.number}
-          - @services.each do |group, services|
-            .col-md-4
-              h3= group.name
-              - services.each do |service|
-                .checkbox
-                  label
-                    = check_box_tag "participant[service_ids][]", service.id, @participant.services.include?(service)
-                    = service.description
-        h3: strong Finanse
-        .row
-          .form-group.col-md-3
-            = f.label(:cost, 'Koszt:')
-            = f.text_field :cost, class: 'form-control total-cost', disabled: true
-          .form-group.col-md-3
-            = f.label(:paid, 'Zapłacił:')
-            = f.text_field :paid, class: 'form-control'
-        .row
-          .col-md-3
+  = form_for [event, @participant], remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz zapisać zmiany?', confirm_type: 'info', confirm_text: 'Zapisz', form: true , calculate_url: event_participant_calculate_cost_path }, html: {id: 'participant-form', class: 'form-horizontal col-md-12', data: { toggle: 'validator'} } do |f|
+    .row
+      .col-md-6
+        .panel.panel-default
+          .panel-heading Ustawienia
+          .panel-body
             .form-group
-              button#save-button.btn.btn-primary type="submit" name="submit" data-loading-text="Wysyłanie..." Zapisz
-        .row
-          col-md-12
-          #alerts
+              .col-md-6
+                = f.label(:status, 'Status uczestnika:')
+                = f.select(:status, Participant.status_attributes_for_select, { include_blank: 'Wybierz status' }, { class: 'form-control', required: 'true' } )
+              .col-md-6
+                = f.label(:role, 'Rola uczestnika:')
+                = collection_select :participant, :role_id, Role.all, :id, :name, { include_blank: 'Wybierz rolę' }, { class: 'form-control', required: 'true' }
+    .row
+      .col-md-12
+        .panel.panel-default
+          .panel-heading Dane uczestnika
+          .panel-body
+            .form-group
+              = f.label(:first_name, 'Imię:', class: 'col-sm-2 control-label')
+              .col-sm-10
+                = f.text_field :first_name, class: 'form-control', placeholder: 'Imię', data: { error: 'Podaj swoje imię.' }, required: 'true'
+              .help-block.with-errors
+            .hr-line-dashed
+            .form-group
+              = f.label(:last_name, 'Nazwisko:', class: 'col-sm-2 control-label')
+              .col-sm-10
+                = f.text_field :last_name, class: 'form-control', placeholder: 'Nazwisko', data: { error: 'Podaj swoje nazwisko.' }, required: 'true'
+              .help-block.with-errors
+            .hr-line-dashed
+            .form-group
+              = f.label(:gender, 'Płeć:', class: 'col-sm-2 control-label')
+              .col-sm-10
+                = f.select(:gender, Participant.gender_attributes_for_select, { include_blank: 'Wybierz płeć' }, { class: 'form-control', required: 'true', data: { error: 'Wybierz płeć.'  } } )
+              .help-block.with-errors
+            .hr-line-dashed
+            .form-group
+              = f.label(:city, 'Miejscowość:', class: 'col-sm-2 control-label')
+              .col-sm-10
+                = f.text_field :city, class: 'form-control', placeholder: 'Miasto', data: { error: 'Podaj miejscowość, w której mieszkasz.' }, required: 'true'
+              .help-block.with-errors
+            .hr-line-dashed
+            .form-group
+              = f.label(:age, 'Wiek (min. 16 lat):', class: 'col-sm-2 control-label')
+              .col-sm-10
+                = f.text_field :age, class: 'form-control', placeholder: 'Wiek', data: { error: 'Podaj swój wiek.' }, required: 'true'
+              .help-block.with-errors
+            .hr-line-dashed
+            .form-group
+              = f.label(:email, 'E-mail:', class: 'col-sm-2 control-label')
+              .col-sm-10
+                = f.text_field :email, class: 'form-control', placeholder: 'E-mail', data: { error: 'E-mail jest niepoprawny.' }, required: 'true'
+              .help-block.with-errors
+            .hr-line-dashed
+            .form-group
+              = f.label(:phone, 'Telefon:', class: 'col-sm-2 control-label')
+              .col-sm-10
+                = f.text_field :phone, class: 'form-control', placeholder: 'Telefon', data: { error: 'Podaj swój numer telefonu.' }, required: 'true'
+              .help-block.with-errors
+    .row
+      .col-md-12
+        .panel.panel-default
+          .panel-heading Opcje uczestnictwa
+          .panel-body
+            .form-group
+              = f.label(:days, 'Udział:', class: 'col-sm-2 control-label')
+              .col-md-10
+                - @days.each do |day|
+                  .checkbox
+                    label
+                      = check_box_tag "participant[day_ids][]", day.id, @participant.days.include?(day)
+                      | Dzień #{day.number}
+            - @services.each do |group, services|
+              .hr-line-dashed
+              .form-group
+                = f.label(group.name, "#{group.name}:", class: 'col-sm-2 control-label')
+                .col-md-10
+                  - services.each do |service|
+                    .checkbox
+                      label
+                        = check_box_tag "participant[service_ids][]", service.id, @participant.services.include?(service)
+                        = service.description
+    .row
+      .col-md-6
+        .panel.panel-default
+          .panel-heading: h5.panel-title Finanse
+          .panel-body
+            .form-group
+              .col-md-6
+                = f.label(:cost, 'Koszt:')
+                .input-group
+                  = f.text_field :cost, class: 'form-control total-cost', disabled: true
+                  .input-group-addon .00 PLN
+              .col-md-6
+                = f.label(:paid, 'Zapłacił:')
+                .input-group
+                  = f.text_field :paid, class: 'form-control'
+                  .input-group-addon .00 PLN
+    .row
+      .col-md-5
+        .panel.panel-default
+          .panel-body
+            .btn-toolbar role="toolbar"
+              = link_to 'Anuluj', event_participants_path, class: 'btn btn-default'
+              button#save-button.btn.btn-info type="submit" name="submit" data-loading-text="Wysyłanie..." Zapisz
+    .row
+      col-md-12
+      #alerts
 

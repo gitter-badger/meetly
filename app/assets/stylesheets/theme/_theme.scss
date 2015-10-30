@@ -32,14 +32,34 @@ body.container-fluid,
   }
 }
 
+.toolbar-row {
+  //margin-bottom: 30px;
+}
+
 b, strong {
   font-weight: 600;
+}
+
+// Dividers
+
+.hr-line-dashed {
+  border-top: 1px dashed $lines-color;
+  color: #FFF;
+  background-color: #FFF;
+  height: 1px;
+  margin: 20px 0;
 }
 
 // Browsers
 
 button::-moz-focus-inner {
   border: 0;
+}
+
+h1 {
+  &.page-title {
+    margin-bottom: 30px;
+  }
 }
 
 a {
@@ -424,7 +444,7 @@ label,
 .checkbox,
 .radio {
   font-size: $font-size-small;
-  font-weight: normal;
+  font-weight: 600;
 }
 
 input[type="radio"],
@@ -628,6 +648,10 @@ input[type="checkbox"] {
     padding: 15px;
     border-color: rgba(0, 0, 0, 0.0588235);
     color: $gray-darker;
+      .panel-title {
+        font-weight: 600;
+        font-size: $font-size-base;
+      }
   }
 }
 
