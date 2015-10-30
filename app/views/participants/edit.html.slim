@@ -1,7 +1,7 @@
 - breadcrumb :participant, @participant
 .row
   .col-md-12
-    h1.page-title Edytuj uczestnika
     == breadcrumbs(style: :bootstrap, display_single_fragment: true)
+    h1.page-title Edytuj uczestnika
 = render partial: 'form', locals: { event: event, participant: @participant }
 
