@@ -49,13 +49,15 @@ class ParticipantsController < ApplicationController
   end
 
   def edit
-    @participant = Participant.find(params[:id])
+    participant
     @days = event.days.sort
     @services = event.services.group_by(&:service_group).sort
   end
 
   def update
-    parameters = params.require(:participant).permit(:status, :role, :paid, :first_name, :last_name, :gender, :city, :age, :email, :phone)
+    parameters = params.require(:participant).permit(:status, :role_id, :paid, :first_name, :last_name, :gender, :city, :age, :email, :phone)
+
+    participant.role = Role.find(params[:participant][:role_id])
 
     params[:participant][:day_ids] ||= []
     params[:participant][:service_ids] ||= []
@@ -77,7 +79,7 @@ class ParticipantsController < ApplicationController
 
     if participant.save
       respond_to do |format|
-        format.json { render :json => @participant}
+        format.json { render :json => participant}
       end
     end
   end
