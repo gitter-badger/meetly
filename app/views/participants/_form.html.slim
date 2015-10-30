@@ -7,11 +7,11 @@
           .panel-body
             .form-group
               .col-md-6
-                = f.label(:status, 'Status uczestnika:')
-                = f.select(:status, Participant.status_attributes_for_select, { include_blank: 'Wybierz status' }, { class: 'form-control', required: 'true' } )
-              .col-md-6
                 = f.label(:role, 'Rola uczestnika:')
                 = collection_select :participant, :role_id, Role.all, :id, :name, { include_blank: 'Wybierz rolę' }, { class: 'form-control', required: 'true' }
+              .col-md-6
+                = f.label(:status, 'Status uczestnika:')
+                = f.select(:status, Participant.status_attributes_for_select, { include_blank: 'Wybierz status' }, { class: 'form-control', required: 'true' } )
     .row
       .col-md-12
         .panel.panel-default
