@@ -107,9 +107,6 @@ class ParticipantsController < ApplicationController
 
     participant.role = Role.find(params[:participant][:role_id])
 
-    puts participant.services
-    puts participant.role
-
     participant.days = Day.none
     participant.services = Service.none
 
