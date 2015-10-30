@@ -457,7 +457,11 @@ label,
 .checkbox,
 .radio {
   font-size: $font-size-small;
-  font-weight: 600;
+  font-weight: normal;
+
+  #participant-form & {
+    font-weight: 600;
+  }
 }
 
 input[type="radio"],
