@@ -95,7 +95,7 @@
               .col-md-6
                 = f.label(:cost, 'Koszt:')
                 .input-group
-                  = f.text_field :cost, class: 'form-control total-cost', disabled: true
+                  = f.text_field :cost, class: 'form-control total-cost', readonly: true
                   .input-group-addon .00 PLN
               .col-md-6
                 = f.label(:paid, 'Zapłacił:')
