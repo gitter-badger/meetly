@@ -56,9 +56,11 @@ button::-moz-focus-inner {
   border: 0;
 }
 
-h1, h2, h3 {
-  &.page-title {
-    margin-bottom: 10px;
+#page-content-wrapper {
+  h1, h2, h3 {
+    &.page-title {
+      margin-bottom: 10px;
+    }
   }
 }
 
