@@ -103,9 +103,9 @@ ready = function() {
    * Edit Action
    */
 
-  $('.participant-form-container').ready(function(){
+  $('#participant-form').ready(function(){
 
-    $('#participant-form').on("ajax:success", function(response, data){
+    $(this).on("ajax:success", function(response, data){
       console.log('Success! Participant has been succesfully saved.');
       $('#participant_cost').val(data.cost);
       toast('success', 'Udało się!', 'Uczestnik został pomyślnie zapisany.');
