@@ -21,6 +21,9 @@
 //= require dataTables/extras/dataTables.colVis
 //= require modal
 //= require toast
+//= require moment
+//= require moment/pl
+//= require bootstrap-datetimepicker
 //= require_tree .
 
 var ready;

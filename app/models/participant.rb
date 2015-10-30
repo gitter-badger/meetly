@@ -25,6 +25,14 @@ class Participant < ActiveRecord::Base
     [last_name, first_name].compact.join(' ')
   end
 
+  def payment_deadline_at_string
+    payment_deadline.strftime('%d-%m-%Y').to_s
+  end
+
+  def payment_deadline_at_string=(payment_deadline_at_str)
+    self.payment_deadline = DateTime.strptime(payment_deadline_at_str, '%d-%m-%Y')
+  end
+
   def self.gender_attributes_for_select
     genders.keys.to_a.map { |g| [I18n.t("participant_gender.#{g}"), g] }
   end

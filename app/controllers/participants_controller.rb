@@ -55,7 +55,7 @@ class ParticipantsController < ApplicationController
   end
 
   def update
-    parameters = params.require(:participant).permit(:status, :role_id, :paid, :first_name, :last_name, :gender, :city, :age, :email, :phone)
+    parameters = params.require(:participant).permit(:status, :role_id, :paid, :first_name, :last_name, :gender, :city, :age, :email, :phone, :payment_deadline_at_string)
 
     participant.role = Role.find(params[:participant][:role_id])
 

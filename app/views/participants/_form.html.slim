@@ -1,17 +1,22 @@
 .row
   = form_for [event, @participant], remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz zapisać zmiany?', confirm_type: 'info', confirm_text: 'Zapisz', form: true , calculate_url: event_participant_calculate_cost_path }, html: {id: 'participant-form', class: 'form-horizontal col-md-12', data: { toggle: 'validator'} } do |f|
     .row
-      .col-md-6
+      .col-md-8
         .panel.panel-default
           .panel-heading: h5.panel-title Ustawienia
           .panel-body
             .form-group
-              .col-md-6
+              .col-md-4
                 = f.label(:role, 'Rola uczestnika:')
                 = collection_select :participant, :role_id, Role.all, :id, :name, { include_blank: 'Wybierz rolę' }, { class: 'form-control', required: 'true' }
-              .col-md-6
+              .col-md-4
                 = f.label(:status, 'Status uczestnika:')
                 = f.select(:status, Participant.status_attributes_for_select, { include_blank: 'Wybierz status' }, { class: 'form-control', required: 'true' } )
+              .col-md-4
+                = f.label(:payment_deadline_at_string, 'Termin płatności:')
+                #payment_deadline_date.input-group.date
+                  = f.text_field :payment_deadline_at_string, class: 'form-control', placeholder: 'Termin płatności', required: 'true'
+                  .input-group-addon: i.zmdi.zmdi-calendar.zmdi-hc-lg
     .row
       .col-md-12
         .panel.panel-default

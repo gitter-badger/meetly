@@ -134,6 +134,10 @@ ready = function() {
     getPrice();
   });
 
+  $('#payment_deadline_date').datetimepicker({
+    format: 'DD-MM-YYYY'
+  });
+
 };
 
 $(document).ready(ready);

@@ -23,6 +23,8 @@ module PWebApp
     config.i18n.enforce_available_locales = true
     config.i18n.default_locale = :pl
 
+    config.assets.paths << "#{Rails}/vendor/assets/fonts"
+
     # config.logger = Logger.new(STDOUT)
 
     config.before_configuration do
