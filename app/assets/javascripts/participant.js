@@ -76,7 +76,7 @@ ready = function() {
     table.$('.delete-participant').each(function(){
       $(this).bind('ajax:success', function() {
         console.log('Participant has been removed.');
-        $(this).parents('tr').remove();
+        table.row( $(this).parents('tr') ).remove().draw();
         toast('success', 'Udało się!', 'Uczestnik został poprawnie usunięty.');
       }).bind('ajax:error', function() {
         console.log('Error on removing a participant.');
