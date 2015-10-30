@@ -3,7 +3,7 @@
     .row
       .col-md-6
         .panel.panel-default
-          .panel-heading Ustawienia
+          .panel-heading: h5.panel-title Ustawienia
           .panel-body
             .form-group
               .col-md-6
@@ -15,7 +15,7 @@
     .row
       .col-md-12
         .panel.panel-default
-          .panel-heading Dane uczestnika
+          .panel-heading: h5.panel-title Dane uczestnika
           .panel-body
             .form-group
               = f.label(:first_name, 'Imię:', class: 'col-sm-2 control-label')
@@ -61,7 +61,7 @@
     .row
       .col-md-12
         .panel.panel-default
-          .panel-heading Opcje uczestnictwa
+          .panel-heading: h5.panel-title Opcje uczestnictwa
           .panel-body
             .form-group
               = f.label(:days, 'Udział:', class: 'col-sm-2 control-label')

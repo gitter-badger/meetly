@@ -1,5 +1,14 @@
 crumb :root do
-  link "Home", root_path
+  link 'Home', root_path
+end
+
+crumb :participants do
+  link 'Uczestnicy', event_participants_path
+end
+
+crumb :participant do |participant|
+  link participant.full_name, edit_event_participant_path(event, participant)
+  parent :participants
 end
 
 # crumb :projects do

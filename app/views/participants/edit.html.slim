@@ -1,9 +1,7 @@
-.row.toolbar-row
-  .col-md-12
-    .btn-toolbar role="toolbar"
-      = link_to 'Powrót', event_participants_path, class: 'btn btn-default'
+- breadcrumb :participant, @participant
 .row
   .col-md-12
     h1.page-title Edytuj uczestnika
+    == breadcrumbs(style: :bootstrap, display_single_fragment: true)
 = render partial: 'form', locals: { event: event, participant: @participant }
 
