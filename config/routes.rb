@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     post '/participant_form', to: 'participants#receive_form', defaults: { format: 'json' }
     delete '/participant_set_status_deleted_and_notify/:id', to: 'participants#set_status_deleted_and_notify', defaults: { format: 'json' }, as: :participant_delete_and_notify
     patch '/participant_set_paid_and_notify/:id', to: 'participants#set_paid_and_notify', defaults: { format: 'json' }, as: :participant_set_paid_and_notify
+    get '/calculate_participance_cost', to: 'participants#calculate_participance_cost', defaults: { format: 'json' }, as: :participant_calculate_cost
   end
 
   get 'login', to: 'sessions#new', as: :login

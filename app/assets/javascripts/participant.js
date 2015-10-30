@@ -107,12 +107,31 @@ ready = function() {
 
     $('#participant-form').on("ajax:success", function(response, data){
       console.log('Success! Participant has been succesfully saved.');
-      $('.total-cost').val(data.cost);
+      $('#participant_cost').val(data.cost);
       toast('success', 'Udało się!', 'Uczestnik został pomyślnie zapisany.');
     }).on("ajax:error", function(){
       console.log('Error! Participant has not been saved.');
       toast('danger', 'Wystapił błąd!', 'Uczestnik nie został zapisany.');
     });
+  });
+
+  function getPrice(){
+    $('#participant-form').ajaxSubmit({
+      url: $('#participant-form').data('calculate-url'),
+      type: 'get',
+      dataType: 'json',
+      success: function(cost){
+        $('#participant_cost').val(cost);
+      }
+    });
+  }
+
+  $('#participant-form :checkbox').click(function() {
+    getPrice();
+  });
+
+  $('#participant_role_id').change(function() {
+    getPrice();
   });
 
 };

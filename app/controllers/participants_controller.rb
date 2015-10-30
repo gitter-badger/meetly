@@ -95,6 +95,39 @@ class ParticipantsController < ApplicationController
     end
   end
 
+  def calculate_participance_cost
+    parameters = params.require(:participant).permit(:status, :role_id, :paid, :first_name, :last_name, :gender, :city, :age, :email, :phone)
+
+    params[:participant][:day_ids] ||= []
+    params[:participant][:service_ids] ||= []
+
+    @participant = event.participants.new
+
+    participant.role = Role.find(params[:participant][:role_id])
+
+    puts participant.services
+    puts participant.role
+
+    participant.days = Day.none
+    participant.services = Service.none
+
+    params[:participant][:day_ids].each do |d|
+      participant.days.push(Day.find(d.to_i))
+    end
+
+    params[:participant][:service_ids].each do |s|
+      participant.services.push(Service.find(s.to_i))
+    end
+
+    participant.calculate_cost
+
+    participant.assign_attributes(parameters)
+
+    respond_to do |format|
+      format.json { render :json => participant.cost }
+    end
+  end
+
   def set_status_deleted_and_notify
     @participant = Participant.find(params[:id])
     @participant.status = 'deleted'
