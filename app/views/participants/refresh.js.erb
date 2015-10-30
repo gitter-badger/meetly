@@ -1,4 +1,0 @@
-var id = '<%= dom_id(@participant) %>';
-var clase = '.' + id;
-$(clase).find(".status").empty();
-$(clase).find(".status").html("<%= j @participant.status %>");

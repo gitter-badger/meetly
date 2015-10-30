@@ -1,5 +1,0 @@
-var id = "<%= @participant.id %>";
-console.log("YEAH!!!!" + id);
-$(".update-participant").empty();
-$(".update-participant").html(" <%= j render 'update', :locals =>{:participant => @participant}%>");
-$(".update-participant").fadeIn('fast');

@@ -1,3 +1,0 @@
-var id = '<%= dom_id(@participant) %>';
-var clase = '.' + id;
-$(clase).replaceWith("<%= raw escape_javascript(render(:partial => @participant)) %>")
