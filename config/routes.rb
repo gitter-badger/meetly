@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   get 'login', to: 'sessions#new', as: :login
   post 'login', to: 'sessions#create', as: :session
-  get 'logout', to: 'sessions#destroy', as: :logout
+  delete 'logout', to: 'sessions#destroy', as: :logout
 
   root to: 'application#redirect_to_events_list'
 end
