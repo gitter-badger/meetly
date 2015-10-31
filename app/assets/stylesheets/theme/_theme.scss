@@ -56,6 +56,26 @@ button::-moz-focus-inner {
   border: 0;
 }
 
+h1.login-brand {
+  font-family: 'Comfortaa', cursive;
+  font-size: 52px;
+  color: $gray-light;
+  letter-spacing: 2px;
+  line-height: 52px;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-box {
+  width: 390px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -120px;
+  margin-left: -195px;
+}
+
 #page-content-wrapper {
   h1, h2, h3 {
     &.page-title {
@@ -297,6 +317,10 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
      i {
       //vertical-align: middle;
      }
+  }
+
+  &.login {
+    width: 100%;
   }
 
   i {
