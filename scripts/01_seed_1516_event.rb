@@ -47,8 +47,8 @@ puts "Services #{sg2.name} created!"
 d1 = Day.create!(number: 1, event: e)
 d2 = Day.create!(number: 2, event: e)
 d3 = Day.create!(number: 3, event: e)
-dp1 = DayPrice.create!(price: 0.0, pricing_period: pp, role: r, day: d1)
-dp2 = DayPrice.create!(price: 49.0, pricing_period: pp, role: r, day: d2)
+dp1 = DayPrice.create!(price: 20.0, pricing_period: pp, role: r, day: d1)
+dp2 = DayPrice.create!(price: 29.0, pricing_period: pp, role: r, day: d2)
 dp3 = DayPrice.create!(price: 69.0, pricing_period: pp, role: r, day: d3)
 
 puts "Days created!"
