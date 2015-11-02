@@ -51,7 +51,7 @@ class ParticipantsController < ApplicationController
   def edit
     participant
     @days = event.days.sort
-    @services = event.services.group_by(&:service_group).sort
+    @services = event.services.sort_by(&:name).group_by(&:service_group)
   end
 
   def update
