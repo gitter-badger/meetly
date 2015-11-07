@@ -160,17 +160,17 @@ class ParticipantsController < ApplicationController
     end
   end
 
-  def unarchive
-    @participant = Participant.unscoped.find(params[:id])
-    @participant.archived = false
-    @participant.save!
-    respond_to do |format|
-      format.js { render "destroy", locals: { id: params[:id] } }
+  def refresh_statuses
+    Participant.where(status: 0).each do |p|
+      if(p.payment_deadline - DateTime.now < 0)
+        logger.info "Changing status to delayed for #{p.first_name} #{p.last_name}..."
+        p.status = 2
+        p.save
+      end
     end
-  end
-
-  def show_archived
-    @participants = Participant.unscoped.where(archived: true)
+    respond_with(nil, status: :ok, location: nil) do |format|
+      format.json
+    end
   end
 
   def edit_payment
