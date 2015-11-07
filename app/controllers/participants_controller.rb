@@ -161,6 +161,7 @@ class ParticipantsController < ApplicationController
   end
 
   def refresh_statuses
+    logger.info "Received refresh status request"
     Participant.where(status: 0).each do |p|
       if(p.payment_deadline - DateTime.now < 0)
         logger.info "Changing status to delayed for #{p.first_name} #{p.last_name}..."
