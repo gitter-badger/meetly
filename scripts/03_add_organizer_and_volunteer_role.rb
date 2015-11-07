@@ -1,9 +1,11 @@
 
 e = Event.find_by_name('Poczatek 15/16')
 puts "Found event #{e.name}"
-o = Role.create!(name: 'Organizator', event_id: e.id)
+o = Role.find_by_name('Organizator')
+o = Role.create!(name: 'Organizator', event_id: e.id) if o == nil
 puts "Role #{o.name} created!"
-v = Role.create!(name: 'Wolontariusz', event_id: e.id)
+v = Role.find_by_name('Wolontariusz')
+v = Role.create!(name: 'Wolontariusz', event_id: e.id) if v == nil
 puts "Role #{v.name} created!"
 
 pp1 = PricingPeriod.find_by_name('Pierwszy termin')
@@ -21,8 +23,8 @@ d3 = Day.find_by(number:3)
 puts "days and services found"
 
 # organizator
-epo1 = EventPrice.create!(pricing_period: pp1, role: o, price: 0)
-epo2 = EventPrice.create!(pricing_period: pp2, role: o, price: 0)
+epo1 = EventPrice.create!(pricing_period: pp1, role: o, event: e, price: 0)
+epo2 = EventPrice.create!(pricing_period: pp2, role: o, event: e, price: 0)
 
 spo1 = ServicePrice.create!(price: 0, role: o, service: s1)
 spo2 = ServicePrice.create!(price: 0, role: o, service: s2)
@@ -39,8 +41,8 @@ dpo32 = DayPrice.create!(price: 0.0, pricing_period: pp2, role: o, day: d3)
 puts "Organizer set up finished"
 
 # wolontariusz
-epo1 = EventPrice.create!(pricing_period: pp1, role: v, price: 60)
-epo2 = EventPrice.create!(pricing_period: pp2, role: v, price: 60)
+epo1 = EventPrice.create!(pricing_period: pp1, role: v, event: e, price: 60)
+epo2 = EventPrice.create!(pricing_period: pp2, role: v, event: e, price: 60)
 
 spo1 = ServicePrice.create!(price: 18.0, role: v, service: s1)
 spo2 = ServicePrice.create!(price: 18.0, role: v, service: s2)
