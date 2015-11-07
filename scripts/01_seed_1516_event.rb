@@ -31,15 +31,15 @@ ep = EventPrice.create!(pricing_period: pp, role: r, event: e, price: 99.0)
 puts "Event price for first period and 'Uczestnik' role created!"
 
 sg = ServiceGroup.create!(name: 'Obiady')
-s1 = Service.create!(name: 'Obiad1', event: e, service_group: sg, description: "Obiad 1 - Dzień 30.12")
-s2 = Service.create!(name: 'Obiad2', event: e, service_group: sg, description: "Obiad 2 - Dzień 31.12")
+s1 = Service.create!(name: 'Obiad 1', event: e, service_group: sg, description: "Obiad 1 - Dzień 30.12")
+s2 = Service.create!(name: 'Obiad 2', event: e, service_group: sg, description: "Obiad 2 - Dzień 31.12")
 sp1 = ServicePrice.create!(price: 18, role: r, service: s1)
 sp2 = ServicePrice.create!(price: 18, role: r, service: s2)
 puts "Services #{sg.name} created!"
 
 sg2 = ServiceGroup.create!(name: 'Noclegi')
-s12 = Service.create!(name: 'Nocleg1', event: e, service_group: sg2, description: "Nocleg 1 - Dzień 29.12")
-s22 = Service.create!(name: 'Nocleg2', event: e, service_group: sg2, description: "Nocleg 2 - Dzień 30.12")
+s12 = Service.create!(name: 'Nocleg 1', event: e, service_group: sg2, description: "Nocleg 1 - Dzień 29.12")
+s22 = Service.create!(name: 'Nocleg 2', event: e, service_group: sg2, description: "Nocleg 2 - Dzień 30.12")
 sp12 = ServicePrice.create!(price: 10, role: r, service: s12)
 sp22 = ServicePrice.create!(price: 10, role: r, service: s22)
 puts "Services #{sg2.name} created!"
