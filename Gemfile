@@ -41,6 +41,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 
 group :production do
   gem 'puma'
+  gem 'unicorn'
 end
 
 group :development, :test do
@@ -76,8 +77,7 @@ end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+#Use unicorn as the app server
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
