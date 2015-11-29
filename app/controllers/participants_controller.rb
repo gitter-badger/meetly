@@ -140,14 +140,12 @@ class ParticipantsController < ApplicationController
   def set_paid_and_notify
     @participant = Participant.find(params[:id])
 
-    unless @participant.status == 'paid'
-      @participant.paid = @participant.cost
-      @participant.status = 'paid'
-      @participant.save!
-      send_payment_confirmation
-      respond_to do |format|
-        format.json { render :json => @participant}
-      end
+    @participant.paid = @participant.cost
+    @participant.status = 'paid'
+    @participant.save!
+    send_payment_confirmation
+    respond_to do |format|
+      format.json { render :json => @participant}
     end
 
   end
