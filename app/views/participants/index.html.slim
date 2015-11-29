@@ -22,6 +22,8 @@
                   th Dzień #{day.number}
                 - @services.each do |service|
                   th= service.name
+                th Data rejestracji
+                th Termin płatności
                 th Koszt
                 th Opłacono
                 th Status
@@ -46,6 +48,8 @@
                       td.boolean: i.zmdi.zmdi-check-circle.zmdi-hc-lg.boolean-icon.text-success
                     - else
                       td.boolean: i.zmdi.zmdi-minus-circle.zmdi-hc-lg.boolean-icon.text-danger
+                  td= participant.created_at.strftime("%d-%m-%Y")
+                  td= participant.payment_deadline.strftime("%d-%m-%Y")
                   td= amount_or_zero_pln(participant.cost)
                   td.paid= amount_or_zero_pln(participant.paid)
                   = render partial: 'participant_status', locals: { participant: participant }
