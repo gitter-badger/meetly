@@ -90,9 +90,6 @@ class Participant < ActiveRecord::Base
     current_period = PricingPeriod.current_period
     payment_time = 7
     payment_deadline = Time.now.to_date + payment_time.days
-    if payment_deadline > current_period.end_date
-      payment_deadline = current_period.end_date.to_date
-    end
     self.payment_deadline = payment_deadline
     logger.debug "Finished deadline calculation. Deadline: #{payment_deadline}"
   end
