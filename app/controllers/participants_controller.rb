@@ -79,7 +79,8 @@ class ParticipantsController < ApplicationController
 
     if participant.save
       respond_to do |format|
-        format.json { render :json => participant}
+        format.json { render json: participant}
+        format.js { render js: "window.location.pathname = #{event_participants_path.to_json}" }
       end
     end
   end
