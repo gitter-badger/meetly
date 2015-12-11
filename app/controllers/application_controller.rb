@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
 
-  helper_method :current_person, :current_account, :user_signed_in?
+  helper_method :current_person, :current_account, :user_signed_in?, :current_event
 
   def redirect_to_events_list
     redirect_to events_path
@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
 
   def user_signed_in?
     !current_user.nil?
+  end
+
+  def current_event
+    Event.find_by(unique_id: params[:event_id].to_s)
   end
 
   def sign_in(user)

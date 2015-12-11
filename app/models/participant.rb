@@ -20,17 +20,19 @@ class Participant < ActiveRecord::Base
   enum status: [:created, :pending, :delayed, :paid, :arrived, :deleted]
 
   scope :active, -> { where.not(status: statuses[:deleted]) }
+  scope :created, -> { where(status: statuses[:created]) }
+  scope :unpaid, -> { where(status: statuses[:delayed]) }
 
   def full_name
     [last_name, first_name].compact.join(' ')
   end
 
   def payment_deadline_at_string
-    payment_deadline.strftime('%d-%m-%Y').to_s
+    payment_deadline.strftime('%d-%m-%Y').to_s if payment_deadline.present?
   end
 
   def payment_deadline_at_string=(payment_deadline_at_str)
-    self.payment_deadline = DateTime.strptime(payment_deadline_at_str, '%d-%m-%Y')
+    self.payment_deadline = DateTime.strptime(payment_deadline_at_str, '%d-%m-%Y') if payment_deadline.present?
   end
 
   def self.gender_attributes_for_select
