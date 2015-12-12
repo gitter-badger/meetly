@@ -4,30 +4,4 @@
     == breadcrumbs(style: :bootstrap, display_single_fragment: true)
     h1.page-title Pulpit
 .row
-  .col-md-3
-    .dashboard-widget.widget-warning
-      .widget-icon.zmdi.zmdi-calendar-check.zmdi-hc-lg
-      .widget-text
-        .widget-title = participants_registered_today.count
-        .widget-subtitle Zarejestrowanych dzisiaj
-  .col-md-3
-    .dashboard-widget.widget-primary
-      .widget-icon.zmdi.zmdi-accounts-alt.zmdi-hc-lg
-      .widget-text
-        .widget-title = participants.active.count
-        .widget-subtitle Zarejestrowanych uczestników
-  .col-md-3
-    .dashboard-widget.widget-danger
-      .widget-icon.zmdi.zmdi-time.zmdi-hc-lg
-      .widget-text
-        .widget-title = participants.unpaid.count
-        .widget-subtitle Nieopłaconych uczestników
-  .col-md-3
-    .dashboard-widget.widget-success
-      .widget-icon.zmdi.zmdi-money.zmdi-hc-lg
-      .widget-text
-        .widget-title
-          | #{participants_payments_sum}
-          small
-            |  / #{participants_participance_costs_sum}
-        .widget-subtitle Wpłaconych pieniędzy
+  = render 'widgets'
