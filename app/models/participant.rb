@@ -98,7 +98,8 @@ class Participant < ActiveRecord::Base
 
   def calculate_cost
     logger.debug "Started cost calculation..."
-    current_period = PricingPeriod.current_period
+    self.created_at ||= Time.now.getlocal('+01:00')
+    current_period = PricingPeriod.corresponding_period self.created_at.to_date
     cost = 0
     services.each do |service|
       logger.debug "Adding service #{service.name} cost. For role: #{role_id}"
