@@ -23,6 +23,9 @@ class Participant < ActiveRecord::Base
   scope :created, -> { where(status: statuses[:created]) }
   scope :unpaid, -> { where(status: statuses[:delayed]) }
 
+  scope :women, -> { where(gender: genders[:woman]) }
+  scope :men, -> { where(gender: genders[:man]) }
+
   def full_name
     [last_name, first_name].compact.join(' ')
   end
