@@ -1,0 +1,19 @@
+.col-md-6
+  .panel.panel-default
+      .panel-heading Opcje zgłoszeń
+      .panel-body
+        ul.nav.nav-pills
+          li role='presentation'
+            =link_to 'Dni', '#days', data: { toggle: 'pill'}
+          li role='presentation'
+            =link_to 'Noclegi', '#nights', data: { toggle: 'pill'}
+          li role='presentation'
+            =link_to 'Obiady', '#dinners', data: { toggle: 'pill'}
+          .row
+          .tab-content
+            #days.tab-pane role='tabpanel'
+              = render 'dashboard/tables/days'
+            #nights.tab-pane role='tabpanel'
+              = render 'dashboard/tables/nights'
+            #dinners.tab-pane role='tabpanel'
+              = render 'dashboard/tables/dinners'

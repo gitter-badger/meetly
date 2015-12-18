@@ -1,0 +1,9 @@
+table.table.table-striped
+  thead
+    th Dzień
+    th Ilość zgłoszeń
+  tbody
+    - current_event.days.each do |day|
+      tr
+        td Dzień #{day.number}
+        td = participants.active.select { |participant| participant.days.include?(day)  }.count

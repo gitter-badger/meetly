@@ -1,0 +1,9 @@
+table.table.table-striped
+  thead
+    th Obiad
+    th Ilość zamówień
+  tbody
+    - current_event.services.in_service_group('Obiady').order('name asc').each do |service|
+      tr
+        td= service.description
+        td= participants.active.select { |participant| participant.services.include?(service)  }.count

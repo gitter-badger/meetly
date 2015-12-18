@@ -1,0 +1,13 @@
+table.table.table-striped
+  thead
+    th Nocleg
+    th Kobiety
+    th Mężczyźni
+    th Razem
+  tbody
+    - current_event.services.in_service_group('Noclegi').order('name asc').each do |service|
+      tr
+        td= service.description
+        td= participants.active.women.select { |participant| participant.services.include?(service)  }.count
+        td= participants.active.men.select { |participant| participant.services.include?(service)  }.count
+        td= participants.active.select { |participant| participant.services.include?(service)  }.count

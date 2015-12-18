@@ -1,0 +1,5 @@
+.col-md-6
+  .panel.panel-default
+    .panel-heading Płeć
+    .panel-body
+      = pie_chart participants.group(:gender).count.map { |k, v| [I18n.t(:"participant_gender.#{Participant.genders.key(k)}"), v] }.to_h, {colors: ["#7992BF", "#495469"], library: {pieSliceText: "percentage" }}

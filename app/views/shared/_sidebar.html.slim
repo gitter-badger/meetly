@@ -15,19 +15,6 @@
           = link_to event_participants_path, class: 'sub-link' do
             i.zmdi.zmdi-hc-fw
             span.item-name Lista uczestników
-          end
+          = link_to new_event_participant_path, class: 'sub-link' do
             i.zmdi.zmdi-hc-fw
             span.item-name Dodaj uczestnika
-    li
-      a.top-link href="#"
-        i.icon.zmdi.zmdi-hc-fw 
-        span.item-name Wiadomości
-        i.zmdi.zmdi-hc-fw.pull-right.arrow 
-      ul.submenu
-        li
-          a.sub-link href="#"
-            i.zmdi.zmdi-hc-fw
-            span.item-name Wszystko
-          a.sub-link href="#"
-            i.zmdi.zmdi-hc-fw
-            span.item-name Nic
