@@ -47,3 +47,15 @@ ready = function() {
 $(document).ready(ready);
 $(document).on('page:load', ready);
 
+$(document).on('page:fetch', function() {
+  $(".loading-mask").fadeIn( "fast", function() {
+    $(".loading-mask").show();
+  })
+});
+
+$(document).on('page:change', function() {
+  setTimeout(function(){  $(".loading-mask").fadeOut( "fast", function() {
+    $(".loading-mask").hide();
+  }) }, 1500);
+});
+
