@@ -1,3 +1,3 @@
 class DashboardController < ApplicationController
-  expose(:participants) { current_event.participants.includes(:days, :services) }
+  expose(:participants) { current_event.participants.active.includes(:days, :services) }
 end

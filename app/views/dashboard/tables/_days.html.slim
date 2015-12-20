@@ -6,4 +6,4 @@ table.table.table-striped
     - current_event.days.each do |day|
       tr
         td Dzień #{day.number}
-        td = participants.active.select { |participant| participant.days.include?(day)  }.count
+        td = participants.select { |participant| participant.days.include?(day)  }.count
