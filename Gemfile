@@ -41,6 +41,8 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 
 gem 'decent_exposure'
 
+gem "chartkick"
+
 group :production do
   gem 'puma'
   gem 'unicorn'
