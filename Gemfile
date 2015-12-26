@@ -49,6 +49,7 @@ group :production do
 end
 
 group :development, :test do
+  gem 'byebug'
   gem 'spring'
   gem 'spring-commands-rspec', '~> 1.0.4'
   gem 'rspec-rails', '~> 3.3.3'
