@@ -13,6 +13,7 @@ class Participant < ActiveRecord::Base
   validates :days, length: { minimum: 1 }
   validates :email, uniqueness: { scope: [:first_name, :last_name, :status] }
   validate :days_must_be_in_proper_groups
+  before_save :paid_equals_cost, if: proc { arrived? }
   before_save :calculate_cost
   before_create :calculate_deadline
 
@@ -75,6 +76,10 @@ class Participant < ActiveRecord::Base
   attr_accessor :mandrill
 
   # private
+
+  def paid_equals_cost
+    paid == cost
+  end
 
   def days_must_be_in_proper_groups
     day1 = Day.find_by_number(1)

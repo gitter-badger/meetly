@@ -94,10 +94,10 @@ class ParticipantsController < ApplicationController
 
   def set_arrived
     @participant = Participant.find(params[:id])
-    @participant.arrived = !@participant.arrived
-    @participant.save!
-    respond_to do |format|
-      format.js { render "refresh", locals: { id: params[:id] } }
+    participant.status = 'arrived'
+    participant.save!
+    respond_with(participant, status: :ok, location: nil) do |format|
+      format.json
     end
   end
 

@@ -96,6 +96,18 @@ ready = function() {
       });
     });
 
+    table.$('.arrived-participant').each(function(){
+      $(this).bind('ajax:success', function(response, data) {
+        console.log('Participant has been set as arrived.');
+        $(this).closest('tr').find('td.status').html('<span class="label status-label label-default">Przyjechał</span>');
+        $(this).closest('tr').find('.arrived-participant').remove();
+        toast('success', 'Udało się!', 'Przyjazd uczestnika zapisany.');
+      }).bind('ajax:error', function() {
+        console.log('Error on setting participant as paid.');
+        toast('danger', 'Wystapił błąd!', 'Przyjazd uczestnika nie został zapisany, spróbuj ponownie.');
+      });
+    });
+
   });
 
   /**
