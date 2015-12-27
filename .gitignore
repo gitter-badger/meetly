@@ -79,3 +79,5 @@ config/app_env_variables.rb
 config/google_analytics.yml
 config/database.yml
 /node_modules/
+
+.byebug_history
