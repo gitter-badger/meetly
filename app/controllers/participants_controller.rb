@@ -11,41 +11,44 @@ class ParticipantsController < ApplicationController
     @services = event.services.sort
   end
 
+  def new
+    @participant = Participant.new(event: event)
+    @days = event.days.sort
+    @services = event.services.includes(:service_group).sort_by(&:name).group_by(&:service_group)
+  end
+
   def create
-    parameters = params.require(:participant).permit(:arrived, :gender, :paid, :first_name, :last_name, :age, :city, :email, :phone)
+    participant_param = participant_params
 
-    @participant = Participant.new(parameters)
+    event = Event.find_by(unique_id: params[:event_id])
+    @participant = Participant.new(participant_param)
+    participant.role = Role.find(params[:participant][:role_id])
+    @participant.event = event
 
-    role_id = params[:participant][:role_id]
-    @participant.role = Role.find(role_id)
+    params[:participant][:day_ids] ||= []
+    params[:participant][:service_ids] ||= []
 
-    day_ids = params[:participant][:day_ids]
-    dinner_ids = params[:participant][:dinner_ids]
-    night_ids = params[:participant][:night_ids]
+    participant.days = Day.none
+    participant.services = Service.none
 
-    day_ids.reject!(&:empty?)
-    dinner_ids.reject!(&:empty?)
-    night_ids.reject!(&:empty?)
-
-    @participant.days = Day.none
-    @participant.dinners = Dinner.none
-    @participant.nights = Night.none
-
-    day_ids.each do |d|
-      @participant.days.push(Day.find(d.to_i))
-    end
-    dinner_ids.each do |d|
-      @participant.dinners.push(Dinner.find(d.to_i))
-    end
-    night_ids.each do |d|
-      @participant.nights.push(Night.find(d.to_i))
+    params[:participant][:day_ids].each do |d|
+      participant.days.push(Day.find(d.to_i))
     end
 
-    @participant.payment_deadline = DateTime.new(params[:participant]["payment_deadline(1i)"].to_i, params[:participant]["payment_deadline(2i)"].to_i, params[:participant]["payment_deadline(3i)"].to_i)
+    params[:participant][:service_ids].each do |s|
+      participant.services.push(Service.find(s.to_i))
+    end
 
-    @participant.save!
-
-    redirect_to root_url
+    if participant.save
+      respond_to do |format|
+        format.json { render json: participant}
+        format.js { render js: "window.location.pathname = #{event_participants_path.to_json}" }
+      end
+    else
+      respond_with("error: #{@participant.errors.to_a.join(', ')}", status: 601, location: nil) do |format|
+        format.json
+      end
+    end
   end
 
   def edit

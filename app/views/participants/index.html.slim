@@ -4,6 +4,12 @@
     == breadcrumbs(style: :bootstrap, display_single_fragment: true)
     h1.page-title Lista uczestników
 .row
+  .col-md-12
+    .btn-group role="group"
+        = link_to new_event_participant_path, class: 'btn btn-small btn-success participant-action iconic-button', title: 'Dodaj uczestnika' do
+          i.zmdi.zmdi-plus.zmdi-hc-lg
+          span.text Dodaj uczestnika
+.row
   .col-lg-12
     .panel.panel-default
       .panel-body
