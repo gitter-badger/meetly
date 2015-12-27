@@ -8,6 +8,6 @@ table.table.table-striped
     - current_event.services.in_service_group('Noclegi').order('name asc').each do |service|
       tr
         td= service.description
-        td= participants_with_days_and_services.women.select { |participant| participant.services.include?(service)  }.count
-        td= participants_with_days_and_services.men.select { |participant| participant.services.include?(service)  }.count
-        td= participants_with_days_and_services.select { |participant| participant.services.include?(service)  }.count
+        td= participants_with_days_and_services.paid.women.select { |participant| participant.services.include?(service)  }.count
+        td= participants_with_days_and_services.paid.men.select { |participant| participant.services.include?(service)  }.count
+        td= participants_with_days_and_services.paid.select { |participant| participant.services.include?(service)  }.count
