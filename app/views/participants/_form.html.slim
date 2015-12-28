@@ -16,7 +16,7 @@
                 .col-md-4
                   = f.label(:payment_deadline_at_string, 'Termin płatności:')
                   #payment_deadline_date.input-group.date
-                    = f.text_field :payment_deadline_at_string, class: 'form-control', placeholder: 'Termin płatności', required: 'true'
+                    = f.text_field :payment_deadline_at_string, class: 'form-control', placeholder: 'Termin płatności', required: 'false'
                     .input-group-addon: i.zmdi.zmdi-calendar.zmdi-hc-lg
     .row
       .col-md-12
@@ -44,25 +44,25 @@
             .form-group
               = f.label(:city, 'Miejscowość:', class: 'col-sm-2 control-label')
               .col-sm-10
-                = f.text_field :city, class: 'form-control', placeholder: 'Miasto', data: { error: 'Podaj miejscowość, w której mieszkasz.' }, required: 'true'
+                = f.text_field :city, class: 'form-control', placeholder: 'Miasto', data: { error: 'Podaj miejscowość, w której mieszkasz.' }
               .help-block.with-errors
             .hr-line-dashed
             .form-group
               = f.label(:age, 'Wiek (min. 16 lat):', class: 'col-sm-2 control-label')
               .col-sm-10
-                = f.text_field :age, class: 'form-control', placeholder: 'Wiek', data: { error: 'Podaj swój wiek.' }, required: 'true'
+                = f.text_field :age, class: 'form-control', placeholder: 'Wiek', data: { error: 'Podaj swój wiek.' }
               .help-block.with-errors
             .hr-line-dashed
             .form-group
               = f.label(:email, 'E-mail:', class: 'col-sm-2 control-label')
               .col-sm-10
-                = f.text_field :email, class: 'form-control', placeholder: 'E-mail', data: { error: 'E-mail jest niepoprawny.' }, required: 'true'
+                = f.text_field :email, class: 'form-control', placeholder: 'E-mail', data: { error: 'E-mail jest niepoprawny.' }
               .help-block.with-errors
             .hr-line-dashed
             .form-group
               = f.label(:phone, 'Telefon:', class: 'col-sm-2 control-label')
               .col-sm-10
-                = f.text_field :phone, class: 'form-control', placeholder: 'Telefon', data: { error: 'Podaj swój numer telefonu.' }, required: 'true'
+                = f.text_field :phone, class: 'form-control', placeholder: 'Telefon', data: { error: 'Podaj swój numer telefonu.' }
               .help-block.with-errors
     .row
       .col-md-12
