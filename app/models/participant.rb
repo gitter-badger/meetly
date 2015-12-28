@@ -8,11 +8,13 @@ class Participant < ActiveRecord::Base
   has_many :participant_services
   has_many :services, through: :participant_services
 
-  validates_presence_of :first_name, :last_name, :email, :age, :city, :phone, :role, :gender, :event_id, :status
-  validates :age, numericality: { only_integer: true }
+  validates_presence_of :first_name, :last_name, :role, :event_id, :status
+#:email
+#, :age, :city, :phone, :role, :gender, :event_id, :status
+  #validates :age, numericality: { only_integer: true }
   validates :days, length: { minimum: 1 }
   validates :email, uniqueness: { scope: [:first_name, :last_name, :status] }
-  validate :days_must_be_in_proper_groups
+  #validate :days_must_be_in_proper_groups
   before_save :paid_equals_cost, if: proc { arrived? }
   before_save :calculate_cost
   before_create :calculate_deadline
