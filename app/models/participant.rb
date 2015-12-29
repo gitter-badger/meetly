@@ -80,7 +80,7 @@ class Participant < ActiveRecord::Base
   # private
 
   def paid_equals_cost
-    paid == cost
+    paid >= cost
   end
 
   def days_must_be_in_proper_groups
