@@ -201,6 +201,7 @@ class ParticipantsController < ApplicationController
   end
 
   def receive_form
+
     logger.info "Received participant form request. Params: #{params}"
     logger.info "Request body: #{request.body.read}"
     participant_param = participant_params

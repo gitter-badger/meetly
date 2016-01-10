@@ -12,7 +12,7 @@ class Participant < ActiveRecord::Base
 #:email
 #, :age, :city, :phone, :role, :gender, :event_id, :status
   #validates :age, numericality: { only_integer: true }
-  validates :days, length: { minimum: 1 }
+  #validates :days, length: { minimum: 1 }
   before_save :calculate_cost
   before_create :calculate_deadline
 
