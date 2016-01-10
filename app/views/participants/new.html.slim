@@ -1,0 +1,7 @@
+- breadcrumb :new_participant, @participant
+.row
+  .col-md-12
+    == breadcrumbs(style: :bootstrap, display_single_fragment: true)
+    h1.page-title Dodaj uczestnika
+= render partial: 'form', locals: { event: event, participant: @participant }
+

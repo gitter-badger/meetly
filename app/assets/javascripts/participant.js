@@ -89,11 +89,22 @@ ready = function() {
         console.log('Participant has been set as paid and notified by e-mail.');
         $(this).closest('tr').find('td.status').html('<span class="label status-label label-success">Opłacony</span>');
         $(this).closest('tr').find('td.paid').html(parseFloat(data.paid).toFixed(2) + ' PLN');
-        $(this).remove();
         toast('success', 'Udało się!', 'Uczestnik został oznaczony jako opłacony.');
       }).bind('ajax:error', function() {
         console.log('Error on setting participant as paid.');
         toast('danger', 'Wystapił błąd!', 'Uczestnik nie został oznaczony jako opłacony, spróbuj ponownie.');
+      });
+    });
+
+    table.$('.arrived-participant').each(function(){
+      $(this).bind('ajax:success', function(response, data) {
+        console.log('Participant has been set as arrived.');
+        $(this).closest('tr').find('td.status').html('<span class="label status-label label-default">Przyjechał</span>');
+        $(this).closest('tr').find('.arrived-participant').remove();
+        toast('success', 'Udało się!', 'Przyjazd uczestnika zapisany.');
+      }).bind('ajax:error', function() {
+        console.log('Error on setting participant as paid.');
+        toast('danger', 'Wystapił błąd!', 'Przyjazd uczestnika nie został zapisany, spróbuj ponownie.');
       });
     });
 

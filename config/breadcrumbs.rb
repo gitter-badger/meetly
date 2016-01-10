@@ -6,8 +6,17 @@ crumb :participants do
   link 'Uczestnicy', event_participants_path
 end
 
+crumb :dashboard do
+  link 'Pulpit', event_dashboard_path
+end
+
 crumb :participant do |participant|
   link participant.full_name, edit_event_participant_path(event, participant)
+  parent :participants
+end
+
+crumb :new_participant do |participant|
+  link 'Dodaj uczestnika', new_event_participant_path(event)
   parent :participants
 end
 

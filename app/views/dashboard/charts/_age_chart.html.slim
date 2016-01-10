@@ -1,0 +1,5 @@
+.col-md-7
+  .panel.panel-default
+    .panel-heading Wiek uczestników
+    .panel-body
+      = column_chart participants.group(:age).count, {colors: ["#7992BF", "#495469"]}

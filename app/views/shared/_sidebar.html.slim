@@ -1,32 +1,20 @@
 #sidebar-wrapper
   ul#menu.sidebar-nav.metismenu
     li
-      a.top-link href="#"
-        i.icon.zmdi.zmdi-hc-fw 
-        span Pulpit
+      = link_to event_dashboard_path, class: 'top-link' do
+          i.icon.zmdi.zmdi-hc-fw 
+          span Pulpit
+      end
     li
-      a.top-link href="#"
+      a.top-link href=""
         i.icon.zmdi.zmdi-hc-fw 
         span.item-name Uczestnicy
         i.zmdi.zmdi-hc-fw.pull-right.arrow 
       ul.submenu
         li
-          a.sub-link href="#"
+          = link_to event_participants_path, class: 'sub-link' do
             i.zmdi.zmdi-hc-fw
             span.item-name Lista uczestników
-          a.sub-link href="#"
+          = link_to new_event_participant_path, class: 'sub-link' do
             i.zmdi.zmdi-hc-fw
             span.item-name Dodaj uczestnika
-    li
-      a.top-link href="#"
-        i.icon.zmdi.zmdi-hc-fw 
-        span.item-name Wiadomości
-        i.zmdi.zmdi-hc-fw.pull-right.arrow 
-      ul.submenu
-        li
-          a.sub-link href="#"
-            i.zmdi.zmdi-hc-fw
-            span.item-name Wszystko
-          a.sub-link href="#"
-            i.zmdi.zmdi-hc-fw
-            span.item-name Nic

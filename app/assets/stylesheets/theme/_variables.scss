@@ -118,7 +118,7 @@ $border-radius-small:       2px !default;
 //** Global color for active items (e.g., navs or dropdowns).
 $component-active-color:    #fff !default;
 //** Global background color for active items (e.g., navs or dropdowns).
-$component-active-bg:       $brand-primary !default;
+$component-active-bg:       $blue !default;
 
 //** Width of the `border` for generating carets that indicator dropdowns.
 $caret-width-base:          4px !default;
@@ -905,3 +905,13 @@ $sidebar-link-spacing:      normal;
 $sidebar-link-line-height:  $sidebar-link-icon-size;
 $sidebar-item-height:       50px;
 $sidebar-item-padding-v:    ($sidebar-item-height - $sidebar-link-icon-size)/2;
+
+// DASHBOARD WIDGETS
+
+$widget-icon-height: 40px;
+$widget-icon-width: $widget-icon-height;
+$widget-icon-border-radius: $widget-icon-height / 2;
+$widget-icon-font-size: 18px;
+$widget-title-font-size: 20px;
+$widget-subtitle-font-size: 12px;
+

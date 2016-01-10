@@ -8,8 +8,10 @@ class Participant < ActiveRecord::Base
   has_many :participant_services
   has_many :services, through: :participant_services
 
-  validates_presence_of :first_name, :last_name, :email, :age, :city, :phone, :role, :gender, :event_id, :status
-  validates :age, numericality: { only_integer: true }
+  validates_presence_of :first_name, :last_name, :role, :event_id, :status
+#:email
+#, :age, :city, :phone, :role, :gender, :event_id, :status
+  #validates :age, numericality: { only_integer: true }
   validates :days, length: { minimum: 1 }
   before_save :calculate_cost
   before_create :calculate_deadline
@@ -18,6 +20,11 @@ class Participant < ActiveRecord::Base
   enum status: [:created, :pending, :delayed, :paid, :arrived, :deleted]
 
   scope :active, -> { where.not(status: statuses[:deleted]) }
+  scope :created, -> { where(status: statuses[:created]) }
+  scope :unpaid, -> { where(status: statuses[:delayed]) }
+
+  scope :women, -> { where(gender: genders[:woman]) }
+  scope :men, -> { where(gender: genders[:man]) }
 
   def full_name
     [last_name, first_name].compact.join(' ')
@@ -32,11 +39,11 @@ class Participant < ActiveRecord::Base
   end
 
   def payment_deadline_at_string
-    payment_deadline.strftime('%d-%m-%Y').to_s
+    payment_deadline.strftime('%d-%m-%Y').to_s if payment_deadline.present?
   end
 
   def payment_deadline_at_string=(payment_deadline_at_str)
-    self.payment_deadline = DateTime.strptime(payment_deadline_at_str, '%d-%m-%Y')
+    self.payment_deadline = DateTime.strptime(payment_deadline_at_str, '%d-%m-%Y') if payment_deadline.present?
   end
 
   def self.gender_attributes_for_select
@@ -77,21 +84,40 @@ class Participant < ActiveRecord::Base
 
   # private
 
+<<<<<<< HEAD
+=======
+  def paid_equals_cost
+    paid >= cost
+  end
+
+  def days_must_be_in_proper_groups
+    day1 = Day.find_by_number(1)
+    day2 = Day.find_by_number(2)
+    day3 = Day.find_by_number(3)
+
+    if days.length == 1 && !days.include?(day3)
+      errors.add(:days, 'only third day can be chosen single')
+    elsif days.length == 2 && (!days.include?(day1) || !days.include?(day2))
+      errors.add(:days, 'only first and second day can be chosen in pair')
+    elsif days.length > Day.all.length
+      errors.add(:days, 'too many days')
+    end
+  end
+
+>>>>>>> master
   def calculate_deadline
     logger.debug "Started deadline calculation..."
     current_period = PricingPeriod.current_period
     payment_time = 7
     payment_deadline = Time.now.to_date + payment_time.days
-    if payment_deadline > current_period.end_date
-      payment_deadline = current_period.end_date.to_date
-    end
     self.payment_deadline = payment_deadline
     logger.debug "Finished deadline calculation. Deadline: #{payment_deadline}"
   end
 
   def calculate_cost
     logger.debug "Started cost calculation..."
-    current_period = PricingPeriod.current_period
+    self.created_at ||= Time.now.getlocal('+01:00')
+    current_period = PricingPeriod.corresponding_period self.created_at.to_date
     cost = 0
     services.each do |service|
       logger.debug "Adding service #{service.name} cost. For role: #{role_id}"

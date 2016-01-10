@@ -1,0 +1,13 @@
+.col-md-6
+  .panel.panel-default
+      .panel-heading Statusy zgłoszeń
+      .panel-body
+        table.table.table-striped
+          thead
+            th Status
+            th Liczba uczestników
+          tbody
+            - Participant.statuses.keys.each do |status|
+              tr
+                td= t("participant_status.#{status}")
+                td= participants.select { |participant| participant.status == status  }.count

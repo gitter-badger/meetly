@@ -22,6 +22,9 @@ puts "Event #{e.name} created!"
 pp = PricingPeriod.create!(name: 'Pierwszy termin', event: e, start_date: Date.new(2015, 10, 1), end_date: Date.new(2015, 12, 10))
 puts "PricingPeriod #{pp.name} created!"
 
+pp2 = PricingPeriod.create!(name: 'Drugi termin', event: e, start_date: Date.new(2015, 12, 11), end_date: Date.new(2015, 12, 31))
+puts "PricingPeriod #{pp2.name} created!"
+
 r = Role.create!(
   name: 'Uczestnik',
   event_id: e.id
@@ -30,6 +33,7 @@ r = Role.create!(
 puts "Role #{r.name} created!"
 
 ep = EventPrice.create!(pricing_period: pp, role: r, event: e, price: 99.0)
+ep = EventPrice.create!(pricing_period: pp2, role: r, event: e, price: 129.0)
 puts "Event price for first period and 'Uczestnik' role created!"
 
 sg = ServiceGroup.create!(name: 'Obiady')
@@ -49,9 +53,14 @@ puts "Services #{sg2.name} created!"
 d1 = Day.create!(number: 1, event: e)
 d2 = Day.create!(number: 2, event: e)
 d3 = Day.create!(number: 3, event: e)
+
 dp1 = DayPrice.create!(price: 0.0, pricing_period: pp, role: r, day: d1)
 dp2 = DayPrice.create!(price: 49.0, pricing_period: pp, role: r, day: d2)
 dp3 = DayPrice.create!(price: 69.0, pricing_period: pp, role: r, day: d3)
+
+dp4 = DayPrice.create!(price: 0.0, pricing_period: pp, role: r, day: d1)
+dp5 = DayPrice.create!(price: 59.0, pricing_period: pp, role: r, day: d2)
+dp6 = DayPrice.create!(price: 79.0, pricing_period: pp, role: r, day: d3)
 
 puts "Days created!"
 

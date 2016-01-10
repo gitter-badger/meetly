@@ -39,12 +39,17 @@ gem 'momentjs-rails', '>= 2.9.0'
 
 gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 
+gem 'decent_exposure'
+
+gem "chartkick"
+
 group :production do
   gem 'puma'
   gem 'unicorn'
 end
 
 group :development, :test do
+  gem 'byebug'
   gem 'spring'
   gem 'spring-commands-rspec', '~> 1.0.4'
   gem 'rspec-rails', '~> 3.3.3'

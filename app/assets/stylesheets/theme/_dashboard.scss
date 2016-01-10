@@ -1,0 +1,77 @@
+.dashboard-widget {
+  display: inline-block;
+  padding: 20px;
+  background: $white;
+  width: 100%;
+
+  .widget-icon,
+  .widget-text {
+    display: inline-block;
+    float: left;
+  }
+
+  .widget-icon {
+    text-align: center;
+    height: $widget-icon-height;
+    width: $widget-icon-width;
+    border-radius: $widget-icon-border-radius;
+    -moz-border-radius: $widget-icon-border-radius;
+    -webkit-border-radius: $widget-icon-border-radius;
+    line-height: $widget-icon-height;
+    margin-right: 15px;
+    color: $white;
+
+    &:before {
+      display: inline-block;
+      font-size: $widget-icon-font-size;
+      vertical-align: middle;
+      text-align: center;
+      margin: 0 auto;
+    }
+  }
+
+  .widget-title {
+    font-size: $widget-title-font-size;
+    line-height: $widget-title-font-size;
+    font-weight: 400;
+
+    small {
+      font-size: $widget-title-font-size / 1.6;
+    }
+  }
+
+  .widget-subtitle {
+    font-size: $widget-subtitle-font-size;
+    line-height: $widget-title-font-size;
+  }
+
+  &.widget-primary {
+    .widget-icon {
+      background: $brand-primary;
+    }
+  }
+
+  &.widget-info {
+    .widget-icon {
+      background: $brand-info;
+    }
+  }
+
+  &.widget-success {
+    .widget-icon {
+      background: $brand-success;
+    }
+  }
+
+  &.widget-danger {
+    .widget-icon {
+      background: $brand-danger;
+    }
+  }
+
+  &.widget-warning {
+    .widget-icon {
+      background: $brand-warning;
+    }
+  }
+}

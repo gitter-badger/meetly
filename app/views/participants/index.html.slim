@@ -4,6 +4,12 @@
     == breadcrumbs(style: :bootstrap, display_single_fragment: true)
     h1.page-title Lista uczestników
 .row
+  .col-md-12
+    .btn-group role="group"
+        = link_to new_event_participant_path, class: 'btn btn-small btn-success participant-action iconic-button', title: 'Dodaj uczestnika' do
+          i.zmdi.zmdi-plus.zmdi-hc-lg
+          span.text Dodaj uczestnika
+.row
   .col-lg-12
     .panel.panel-default
       .panel-body
@@ -25,6 +31,8 @@
                   th #{day.display_name}
                 - @services.each do |service|
                   th= service.name
+                th Data rejestracji
+                th Termin płatności
                 th Koszt
                 th Opłacono
                 th Status
@@ -52,18 +60,21 @@
                       td.boolean: i.zmdi.zmdi-check-circle.zmdi-hc-lg.boolean-icon.text-success
                     - else
                       td.boolean: i.zmdi.zmdi-minus-circle.zmdi-hc-lg.boolean-icon.text-danger
+                  td= participant.created_at.strftime("%Y-%m-%d")
+                  td= participant.payment_deadline.strftime("%Y-%m-%d")
                   td= amount_or_zero_pln(participant.cost)
                   td.paid= amount_or_zero_pln(participant.paid)
                   = render partial: 'participant_status', locals: { participant: participant }
                   td
                     .btn-group role="group"
+                      - unless participant.status == 'arrived'
+                        = link_to event_participant_set_arrived_path(participant.event, participant.id), method: 'patch', remote: true, class: 'arrived-participant btn btn-primary btn-small participant-action iconic-button', title: 'Przyjechał' do
+                            i.zmdi.zmdi-car.zmdi-hc-lg
+                            span.text Przyjechał
                       = link_to edit_event_participant_path(participant.event, participant.id), class: 'delete-participant btn btn-small btn-default participant-action iconic-button', title: 'Edytuj zgłoszenie' do
                         i.zmdi.zmdi-edit.zmdi-hc-lg
                         span.text Edytuj
-                      = link_to '#', class: 'btn btn-small btn-default participant-action icon-button', title: 'Edytuj zgłoszenie' do
-                        i.zmdi.zmdi-email.zmdi-hc-lg
-                      - unless participant.status == 'paid'
-                        = link_to event_participant_set_paid_and_notify_path(participant.event, participant.id), method: 'patch', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz ustawić uczestnika jako opłaconego i wysłać mu powiadomienie e-mail o otrzymaniu wpłaty?', confirm_type: 'success', confirm_text: 'Potwierdź' }, class: 'paid-participant btn btn-default btn-small participant-action icon-button', title: 'Opłać zgłoszenie' do
+                      = link_to event_participant_set_paid_and_notify_path(participant.event, participant.id), method: 'patch', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz ustawić uczestnika jako opłaconego i wysłać mu powiadomienie e-mail o otrzymaniu wpłaty?', confirm_type: 'success', confirm_text: 'Potwierdź' }, class: 'paid-participant btn btn-default btn-small participant-action icon-button', title: 'Opłać zgłoszenie' do
                           i.zmdi.zmdi-money.zmdi-hc-lg
                       = link_to event_participant_delete_and_notify_path(participant.event, participant.id), method: 'delete', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz usunąć tego uczestnika?', confirm_type: 'danger', confirm_text: 'Usuń', type: 'script'}, class: 'delete-participant btn btn-small btn-default participant-action icon-button', title: 'Usuń zgłoszenie' do
                         i.zmdi.zmdi-delete.zmdi-hc-lg

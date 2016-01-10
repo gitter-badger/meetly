@@ -30,6 +30,6 @@ class Event < ActiveRecord::Base
   end
 
   def participant_count
-    self.participants.count
+    self.participants.where.not(status: 5).count
   end
 end

@@ -20,7 +20,10 @@ Rails.application.routes.draw do
     get '/refresh_statuses', to: 'participant#refresh_statuses', defaults: { format: 'json' }
     delete '/participant_set_status_deleted_and_notify/:id', to: 'participants#set_status_deleted_and_notify', defaults: { format: 'json' }, as: :participant_delete_and_notify
     patch '/participant_set_paid_and_notify/:id', to: 'participants#set_paid_and_notify', defaults: { format: 'json' }, as: :participant_set_paid_and_notify
+    patch '/participant_set_arrived/:id', to: 'participants#set_arrived', defaults: { format: 'json' }, as: :participant_set_arrived
     get '/calculate_participance_cost', to: 'participants#calculate_participance_cost', defaults: { format: 'json' }, as: :participant_calculate_cost
+
+    get '/dashboard', to: 'dashboard#index', as: :dashboard
   end
 
   get 'login', to: 'sessions#new', as: :login
