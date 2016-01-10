@@ -281,7 +281,7 @@ class ParticipantsController < ApplicationController
   end
 
   def participant_params
-    params.require(:participant).permit(:first_name, :last_name, :email, :gender, :phone, :city, :age, days: [], services: [], :other_info, :community, :duty)
+    params.require(:participant).permit(:first_name, :last_name, :email, :gender, :phone, :city, :age, :other_info, :community, :duty, days: [], services: [])
   rescue ActionController::ParameterMissing => e
     nil
   end
