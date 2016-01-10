@@ -14,7 +14,7 @@ PricingPeriod.destroy_all
 
 u = User.create!(name: 'jestwiecej', email: 'biuro@jestwiecej.org', password: 'poczatek2016')
 puts "User #{u.name} created!"
-e = Event.create!(name: 'Poczatek 15/16', start_date: Date.new(2016,6,2), end_date: Date.new(2015,6,4), owner: u, capacity: 4000, days_to_pay: 7)
+e = Event.create!(name: 'Randy Clark 2-4.06', start_date: Date.new(2016,6,2), end_date: Date.new(2015,6,4), owner: u, capacity: 4000, days_to_pay: 7)
 puts "Event #{e.name} created!"
 
 pp = PricingPeriod.create!(name: 'Pierwszy termin', event: e, start_date: Date.new(2016, 1,1), end_date: Date.new(2016, 2, 29))
