@@ -58,7 +58,7 @@ class ParticipantsController < ApplicationController
   end
 
   def update
-    parameters = params.require(:participant).permit(:status, :role_id, :paid, :first_name, :last_name, :gender, :city, :age, :email, :phone, :payment_deadline_at_string)
+    parameters = params.require(:participant).permit(:status, :role_id, :paid, :first_name, :last_name, :gender, :city, :age, :email, :phone, :payment_deadline_at_string, :duty, :community, :other_info)
 
     participant.role = Role.find(params[:participant][:role_id])
 
@@ -102,7 +102,7 @@ class ParticipantsController < ApplicationController
   end
 
   def calculate_participance_cost
-    parameters = params.require(:participant).permit(:status, :role_id, :paid, :first_name, :last_name, :gender, :city, :age, :email, :phone)
+    parameters = params.require(:participant).permit(:status, :role_id, :paid, :first_name, :last_name, :gender, :city, :age, :email, :phone, :duty, :community, :other_info)
 
     params[:participant][:day_ids] ||= []
     params[:participant][:service_ids] ||= []
@@ -274,7 +274,7 @@ class ParticipantsController < ApplicationController
   end
 
   def participant_params
-    params.require(:participant).permit(:first_name, :last_name, :email, :gender, :phone, :city, :age, days: [], services: [])
+    params.require(:participant).permit(:first_name, :last_name, :email, :gender, :phone, :city, :age, days: [], services: [], :other_info, :community, :duty)
   rescue ActionController::ParameterMissing => e
     nil
   end
