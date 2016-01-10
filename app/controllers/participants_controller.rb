@@ -6,6 +6,13 @@ class ParticipantsController < ApplicationController
   respond_to :json, :js
 
   def index
+    Participant.where(status: 0).each do |p|
+      if(p.payment_deadline - DateTime.now < 0)
+        puts "Changing status to unpaid for #{p.first_name} #{p.last_name}..."
+        p.status = 2
+        p.save
+      end
+    end
     @participants = event.participants.includes(:days, :services, :role).active.references(:days, :services, :role).order(:id)
     @days = event.days.sort
     @services = event.services.sort
