@@ -23,6 +23,14 @@ class Participant < ActiveRecord::Base
     [last_name, first_name].compact.join(' ')
   end
 
+  def short_info
+    if other_info != nil && other_info.length > 10
+      other_info[0, 10]
+    else
+      other_info
+    end
+  end
+
   def payment_deadline_at_string
     payment_deadline.strftime('%d-%m-%Y').to_s
   end

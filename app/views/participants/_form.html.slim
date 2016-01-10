@@ -47,6 +47,18 @@
               .help-block.with-errors
             .hr-line-dashed
             .form-group
+              =f.label(:community, 'Wspólnota:', class: 'col-sm-2 control-label')
+              .col-sm-10
+                = f.text_field :community, class: 'form-control', placeholder: 'Wspólnota'
+              .help-block.with-errors
+            .hr-line-dashed
+            .form-group
+              =f.label(:duty, 'Rodzaj posługi', class: 'col-sm-2 control-label')
+              .col-sm-10
+                = f.text_field :community, class: 'form-control', placeholder: 'Rodzaj posługi'
+              .help-block.with-errors
+            .hr-line-dashed
+            .form-group
               = f.label(:age, 'Wiek (min. 16 lat):', class: 'col-sm-2 control-label')
               .col-sm-10
                 = f.text_field :age, class: 'form-control', placeholder: 'Wiek', data: { error: 'Podaj swój wiek.' }, required: 'true'
@@ -63,6 +75,12 @@
               .col-sm-10
                 = f.text_field :phone, class: 'form-control', placeholder: 'Telefon', data: { error: 'Podaj swój numer telefonu.' }, required: 'true'
               .help-block.with-errors
+            .hr-line-dashed
+            .form-group
+              = f.label(:other_info, 'Inne informacje:', class: 'col-sm-2 control-label')
+              .col-sm-10
+                = f.text_area :other_info, class: 'form-control', placeholder: 'Inne informacje...'
+              .help-block.with-errors
     .row
       .col-md-12
         .panel.panel-default
@@ -75,7 +93,7 @@
                   .checkbox
                     label
                       = check_box_tag "participant[day_ids][]", day.id, @participant.days.include?(day)
-                      | Dzień #{day.number}
+                      | #{day.display_name}
             - @services.each do |group, services|
               .hr-line-dashed
               .form-group

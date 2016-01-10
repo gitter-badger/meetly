@@ -16,10 +16,13 @@
                 th Wiek
                 th Płeć
                 th Miejscowość
+                th Wspólnota
+                th Służba
                 th E-mail
                 th Telefon
+                th Inne informacje
                 - @days.each do |day|
-                  th Dzień #{day.number}
+                  th #{day.display_name}
                 - @services.each do |service|
                   th= service.name
                 th Koszt
@@ -34,8 +37,11 @@
                   td= participant.age
                   td= participant.gender_i18n
                   td= participant.city
+                  td= participant.community
+                  td= participant.duty
                   td= participant.email
                   td= participant.phone
+                  td= participant.short_info
                   - @days.each do |day|
                     - if participant.days.include?(day)
                       td.boolean: i.zmdi.zmdi-check-circle.zmdi-hc-lg.boolean-icon.text-success
