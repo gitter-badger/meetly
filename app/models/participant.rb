@@ -84,27 +84,6 @@ class Participant < ActiveRecord::Base
 
   # private
 
-<<<<<<< HEAD
-=======
-  def paid_equals_cost
-    paid >= cost
-  end
-
-  def days_must_be_in_proper_groups
-    day1 = Day.find_by_number(1)
-    day2 = Day.find_by_number(2)
-    day3 = Day.find_by_number(3)
-
-    if days.length == 1 && !days.include?(day3)
-      errors.add(:days, 'only third day can be chosen single')
-    elsif days.length == 2 && (!days.include?(day1) || !days.include?(day2))
-      errors.add(:days, 'only first and second day can be chosen in pair')
-    elsif days.length > Day.all.length
-      errors.add(:days, 'too many days')
-    end
-  end
-
->>>>>>> master
   def calculate_deadline
     logger.debug "Started deadline calculation..."
     current_period = PricingPeriod.current_period
