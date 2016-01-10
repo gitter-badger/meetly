@@ -4,26 +4,26 @@ require 'active_support'
 
 class ParticipantMailer
   def initialize(logger)
-    @logger = logger
-    logger.debug "Initializing participant mailer with key: #{ENV['MANDRILL_API_KEY']}"
-  	@mailer = Mandrill::API.new ENV['MANDRILL_API_KEY']
+    #@logger = logger
+    #logger.debug "Initializing participant mailer with key: #{ENV['MANDRILL_API_KEY']}"
+  	#@mailer = Mandrill::API.new ENV['MANDRILL_API_KEY']
   end
 
   attr_accessor :mailer, :logger
 
   def send_registration_confirmation(participant)
-  	prepare_confirmation_message(participant)
-  	send_message('pocz-tek-registration-confirmation')
+  	#prepare_confirmation_message(participant)
+  	#send_message('pocz-tek-registration-confirmation')
   end
 
   def send_payment_confirmation(participant)
     prepare_payment_confirmation_message(participant)
-    send_message('pocz-tek-payment-confirmation')
+    #send_message('pocz-tek-payment-confirmation')
   end
 
   def send_cancellation_information(participant)
-    prepare_cancellation_information_message(participant)
-    send_message('pocz-tek-registration-canceled')
+    #prepare_cancellation_information_message(participant)
+    #send_message('pocz-tek-registration-canceled')
   end
 
   private

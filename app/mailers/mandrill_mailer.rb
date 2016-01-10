@@ -4,17 +4,17 @@ require 'day.rb'
 
 class MandrillMailer
   def initialize
-    @mailer = Mandrill::API.new 'lv_wbMgDlIX5unkCAMXg4Q'
+    #@mailer = Mandrill::API.new 'lv_wbMgDlIX5unkCAMXg4Q'
   end
 
   attr_accessor :mailer
 
   def send_message(template)
-    @mailer.messages.send_template(
-      template,
-      [],
-      message = @message
-    )
+    #@mailer.messages.send_template(
+    #  template,
+    #  [],
+    #  message = @message
+    #)
   end
 
   def prepare_confirm_payment_message(participant, days)
