@@ -6,11 +6,7 @@ ready = function() {
    */
   $('#participants').ready(function(){
 
-    var days_indexes = [7, 8, 9];
-    var dinners_indexes = [10, 11];
-    var nights_indexes = [12, 13];
-    var services_indexes = dinners_indexes.concat(nights_indexes);
-    var days_services_indexes = days_indexes.concat(services_indexes);
+    var dinners_indexes = [13, 12];
 
     var table = $('#participants').DataTable( {
       stateSave: true,
@@ -19,8 +15,7 @@ ready = function() {
       ordering:  true,
       sPaginationType: "full_numbers",
       columnDefs: [
-        { visible: false, targets: [2, 4, 5, 6] },
-        { sortable: false, targets: days_services_indexes }
+        { visible: false, targets: [1, 3] }
       ],
       language: {
         emptyTable:     "Brak danych",
@@ -50,19 +45,10 @@ ready = function() {
     var colvis = new $.fn.dataTable.ColVis( table,
     {
       buttonText: 'Widok kolumn',
-      exclude: days_services_indexes,
       groups: [
-        {
-          title: 'Dni',
-          columns: days_indexes
-        },
         {
           title: 'Obiady',
           columns: dinners_indexes
-        },
-        {
-          title: 'Noclegi',
-          columns: nights_indexes
         }
       ],
       restore: 'Przywróć'
