@@ -3,7 +3,12 @@ table.table.table-striped
     th Dzień
     th Ilość zgłoszeń
   tbody
+    - current_event.services.in_service_group('Spotkanie liderów').order('name asc').each do |service|
+      tr
+        td #{service.name}
+        td = participants_with_days_and_services.paid.select { |participant| participant.services.include?(service)  }.count
     - current_event.days.each do |day|
       tr
-        td Dzień #{day.number}
+        td #{day.display_name}
         td = participants_with_days_and_services.paid.select { |participant| participant.days.include?(day)  }.count
+
