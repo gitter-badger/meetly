@@ -6,9 +6,9 @@ table.table.table-striped
     - current_event.services.in_service_group('Spotkanie liderów').order('name asc').each do |service|
       tr
         td #{service.name}
-        td = participants_with_days_and_services.created.select { |participant| participant.services.include?(service)  }.count
+        td = participants_with_days_and_services.where(status: 0).select { |participant| participant.services.include?(service)  }.count
     - current_event.days.order('number asc').each do |day|
       tr
         td #{day.display_name}
-        td = participants_with_days_and_services.created.select { |participant| participant.days.include?(day)  }.count
+        td = participants_with_days_and_services.where(status: 0).select { |participant| participant.days.include?(day)  }.count
 
