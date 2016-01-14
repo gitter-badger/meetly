@@ -1,0 +1,18 @@
+.panel.panel-default
+      .panel-heading Wszystkie
+      .panel-body
+        ul.nav.nav-pills
+          li role='presentation'
+            =link_to 'Dni', '#alldays', data: { toggle: 'pill'}
+          li role='presentation'
+            =link_to 'Noclegi', '#allnights', data: { toggle: 'pill'}
+          li role='presentation'
+            =link_to 'Obiady', '#alldinners', data: { toggle: 'pill'}
+          .row
+          .tab-content
+            #alldays.tab-pane role='tabpanel'
+              = render 'dashboard/tables/alldays'
+            #allnights.tab-pane role='tabpanel'
+              = render 'dashboard/tables/allnights'
+            #alldinners.tab-pane role='tabpanel'
+              = render 'dashboard/tables/alldinners'

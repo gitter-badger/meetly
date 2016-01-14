@@ -1,19 +1,19 @@
 .col-md-6
   .panel.panel-default
-      .panel-heading Wybrane opcje (zgłoszenia opłacone)
+      .panel-heading Zgłoszenia
       .panel-body
         ul.nav.nav-pills
           li role='presentation'
-            =link_to 'Dni', '#days', data: { toggle: 'pill'}
+            =link_to 'Wszystkie', '#all', data: { toggle: 'pill'}
           li role='presentation'
-            =link_to 'Noclegi', '#nights', data: { toggle: 'pill'}
+            =link_to 'Zarejestrowane', '#registered', data: { toggle: 'pill'}
           li role='presentation'
-            =link_to 'Obiady', '#dinners', data: { toggle: 'pill'}
+            =link_to 'Opłacone', '#paid', data: { toggle: 'pill'}
           .row
           .tab-content
-            #days.tab-pane role='tabpanel'
-              = render 'dashboard/tables/days'
-            #nights.tab-pane role='tabpanel'
-              = render 'dashboard/tables/nights'
-            #dinners.tab-pane role='tabpanel'
-              = render 'dashboard/tables/dinners'
+            #all.tab-pane role='tabpanel'
+              = render 'dashboard/all_table'
+            #registered.tab-pane role='tabpanel'
+              = render 'dashboard/registered_table'
+            #paid.tab-pane role='tabpanel'
+              = render 'dashboard/paid_table'

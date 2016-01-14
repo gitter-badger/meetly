@@ -1,0 +1,18 @@
+.panel.panel-default
+      .panel-heading Zarejestrowane
+      .panel-body
+        ul.nav.nav-pills
+          li role='presentation'
+            =link_to 'Dni', '#regdays', data: { toggle: 'pill'}
+          li role='presentation'
+            =link_to 'Noclegi', '#regnights', data: { toggle: 'pill'}
+          li role='presentation'
+            =link_to 'Obiady', '#regdinners', data: { toggle: 'pill'}
+          .row
+          .tab-content
+            #regdays.tab-pane role='tabpanel'
+              = render 'dashboard/tables/days'
+            #regnights.tab-pane role='tabpanel'
+              = render 'dashboard/tables/nights'
+            #regdinners.tab-pane role='tabpanel'
+              = render 'dashboard/tables/dinners'
