@@ -23,6 +23,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'mandrill-api'
 
+gem 'le'
+
 gem 'bcrypt', :require => 'bcrypt'
 
 gem 'jquery-datatables-rails', github: "rweng/jquery-datatables-rails", branch: "master"
