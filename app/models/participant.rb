@@ -98,12 +98,12 @@ class Participant < ActiveRecord::Base
     self.created_at ||= Time.now.getlocal('+01:00')
     current_period = PricingPeriod.corresponding_period self.created_at.to_date
     cost = 0
-    services.each do |service|
+    event = Event.find(event_id)
+    services.where(event_id: event_id).each do |service|
       logger.debug "Adding service #{service.name} cost. For role: #{role_id}"
       service_price = service.service_prices.select { |sp| sp.role_id == role_id }
       cost += service_price[0].price
     end
-    event = Event.find(event_id)
     if days.length == event.days.length
       logger.debug "Adding event price for role: #{role_id} and pricing_period: #{current_period.id}"
       event_price = event.event_prices.select { |ep| ep.role_id == role_id && ep.pricing_period_id == current_period.id }
