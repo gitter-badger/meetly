@@ -100,7 +100,7 @@ class Participant < ActiveRecord::Base
     cost = 0
     event = Event.find(event_id)
     services.where(event_id: event_id).each do |service|
-      logger.debug "Adding service #{service.name} cost. For role: #{role_id}"
+      logger.info "Adding service #{service.name} cost. For role: #{role_id} and event #{event_id}"
       service_price = service.service_prices.select { |sp| sp.role_id == role_id }
       cost += service_price[0].price
     end
