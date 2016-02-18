@@ -32,7 +32,7 @@ class EventsController < ApplicationController
 
   def build_form_data_json(role, event)
     data = {}
-    current_period = PricingPeriod.current_period
+    current_period = PricingPeriod.current_period event.id
     data["registration_status"] = event.registration_status
     data["event_price"] = EventPrice.find_by(event_id: event.id, role_id: role.id, pricing_period_id: current_period.id).price
     data["services"] = []
