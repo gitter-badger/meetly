@@ -96,7 +96,7 @@ class Participant < ActiveRecord::Base
   def calculate_cost
     logger.debug "Started cost calculation..."
     self.created_at ||= Time.now.getlocal('+01:00')
-    current_period = PricingPeriod.corresponding_period self.created_at.to_date event_id
+    current_period = PricingPeriod.corresponding_period(self.created_at.to_date, event_id)
     cost = 0
     event = Event.find(event_id)
     services.where(event_id: event_id).each do |service|
@@ -105,7 +105,7 @@ class Participant < ActiveRecord::Base
       cost += service_price[0].price
     end
     if days.length == event.days.length
-      logger.inf "Adding event price for role: #{role_id} and pricing_period: #{current_period.id}"
+      logger.info "Adding event price for role: #{role_id} and pricing_period: #{current_period.id}"
       event_price = event.event_prices.select { |ep| ep.role_id == role_id && ep.pricing_period_id == current_period.id }
       cost += event_price[0].price
     else
