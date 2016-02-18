@@ -20,7 +20,7 @@ puts "Role #{r.name} created!"
 
 ep = EventPrice.create!(pricing_period: pp, role: r, event: e, price: 100.0)
 
-sg = ServiceGroup.create!(name: 'Obiady')
+sg = ServiceGroup.create!(name: 'Obiady BC')
 s1 = Service.create!(name: 'Obiady', event: e, service_group: sg, description: "Obiady 25-27.04")
 sp1 = ServicePrice.create!(price: 45, role: r, service: s1)
 
