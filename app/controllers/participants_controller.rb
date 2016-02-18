@@ -216,7 +216,7 @@ class ParticipantsController < ApplicationController
       event = Event.find_by(unique_id: params[:event_id])
       if event
         @participant = Participant.new(participant_param)
-        @participant.role = Role.find_by(name: "Uczestnik")
+        @participant.role = Role.find_by(name: "Uczestnik", event_id: event.id)
         @participant.event = event
         days = []
         services = []
