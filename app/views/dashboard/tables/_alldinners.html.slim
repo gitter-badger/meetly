@@ -3,7 +3,7 @@ table.table.table-striped
     th Obiad
     th Ilość zamówień
   tbody
-    - current_event.services.in_service_group('Obiady').order('name asc').each do |service|
+    - current_event.services.concerning_dinner.order('name asc').each do |service|
       tr
         td= service.description
         td= participants_with_days_and_services.active.select { |participant| participant.services.include?(service)  }.count
