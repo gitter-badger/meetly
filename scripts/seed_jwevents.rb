@@ -41,7 +41,7 @@ s6 = Service.find_by(description: "Obiady 16-18.05")
   ])
 }
 
-2.times {
+100.times {
   Participant.create!([
     {
       first_name: FFaker::Name.first_name,
