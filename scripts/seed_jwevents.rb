@@ -6,10 +6,9 @@ blaine = Event.find_by(name: 'Blaine Cook 25-27.04');
 gary = Event.find_by(name: 'Gary Oates 16-18.05');
 
 d1 = Day.find_by(number: 1, event: randy)
-d2 = Day.find_by(number: 2, event: randy)
-d3 = Day.find_by(number: 3, event: randy)
-d4 = Day.find_by(number: 1, event: blaine)
-d5 = Day.find_by(number: 1, event: gary)
+d2   = Day.find_by(number: 2, event: randy)
+d3 = Day.find_by(number: 1, event: blaine)
+d4 = Day.find_by(number: 1, event: gary)
 
 
 rrc = Role.find_by(name: 'Uczestnik', event_id: randy.id)
@@ -42,7 +41,7 @@ s6 = Service.find_by(description: "Obiady 16-18.05")
   ])
 }
 
-100.times {
+2.times {
   Participant.create!([
     {
       first_name: FFaker::Name.first_name,
