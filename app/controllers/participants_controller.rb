@@ -288,14 +288,20 @@ class ParticipantsController < ApplicationController
   end
 
   def send_registration_confirmation
-    logger.debug "Sending emails disabled."
+    logger.debug "Sending registration confirmation to #{participant.first_name} #{participant.last_name}"
+    mailer = ParticipantMailer.new logger
+    mailer.send_registration_confirmation @participant
   end
 
   def send_cancellation_information
-    logger.debug "Sending emails disabled."
+    logger.debug "Sending cancelation information to #{participant.first_name} #{participant.last_name}"
+    mailer = ParticipantMailer.new logger
+    mailer.send_cancellation_information @participant
   end
 
   def send_payment_confirmation
-    logger.debug "Sending emails disabled."
+    logger.debug "Sending payment confirmation to #{participant.first_name} #{participant.last_name}"
+    mailer = ParticipantMailer.new logger
+    mailer.send_payment_confirmation @participant
   end
 end
