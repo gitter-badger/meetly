@@ -139,10 +139,21 @@ class ParticipantsController < ApplicationController
   end
 
   def set_status_deleted_and_notify
+    logger.info "set_status_deleted_and_notify"
     @participant = Participant.find(params[:id])
     @participant.status = 'deleted'
     @participant.save!
     send_cancellation_information
+    respond_with(@participant, status: :ok, location: nil) do |format|
+      format.json
+    end
+  end
+
+  def set_status_deleted
+    logger.info "set_status_deleted"
+    @participant = Participant.find(params[:id])
+    @participant.status = 'deleted'
+    @participant.save!
     respond_with(@participant, status: :ok, location: nil) do |format|
       format.json
     end
@@ -201,9 +212,7 @@ class ParticipantsController < ApplicationController
   end
 
   def receive_form
-
     logger.info "Received participant form request. Params: #{params}"
-    logger.info "Request body: #{request.body.read}"
     participant_param = participant_params
     logger.info "Participant: #{participant_param}"
     if participant_param.nil? || participant_param.empty?

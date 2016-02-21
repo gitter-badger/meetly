@@ -75,6 +75,8 @@
                         i.zmdi.zmdi-edit.zmdi-hc-lg
                         span.text Edytuj
                       = link_to event_participant_set_paid_and_notify_path(participant.event, participant.id), method: 'patch', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz ustawić uczestnika jako opłaconego i wysłać mu powiadomienie e-mail o otrzymaniu wpłaty?', confirm_type: 'success', confirm_text: 'Potwierdź' }, class: 'paid-participant btn btn-default btn-small participant-action icon-button', title: 'Opłać zgłoszenie' do
-                          i.zmdi.zmdi-money.zmdi-hc-lg
-                      = link_to event_participant_delete_and_notify_path(participant.event, participant.id), method: 'delete', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz usunąć tego uczestnika?', confirm_type: 'danger', confirm_text: 'Usuń', type: 'script'}, class: 'delete-participant btn btn-small btn-default participant-action icon-button', title: 'Usuń zgłoszenie' do
+                          i.zmdi.zmdi-money.zmdi-hc-lg.mailing
+                      = link_to event_participant_delete_and_notify_path(participant.event, participant.id), method: 'delete', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz usunąć tego uczestnika i wysłać mu powiadomienie e-mail?', confirm_type: 'danger', confirm_text: 'Usuń', type: 'script'}, class: 'delete-participant btn btn-small btn-default participant-action icon-button', title: 'Usuń zgłoszenie' do
+                        i.zmdi.zmdi-delete.zmdi-hc-lg.mailing
+                      = link_to event_participant_delete_path(participant.event, participant.id), method: 'delete', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz usunąć tego uczestnika?', confirm_type: 'danger', confirm_text: 'Usuń', type: 'script'}, class: 'delete-participant btn btn-small btn-default participant-action icon-button', title: 'Usuń zgłoszenie' do
                         i.zmdi.zmdi-delete.zmdi-hc-lg

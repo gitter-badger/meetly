@@ -56,14 +56,7 @@ class ParticipantMailer
           name: "#{participant.first_name} #{participant.last_name}"
         }
       ],
-      global_merge_vars: [{
-        name: "IMIE",
-        content: "#{participant.first_name}"
-      },
-      {
-        name: "NAZWISKO",
-        content: "#{participant.last_name}"
-      },
+      global_merge_vars: [
       {
         name: "DATAP",
         content: "#{participant.payment_deadline.strftime('%d-%m-%Y')}"
@@ -119,7 +112,7 @@ class ParticipantMailer
     )
   end
 
-  def get_confirmation_title
+  def get_confirmation_title(participant)
     title = "Dziękujemy za rejestrację na konferencję #{participant.event.name}"
   end
 end
