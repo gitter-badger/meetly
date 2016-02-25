@@ -12,8 +12,9 @@ class ParticipantMailer
   attr_accessor :mailer, :logger
 
   def send_registration_confirmation(participant)
+    template_name = registration_confirmation_template_name participant
   	prepare_confirmation_message(participant)
-  	send_message('registration-confirmation')
+  	send_message(template_name)
   end
 
   def send_payment_confirmation(participant)
@@ -29,10 +30,12 @@ class ParticipantMailer
   private
 
   def prepare_cancellation_information_message(participant)
+    title = cancelation_information_title participant
+
     @message = {
       from_name: "jestwiecej.pl",
       from_email: "biuro@jestwiecej.pl",
-      subject: "Twoje zgłoszenie zostało anulowane",
+      subject: "#{title}",
       to: [
         {
           email: "#{participant.email}",
@@ -44,7 +47,7 @@ class ParticipantMailer
   end
 
   def prepare_confirmation_message(participant)
-    title = get_confirmation_title(participant)
+    title = registration_confirmation_title(participant)
 
   	@message = {
       from_name: "jestwiecej.pl",
@@ -69,39 +72,20 @@ class ParticipantMailer
   end
 
   def prepare_payment_confirmation_message(participant)
+    title = payment_confirmation_title participant
+
     @message = {
       from_name: "jestwiecej.pl",
       from_email: "biuro@jestwiecej.pl",
-      subject: "Dziękujemy za wpłatę",
+      subject: title,
       to: [
         {
           email: "#{participant.email}",
           name: "#{participant.first_name} #{participant.last_name}"
         }
       ],
-      global_merge_vars: [
-      {
-        name: "KOSZT",
-        content: "#{participant.cost}"
-      },
-      {
-        name: "OPLACONO",
-        content: "#{participant.paid}"
-      },
-      {
-        name: 'DOZAPLATY',
-        content: "#{participant.cost - participant.paid}"
-      }
-      ]
+      global_merge_vars: []
     }
-  end
-
-  def gender_ending(participant)
-    if participant.gender == 'man'
-      "eś"
-    else
-      "aś"
-    end
   end
 
   def send_message(template)
@@ -112,7 +96,26 @@ class ParticipantMailer
     )
   end
 
-  def get_confirmation_title(participant)
-    title = "Dziękujemy za rejestrację na konferencję #{participant.event.name}"
+  def registration_confirmation_title(participant)
+    "Dziękujemy za rejestrację na konferencję #{participant.event.name}"
+  end
+
+  def payment_confirmation_title(participant)
+    "Dziękujemy za wpłatę na konferencję #{participant.event.name}"
+  end
+
+  def cancelation_information_title(participant)
+    "Twoje zgłoszenie na konferencję #{participant.event.name} zostało anulowane"
+  end
+
+  def registration_confirmation_template_name(participant)
+    event_name = participant.event.name
+    if(event_name == 'Randy Clark 2-4.06')
+      'registration-confirmation-randy'
+    elsif(event_name == 'Blaine Cook 25-27.04')
+      'registration-confirmation-blaine'
+    else
+      'registration-confirmation-gary'
+    end
   end
 end
