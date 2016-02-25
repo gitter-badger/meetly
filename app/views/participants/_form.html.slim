@@ -8,7 +8,7 @@
             .form-group
               .col-md-4
                 = f.label(:role, 'Rola uczestnika:')
-                = collection_select :participant, :role_id, Role.all, :id, :name, { include_blank: 'Wybierz rolę' }, { class: 'form-control', required: 'true' }
+                = collection_select :participant, :role_id, Role.where(event_id: event.id), :id, :name, { include_blank: 'Wybierz rolę' }, { class: 'form-control', required: 'true' }
               .col-md-4
                 = f.label(:status, 'Status uczestnika:')
                 = f.select(:status, Participant.status_attributes_for_select, { include_blank: 'Wybierz status' }, { class: 'form-control', required: 'true' } )
