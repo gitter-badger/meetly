@@ -48,7 +48,7 @@ sp12 = ServicePrice.create!(price: 35, role: r, service: s12)
 puts "Services #{sg2.name} created!"
 
 sg3 = ServiceGroup.create!(name: 'Spotkanie liderów')
-s13 = Service.create!(name: 'Spotkanie liderów 02.06', event: e, service_group: sg3, description: "Nocleg w internaci")
+s13 = Service.create!(name: 'Spotkanie liderów 02.06', event: e, service_group: sg3, description: "Spotkanie liderów")
 sp13 = ServicePrice.create!(price: 100, role: r, service: s13)
 puts "Services #{sg3.name} created!"
 
