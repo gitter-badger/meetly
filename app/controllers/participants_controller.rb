@@ -143,7 +143,11 @@ class ParticipantsController < ApplicationController
     @participant = Participant.find(params[:id])
     @participant.status = 'deleted'
     @participant.save!
-    send_cancellation_information
+    if participant.email != ''
+      send_cancellation_information
+    else
+      logger.info "Participant saved without an email: mailer will not be triggered for cancelation information"
+    end
     respond_with(@participant, status: :ok, location: nil) do |format|
       format.json
     end
@@ -165,7 +169,11 @@ class ParticipantsController < ApplicationController
     @participant.paid = @participant.cost
     @participant.status = 'paid'
     @participant.save!
-    send_payment_confirmation
+    if participant.email != ''
+      send_payment_confirmation
+    else
+      logger.info "Participant saved without an email: mailer will not be triggered for payment confirmation"
+    end
     respond_to do |format|
       format.json { render :json => @participant}
     end
@@ -250,7 +258,11 @@ class ParticipantsController < ApplicationController
           respond_with(@participant, status: :created, location: nil) do |format|
             format.json
           end
-          send_registration_confirmation
+          if participant.email != ""
+            send_registration_confirmation
+          else
+            logger.info "Participant saved without an email: mailer will not be triggered for registration confirmation"
+          end
         else
           logger.info "Saving of participant failed. Responding with 601. Error: #{@participant.errors.to_a.join(', ')}"
           respond_with("error: #{@participant.errors.to_a.join(', ')}", status: 601, location: nil) do |format|
