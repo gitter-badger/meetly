@@ -249,7 +249,7 @@ class ParticipantsController < ApplicationController
         if params[:participant].key?("services")
           params[:participant][:services] ||= []
           params[:participant][:services].each do |paramService|
-            services.push Service.find_by_name(paramService["name"])
+            services.push Service.find_by(name: paramService["name"], event_id: event.id)
           end
           @participant.services = services
         end
