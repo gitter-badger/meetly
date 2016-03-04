@@ -32,7 +32,7 @@ class Participant < ActiveRecord::Base
 
   def short_info
     if other_info != nil && other_info.length > 10
-      other_info[0, 10]
+      other_info[0, 10] + '...'
     else
       other_info
     end

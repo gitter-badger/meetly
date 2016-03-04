@@ -13,9 +13,13 @@ class ParticipantsController < ApplicationController
         p.save
       end
     end
-    @participants = event.participants.includes(:days, :services, :role).active.references(:days, :services, :role).order(:id)
+   # @participants = event.participants.includes(:days, :services, :role).active.references(:days, :services, :role).order(:id)
     @days = event.days.sort
     @services = event.services.sort
+    respond_to do |format|
+      format.html
+      format.json { render json: ParticipantsDatatable.new(view_context, event) }
+    end
   end
 
   def new

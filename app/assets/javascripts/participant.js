@@ -1,3 +1,16 @@
+function onArrived(button){
+        $(button).bind('ajax:success', function(response, data) {
+        console.log('Participant has been set as arrived.');
+        $(button).closest('tr').find('td.status').html('<span class="label status-label label-default">Przyjechał</span>');
+        $(button).closest('tr').find('.arrived-participant').remove();
+        toast('success', 'Udało się!', 'Przyjazd uczestnika zapisany.');
+      }).bind('ajax:error', function() {
+        console.log('Error on setting participant as paid.');
+        toast('danger', 'Wystapił błąd!', 'Przyjazd uczestnika nie został zapisany, spróbuj ponownie.');
+      });
+}
+
+
 var ready;
 ready = function() {
 
@@ -7,6 +20,7 @@ ready = function() {
   $('#participants').ready(function(){
 
     var dinners_indexes = [13, 12];
+    var iColumns = $('#participants thead th').length;
 
     var table = $('#participants').DataTable( {
       stateSave: true,
@@ -14,8 +28,12 @@ ready = function() {
       searching: true,
       ordering:  true,
       sPaginationType: "full_numbers",
+      bProcessing: true,
+      bServerSide: true,
+      sAjaxSource: $('#participants').data('source'),
       columnDefs: [
-        { visible: false, targets: [1, 3] }
+         { visible: false, targets: [1, 3] },
+         { className: "status", targets: [iColumns-2] }
       ],
       language: {
         emptyTable:     "Brak danych",

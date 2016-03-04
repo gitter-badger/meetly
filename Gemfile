@@ -45,6 +45,8 @@ gem 'decent_exposure'
 
 gem "chartkick"
 
+gem 'will_paginate'
+
 group :production do
   gem 'puma'
   gem 'unicorn'

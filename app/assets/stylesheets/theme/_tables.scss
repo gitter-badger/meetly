@@ -233,6 +233,11 @@ table.dataTable > tbody > tr.child span.dtr-title {
 
 // Custom tables style
 
+.boolean-cell{
+  display: block;
+  text-align: center;
+}
+
 table.table {
   margin-bottom: 0;
   > tbody {
@@ -267,18 +272,16 @@ div.dataTables_filter {
   font-size: 26px;
 }
 
-td.status {
+.label {
+  display: inline-block;
   text-align: center;
-  .label {
-    display: inline-block;
-    width: 140px;
-    padding-top: 6px;
-    padding-bottom: 6px;
-  }
+  width: 140px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
 
-  .status-label {
-    font-size: 14px;
-  }
+.status-label {
+  font-size: 14px;
 }
 
 .participant-action {

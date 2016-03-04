@@ -14,7 +14,7 @@
     .panel.panel-default
       .panel-body
         #participants-table
-          table#participants.table.table-striped.table-hover.display.no-wrap.order-column cellspacing="0" width="100%" data-order='[[ 1, "asc" ]]' data-page-length='10'
+          table#participants.table.table-striped.table-hover.display.no-wrap.order-column cellspacing="0" width="100%" data-order='[[ 1, "asc" ]]' data-page-length='10' data-source=event_participants_url(format:'json')
             thead
               tr
                 th Nazwisko i Imię
@@ -28,7 +28,7 @@
                 th Telefon
                 th Inne informacje
                 - @days.each do |day|
-                  th #{day.display_name}
+                  th= day.display_name
                 - @services.each do |service|
                   th= service.name
                 th Data rejestracji
@@ -38,45 +38,3 @@
                 th Status
                 th Akcje
             tbody
-              - @participants.each do |participant|
-                tr
-                  td= participant.full_name
-                  td= participant.role.name
-                  td= participant.age
-                  td= participant.gender_i18n
-                  td= participant.city
-                  td= participant.community
-                  td= participant.duty
-                  td= participant.email
-                  td= participant.phone
-                  td= participant.short_info
-                  - @days.each do |day|
-                    - if participant.days.include?(day)
-                      td.boolean: i.zmdi.zmdi-check-circle.zmdi-hc-lg.boolean-icon.text-success
-                    - else
-                      td.boolean: i.zmdi.zmdi-minus-circle.zmdi-hc-lg.boolean-icon.text-danger
-                  - @services.each do |service|
-                    - if participant.services.include?(service)
-                      td.boolean: i.zmdi.zmdi-check-circle.zmdi-hc-lg.boolean-icon.text-success
-                    - else
-                      td.boolean: i.zmdi.zmdi-minus-circle.zmdi-hc-lg.boolean-icon.text-danger
-                  td= participant.created_at.strftime("%Y-%m-%d")
-                  td= participant.payment_deadline.strftime("%Y-%m-%d")
-                  td= amount_or_zero_pln(participant.cost)
-                  td.paid= amount_or_zero_pln(participant.paid)
-                  = render partial: 'participant_status', locals: { participant: participant }
-                  td
-                    .btn-group role="group"
-                      - unless participant.status == 'arrived'
-                        = link_to event_participant_set_arrived_path(participant.event, participant.id), method: 'patch', remote: true, class: 'arrived-participant btn btn-primary btn-small participant-action iconic-button', title: 'Przyjechał' do
-                            i.zmdi.zmdi-car.zmdi-hc-lg
-                            span.text Przyjechał
-                      = link_to edit_event_participant_path(participant.event, participant.id), class: 'delete-participant btn btn-small btn-default participant-action iconic-button', title: 'Edytuj zgłoszenie' do
-                        i.zmdi.zmdi-edit.zmdi-hc-lg
-                        span.text Edytuj
-                      = link_to event_participant_set_paid_and_notify_path(participant.event, participant.id), method: 'patch', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz ustawić uczestnika jako opłaconego i wysłać mu powiadomienie e-mail o otrzymaniu wpłaty?', confirm_type: 'success', confirm_text: 'Potwierdź' }, class: 'paid-participant btn btn-default btn-small participant-action icon-button', title: 'Opłać zgłoszenie' do
-                          i.zmdi.zmdi-money.zmdi-hc-lg.mailing
-                      = link_to event_participant_delete_and_notify_path(participant.event, participant.id), method: 'delete', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz usunąć tego uczestnika i wysłać mu powiadomienie e-mail?', confirm_type: 'danger', confirm_text: 'Usuń', type: 'script'}, class: 'delete-participant btn btn-small btn-default participant-action icon-button', title: 'Usuń zgłoszenie' do
-                        i.zmdi.zmdi-delete.zmdi-hc-lg.mailing
-                      = link_to event_participant_delete_path(participant.event, participant.id), method: 'delete', remote: true, data: { confirm: 'true', title: 'Potwierdź', message: 'Czy napewno chcesz usunąć tego uczestnika?', confirm_type: 'danger', confirm_text: 'Usuń', type: 'script'}, class: 'delete-participant btn btn-small btn-default participant-action icon-button', title: 'Usuń zgłoszenie' do
-                        i.zmdi.zmdi-delete.zmdi-hc-lg
