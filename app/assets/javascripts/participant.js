@@ -1,15 +1,37 @@
 function onArrived(button){
-        $(button).bind('ajax:success', function(response, data) {
-        console.log('Participant has been set as arrived.');
-        $(button).closest('tr').find('td.status').html('<span class="label status-label label-default">Przyjechał</span>');
-        $(button).closest('tr').find('.arrived-participant').remove();
-        toast('success', 'Udało się!', 'Przyjazd uczestnika zapisany.');
-      }).bind('ajax:error', function() {
-        console.log('Error on setting participant as paid.');
-        toast('danger', 'Wystapił błąd!', 'Przyjazd uczestnika nie został zapisany, spróbuj ponownie.');
-      });
+  $(button).bind('ajax:success', function(response, data) {
+    console.log('Participant has been set as arrived.');
+    $(button).closest('tr').find('td.status').html('<span class="label status-label label-default">Przyjechał</span>');
+    $(button).closest('tr').find('.arrived-participant').remove();
+    toast('success', 'Udało się!', 'Przyjazd uczestnika zapisany.');
+  }).bind('ajax:error', function() {
+    console.log('Error on setting participant as paid.');
+    toast('danger', 'Wystapił błąd!', 'Przyjazd uczestnika nie został zapisany, spróbuj ponownie.');
+  });
 }
 
+function onPaid(button){
+  $(button).bind('ajax:success', function(response, data) {
+    console.log('Participant has been set as paid and notified by e-mail.');
+    $(button).closest('tr').find('td.status').html('<span class="label status-label label-success">Opłacony</span>');
+    $(button).closest('tr').find('td.paid').html(parseFloat(data.paid).toFixed(2) + ' PLN');
+    toast('success', 'Udało się!', 'Uczestnik został oznaczony jako opłacony.');
+  }).bind('ajax:error', function() {
+    console.log('Error on setting participant as paid.');
+    toast('danger', 'Wystapił błąd!', 'Uczestnik nie został oznaczony jako opłacony, spróbuj ponownie.');
+  });
+}
+
+function onDelete(button){
+  $(button).bind('ajax:success', function() {
+    console.log('Participant has been removed.');
+    $(button).closest('tr').addClass('hidden');
+    toast('success', 'Udało się!', 'Uczestnik został poprawnie usunięty.');
+  }).bind('ajax:error', function() {
+    console.log('Error on removing a participant.');
+    toast('danger', 'Wystapił błąd!', 'Uczestnik nie został usunięty, spróbuj ponownie.');
+  });
+}
 
 var ready;
 ready = function() {

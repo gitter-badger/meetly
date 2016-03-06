@@ -1,5 +1,5 @@
 class ParticipantsDatatable
-  delegate :params, :link_to, :amount_or_zero_pln, :render_true, :render_false, :event_participant_set_arrived_path, :render_participant_status, :render_participant_actions, to: :@view
+  delegate :params, :link_to, :amount_or_zero_pln, :render_true, :render_false, :event_participant_delete_path, :event_participant_delete_and_notify_path, :event_participant_set_paid_and_notify_path, :edit_event_participant_path, :event_participant_set_arrived_path, :render_participant_status, :render_participant_actions, to: :@view
 
   def initialize(view, event)
   	@view = view
@@ -146,7 +146,7 @@ private
 
   def build_arrived_button(participant)
     if participant.status == 'arrived'
-      ""
+      ''
     else
       button = link_to event_participant_set_arrived_path(participant.event, participant.id), method: 'patch', remote: true, class: 'arrived-participant btn btn-primary btn-small participant-action iconic-button', title: 'Przyjechał', onclick: 'onArrived(this)' do
         '<i class="zmdi zmdi-car zmdi-hc-lg"></i><span class="text">Przyjechał</span>'.html_safe
@@ -156,19 +156,37 @@ private
   end
 
   def build_edit_button(participant)
-    ""
+    button = link_to edit_event_participant_path(participant.event, participant.id), class: 'btn btn-small btn-default participant-action iconic-button', title: 'Edytuj zgłoszenie' do
+      '<i class="zmdi zmdi-edit zmdi-hc-lg"></i><span class="text">Edytuj</span>'.html_safe
+    end
+    button
   end
 
   def build_paid_button(participant)
-    ""
+    button = link_to event_participant_set_paid_and_notify_path(participant.event, participant.id), method: 'patch', remote: true,
+    data: {confirm: true, title: 'Potwierdź', message: 'Czy na pewno chcesz ustawić uczestnika jako opłaconego i wysłać mu powiadomienie e-mail o otrzymaniu wpłaty?', confirm_type: 'success', confirm_text: 'Potwierdź'},
+    class: 'paid-participant btn btn-default btn-small participant-action icon-button', title: 'Opłać zgłoszenie', onclick: 'onPaid(this)' do
+      '<i class="zmdi zmdi-money zmdi-hc-lg mailing"></i>'.html_safe
+    end
+    button
   end
 
   def build_delete_and_notify_button(participant)
-    ""
+    button = link_to event_participant_delete_and_notify_path(participant.event, participant.id), method: 'delete', remote: true,
+    data: {confirm: true, title: 'Potwierdź', message: 'Czy napewno chcesz usunąć tego uczestnika i wysłać mu powiadomienie e-mail?', confirm_type: 'danger', confirm_text: 'Usuń', type: 'script'},
+    class: 'delete-participant btn btn-small btn-default participant-action icon-button', title: 'Usuń zgłoszenie', onclick: 'onDelete(this)' do
+      '<i class="zmdi zmdi-delete zmdi-hc-lg mailing"></i>'.html_safe
+    end
+    button
   end
 
   def build_delete_button(participant)
-    ""
+    button = link_to event_participant_delete_path(participant.event, participant.id), method: 'delete', remote: true,
+    data: {confirm: true, title: 'Potwierdź', message: 'Czy napewno chcesz usunąć tego uczestnika?', confirm_type: 'danger', confirm_text: 'Usuń', type: 'script'},
+    class: 'delete-participant btn btn-small btn-default participant-action icon-button', title: 'Usuń zgłoszenie', onclick: 'onDelete(this)' do
+      '<i class="zmdi zmdi-delete zmdi-hc-lg"></i>'.html_safe
+    end
+    button
   end
 
 end
