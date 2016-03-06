@@ -8,6 +8,6 @@ module ParticipantsHelper
   end
 
   def participants_registered_today
-    participants.created.select { |participant| participant.created_at.to_date == Date.today  }
+    participants.created.select { |participant| participant.registration_date.to_date == Date.today  }
   end
 end

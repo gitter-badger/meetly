@@ -6,14 +6,19 @@
           .panel-heading: h5.panel-title Ustawienia
           .panel-body
             .form-group
-              .col-md-4
+              .col-md-3
                 = f.label(:role, 'Rola uczestnika:')
                 = collection_select :participant, :role_id, Role.where(event_id: event.id), :id, :name, { include_blank: 'Wybierz rolę' }, { class: 'form-control', required: 'true' }
-              .col-md-4
+              .col-md-3
                 = f.label(:status, 'Status uczestnika:')
                 = f.select(:status, Participant.status_attributes_for_select, { include_blank: 'Wybierz status' }, { class: 'form-control', required: 'true' } )
+              .col-md-3
+                  = f.label(:registration_date_as_string, 'Data rejestracji:')
+                  #registration_date.input-group.date
+                    = f.text_field :registration_date_as_string, class: 'form-control', placeholder: 'Data rejestracji', required: 'false'
+                    .input-group-addon: i.zmdi.zmdi-calendar.zmdi-hc-lg
               - if action_name == 'edit'
-                .col-md-4
+                .col-md-3
                   = f.label(:payment_deadline_at_string, 'Termin płatności:')
                   #payment_deadline_date.input-group.date
                     = f.text_field :payment_deadline_at_string, class: 'form-control', placeholder: 'Termin płatności', required: 'false'

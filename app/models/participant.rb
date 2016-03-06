@@ -38,6 +38,14 @@ class Participant < ActiveRecord::Base
     end
   end
 
+  def registration_date_as_string
+    registration_date.strftime('%d-%m-%Y').to_s if registration_date.present?
+  end
+
+  def registration_date_as_string=(registration_date_as_string)
+    self.registration_date = DateTime.strptime(registration_date_as_string, '%d-%m-%Y') if registration_date.present?
+  end
+
   def payment_deadline_at_string
     payment_deadline.strftime('%d-%m-%Y').to_s if payment_deadline.present?
   end
@@ -95,8 +103,8 @@ class Participant < ActiveRecord::Base
 
   def calculate_cost
     logger.debug "Started cost calculation..."
-    self.created_at ||= Time.now.getlocal('+01:00')
-    current_period = PricingPeriod.corresponding_period(self.created_at.to_date, event_id)
+    self.registration_date ||= Time.now.getlocal('+01:00')
+    current_period = PricingPeriod.corresponding_period(self.registration_date.to_date, event_id)
     cost = 0
     event = Event.find(event_id)
     services.each do |service|

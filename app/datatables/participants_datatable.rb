@@ -49,7 +49,7 @@ private
           arr.push(render_false)
         end
       end
-      arr.push(participant.created_at.strftime('%Y-%m-%d').html_safe)
+      arr.push(participant.registration_date.strftime('%Y-%m-%d').html_safe)
       arr.push(participant.payment_deadline.strftime('%Y-%m-%d').html_safe)
       arr.push(amount_or_zero_pln(participant.cost).html_safe)
       arr.push(amount_or_zero_pln(participant.paid).html_safe)
@@ -90,7 +90,7 @@ private
         columns.push("services")
       end
 
-      columns.push("created_at")
+      columns.push("registration_date")
       columns.push("payment_deadline")
       columns.push("cost")
       columns.push("paid")

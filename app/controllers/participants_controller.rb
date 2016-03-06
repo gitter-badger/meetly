@@ -31,11 +31,14 @@ class ParticipantsController < ApplicationController
   def create
     participant_param = participant_params
 
+    logger.info(participant_params.to_s)
+    logger.info(participant_param)
+
     event = Event.find_by(unique_id: params[:event_id])
     @participant = Participant.new(participant_param)
-    participant.role = Role.find(params[:participant][:role_id])
+    @participant.role = Role.find(params[:participant][:role_id])
     @participant.event = event
-
+    @participant.registration_date = DateTime.strptime(params[:participant][:registration_date_as_string], '%d-%m-%Y')
     params[:participant][:day_ids] ||= []
     params[:participant][:service_ids] ||= []
 
@@ -69,7 +72,7 @@ class ParticipantsController < ApplicationController
   end
 
   def update
-    parameters = params.require(:participant).permit(:status, :role_id, :paid, :first_name, :last_name, :gender, :city, :age, :email, :phone, :payment_deadline_at_string, :duty, :community, :other_info)
+    parameters = params.require(:participant).permit(:status, :role_id, :paid, :first_name, :last_name, :gender, :city, :age, :email, :phone, :payment_deadline_at_string, :registration_date_as_string, :duty, :community, :other_info)
 
     participant.role = Role.find(params[:participant][:role_id])
 
@@ -88,8 +91,6 @@ class ParticipantsController < ApplicationController
     end
 
     participant.assign_attributes(parameters)
-
-    # participant.payment_deadline = DateTime.new(params[:participant]["payment_deadline(1i)"].to_i, params[:participant]["payment_deadline(2i)"].to_i, params[:participant]["payment_deadline(3i)"].to_i)
 
     if participant.save
       respond_to do |format|
@@ -113,7 +114,7 @@ class ParticipantsController < ApplicationController
   end
 
   def calculate_participance_cost
-    parameters = params.require(:participant).permit(:status, :role_id, :paid, :first_name, :last_name, :gender, :city, :age, :email, :phone, :duty, :community, :other_info)
+    parameters = params.require(:participant).permit(:status, :role_id, :paid, :first_name, :last_name, :gender, :city, :age, :email, :phone, :duty, :community, :other_info, :registration_date_as_string)
 
     params[:participant][:day_ids] ||= []
     params[:participant][:service_ids] ||= []
@@ -121,6 +122,10 @@ class ParticipantsController < ApplicationController
     @participant = event.participants.new
 
     participant.role = Role.find(params[:participant][:role_id])
+
+    if(parameters[:registration_date_as_string] != '')
+      participant.registration_date = DateTime.strptime(parameters[:registration_date_as_string], '%d-%m-%Y')
+    end
 
     participant.days = Day.none
     participant.services = Service.none
@@ -307,7 +312,7 @@ class ParticipantsController < ApplicationController
   end
 
   def participant_params
-    params.require(:participant).permit(:first_name, :last_name, :email, :gender, :phone, :city, :age, :other_info, :community, :duty, days: [], services: [])
+    params.require(:participant).permit(:first_name, :last_name, :email, :gender, :phone, :city, :age, :other_info, :community, :duty, :registration_date_as_string, days: [], services: [])
   rescue ActionController::ParameterMissing => e
     nil
   end

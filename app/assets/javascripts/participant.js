@@ -176,6 +176,12 @@ ready = function() {
     format: 'DD-MM-YYYY'
   });
 
+  $('#registration_date').datetimepicker({
+    format: 'DD-MM-YYYY'
+  }).on('dp.change', function() {
+    getPrice();
+  });
+
 };
 
 $(document).ready(ready);
