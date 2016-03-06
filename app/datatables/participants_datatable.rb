@@ -64,10 +64,11 @@ private
   end
 
   def fetch_participants
-    participants = @event.participants.includes(:days, :services, :role).active.references(:days, :services, :role).order(:id)
+    puts "FETCHING PARTICIPANTS!"
+    participants = @event.participants.includes(:days, :services, :role).active.references(:days, :services, :role).order("#{sort_column} #{sort_direction}")
     participants = participants.page(page).per_page(per_page)
     if params[:sSearch].present?
-      participants = participants.where("first_name ilike :search or last_name ilike :search or email ilike :search", search: "%#{params[:sSearch]}%")
+      participants = participants.where("first_name ilike :search or last_name ilike :search or city ilike :search", search: "%#{params[:sSearch]}%")
     end
     participants
   end
@@ -81,7 +82,23 @@ private
   end
 
   def sort_column
-    columns = %w[]
+    columns = %w(last_name role_id age gender city community duty email phone other_info)
+    @days.each do |day|
+        columns.push("days")
+      end
+
+      @services.each do |service|
+        columns.push("services")
+      end
+
+      columns.push("created_at")
+      columns.push("payment_deadline")
+      columns.push("cost")
+      columns.push("paid")
+      columns.push("status")
+      columns.push("actions")
+
+      columns[params[:iSortCol_0].to_i]
   end
 
   def sort_direction

@@ -41,8 +41,14 @@ ready = function() {
    */
   $('#participants').ready(function(){
 
-    var dinners_indexes = [13, 12];
-    var iColumns = $('#participants thead th').length;
+    var columnsNumber = $('#participants thead th').length;
+    var daysStartIndex = 10;
+    var servicesEndIndex = columnsNumber - 6;
+    var nonOrderableColumnsIndexes = []
+    for(var i = daysStartIndex; i < servicesEndIndex; i++){
+      nonOrderableColumnsIndexes.push(i);
+    }
+    nonOrderableColumnsIndexes.push(columnsNumber-1);
 
     var table = $('#participants').DataTable( {
       stateSave: true,
@@ -55,7 +61,8 @@ ready = function() {
       sAjaxSource: $('#participants').data('source'),
       columnDefs: [
          { visible: false, targets: [1, 3] },
-         { className: "status", targets: [iColumns-2] }
+         { className: "status", targets: [columnsNumber-2] },
+         { orderable: false, targets: nonOrderableColumnsIndexes}
       ],
       language: {
         emptyTable:     "Brak danych",
@@ -85,12 +92,6 @@ ready = function() {
     var colvis = new $.fn.dataTable.ColVis( table,
     {
       buttonText: 'Widok kolumn',
-      groups: [
-        {
-          title: 'Obiady',
-          columns: dinners_indexes
-        }
-      ],
       restore: 'Przywróć'
     } );
     $( colvis.button() ).insertBefore('#participants_length');
