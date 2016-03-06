@@ -64,7 +64,6 @@ private
   end
 
   def fetch_participants
-    puts "FETCHING PARTICIPANTS!"
     participants = @event.participants.includes(:days, :services, :role).active.references(:days, :services, :role).order("#{sort_column} #{sort_direction}")
     participants = participants.page(page).per_page(per_page)
     if params[:sSearch].present?
