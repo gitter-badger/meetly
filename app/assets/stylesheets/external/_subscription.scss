@@ -1,14 +1,23 @@
 
-#success {
+#success h4 {
 	color: green;
+	font-weight: bold;
 }
 
-#failure {
+#failure h4 {
 	color: red;
+	font-weight: bold;
+}
+
+.subscription-container {
+	padding: 35px;
 }
 
 .subscription-info{
-	margin: 0 auto;
+	margin: 50px auto;
 	border: solid 1px black;
 	font-weight: bold;
+	max-width: 500px;
+	text-align: center;
+	padding: 20px;
 }

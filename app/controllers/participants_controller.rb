@@ -286,12 +286,19 @@ class ParticipantsController < ApplicationController
   def set_agreement_to_true
     puts params
     event = Event.find_by(unique_id: params[:event_id])
-    participant = Participant.find(params[:participant_id])
+    participant = Participant.find_by(id: params[:participant_id])
+
+    agreement = Service.find_by(name: 'Informacje o kolejnych wydarzeniach', event_id: event.id)
 
     if event == nil || participant == nil
       render 'subscription_failed', layout: 'external'
     else
-      render 'subscription_successfull', layout: 'external'
+      participant.services.push(agreement) unless participant.services.to_a.include? agreement
+      if participant.save
+        render 'subscription_successfull', layout: 'external'
+      else
+        render 'subscription_failed_on_save', layout: 'external'
+      end
     end
   end
 
