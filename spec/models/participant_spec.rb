@@ -1,14 +1,16 @@
 require 'rails_helper'
 
 describe Participant, type: :model do
-  describe 'ActiveModel validations' do
+  describe 'Participant' do
     before(:each) do
       FactoryGirl.create(:event)
     end
 
     it 'has a valid factory' do
-      db = FactoryHelper.setup_database Date.new(2015, 9, 1), Date.new(2015, 11, 11), 90
-      expect(FactoryGirl.create(:participant)).to be_valid
+      db = FactoryHelper.setup_database Date.new(2015, 9, 1), Date.new(2017, 11, 11), 90
+      participant = FactoryGirl.create(:participant)
+      participant.role_id = Role.first.id
+      expect().to be_valid
     end
 
     it 'is invalid without first name' do
@@ -17,31 +19,6 @@ describe Participant, type: :model do
 
     it 'is invalid without last name' do
       expect(FactoryGirl.build(:participant, last_name: nil)).to_not be_valid
-    end
-
-    it 'is invalid without a gender' do
-      expect(FactoryGirl.build(:participant, gender: nil)).to_not be_valid
-    end
-
-    it 'is invalid without an email' do
-      expect(FactoryGirl.build(:participant, email: nil)).to_not be_valid
-    end
-
-    it 'is invalid without an age' do
-      expect(FactoryGirl.build(:participant, age: nil)).to_not be_valid
-    end
-
-    it 'validates numericality of age' do
-      expect(FactoryGirl.build(:participant, age: 'I am 23')).to_not be_valid
-      expect(FactoryGirl.build(:participant, age: 'age')).to_not be_valid
-    end
-
-    it 'is invalid without a city' do
-      expect(FactoryGirl.build(:participant, city: nil)).to_not be_valid
-    end
-
-    it 'is invalid without phone' do
-      expect(FactoryGirl.build(:participant, phone: nil)).to_not be_valid
     end
 
     it 'is invalid without role' do
@@ -54,10 +31,6 @@ describe Participant, type: :model do
 
     it 'is invalid without event' do
       expect(FactoryGirl.build(:participant, event_id: nil)).to_not be_valid
-    end
-
-    it 'is invalid with no days' do
-      expect(FactoryGirl.build(:participant, days: [])).to_not be_valid
     end
 
     it 'calculates expected cost for whole event' do
@@ -107,7 +80,7 @@ describe Participant, type: :model do
       # d1 = FactoryHelper.create_day_with_price 1, 40, db[:pricing_period], db[:role]
       u = User.create!(name: 'admin', email: 'admin@poczatek.org', password: 'pcztk2015')
       puts "User #{u.name} craeted!"
-      e = Event.create!(name: 'Poczatek15/16', 
+      e = Event.create!(name: 'Poczatek15/16',
                start_date: Date.new(2015,12,29), end_date: Date.new(2015, 12,31), owner: u)
       puts "Event #{e.name} created!"
 
@@ -145,7 +118,7 @@ describe Participant, type: :model do
         gender: 'man',
         event: e,
         services: [s1, s2],
-        status: 'created'        
+        status: 'created'
         )
       expect(p.payment_deadline).to be(Time.now.to_date + 7.days)
     end
@@ -156,7 +129,7 @@ describe Participant, type: :model do
 
       # u = User.create!(name: 'admin', email: 'admin@poczatek.org', password: 'pcztk2015')
       # puts "User #{u.name} craeted!"
-      # e = Event.create!(name: 'Poczatek15/16', 
+      # e = Event.create!(name: 'Poczatek15/16',
       #          start_date: Date.new(2015,12,29), end_date: Date.new(2015, 12,31), owner: u)
       # puts "Event #{e.name} created!"
 
@@ -194,7 +167,7 @@ describe Participant, type: :model do
         gender: 'man',
         event: Event.first,
         services: [],
-        status: 'created'        
+        status: 'created'
         )
       expect(p.payment_deadline).to be == Time.utc(2015, 11, 11)
     end

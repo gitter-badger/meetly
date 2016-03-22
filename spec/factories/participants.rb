@@ -9,7 +9,7 @@ FactoryGirl.define do
     role
     gender :man
     event { Event.first }
-    days { [FactoryGirl.build(:day), FactoryGirl.build(:day), FactoryGirl.build(:day)] }
+    days { [] }
     status :created
   end
 end
