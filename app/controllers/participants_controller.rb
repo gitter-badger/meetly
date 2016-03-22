@@ -100,10 +100,6 @@ class ParticipantsController < ApplicationController
     end
   end
 
-  def destroy
-    # TODO
-  end
-
   def set_arrived
     @participant = Participant.find(params[:id])
     participant.status = 'arrived'
@@ -287,9 +283,16 @@ class ParticipantsController < ApplicationController
     end
   end
 
-  def resend_confirmation
-    @participant = Participant.find(params[:id])
-    send_registration_confirmation @participant
+  def set_agreement_to_true
+    puts params
+    event = Event.find_by(unique_id: params[:event_id])
+    participant = Participant.find(params[:participant_id])
+
+    if event == nil || participant == nil
+      render 'subscription_failed', layout: 'external'
+    else
+      render 'subscription_successfull', layout: 'external'
+    end
   end
 
   helper_method :event

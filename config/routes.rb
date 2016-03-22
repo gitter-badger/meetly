@@ -1,20 +1,8 @@
 Rails.application.routes.draw do
-  # TODO: review these resources and uncomment them
-  # resources :participants do
-  #   patch :edit_payment, on: :member, defaults: {format: 'js'}
-  #   post :payment_confirm, on: :member
-  #   delete :wipe, on: :member
-  #   patch :unarchive, on: :member
-  #   get :resend_confirmation, on: :member
-  #   put :edit_form, on: :member
-  #   get :list_mail, on: :member
-  #   patch :edit, on: :member
-  #   delete :destroy_and_mail, on: :member
-  #   patch :set_arrived, on: :member, defaults: {format: 'js'}
-  # end
-
-  resources :events do
-    resources :participants
+   resources :events do
+    resources :participants do
+      get '/join_subscription', to: 'participants#set_agreement_to_true', defaults: {format: 'html'}
+    end
     get '/participant_form', to: 'events#form_data', defaults: { format: 'json'}
     post '/participant_form', to: 'participants#receive_form', defaults: { format: 'json' }
     get '/refresh_statuses', to: 'participant#refresh_statuses', defaults: { format: 'json' }
