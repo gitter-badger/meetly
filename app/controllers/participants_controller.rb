@@ -2,7 +2,7 @@ require 'participant_mailer'
 
 class ParticipantsController < ApplicationController
   before_action :set_headers
-  before_action :authorize_user, except: [:receive_form, :create_participant]
+  before_action :authorize_user, except: [:receive_form, :create_participant, :set_agreement_to_true]
   respond_to :json, :js
 
   def index

@@ -27,7 +27,33 @@ class ParticipantMailer
     send_message('registration-canceled')
   end
 
+  def send_join_subscription(participant)
+    prepare_join_subscription_message(participant)
+    send_message('join-subscription')
+  end
+
   private
+
+  def prepare_join_subscription_message(participant, event)
+    title = 'Czy chcesz wiedzieć więcej?'
+    root = ENV['ROOT_ADDRESS'] || "http://localhost:3000"
+    link = "#{root}/events/#{event.unique_id}/participants/#{participant.id}/join_subscription"
+    @message = {
+      from_name: 'jestwiecej.pl',
+      from_email: 'biuro@jestwiecej.pl',
+      subject: 'Czy chcesz wiedzieć więcej?',
+      to: [
+        {
+          email: "#{participant.email}",
+          name: "#{participant.full_name}"
+        }
+      ],
+      global_merge_vars: [
+        name: "LINK",
+        content: link
+      ]
+    }
+  end
 
   def prepare_cancellation_information_message(participant)
     title = cancelation_information_title participant
