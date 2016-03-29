@@ -117,6 +117,13 @@ class ParticipantsController < ApplicationController
 
     @participant = event.participants.new
 
+    if(params[:participant][:role_id] == '')
+      respond_to do |format|
+        format.json { render :json => 0}
+      end
+      return
+    end
+
     participant.role = Role.find(params[:participant][:role_id])
 
     if(parameters[:registration_date_as_string] != '')
