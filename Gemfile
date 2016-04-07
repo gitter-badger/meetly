@@ -31,8 +31,6 @@ gem 'jquery-datatables-rails', github: "rweng/jquery-datatables-rails", branch: 
 
 gem 'slim'
 
-gem 'browserify-rails'
-
 gem 'ffaker'
 
 gem 'gretel'
