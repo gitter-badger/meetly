@@ -348,7 +348,7 @@ class ParticipantsController < ApplicationController
 
   def send_payment_confirmation
     logger.debug "Sending payment confirmation to #{participant.first_name} #{participant.last_name}"
-    mailer = ParticipantMailer.new logger
+    mailer = SendgridMailer.new
     mailer.send_payment_confirmation @participant
   end
 end

@@ -23,6 +23,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'mandrill-api'
 
+gem 'sendgrid-ruby'
+
 gem 'le'
 
 gem 'bcrypt', :require => 'bcrypt'
