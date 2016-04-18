@@ -1,5 +1,5 @@
 class ParticipantsDatatable
-  delegate :params, :link_to, :amount_or_zero_pln, :render_true, :render_false, :event_participant_delete_path, :event_participant_delete_and_notify_path, :event_participant_set_paid_and_notify_path, :edit_event_participant_path, :event_participant_set_arrived_path, :render_participant_status, :render_participant_actions, to: :@view
+  delegate :params, :link_to, :amount_or_zero_curr, :render_true, :render_false, :event_participant_delete_path, :event_participant_delete_and_notify_path, :event_participant_set_paid_and_notify_path, :edit_event_participant_path, :event_participant_set_arrived_path, :render_participant_status, :render_participant_actions, to: :@view
 
   def initialize(view, event)
   	@view = view
@@ -51,8 +51,8 @@ private
       end
       arr.push(participant.registration_date.strftime('%Y-%m-%d').html_safe)
       arr.push(participant.payment_deadline.strftime('%Y-%m-%d').html_safe)
-      arr.push(amount_or_zero_pln(participant.cost).html_safe)
-      arr.push(amount_or_zero_pln(participant.paid).html_safe)
+      arr.push(amount_or_zero_curr(participant.cost, participant.event.event_prices.first.currency).html_safe)
+      arr.push(amount_or_zero_curr(participant.paid, participant.event.event_prices.first.currency).html_safe)
       arr.push(render_participant_status(participant).html_safe)
       arr.push(render_participant_actions(participant).html_safe)
       arr

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306192723) do
+ActiveRecord::Schema.define(version: 20160418222106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160306192723) do
     t.integer  "pricing_period_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "currency"
   end
 
   add_index "day_prices", ["day_id"], name: "index_day_prices_on_day_id", using: :btree
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160306192723) do
     t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "currency"
   end
 
   add_index "event_prices", ["event_id"], name: "index_event_prices_on_event_id", using: :btree
@@ -136,6 +138,7 @@ ActiveRecord::Schema.define(version: 20160306192723) do
     t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "currency"
   end
 
   add_index "service_prices", ["role_id"], name: "index_service_prices_on_role_id", using: :btree
