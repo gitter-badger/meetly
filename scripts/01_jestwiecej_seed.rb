@@ -17,11 +17,11 @@ puts "User #{u.name} created!"
 e = Event.create!(name: 'Randy Clark 2-4.06', start_date: Date.new(2016,6,2), end_date: Date.new(2015,6,4), owner: u, capacity: 4000, days_to_pay: 7)
 puts "Event #{e.name} created!"
 
-pp = PricingPeriod.create!(name: 'Pierwszy termin', event: e, start_date: Date.new(2016, 1,1), end_date: Date.new(2016, 2, 29))
+pp = PricingPeriod.create!(name: 'Pierwszy termin', event: e, start_date: Date.new(2016, 1,1), end_date: Date.new(2016, 3, 1))
 puts "PricingPeriod #{pp.name} created!"
-pp2 = PricingPeriod.create!(name: 'Drugi termin', event: e, start_date: Date.new(2016, 3,1), end_date: Date.new(2016, 4, 30))
+pp2 = PricingPeriod.create!(name: 'Drugi termin', event: e, start_date: Date.new(2016, 3,1), end_date: Date.new(2016, 5, 1))
 puts "PricingPeriod #{pp2.name} created!"
-pp3 = PricingPeriod.create!(name: 'Trzeci termin', event: e, start_date: Date.new(2016, 5, 1), end_date: Date.new(2016, 6, 5))
+pp3 = PricingPeriod.create!(name: 'Trzeci termin', event: e, start_date: Date.new(2016, 5, 1), end_date: Date.new(2016, 6, 6))
 puts "PricingPeriod #{pp3.name} created!"
 
 r = Role.create!(
