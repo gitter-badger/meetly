@@ -1,11 +1,12 @@
 .row
   .col-md-4.col-md-offset-4.login-box
     h1.login-brand meetly
-    = form_tag session_path do
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .form-group
-        = text_field_tag :username,  nil, placeholder: 'Użytkownik', class: 'form-control'
+        = f.email_field :email, placeholder: 'E-mail', class: 'form-control', autofocus: true
       .form-group
-        = password_field_tag :password, nil, placeholder: 'Hasło', class: 'form-control'
+        = f.password_field :password, placeholder: 'Hasło', class: 'form-control', autocomplete: "off"
       .form-group
-        = button_tag(type: 'submit', class: 'btn btn-primary login') do
+        = f.button type: 'submit', class: 'btn btn-primary login' do
           | Zaloguj
+

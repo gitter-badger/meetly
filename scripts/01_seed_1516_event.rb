@@ -12,7 +12,7 @@ ServicePrice.destroy_all
 ServiceGroup.destroy_all
 PricingPeriod.destroy_all
 
-u = User.create!(name: 'admin', email: 'admin@poczatek.org', password: 'pcztk2015')
+u = User.create!(name: 'admin', email: 'admin@poczatek.org', password: 'pcztk2015', password_confirmation: 'pcztk2015')
 puts "User #{u.name} created!"
 e = Event.create!(name: 'Poczatek 15/16', start_date: Date.new(2015,12,29), end_date: Date.new(2015, 12,31), owner: u, capacity: 700, days_to_pay: 7)
 puts "Event #{e.name} created!"

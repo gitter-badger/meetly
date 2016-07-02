@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users, :controllers => { :sessions      => 'sessions' }
   # TODO: review these resources and uncomment them
   # resources :participants do
   #   patch :edit_payment, on: :member, defaults: {format: 'js'}
@@ -25,10 +26,6 @@ Rails.application.routes.draw do
 
     get '/dashboard', to: 'dashboard#index', as: :dashboard
   end
-
-  get 'login', to: 'sessions#new', as: :login
-  post 'login', to: 'sessions#create', as: :session
-  delete 'logout', to: 'sessions#destroy', as: :logout
 
   root to: 'application#redirect_to_events_list'
 end

@@ -2,9 +2,9 @@ ul.nav.navbar-nav.navbar-right
   li.dropdown.pull-right
     a.dropdown-toggle.navbar-user href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
       = image_tag "account.jpg", class: 'user-thumb img-circle'
-      span.user-name.xs-hide= current_person
+      span.user-name.xs-hide= current_user.name
     ul.dropdown-menu.no-collapse role="menu"
       li: a href="#" tabindex="-1" Moje konto
       li: a href="#" tabindex="-1" Ustawienia
       li.divider role="separator"
-      li= link_to 'Wyloguj', logout_path, method: :delete, tabindex: "-1"
+      li= link_to 'Wyloguj', destroy_user_session_path, method: :delete, tabindex: "-1"
